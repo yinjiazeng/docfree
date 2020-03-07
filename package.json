@@ -1,0 +1,19 @@
+{
+  "name": "docfree",
+  "repository": "https://github.com/yinjiazeng/docfree.git",
+  "author": "Aniu <yinjiazeng@163.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "publish": "node scripts/publish.js"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.20.2"
+  }
+}
