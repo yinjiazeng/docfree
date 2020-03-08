@@ -7,13 +7,45 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "pub": "lerna publish"
+    "babel": "babel packages/**/src --out-dir ../lib --relative --extensions .ts",
+    "eslint": "eslint --fix --ext .js,.ts,.jsx,.tsx .",
+    "stylelint": "stylelint --fix **/*.{css,less,scss,sass}",
+    "lint": "npm run stylelint && npm run eslint",
+    "clean": "rimraf packages/**/lib",
+    "publish": "lerna publish",
+    "test": "jest"
   },
   "workspaces": [
     "packages/*"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "lerna": "^3.20.2",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.2.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-prettier": "^1.1.2",
+    "typescript": "^3.8.3"
   }
 }
