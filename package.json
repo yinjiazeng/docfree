@@ -12,8 +12,7 @@
     "stylelint": "stylelint --fix **/*.{css,less,scss,sass}",
     "lint": "npm run stylelint && npm run eslint",
     "clean": "rimraf packages/**/lib",
-    "publish:npm": "npm run build && lerna publish --skip-git",
-    "publish:git": "lerna publish --skip-npm",
+    "publish": "npm run clean && npm run build && lerna publish",
     "test": "jest"
   },
   "workspaces": [
@@ -21,7 +20,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run clean && npm run lint"
+      "pre-commit": "npm run lint"
     }
   },
   "devDependencies": {
