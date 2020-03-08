@@ -8,21 +8,14 @@
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "babel": "babel packages/**/src --out-dir ../lib --relative --extensions .ts",
-    "eslint": "eslint --fix --ext .js,.ts,.jsx,.tsx .",
-    "stylelint": "stylelint --fix **/*.{css,less,scss,sass}",
-    "lint": "npm run stylelint && npm run eslint",
     "clean": "rimraf packages/**/lib",
     "publish": "npm run clean && npm run build && lerna publish",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "lint-staged"
   },
   "workspaces": [
     "packages/*"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
@@ -41,6 +34,7 @@
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lerna": "^3.20.2",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "stylelint": "^13.2.0",
