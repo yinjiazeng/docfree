@@ -12,7 +12,8 @@
     "stylelint": "stylelint --fix **/*.{css,less,scss,sass}",
     "lint": "npm run stylelint && npm run eslint",
     "clean": "rimraf packages/**/lib",
-    "publish": "npm run build && lerna publish",
+    "publish:npm": "npm run build && lerna publish --skip-git",
+    "publish:git": "lerna publish --skip-npm",
     "test": "jest"
   },
   "workspaces": [
