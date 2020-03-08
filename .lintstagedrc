@@ -1,8 +1,10 @@
 {
   "*.{js,ts,jsx,tsx}": [
-    "eslint1 --fix"
+    "prettier --fix",
+    "eslint --fix"
   ],
   "*.{css,less,scss,sass}": [
+    "prettier --fix",
     "stylelint --fix"
   ]
 }

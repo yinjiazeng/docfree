@@ -1,5 +1,2 @@
-console.log(
-  '1111',
-
-  'xxxx',
-);
+const a = {a:1};
+console.log(a);
