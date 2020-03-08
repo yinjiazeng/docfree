@@ -10,8 +10,12 @@
     "babel": "babel packages/**/src --out-dir ../lib --relative --extensions .ts",
     "clean": "rimraf packages/**/lib",
     "publish": "npm run clean && npm run build && lerna publish",
-    "test": "jest",
-    "precommit": "lint-staged"
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "workspaces": [
     "packages/*"
