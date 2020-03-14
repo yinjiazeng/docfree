@@ -1,5 +1,5 @@
 {
-  "name": "docfree-components",
+  "name": "docfree-utils",
   "version": "0.1.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
@@ -9,8 +9,5 @@
   "files": [
     "lib"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "docfree-utils": "^0.1.2"
-  }
+  "license": "MIT"
 }

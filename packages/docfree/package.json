@@ -4,7 +4,7 @@
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
-  "main": "lib/index.js",
+  "bin": "lib/bin.js",
   "sideEffects": false,
   "files": [
     "lib"
@@ -12,5 +12,12 @@
   "license": "MIT",
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "commander": "^4.1.1",
+    "docfree-resolver": "^0.1.2",
+    "docfree-utils": "^0.1.2",
+    "docfree-webpack": "^0.1.2",
+    "lodash.merge": "^4.6.2"
   }
 }

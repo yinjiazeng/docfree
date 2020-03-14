@@ -4,6 +4,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "no-unused-vars": "off",
     "consistent-return": "off",
     "no-unused-expressions": "off",
     "prefer-promise-reject-errors": "off",
