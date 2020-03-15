@@ -6,6 +6,7 @@
     "prettier/prettier": "error",
     "no-unused-vars": "off",
     "consistent-return": "off",
+    "no-param-reassign": "off",
     "global-require": "off",
     "no-unused-expressions": "off",
     "prefer-promise-reject-errors": "off",

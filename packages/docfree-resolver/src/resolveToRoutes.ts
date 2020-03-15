@@ -15,9 +15,10 @@ export default function resolveToRoutes(docPath: string, routes: Routes = []): R
           path: `/${item}`,
           children: resolveToRoutes(itemPath, []).concat({ path: '*', children: 'NotFound' }),
         });
-      } else if (/\.mdx?$/i.test(item)) {
+      } else if (/\.md$/i.test(item)) {
         routes.push({
           path: /^README$/i.test(basename(item)) ? `/(${item})?` : `/${item}`,
+          createTime: stat.ctime.getTime(),
           require: itemPath,
         });
       }

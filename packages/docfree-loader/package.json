@@ -11,6 +11,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@mdx-js/mdx": "^1.5.7",
     "docfree-utils": "^0.1.2"
   }
 }
