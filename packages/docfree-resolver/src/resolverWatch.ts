@@ -4,7 +4,7 @@ import { statSync } from 'fs';
 import { getDocPath } from 'docfree-utils';
 import resolver from './resolver';
 
-export default () => {
+export default function resolverWatch() {
   resolver();
   chokidar
     .watch(getDocPath(), {
@@ -16,4 +16,4 @@ export default () => {
         resolver();
       }
     });
-};
+}

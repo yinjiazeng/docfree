@@ -1,2 +1,2 @@
-export * from './resolver';
-export { default as watch } from './resolverWatch';
+export { default as resolver } from './resolver';
+export { default as resolverWatch } from './resolverWatch';
