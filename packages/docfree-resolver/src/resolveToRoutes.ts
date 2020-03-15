@@ -16,8 +16,12 @@ export default function resolveToRoutes(docPath: string, routes: Routes = []): R
           children: resolveToRoutes(itemPath, []).concat({ path: '*', children: 'NotFound' }),
         });
       } else if (/\.md$/i.test(item)) {
+        const baseName = basename(item);
         routes.push({
-          path: /^README$/i.test(basename(item)) ? `/(${item})?` : `/${item}`,
+          path: /^README$/i.test(baseName) ? `/(${item})?` : `/${item}`,
+          baseName,
+          fileName: item,
+          title: baseName,
           createTime: stat.ctime.getTime(),
           require: itemPath,
         });

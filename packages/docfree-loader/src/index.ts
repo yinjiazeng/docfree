@@ -3,8 +3,17 @@ import mdx from '@mdx-js/mdx';
 
 module.exports = async function docfreeLoader(content: string) {
   const callback = this.async();
+  const config = getConfig();
+  const { sidebar, mode } = config;
   let result: string;
-  let sidebar: any;
+  let title: string = '';
+
+  const matchTitle = content.match(/#\s+(.+)/);
+
+  if (matchTitle) {
+    // eslint-disable-next-line prefer-destructuring
+    title = matchTitle[1];
+  }
 
   try {
     result = await mdx(content);
@@ -18,16 +27,34 @@ module.exports = async function docfreeLoader(content: string) {
     null,
     `
     import React from 'react';
-    import { Layout } from 'docfree-components';
+    import { Layout, Props, Playground } from 'docfree-components';
 
     ${result}
 
-    module.exports = {
-      sidebar: ${sidebar},
-      render() {
-        return <MDXContent />
+    const nuomiProps = {
+      state: {
+
+        sidebar: [],
+        subSidebar: [],
+      },
+      render: () => <MDXContent />;
+    };
+
+    ${mode !== 'blog' &&
+      `
+      nuomiProps.onInit = function() {
+        this.dispatch({
+          type: '_updateState'
+        });
       }
-    }
+    `}
+
+    ${!!title &&
+      `
+      nuomiProps.title = '${title}';
+    `}
+
+    module.exports = nuomiProps;
   `,
   );
 };

@@ -21,14 +21,39 @@ export default function generateEntry(routes: Routes): string {
   const content = `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { Router, RouteShape, Nuomi } from 'nuomi';
+    import { Router, RouteShape, Nuomi, store, nuomi, router } from 'nuomi';
     import { NotFound, BlogEntry, GlobalLayout } from 'docfree-components';
 
+    ${config.mode !== 'blog' &&
+      `
+    const sidebarData = ${JSON.stringify(config.sidebar.data || {})};
+
+    nuomi.config({
+      effects: {
+        updateState() {
+          const { global: { data } } = store.getState();
+          sidebarData
+        },
+      },
+    });
+    `}
+
     const routes = ${routesString};
+    const generateData = (raw, parentPath = '/', data = []) => {
+      raw.forEach(({ path, children, render, effects, onInit, onChange, ...rest }) => {
+        if (Array.isArray(children)) {
+          data = generateData(children, router.megre(parentPath, path), data);
+        } else {
+          data.push({ path: parentPath, ...rest });
+        }
+      });
+      return data;
+    };
+    const data = generateData(routes);
 
     const App = () => {
       return (
-        <Nuomi id="global" data={routes}>
+        <Nuomi id="global" state={{ data }}>
           <GlobalLayout>
             <Router>
               <RouteShape routes={routes} />
