@@ -12,6 +12,12 @@
   "license": "MIT",
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
-    "docfree-utils": "^0.1.2"
+    "docfree-utils": "^0.1.2",
+    "gray-matter": "^4.0.2",
+    "remark": "^11.0.2",
+    "remark-parse": "^7.0.2",
+    "remark-stringify": "^7.0.4",
+    "unified": "^8.4.2",
+    "unist-builder": "^2.0.3"
   }
 }

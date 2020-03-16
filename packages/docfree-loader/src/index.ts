@@ -1,19 +1,22 @@
 import { getConfig } from 'docfree-utils';
 import mdx from '@mdx-js/mdx';
+import matter from 'gray-matter';
+import parseHeader from './parseHeader';
 
 module.exports = async function docfreeLoader(content: string) {
   const callback = this.async();
   const config = getConfig();
-  const { sidebar, mode } = config;
+  const { sidebar } = config;
+  const { content: markdownContent, data: setting } = matter(content);
+  const { content: con, data: heading } = parseHeader(markdownContent);
+  const showSidebar: boolean =
+    typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
+  const sidebarDepth: boolean =
+    setting.pageSidebar >= 1 && setting.pageSidebar <= 6 ? setting.depth : sidebar.depth;
   let result: string;
-  let title: string = '';
+  const subSidebarMenus = heading.filter(({ depth }) => depth > 1 && depth <= sidebarDepth);
 
-  const matchTitle = content.match(/#\s+(.+)/);
-
-  if (matchTitle) {
-    // eslint-disable-next-line prefer-destructuring
-    title = matchTitle[1];
-  }
+  content = con;
 
   try {
     result = await mdx(content);
@@ -27,32 +30,20 @@ module.exports = async function docfreeLoader(content: string) {
     null,
     `
     import React from 'react';
-    import { Layout, Props, Playground } from 'docfree-components';
+    import { Layout, HashLink } from 'docfree-components';
 
     ${result}
 
     const nuomiProps = {
       state: {
-
-        sidebar: [],
-        subSidebar: [],
+        showSidebar: ${showSidebar},
+        sidebarMenus: [],
+        subSidebarMenus: ${JSON.stringify(subSidebarMenus)},
       },
       render: () => <MDXContent />;
     };
 
-    ${mode !== 'blog' &&
-      `
-      nuomiProps.onInit = function() {
-        this.dispatch({
-          type: '_updateState'
-        });
-      }
-    `}
-
-    ${!!title &&
-      `
-      nuomiProps.title = '${title}';
-    `}
+    ${!!heading.length && `nuomiProps.title = '${heading[0].title}';`}
 
     module.exports = nuomiProps;
   `,
