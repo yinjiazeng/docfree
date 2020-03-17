@@ -1,22 +1,22 @@
 import { getConfig } from 'docfree-utils';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
-import parseHeader from './parseHeader';
+import parseMarkdown from './parseMarkdown';
 
 module.exports = async function docfreeLoader(content: string) {
   const callback = this.async();
   const config = getConfig();
   const { sidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
-  const { content: con, data: heading } = parseHeader(markdownContent);
+  const { content: mdContent, data: heading } = parseMarkdown(markdownContent);
   const showSidebar: boolean =
     typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
-  const sidebarDepth: boolean =
+  const sidebarDepth: number =
     setting.pageSidebar >= 1 && setting.pageSidebar <= 6 ? setting.depth : sidebar.depth;
   let result: string;
   const subSidebarMenus = heading.filter(({ depth }) => depth > 1 && depth <= sidebarDepth);
 
-  content = con;
+  content = `${mdContent}\nexport default Layout`;
 
   try {
     result = await mdx(content);
@@ -24,7 +24,7 @@ module.exports = async function docfreeLoader(content: string) {
     return callback(err);
   }
 
-  result = result.replace('"wrapper"', 'Layout').replace('export default ', '');
+  result = result.replace('export default ', '');
 
   return callback(
     null,
