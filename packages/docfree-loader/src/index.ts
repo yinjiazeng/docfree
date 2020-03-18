@@ -3,7 +3,7 @@ import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import parseMarkdown from './parseMarkdown';
 
-module.exports = async function docfreeLoader(content: string) {
+module.exports = async function docfreeLoader(this: any, content: string) {
   const callback = this.async();
   const config = getConfig();
   const { sidebar } = config;

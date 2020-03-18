@@ -10,6 +10,10 @@
     "lib"
   ],
   "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "dts": "tsc"
+  },
   "dependencies": {
     "docfree-utils": "^0.1.2"
   }

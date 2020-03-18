@@ -18,7 +18,7 @@ const getTexts = (arr: AstNode[]) => {
   return text;
 };
 
-function parseMarkdown(content: string) {
+export default function parseMarkdown(content: string) {
   const ret: ParseResult = {
     data: [],
     content,

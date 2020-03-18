@@ -5,13 +5,15 @@
   "keywords": [],
   "description": "",
   "bin": "lib/bin.js",
+  "typings": "lib/bin.d.ts",
   "sideEffects": false,
   "files": [
     "lib"
   ],
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dts": "tsc"
   },
   "dependencies": {
     "commander": "^4.1.1",

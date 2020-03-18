@@ -5,11 +5,16 @@
   "keywords": [],
   "description": "",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "sideEffects": false,
   "files": [
     "lib"
   ],
   "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "dts": "tsc"
+  },
   "dependencies": {
     "chokidar": "^3.3.1",
     "docfree-utils": "^0.1.2",

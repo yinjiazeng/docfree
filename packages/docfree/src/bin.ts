@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-
+// a
 import commander from 'commander';
 import { build, server } from 'docfree-webpack';
 import { resolver, resolverWatch } from 'docfree-resolver';
-import pkg from '../package.json';
+import pkg from 'docfree/package.json';
 
 const program = new commander.Command();
 

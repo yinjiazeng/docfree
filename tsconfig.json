@@ -2,18 +2,18 @@
   "compilerOptions": {
     "target": "es6",
     "noImplicitAny": false,
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
+    "noEmitOnError": true,
     "jsx": "react",
-    "outDir": "lib"
-  },
-  "include": ["src", "."]
+    "declaration": true,
+    "emitDeclarationOnly": true
+  }
 }
