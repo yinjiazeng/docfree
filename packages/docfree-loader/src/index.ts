@@ -1,14 +1,18 @@
 import { getConfig } from 'docfree-utils';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
+import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
 
+export * from './typings';
+
 module.exports = async function docfreeLoader(this: any, content: string) {
+  const options = getOptions(this);
   const callback = this.async();
   const config = getConfig();
   const { sidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
-  const { content: mdContent, data: heading } = parseMarkdown(markdownContent);
+  const { content: mdContent, data: heading } = parseMarkdown(markdownContent, options);
   const showSidebar: boolean =
     typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
   const sidebarDepth: number =

@@ -1,8 +1,7 @@
 import remark from 'remark';
 import parse from 'remark-parse';
 import u from 'unist-builder';
-import * as babelParser from '@babel/parser';
-import traverse from '@babel/traverse';
+import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 
 const getTexts = (arr: AstNode[]) => {
@@ -18,7 +17,7 @@ const getTexts = (arr: AstNode[]) => {
   return text;
 };
 
-export default function parseMarkdown(content: string) {
+export default function parseMarkdown(content: string, options: OptionObject) {
   const ret: ParseResult = {
     data: [],
     content,
@@ -38,25 +37,26 @@ export default function parseMarkdown(content: string) {
           u('html', { value: `</HashLink>` }),
           u('text', { value: text }),
         ];
-      } else if (node.type === 'code') {
-        if (node.lang === 'jsx') {
-          const ast = babelParser.parse(node.value, { plugins: ['jsx'] });
-          // traverse(ast, {
-          //   enter(path) {
-          //     path.node = null;
-          //   },
-          // });
-          const jsx = '';
-          const code = '';
-          arr[i] = u('html', {
-            value: `${code}
-
-              <Playground code={\`${node.value.trim()}\`}>
-              ${jsx}
-              </Playground>
-            `,
-          });
-        }
+      } else if (node.type === 'code' && Array.isArray(options.plugins)) {
+        options.plugins.forEach((value) => {
+          if (value) {
+            let plugin = value;
+            if (typeof plugin === 'string') {
+              plugin = require(`docfree-loader-${plugin}`);
+            }
+            if (!plugin.lang) {
+              throw new Error('docfree-loader插件返回值必须包含lang属性');
+            }
+            if (plugin.lang === node.lang) {
+              if (typeof plugin.transform === 'function') {
+                const ast = plugin.transform(node.value);
+                if (ast && ast.type) {
+                  arr[i] = ast;
+                }
+              }
+            }
+          }
+        });
       } else if (node.children) {
         parser(node.children);
       }

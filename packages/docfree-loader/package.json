@@ -16,13 +16,10 @@
     "dts": "tsc"
   },
   "dependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/generator": "^7.8.8",
-    "@babel/parser": "^7.8.8",
-    "@babel/traverse": "^7.8.6",
     "@mdx-js/mdx": "^1.5.7",
     "docfree-utils": "^0.1.2",
     "gray-matter": "^4.0.2",
+    "loader-utils": "^2.0.0",
     "remark": "^11.0.2",
     "remark-parse": "^7.0.2",
     "remark-stringify": "^7.0.4",
