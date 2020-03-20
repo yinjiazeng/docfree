@@ -1,16 +1,14 @@
-import webpack from 'webpack';
+import { Configuration, RuleSetRule } from 'webpack';
 import { getDocPath, getConfig } from 'docfree-utils';
 import { join, resolve } from 'path';
 import merge from 'webpack-merge';
+import * as autoprefixer from 'autoprefixer';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import extToRegexp from './extToRegexp';
 
-type Config = webpack.Configuration;
-type Rule = webpack.RuleSetRule;
-
-export default function(options: Config): Config {
+export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
   const { webpackConfig, dest: defaultDest, title, favicon, meta } = getConfig();
@@ -29,7 +27,7 @@ export default function(options: Config): Config {
   // 构建输出静态资源目录
   const destStaticPath = join(destPath, 'static');
 
-  const publicPath = webpackConfig.output.publicPath || './';
+  const publicPath = (webpackConfig.output && webpackConfig.output.publicPath) || './';
   const publicjsPath = `static/js`;
   const publicCssPath = `static/css`;
   const publicMediaPath = `static/media`;
@@ -66,7 +64,7 @@ export default function(options: Config): Config {
     }),
   ];
 
-  const cssLoader = (module: boolean = false): Rule[] => {
+  const cssLoader = (module: boolean = false): RuleSetRule[] => {
     const sourceMap = isDev;
     const use = [
       {
@@ -86,6 +84,11 @@ export default function(options: Config): Config {
         loader: 'postcss-loader',
         options: {
           sourceMap,
+          plugins: [
+            autoprefixer({
+              browsers: ['last 1 version', '> 1%', 'ie >= 9'],
+            }),
+          ],
         },
       },
     ];
@@ -125,11 +128,21 @@ export default function(options: Config): Config {
     ];
   };
 
-  const rules: Rule[] = [
+  const rules: RuleSetRule[] = [
     {
-      test: jsExtReg,
+      test: [jsExtReg, mdExtReg],
+      exclude: /node_modules/,
       loader: 'babel-loader',
-      options: {},
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+      },
+    },
+    {
+      test: mdExtReg,
+      loader: 'docfree-loader',
+      options: {
+        plugins: ['jsx'],
+      },
     },
     {
       exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg],
@@ -143,7 +156,7 @@ export default function(options: Config): Config {
     ...cssLoader(true),
   ];
 
-  const defaultConfig: Config = {
+  const defaultConfig: Configuration = {
     entry: {
       docfree: ['@babel/polyfill', entryPath],
     },

@@ -1,7 +1,12 @@
-import webpack from './webpack';
+import webpack from 'webpack';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import config from './config';
 
 export default function() {
-  webpack({
+  const { devServer, ...webpackConfig } = config({
     mode: 'production',
+    plugins: [new CleanWebpackPlugin()],
   });
+
+  webpack(webpackConfig);
 }

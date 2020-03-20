@@ -14,5 +14,9 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.2",
+    "webpack": "^4.42.0"
   }
 }

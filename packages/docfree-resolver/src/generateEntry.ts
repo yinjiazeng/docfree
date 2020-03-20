@@ -37,14 +37,14 @@ export default function generateEntry(routes: Routes): string {
             const pre = path.substr(0, path.lastIndexOf('/'));
             const prePath = pre || '/';
             if (sidebarData[prePath]) {
-              const { title: sidebarTitle, menus } = sidebarData[prePath];
+              const { title: sidebarTitle, list } = sidebarData[prePath];
               const { global: { data } } = store.getState();
               const payload = {
                 sidebarTitle,
               };
 
-              if (Array.isArray(menus)) {
-                payload.sidebarMenus = menus.map((name) => {
+              if (Array.isArray(list)) {
+                payload.sidebarMenus = list.map((name) => {
                   const findData = data.find((item) => {
                     return item.path === prePath && item.baseName === name;
                   });
