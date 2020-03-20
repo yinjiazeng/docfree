@@ -1,2 +1,2 @@
-export const build = () => {};
-export const server = () => {};
+export { default as build } from './build';
+export { default as dev } from './dev';

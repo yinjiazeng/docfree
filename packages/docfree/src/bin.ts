@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // a
 import commander from 'commander';
-import { build, server } from 'docfree-webpack';
+import { build, dev } from 'docfree-webpack';
 import { resolver, resolverWatch } from 'docfree-resolver';
 import pkg from 'docfree/package.json';
 
@@ -18,9 +18,9 @@ program
   });
 
 program
-  .command('server <dir>')
+  .command('dev <dir>')
   .description('启动Web服务')
   .action(() => {
     resolverWatch();
-    server();
+    dev();
   });
