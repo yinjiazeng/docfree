@@ -49,7 +49,7 @@ export default function parseMarkdown(content: string, options: OptionObject) {
             }
             if (plugin.lang === node.lang) {
               if (typeof plugin.transform === 'function') {
-                const ast = plugin.transform(node.value);
+                const ast = plugin.transform(node.value.trim());
                 if (ast && ast.type) {
                   arr[i] = ast;
                 }
@@ -68,22 +68,3 @@ export default function parseMarkdown(content: string, options: OptionObject) {
 
   return ret;
 }
-
-// parseMarkdown(
-//   `
-// \`\`\`jsx
-// const a = 1;
-// <div></div>
-// \`\`\`
-// `,
-// )
-
-// console.log(
-//   parseMarkdown(
-//     `
-//   \`\`\`jsx
-//   <div></div>
-//   \`\`\`
-//   `,
-//   ),
-// );

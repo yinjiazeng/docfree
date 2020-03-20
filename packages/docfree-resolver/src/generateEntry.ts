@@ -82,10 +82,11 @@ export default function generateEntry(routes: Routes): string {
       return data;
     };
     const data = generateData(routes);
+    const nav = ${JSON.stringify(config.nav)};
 
     const App = () => {
       return (
-        <Nuomi id="global" state={{ data }}>
+        <Nuomi id="global" state={{ data, nav }}>
           <GlobalLayout>
             <Router>
               <RouteShape routes={routes} />

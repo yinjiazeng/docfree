@@ -1,25 +1,24 @@
-import * as babelParser from '@babel/parser';
-import traverse from '@babel/traverse';
-import u from 'unist-builder';
+import * as babel from '@babel/core';
 
 module.exports = {
   lang: 'jsx',
   transform(content: string) {
-    const ast = babelParser.parse(content, { plugins: ['jsx'] });
-    // traverse(ast, {
-    //   enter(path) {
-    //     path.node = null;
-    //   },
-    // });
-    const jsx = '';
-    const code = '';
-    return u('html', {
-      value: `${code}
-
-              <Playground code={\`${content.trim()}\`}>
-              ${jsx}
-              </Playground>
-            `,
+    const res = babel.transformSync(content, {
+      configFile: false,
+      babelrc: false,
+      presets: ['@babel/preset-env', '@babel/preset-react'],
     });
+
+    if (res && res.code) {
+      const renderFunction = `function(){${res.code.replace(
+        /(^|\n)(React\.createElement)/,
+        '$1return $2',
+      )}}`;
+
+      return {
+        type: 'html',
+        value: `<Playground code={\`${content}\`} render={${renderFunction}} />`,
+      };
+    }
   },
 };
