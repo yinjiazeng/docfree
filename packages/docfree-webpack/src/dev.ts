@@ -28,5 +28,6 @@ export default async function() {
 
   const compiler = webpack(webpackConfig);
 
-  const server = new WebpackDevServer(compiler, serverConfig);
+  // eslint-disable-next-line no-new
+  new WebpackDevServer(compiler, serverConfig);
 }

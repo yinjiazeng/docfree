@@ -3,8 +3,7 @@ import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
-
-export * from './typings';
+import { Heading } from './typings';
 
 module.exports = async function docfreeLoader(this: any, content: string) {
   const options = getOptions(this);
@@ -17,8 +16,15 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
   const sidebarDepth: number =
     setting.pageSidebar >= 1 && setting.pageSidebar <= 6 ? setting.depth : sidebar.depth;
-  let result: string;
-  const subSidebarMenus = heading.filter(({ depth }) => depth > 1 && depth <= sidebarDepth);
+  let result = '';
+  let title = '';
+  const subSidebarMenus = heading.filter(({ depth, title: tit }) => {
+    if (!title && depth === 1) {
+      title = tit;
+      return false;
+    }
+    return depth > 1 && depth <= sidebarDepth;
+  });
 
   content = `${mdContent}\nexport default Layout`;
 
@@ -47,7 +53,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       render: () => <MDXContent />;
     };
 
-    ${!!heading.length && `nuomiProps.title = '${heading[0].title}';`}
+    ${!!title && `nuomiProps.title = '${title}';`}
 
     module.exports = nuomiProps;
   `,
