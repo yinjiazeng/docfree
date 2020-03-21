@@ -7,6 +7,5 @@ export default function() {
     mode: 'production',
     plugins: [new CleanWebpackPlugin()],
   });
-
   webpack(webpackConfig);
 }

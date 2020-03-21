@@ -11,7 +11,9 @@
     "dts": "lerna run dts",
     "clean": "rimraf packages/**/lib",
     "publish": "npm run clean && npm run build && lerna publish",
-    "test": "jest"
+    "test": "jest",
+    "doc:dev": "docfree dev docs",
+    "doc:build": "docfree build docs"
   },
   "husky": {
     "hooks": {

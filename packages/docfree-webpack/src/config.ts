@@ -2,10 +2,10 @@ import { Configuration, RuleSetRule } from 'webpack';
 import { getDocPath, getConfig } from 'docfree-utils';
 import { join, resolve } from 'path';
 import merge from 'webpack-merge';
-import * as autoprefixer from 'autoprefixer';
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import autoprefixer from 'autoprefixer';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import extToRegexp from './extToRegexp';
 
 export default function(options: Configuration): Configuration {
@@ -19,7 +19,7 @@ export default function(options: Configuration): Configuration {
   // 文档配置目录
   const docfreePath = join(docPath, '.docfree');
   // 临时文件目录
-  const entryPath = join(docfreePath, '.temp');
+  const entryPath = join(docfreePath, '.temp.js');
   // 静态资源目录
   const staticPath = join(docfreePath, 'static');
   // 构建输出文件目录
@@ -55,10 +55,12 @@ export default function(options: Configuration): Configuration {
       favicon: resolve(publicPath, favicon),
       meta,
     }),
-    new CopyWebpackPlugin({
-      from: staticPath,
-      to: destStaticPath,
-    }),
+    new CopyWebpackPlugin([
+      {
+        from: staticPath,
+        to: destStaticPath,
+      },
+    ]),
     new MiniCssExtractPlugin({
       filename: `${publicCssPath}/[name].[contenthash:8].css`,
     }),
@@ -86,7 +88,7 @@ export default function(options: Configuration): Configuration {
           sourceMap,
           plugins: [
             autoprefixer({
-              browsers: ['last 1 version', '> 1%', 'ie >= 9'],
+              overrideBrowserslist: ['last 1 version', '> 1%', 'ie >= 9'],
             }),
           ],
         },

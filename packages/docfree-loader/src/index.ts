@@ -3,7 +3,6 @@ import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
-import { Heading } from './typings';
 
 module.exports = async function docfreeLoader(this: any, content: string) {
   const options = getOptions(this);
@@ -48,7 +47,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       state: {
         showSidebar: ${showSidebar},
         sidebarMenus: [],
-        subSidebarMenus: ${JSON.stringify(subSidebarMenus)},
+        subSidebarMenus: ${JSON.stringify(subSidebarMenus, null, '  ')},
       },
       render: () => <MDXContent />;
     };

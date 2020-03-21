@@ -8,5 +8,5 @@ export default function resolver() {
   const docPath = getDocPath();
   const routes = resolveToRoutes(docPath);
   const entry = generateEntry(routes);
-  outputFileSync(join(docPath, '/.docfree/.temp/index.js'), entry);
+  outputFileSync(join(docPath, '/.docfree/.temp.js'), entry);
 }

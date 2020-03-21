@@ -4,8 +4,9 @@
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
-  "bin": "lib/bin.js",
-  "typings": "lib/bin.d.ts",
+  "bin": {
+    "docfree": "lib/bin.js"
+  },
   "sideEffects": false,
   "files": [
     "lib"

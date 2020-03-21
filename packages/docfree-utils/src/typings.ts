@@ -18,17 +18,18 @@ export interface ConfigSidebarData {
 }
 
 export interface ConfigSidebar {
-  show?: boolean;
-  depth?: 1 | 2 | 3 | 4 | 5 | 6;
-  data?: ConfigSidebarData;
+  show: boolean;
+  depth: 1 | 2 | 3 | 4 | 5 | 6;
+  data: ConfigSidebarData;
 }
 
 export interface DocfreeConfig {
-  title?: string;
-  favicon?: string;
-  meta?: ConfigMeta;
-  nav?: ConfigNav[];
-  sidebar?: ConfigSidebar;
-  webpackConfig?: Configuration;
+  mode: 'doc' | 'blog';
+  title: string;
+  favicon: string;
+  meta: ConfigMeta;
+  nav: ConfigNav[];
+  sidebar: ConfigSidebar;
+  webpackConfig: Configuration;
   [key: string]: any;
 }
