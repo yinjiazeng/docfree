@@ -1,4 +1,4 @@
-import { Configuration, RuleSetRule } from 'webpack';
+import webpack, { Configuration, RuleSetRule } from 'webpack';
 import { getDocPath, getConfig } from 'docfree-utils';
 import { join, resolve } from 'path';
 import merge from 'webpack-merge';
@@ -21,16 +21,14 @@ export default function(options: Configuration): Configuration {
   // 临时文件目录
   const entryPath = join(docfreePath, '.temp.js');
   // 静态资源目录
-  const staticPath = join(docfreePath, 'static');
+  const staticPath = join(docfreePath, 'public');
   // 构建输出文件目录
   const destPath = defaultDest || join(docfreePath, 'dist');
-  // 构建输出静态资源目录
-  const destStaticPath = join(destPath, 'static');
 
   const publicPath = (webpackConfig.output && webpackConfig.output.publicPath) || './';
-  const publicjsPath = `static/js`;
-  const publicCssPath = `static/css`;
-  const publicMediaPath = `static/media`;
+  const publicjsPath = `js`;
+  const publicCssPath = `css`;
+  const publicMediaPath = `media`;
 
   const jsExts = ['js', 'jsx', 'mjs'];
   const exts = [...jsExts, 'json'];
@@ -52,18 +50,21 @@ export default function(options: Configuration): Configuration {
   const plugins = [
     new HtmlWebpackPlugin({
       title,
-      favicon: resolve(publicPath, favicon),
+      // filename: join(destPath, 'index.html'),
+      template: join(staticPath, 'index.html'),
+      // favicon: resolve(publicPath, favicon),
       meta,
     }),
     new CopyWebpackPlugin([
       {
         from: staticPath,
-        to: destStaticPath,
+        to: destPath,
       },
     ]),
     new MiniCssExtractPlugin({
       filename: `${publicCssPath}/[name].[contenthash:8].css`,
     }),
+    new webpack.ProgressPlugin(),
   ];
 
   const cssLoader = (module: boolean = false): RuleSetRule[] => {
@@ -147,7 +148,7 @@ export default function(options: Configuration): Configuration {
       },
     },
     {
-      exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg],
+      exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg, /\.html$/],
       loader: 'file-loader',
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,
@@ -159,12 +160,14 @@ export default function(options: Configuration): Configuration {
   ];
 
   const defaultConfig: Configuration = {
+    stats: 'errors-only',
     entry: {
       docfree: ['@babel/polyfill', entryPath],
     },
     output: {
       path: destPath,
-      filename: `${publicjsPath}/[name].[contenthash:8].js`,
+      // filename: `${publicjsPath}/[name].[contenthash:8].js`,
+      filename: `${publicjsPath}/[name].[hash:8].js`,
       publicPath,
     },
     resolve: {

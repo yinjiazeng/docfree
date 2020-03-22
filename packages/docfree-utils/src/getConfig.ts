@@ -7,12 +7,14 @@ const defaultConfig: DocfreeConfig = {
   mode: 'doc',
   title: '',
   favicon: '',
+  logo: '',
+  dest: '',
   meta: {},
   nav: [],
   sidebar: {
     show: true,
     depth: 3,
-    data: {},
+    data: null,
   },
   webpackConfig: {},
 };

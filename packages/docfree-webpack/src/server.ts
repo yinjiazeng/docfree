@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import portfinder from 'portfinder';
 import config from './config';
+import CompileDonePlugin from './CompileDonePlugin';
 
 export default async function() {
   const { devServer, ...webpackConfig } = config({
@@ -11,9 +12,12 @@ export default async function() {
   const { path, publicPath }: any = webpackConfig.output;
 
   const serverConfig = {
-    port: 3000,
+    port: 8000,
+    host: 'localhost',
     contentBase: path,
+    // clientLogLevel: 'error',
     compress: true,
+    quiet: true,
     historyApiFallback: true,
     hot: true,
     disableHostCheck: true,
@@ -24,10 +28,17 @@ export default async function() {
   portfinder.basePort = serverConfig.port;
   serverConfig.port = await portfinder.getPortPromise();
 
-  WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
+  // WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
+
+  // webpackConfig.plugins.push(new CompileDonePlugin());
 
   const compiler = webpack(webpackConfig);
 
-  // eslint-disable-next-line no-new
-  new WebpackDevServer(compiler, serverConfig);
+  const server = new WebpackDevServer(compiler, serverConfig);
+
+  server.listen(serverConfig.port, serverConfig.host, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
 }

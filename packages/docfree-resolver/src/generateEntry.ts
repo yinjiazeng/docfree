@@ -1,4 +1,4 @@
-import { getConfig } from 'docfree-utils';
+import { getConfig, formatJSON } from 'docfree-utils';
 import { Routes } from './typings';
 import createBlogRouteEntry from './createBlogRouteEntry';
 
@@ -8,10 +8,10 @@ export default function generateEntry(routes: Routes): string {
 
   if (config.mode === 'blog') {
     routes = createBlogRouteEntry(routes);
-    routesString = JSON.stringify(routes, null, '  ');
+    routesString = formatJSON(routes);
     routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<BlogEntry />');
   } else {
-    routesString = JSON.stringify(routes, null, '  ');
+    routesString = formatJSON(routes);
   }
 
   routesString = routesString
@@ -23,9 +23,9 @@ import ReactDOM from 'react-dom';
 import { Router, RouteShape, Nuomi, store, nuomi, router } from 'nuomi';
 import { NotFound, BlogEntry, GlobalLayout } from 'docfree-components';
 ${
-  config.mode !== 'blog' && !!config.sidebar.data
+  config.mode !== 'blog' && config.sidebar.data
     ? `
-const sidebarData = ${JSON.stringify(config.sidebar.data, null, '  ')}
+const sidebarData = ${formatJSON(config.sidebar.data)}
 
 nuomi.config({
   onInit() {
@@ -83,7 +83,7 @@ const generateData = (raw, parentPath = '/', data = []) => {
 };
 
 const data = generateData(routes);
-const nav = ${JSON.stringify(config.nav, null, '  ')};
+const nav = ${formatJSON(config.nav)};
 
 const App = () => {
   return (
@@ -97,10 +97,7 @@ const App = () => {
   );
 };
 
-const rootNode = document.createElement('div');
-document.body.prepend(rootNode);
-
-ReactDOM.render(<App />, rootNode);`;
+ReactDOM.render(<App />, document.getElementById('root'));`;
 
   return content;
 }

@@ -20,13 +20,15 @@ export interface ConfigSidebarData {
 export interface ConfigSidebar {
   show: boolean;
   depth: 1 | 2 | 3 | 4 | 5 | 6;
-  data: ConfigSidebarData;
+  data: ConfigSidebarData | null;
 }
 
 export interface DocfreeConfig {
   mode: 'doc' | 'blog';
   title: string;
   favicon: string;
+  logo: string;
+  dest: string;
   meta: ConfigMeta;
   nav: ConfigNav[];
   sidebar: ConfigSidebar;

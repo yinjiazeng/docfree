@@ -7,5 +7,9 @@ export default function() {
     mode: 'production',
     plugins: [new CleanWebpackPlugin()],
   });
-  webpack(webpackConfig);
+  webpack(webpackConfig, (err, stats) => {
+    // stats.toJson().errors.forEach(err => {
+    //   console.error(err)
+    // })
+  });
 }

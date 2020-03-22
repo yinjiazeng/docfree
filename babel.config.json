@@ -2,9 +2,6 @@
   "presets": [
     ["@babel/preset-env", {
       "targets": {
-        "browsers": [
-          "ie >= 9"
-        ],
         "node": true
       },
       "modules": "commonjs"

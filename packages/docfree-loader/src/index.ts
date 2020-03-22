@@ -1,4 +1,4 @@
-import { getConfig } from 'docfree-utils';
+import { getConfig, formatJSON } from 'docfree-utils';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
@@ -47,9 +47,9 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       state: {
         showSidebar: ${showSidebar},
         sidebarMenus: [],
-        subSidebarMenus: ${JSON.stringify(subSidebarMenus, null, '  ')},
+        subSidebarMenus: ${formatJSON(subSidebarMenus)},
       },
-      render: () => <MDXContent />;
+      render: () => <MDXContent />
     };
 
     ${!!title && `nuomiProps.title = '${title}';`}
