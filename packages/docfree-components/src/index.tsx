@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Layout = () => {
-  return <></>;
+export const Layout = ({ children }) => {
+  return <>{children}</>;
 };
 
 export const HashLink = () => {
@@ -16,6 +16,6 @@ export const BlogEntry = () => {
   return <></>;
 };
 
-export const GlobalLayout = () => {
-  return <></>;
+export const GlobalLayout = ({ children }) => {
+  return <>{children}</>;
 };

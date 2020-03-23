@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import portfinder from 'portfinder';
+import { join } from 'path';
 import config from './config';
 import CompileDonePlugin from './CompileDonePlugin';
 
@@ -9,26 +10,25 @@ export default async function() {
     mode: 'development',
     devtool: 'eval-source-map',
   });
-  const { path, publicPath }: any = webpackConfig.output;
+  const { path }: any = webpackConfig.output;
 
   const serverConfig = {
     port: 8000,
     host: 'localhost',
-    contentBase: path,
+    contentBase: join(path, '../public'),
     // clientLogLevel: 'error',
     compress: true,
-    quiet: true,
+    // quiet: true,
     historyApiFallback: true,
     hot: true,
     disableHostCheck: true,
-    publicPath,
     ...devServer,
   };
 
   portfinder.basePort = serverConfig.port;
   serverConfig.port = await portfinder.getPortPromise();
 
-  // WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
+  WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
 
   // webpackConfig.plugins.push(new CompileDonePlugin());
 

@@ -33,7 +33,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     return callback(err);
   }
 
-  result = result.replace('export default ', '');
+  result = result.replace('export default ', '').replace('/* @jsx mdx */', '');
 
   return callback(
     null,

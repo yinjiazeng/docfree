@@ -20,7 +20,7 @@ export default function generateEntry(routes: Routes): string {
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, RouteShape, Nuomi, store, nuomi, router } from 'nuomi';
+import { Router, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
 import { NotFound, BlogEntry, GlobalLayout } from 'docfree-components';
 ${
   config.mode !== 'blog' && config.sidebar.data
@@ -90,7 +90,7 @@ const App = () => {
     <Nuomi id="global" state={{ data, nav }}>
       <GlobalLayout>
         <Router>
-          <RouteShape routes={routes} />
+          <ShapeRoute routes={routes} />
         </Router>
       </GlobalLayout>
     </Nuomi>
