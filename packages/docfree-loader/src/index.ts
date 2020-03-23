@@ -25,23 +25,21 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     return depth > 1 && depth <= sidebarDepth;
   });
 
-  content = `${mdContent}\nexport default Layout`;
+  content = `import React from 'react';
+  import { Layout, HashLink, Playground } from 'docfree-components';
+  ${mdContent}\nexport default Layout;`;
 
   try {
-    result = await mdx(content);
+    result = await mdx(content, { skipExport: true });
   } catch (err) {
     return callback(err);
   }
 
-  result = result.replace('export default ', '').replace('/* @jsx mdx */', '');
+  result = result.replace(/^\/\*\s+@jsx\s+mdx\s+\*\//, '').replace(/\s+mdxType="[^"]+"/g, '');
 
   return callback(
     null,
-    `
-    import React from 'react';
-    import { Layout, HashLink } from 'docfree-components';
-
-    ${result}
+    `${result}
 
     const nuomiProps = {
       state: {

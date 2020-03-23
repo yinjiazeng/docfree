@@ -1,6 +1,7 @@
 import remark from 'remark';
 import parse from 'remark-parse';
 import u from 'unist-builder';
+import { matchHtml } from 'docfree-utils';
 import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 
@@ -42,14 +43,33 @@ export default function parseMarkdown(content: string, options: OptionObject) {
           if (value) {
             let plugin = value;
             if (typeof plugin === 'string') {
-              plugin = require(`docfree-loader-${plugin}`);
+              plugin = require(`docfree-loader-plugin-${plugin}`);
             }
             if (!plugin.lang) {
               throw new Error('docfree-loader插件返回值必须包含lang属性');
             }
             if (plugin.lang === node.lang) {
               if (typeof plugin.transform === 'function') {
-                const ast = plugin.transform(node.value.trim());
+                const { content: newContent, matchs } = matchHtml('style', node.value);
+                node.value = newContent.trim();
+                const ast = plugin.transform(
+                  node.value,
+                  matchs.map((style) => {
+                    let { lang } = style.attrs;
+                    let { content: styleContent } = style;
+
+                    if (lang && lang !== 'css') {
+                      styleContent = styleContent.trim();
+                    } else {
+                      lang = 'css';
+                    }
+
+                    return {
+                      lang,
+                      content: styleContent,
+                    };
+                  }),
+                );
                 if (ast && ast.type) {
                   arr[i] = ast;
                 }
