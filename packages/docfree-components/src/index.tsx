@@ -20,16 +20,15 @@ export const GlobalLayout = ({ children }) => {
   return <>{children}</>;
 };
 
-export const Playground = ({ code, styles, render, children }) => {
+export const Playground = ({ code, render, children }) => {
   return (
     <>
-      <code lang={code.lang}>{code.content}</code>
-      {styles.map(({ lang, content }, i) => (
+      {render ? render() : children}
+      {[].concat(code).map(({ lang, content }, i) => (
         <code lang={lang} key={i}>
           {content}
         </code>
       ))}
-      {render ? render() : children}
     </>
   );
 };

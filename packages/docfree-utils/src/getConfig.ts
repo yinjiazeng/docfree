@@ -8,6 +8,7 @@ const defaultConfig: DocfreeConfig = {
   title: '',
   favicon: '',
   logo: '',
+  ignore: [],
   dest: '',
   meta: {},
   nav: [],

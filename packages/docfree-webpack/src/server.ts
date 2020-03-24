@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import { tempPath } from 'docfree-utils';
 import portfinder from 'portfinder';
 import { join } from 'path';
 import config from './config';
@@ -23,6 +24,9 @@ export default async function() {
     hot: true,
     disableHostCheck: true,
     ...devServer,
+    watchOptions: {
+      ignored: [tempPath.create()],
+    },
   };
 
   portfinder.basePort = serverConfig.port;

@@ -16,7 +16,7 @@ export default function generateEntry(routes: Routes): string {
 
   routesString = routesString
     .replace(/("children":\s*)"NotFound"/g, '$1<NotFound />')
-    .replace(/"require":\s*"([^"]+)"/g, '...require("$1")');
+    .replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';

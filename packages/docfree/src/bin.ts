@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import commander from 'commander';
+import { unlinkSync } from 'fs';
+import { tempPath } from 'docfree-utils';
 import { build, server } from 'docfree-webpack';
 import { resolver, resolverWatch } from 'docfree-resolver';
 import pkg from 'docfree/package.json';
@@ -13,6 +15,8 @@ program
   .command('build <dir>')
   .description('构建生成本地静态资源')
   .action(() => {
+    process.env.NODE_ENV = 'production';
+    tempPath.remove();
     resolver();
     build();
   });
@@ -21,6 +25,8 @@ program
   .command('dev <dir>')
   .description('启动Web服务')
   .action(() => {
+    process.env.NODE_ENV = 'development';
+    tempPath.remove();
     resolverWatch();
     server();
   });

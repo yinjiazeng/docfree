@@ -1,7 +1,6 @@
 import remark from 'remark';
 import parse from 'remark-parse';
 import u from 'unist-builder';
-import { matchHtml } from 'docfree-utils';
 import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 
@@ -18,7 +17,7 @@ const getTexts = (arr: AstNode[]) => {
   return text;
 };
 
-export default function parseMarkdown(content: string, options: OptionObject) {
+export default function parseMarkdown({ content, ...rest }, options: OptionObject) {
   const ret: ParseResult = {
     data: [],
     content,
@@ -50,26 +49,7 @@ export default function parseMarkdown(content: string, options: OptionObject) {
             }
             if (plugin.lang === node.lang) {
               if (typeof plugin.transform === 'function') {
-                const { content: newContent, matchs } = matchHtml('style', node.value);
-                node.value = newContent.trim();
-                const ast = plugin.transform(
-                  node.value,
-                  matchs.map((style) => {
-                    let { lang } = style.attrs;
-                    let { content: styleContent } = style;
-
-                    if (lang && lang !== 'css') {
-                      styleContent = styleContent.trim();
-                    } else {
-                      lang = 'css';
-                    }
-
-                    return {
-                      lang,
-                      content: styleContent,
-                    };
-                  }),
-                );
+                const ast = plugin.transform(node.value.trim(), rest);
                 if (ast && ast.type) {
                   arr[i] = ast;
                 }

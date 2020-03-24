@@ -1,16 +1,23 @@
 import { getConfig, formatJSON } from 'docfree-utils';
+import { dirname } from 'path';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
 
 module.exports = async function docfreeLoader(this: any, content: string) {
+  const { resourcePath } = this;
   const options = getOptions(this);
   const callback = this.async();
   const config = getConfig();
   const { sidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
-  const { content: mdContent, data: heading } = parseMarkdown(markdownContent, options);
+  const resource = {
+    filePath: resourcePath,
+    dirPath: dirname(resourcePath),
+    content: markdownContent,
+  };
+  const { content: mdContent, data: heading } = parseMarkdown(resource, options);
   const showSidebar: boolean =
     typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
   const sidebarDepth: number =
@@ -30,12 +37,15 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   ${mdContent}\nexport default Layout;`;
 
   try {
-    result = await mdx(content, { skipExport: true });
+    result = await mdx(content);
   } catch (err) {
     return callback(err);
   }
 
-  result = result.replace(/^\/\*\s+@jsx\s+mdx\s+\*\//, '').replace(/\s+mdxType="[^"]+"/g, '');
+  result = result
+    .replace(/(export) default/, '$1')
+    .replace('/* @jsx mdx */', '')
+    .replace(/\s+mdxType="[^"]+"/g, '');
 
   return callback(
     null,
@@ -52,7 +62,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
     ${!!title && `nuomiProps.title = '${title}';`}
 
-    module.exports = nuomiProps;
+    export default nuomiProps;
   `,
   );
 };

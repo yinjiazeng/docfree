@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig } from 'docfree-utils';
+import { getDocPath, getConfig, tempPath } from 'docfree-utils';
 import { join, resolve } from 'path';
 import merge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -12,14 +12,11 @@ export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
   const { webpackConfig, dest: defaultDest, title, favicon, meta } = getConfig();
-  process.env.NODE_ENV = mode;
 
   // 文档根目录
   const docPath = getDocPath();
   // 文档配置目录
   const docfreePath = join(docPath, '.docfree');
-  // 临时文件目录
-  const entryPath = join(docfreePath, '.temp.js');
   // 静态资源目录
   const staticPath = join(docfreePath, 'public');
   // 构建输出文件目录
@@ -136,10 +133,6 @@ export default function(options: Configuration): Configuration {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
       loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env', '@babel/preset-react'],
-        plugins: ['transform-es2015-modules-commonjs'],
-      },
     },
     {
       test: mdExtReg,
@@ -163,7 +156,7 @@ export default function(options: Configuration): Configuration {
   const defaultConfig: Configuration = {
     stats: 'errors-only',
     entry: {
-      docfree: ['@babel/polyfill', entryPath],
+      docfree: ['@babel/polyfill', tempPath.create('docfree.js')],
     },
     output: {
       path: destPath,
