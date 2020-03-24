@@ -10,7 +10,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const options = getOptions(this);
   const callback = this.async();
   const config = getConfig();
-  const { sidebar } = config;
+  const { sidebar, pageSidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
   const resource = {
     filePath: resourcePath,
@@ -18,19 +18,50 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     content: markdownContent,
   };
   const { content: mdContent, data: heading } = parseMarkdown(resource, options);
+
+  const sidebarTitle = setting.sidebarTitle || '';
   const showSidebar: boolean =
     typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
   const sidebarDepth: number =
-    setting.pageSidebar >= 1 && setting.pageSidebar <= 6 ? setting.depth : sidebar.depth;
+    setting.sidebarDepth >= 1 && setting.sidebarDepth <= 6 ? setting.sidebarDepth : sidebar.depth;
+  const showPageSidebar: boolean =
+    typeof setting.pageSidebar === 'boolean' ? setting.pageSidebar : pageSidebar.show;
+  const pageSidebarDepth: number =
+    setting.pageSidebarDepth >= 1 && setting.pageSidebarDepth <= 6
+      ? setting.pageSidebarDepth
+      : pageSidebar.depth;
+
   let result = '';
   let title = '';
-  const subSidebarMenus = heading.filter(({ depth, title: tit }) => {
-    if (!title && depth === 1) {
-      title = tit;
+
+  const headings = heading.filter((item) => {
+    const { depth, text } = item;
+    if (depth === 1) {
+      if (!title) {
+        title = text;
+      }
       return false;
     }
-    return depth > 1 && depth <= sidebarDepth;
+    return true;
   });
+
+  const sidebarMenus = headings.filter(({ depth }) => depth <= sidebarDepth);
+
+  const pageSidebarMenus = headings
+    .filter(({ depth }) => {
+      const bool = depth <= pageSidebarDepth;
+      if (!showSidebar) {
+        return bool;
+      }
+      return bool && depth > sidebarDepth;
+    })
+    .map((item) => {
+      const { level, depth, ...rest } = item;
+      if (showSidebar) {
+        return { level: level - (depth - sidebarDepth + 1), ...rest };
+      }
+      return item;
+    });
 
   content = `import React from 'react';
   import { Layout, HashLink, Playground } from 'docfree-components';
@@ -53,15 +84,16 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
     const nuomiProps = {
       state: {
+        sidebarTitle: ${sidebarTitle},
+        showCode: false,
         showSidebar: ${showSidebar},
-        sidebarMenus: [],
-        subSidebarMenus: ${formatJSON(subSidebarMenus)},
+        showPageSidebar: ${showPageSidebar},
+        sidebarMenus: ${formatJSON(sidebarMenus)},
+        pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       },
       render: () => <MDXContent />
     };
-
-    ${!!title && `nuomiProps.title = '${title}';`}
-
+    ${title ? `nuomiProps.title = '${title}';` : ''}
     export default nuomiProps;
   `,
   );

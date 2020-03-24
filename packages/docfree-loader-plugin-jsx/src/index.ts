@@ -18,7 +18,7 @@ module.exports = {
         lang = 'css';
       }
 
-      const fileName = `${filePath.replace(/[/\\]/g, '_')}_${i}.${lang}`;
+      const fileName = `style/${filePath.replace(/[/\\]/g, '_')}_${i}.${lang}`;
       const path = tempPath.write(fileName, styleContent);
 
       importStyles.push(`import '${path}'`);

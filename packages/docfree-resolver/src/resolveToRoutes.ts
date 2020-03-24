@@ -1,5 +1,5 @@
 import { readdirSync, statSync } from 'fs';
-import { join, basename } from 'path';
+import { join } from 'path';
 import { Routes } from './typings';
 
 // 解析目录生成路由
@@ -15,13 +15,12 @@ export default function resolveToRoutes(docPath: string, routes: Routes = []): R
           path: `/${item}`,
           children: resolveToRoutes(itemPath, []).concat({ path: '*', children: 'NotFound' }),
         });
-      } else if (/\.md$/i.test(item)) {
-        const baseName = item.replace(/\.md$/, '');
+      } else if (/\.mdx$/i.test(item)) {
+        const filename = item.replace(/\.mdx$/i, '');
         routes.push({
-          path: /^README$/i.test(baseName) ? `/(${item})?` : `/${item}`,
-          baseName,
-          fileName: item,
-          title: baseName,
+          path: /^README$/i.test(filename) ? `/(${filename})?` : `/${filename}`,
+          filename,
+          title: filename,
           createTime: stat.ctime.getTime(),
           require: itemPath,
         });

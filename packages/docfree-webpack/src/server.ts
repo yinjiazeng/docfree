@@ -25,7 +25,7 @@ export default async function() {
     disableHostCheck: true,
     ...devServer,
     watchOptions: {
-      ignored: [tempPath.create()],
+      ignored: [tempPath.create('style')],
     },
   };
 

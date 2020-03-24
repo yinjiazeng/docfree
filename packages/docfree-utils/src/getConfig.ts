@@ -4,6 +4,7 @@ import getDocPath from './getDocPath';
 import { DocfreeConfig } from './typings';
 
 const defaultConfig: DocfreeConfig = {
+  router: 'hash',
   mode: 'doc',
   title: '',
   favicon: '',

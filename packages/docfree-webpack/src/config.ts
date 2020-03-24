@@ -32,7 +32,7 @@ export default function(options: Configuration): Configuration {
   const cssExt = 'css';
   const lessExt = 'less';
   const sassExts = ['sass', 'scss'];
-  const mdExts = ['md'];
+  const mdExts = ['md', 'mdx'];
   const extensions = exts.map((ext) => `.${ext}`);
   const jsExtReg = extToRegexp(jsExts);
   const cssExtReg = extToRegexp(cssExt);

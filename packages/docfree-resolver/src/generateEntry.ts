@@ -27,40 +27,78 @@ ${
     ? `
 const sidebarData = ${formatJSON(config.sidebar.data)}
 
-nuomi.config({
-  onInit() {
-    const { path, baseName } = this;
-    const { showSidebar } = this.store.getState();
-    if (showSidebar) {
-      const pre = path.substr(0, path.lastIndexOf('/'));
-      const prePath = pre || '/';
-      if (sidebarData[prePath]) {
-        const { title: sidebarTitle, list } = sidebarData[prePath];
-        const { global: { data } } = store.getState();
-        const payload = {
-          sidebarTitle,
-        };
+const isObject = (obj) => ({}).toString.call(obj) === '[object Object]';
 
-        if (Array.isArray(list)) {
-          payload.sidebarMenus = list.map((name) => {
-            const findData = data.find((item) => {
-              return item.path === prePath && item.baseName === name;
-            });
-            let menu;
-            if (findData) {
-              menu = { path: pre + '/' + findData.fileName, title: findData.title }
-            } else {
-              menu = { path: pre + '/' + name + '.md', title: name };
-            }
-            return menu;
-          })
+const getMenus = function(array, menus = []) {
+  const { global: { data } } = store.getState();
+
+  array.forEach((filename) => {
+    if (typeof filename === 'string') {
+      const findData = data.find((item) => {
+        return item.pathname === this.pathname && item.filename === filename;
+      });
+
+      if (findData) {
+        const { pathname, filename, title } = findData;
+        const menu = { to: pathname + filename, text: title };
+
+        if (findData.path === this.path) {
+          const { sidebarMenus } = this.store.getState();
+          menu.menus = sidebarMenus;
         }
 
-        this.dispatch({
-          type: '_updateState',
-          payload,
-        });
+        menus.push(menu);
       }
+    } else if (isObject(filename)) {
+      const { title, menus } = filename;
+
+      if (title) {
+        const menu = { text: title };
+
+        if (Array.isArray(menus)) {
+          menu.menus = getMenus.call(this, menus)
+        }
+
+        menus.push(menu);
+      }
+    }
+  });
+
+  return menus;
+};
+
+nuomi.config({
+  onInit() {
+    const { path, pathname, filename, title } = this;
+    const state = this.store.getState();
+    const { showSidebar, sidebarMenus } = state;
+
+    if (path && showSidebar) {
+      if (!this.sidebarMenus) {
+        const payload = {};
+        const data = sidebarData[pathname];
+
+        if (data && findFilename(data, filename)) {
+          const { title, menus } = data;
+
+          payload.sidebarTitle = title;
+
+          if (Array.isArray(menus) && menus.length) {
+            payload.sidebarMenus = getMenus.call(this, menus);
+          }
+        } else {
+          payload.sidebarMenus = [{ to: pathname + filename, text: title, menus: sidebarMenus }];
+        }
+
+        this.sidebarMenus = payload.sidebarMenus;
+      } else {
+        payload.sidebarMenus = this.sidebarMenus;
+      }
+
+      this.dispatch({
+        type: '_updateState',
+        payload,
+      });
     }
   }
 });`
@@ -69,13 +107,15 @@ nuomi.config({
 
 const routes = ${routesString};
 
-const generateData = (raw, parentPath = '/', data = []) => {
-  raw.forEach(({ path, children, render, effects, onInit, onChange, ...rest }) => {
+const generateData = (raw, pathname = '/', data = []) => {
+  raw.forEach((route) => {
+    const { path, children, render, effects, onInit, onChange, ...rest } = route;
+    route.pathname = pathname;
     if (path !== "*") {
       if (Array.isArray(children)) {
-        data = generateData(children, router.megre(parentPath, path), data);
+        data = generateData(children, router.megre(pathname, path), data);
       } else {
-        data.push({ path: parentPath, ...rest });
+        data.push({ path, pathname, ...rest });
       }
     }
   });
@@ -89,7 +129,7 @@ const App = () => {
   return (
     <Nuomi id="global" state={{ data, nav }}>
       <GlobalLayout>
-        <Router>
+        <Router type="${config.router}">
           <ShapeRoute routes={routes} />
         </Router>
       </GlobalLayout>

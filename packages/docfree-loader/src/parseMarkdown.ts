@@ -30,9 +30,9 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
       if (node.type === 'heading') {
         const { depth } = node;
         const text = getTexts([node]).join('');
-        ret.data.push({ title: text, depth });
+        ret.data.push({ text, depth, level: depth > 1 ? depth - 2 : 0 });
         node.children = [
-          u('html', { value: `<HashLink to="#${text}">` }),
+          u('html', { value: `<HashLink to="#${depth === 1 ? '/' : text}">` }),
           u('text', { value: '#' }),
           u('html', { value: `</HashLink>` }),
           u('text', { value: text }),

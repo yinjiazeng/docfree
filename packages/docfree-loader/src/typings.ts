@@ -9,8 +9,9 @@ export interface AstNode extends Node {
 }
 
 export interface Heading {
-  title: string;
+  text: string;
   depth: number;
+  level: number;
 }
 
 export interface ParseResult {

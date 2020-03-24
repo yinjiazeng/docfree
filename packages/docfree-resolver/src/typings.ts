@@ -3,8 +3,7 @@ export interface RouteItem {
   children?: Routes | string;
   require?: string;
   title?: string;
-  baseName?: string;
-  fileName?: string;
+  filename?: string;
   createTime?: number;
 }
 
