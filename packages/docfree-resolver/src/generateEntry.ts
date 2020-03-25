@@ -26,15 +26,40 @@ ${
   config.mode !== 'blog' && config.sidebar.data
     ? `
 const sidebarData = ${formatJSON(config.sidebar.data)}
+const routes = ${routesString};
 
 const isObject = (obj) => ({}).toString.call(obj) === '[object Object]';
 
-const getMenus = function(array, menus = []) {
-  const { global: { data } } = store.getState();
+const generateData = (raw, pathname = '/', data = []) => {
+  raw.forEach((route) => {
+    const { path, children, render, effects, onInit, onChange, ...rest } = route;
+    route.pathname = pathname;
+    if (path !== "*") {
+      if (Array.isArray(children)) {
+        data = generateData(children, router.megre(pathname, path), data);
+      } else {
+        data.push({ path, pathname, ...rest });
+      }
+    }
+  });
+  return data;
+};
 
+// 按创建时间倒序
+const dataSource = generateData(routes).sort(({ createTime: a }, { createTime: b }) => {
+  if (a < b) {
+      return 1;
+  }
+  if (a > b) {
+      return -1;
+  }
+  return 0;
+});
+
+const getMenus = function(array, menus = []) {
   array.forEach((filename) => {
     if (typeof filename === 'string') {
-      const findData = data.find((item) => {
+      const findData = dataSource.find((item) => {
         return item.pathname === this.pathname && item.filename === filename;
       });
 
@@ -67,36 +92,61 @@ const getMenus = function(array, menus = []) {
   return menus;
 };
 
+const findFilename = (menus, filename) => {
+  if (Array.isArray(menus)) {
+    for(let item of menus) {
+      if (item === filename) {
+        return true;
+      } else if (item && item.menus) {
+        return findFilename(item.menus, filename);
+      }
+    }
+  }
+  return false;
+};
+
 nuomi.config({
   onInit() {
-    const { path, pathname, filename, title } = this;
-    const state = this.store.getState();
-    const { showSidebar, sidebarMenus } = state;
+    const { title, id } = this;
 
-    if (path && showSidebar) {
-      if (!this.sidebarMenus) {
-        const payload = {};
+    if (id !== 'global' && title) {
+      const {
+        path,
+        pathname,
+        filename,
+        sidebarTitle,
+        showSidebar,
+        showPageSidebar,
+        sidebarMenus,
+        pageSidebarMenus,
+      } = this;
+
+      const payload = {
+        sidebarTitle,
+        showSidebar,
+        showPageSidebar,
+        pageSidebarMenus,
+      };
+
+      if (!this.computedMenus) {
         const data = sidebarData[pathname];
 
-        if (data && findFilename(data, filename)) {
+        if (data && findFilename(data.menus, filename)) {
           const { title, menus } = data;
-
           payload.sidebarTitle = title;
 
           if (Array.isArray(menus) && menus.length) {
-            payload.sidebarMenus = getMenus.call(this, menus);
+            this.computedMenus = getMenus.call(this, menus);
           }
         } else {
-          payload.sidebarMenus = [{ to: pathname + filename, text: title, menus: sidebarMenus }];
+          this.computedMenus = [{ to: pathname + filename, text: title, menus: sidebarMenus }];
         }
-
-        this.sidebarMenus = payload.sidebarMenus;
-      } else {
-        payload.sidebarMenus = this.sidebarMenus;
       }
 
-      this.dispatch({
-        type: '_updateState',
+      payload.sidebarMenus = this.computedMenus;
+
+      store.dispatch({
+        type: 'global/_updateState',
         payload,
       });
     }
@@ -105,31 +155,24 @@ nuomi.config({
     : ''
 }
 
-const routes = ${routesString};
-
-const generateData = (raw, pathname = '/', data = []) => {
-  raw.forEach((route) => {
-    const { path, children, render, effects, onInit, onChange, ...rest } = route;
-    route.pathname = pathname;
-    if (path !== "*") {
-      if (Array.isArray(children)) {
-        data = generateData(children, router.megre(pathname, path), data);
-      } else {
-        data.push({ path, pathname, ...rest });
-      }
-    }
-  });
-  return data;
+const globalState = {
+  dataSource,
+  showSidebar: false,
+  pageSidebar: false,
+  sidebarTtile: '',
+  sidebarMenus: [],
+  pageSidebarMenus: [],
 };
 
-const data = generateData(routes);
 const nav = ${formatJSON(config.nav)};
+const footer = '${config.footer}';
+const routerType = '${['hash', 'browser'].includes(config.router) ? config.router : 'hash'}';
 
 const App = () => {
   return (
-    <Nuomi id="global" state={{ data, nav }}>
-      <GlobalLayout>
-        <Router type="${config.router}">
+    <Nuomi id="global" state={globalState}>
+      <GlobalLayout nav={nav} footer={footer}>
+        <Router type={routerType}>
           <ShapeRoute routes={routes} />
         </Router>
       </GlobalLayout>

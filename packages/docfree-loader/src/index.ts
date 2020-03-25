@@ -84,13 +84,13 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
     const nuomiProps = {
       state: {
-        sidebarTitle: ${sidebarTitle},
         showCode: false,
-        showSidebar: ${showSidebar},
-        showPageSidebar: ${showPageSidebar},
-        sidebarMenus: ${formatJSON(sidebarMenus)},
-        pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       },
+      sidebarTitle: '${sidebarTitle}',
+      showSidebar: ${showSidebar},
+      showPageSidebar: ${showPageSidebar},
+      sidebarMenus: ${formatJSON(sidebarMenus)},
+      pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       render: () => <MDXContent />
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}
