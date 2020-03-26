@@ -14,6 +14,7 @@ const defaultConfig: DocfreeConfig = {
   dest: '',
   meta: {},
   nav: [],
+  langTheme: 'github',
   sidebar: {
     show: true,
     depth: 3,

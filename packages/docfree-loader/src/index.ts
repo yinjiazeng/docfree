@@ -5,6 +5,17 @@ import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
 
+const getDepth = (settingDepth: number, defaultDepth: number) => {
+  const depth = Number(Number.isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
+  if (depth < 1) {
+    return 1;
+  }
+  if (depth > 6) {
+    return 6;
+  }
+  return depth;
+};
+
 module.exports = async function docfreeLoader(this: any, content: string) {
   const { resourcePath } = this;
   const options = getOptions(this);
@@ -18,18 +29,15 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     content: markdownContent,
   };
   const { content: mdContent, data: heading } = parseMarkdown(resource, options);
-
   const sidebarTitle = setting.sidebarTitle || '';
-  const showSidebar: boolean =
-    typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show;
-  const sidebarDepth: number =
-    setting.sidebarDepth >= 1 && setting.sidebarDepth <= 6 ? setting.sidebarDepth : sidebar.depth;
-  const showPageSidebar: boolean =
-    typeof setting.pageSidebar === 'boolean' ? setting.pageSidebar : pageSidebar.show;
-  const pageSidebarDepth: number =
-    setting.pageSidebarDepth >= 1 && setting.pageSidebarDepth <= 6
-      ? setting.pageSidebarDepth
-      : pageSidebar.depth;
+  const showSidebar = Boolean(
+    typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show,
+  );
+  const showPageSidebar = Boolean(
+    typeof setting.pageSidebar === 'boolean' ? setting.pageSidebar : pageSidebar.show,
+  );
+  const sidebarDepth = getDepth(setting.sidebarDepth, sidebar.depth);
+  const pageSidebarDepth = getDepth(setting.pageSidebarDepth, pageSidebar.depth);
 
   let result = '';
   let title = '';

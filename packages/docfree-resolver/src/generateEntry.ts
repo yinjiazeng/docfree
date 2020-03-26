@@ -23,6 +23,7 @@ export default function generateEntry(routes: Routes): string {
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
 import { NotFound${isBlog ? ', BlogEntry' : ''}, Layout } from 'docfree-components';
+import 'highlight.js/styles/${config.langTheme}.css';
 
 const routes = ${routesString};
 

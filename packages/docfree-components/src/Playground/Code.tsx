@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useLayoutEffect, useState, useRef } from 'react';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
-import { Card, Tooltip } from 'antd';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
+import { Tooltip, Card } from '../antd';
 
 export default function Code({ lang, content }) {
   const [copy, copyDispatch] = useState(false);
@@ -29,7 +28,7 @@ export default function Code({ lang, content }) {
     }, 1000);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     hljs.highlightBlock(ref.current);
   }, []);
 

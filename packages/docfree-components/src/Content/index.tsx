@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useConnect, connect } from 'nuomi';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import hljs from 'highlight.js';
+import { Tooltip } from '../antd';
 
 function Content({ children }) {
   const [{ showCode }, dispatch] = useConnect();
+  const Icon = showCode ? EyeInvisibleOutlined : EyeOutlined;
 
   const showCodeHandler = () => {
     dispatch({
@@ -14,15 +17,19 @@ function Content({ children }) {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch({ type: 'initData' });
-  }, []);
 
-  const Icon = showCode ? EyeInvisibleOutlined : EyeOutlined;
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  }, []);
 
   return (
     <>
-      <Icon onClick={showCodeHandler} />
+      <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
+        <Icon onClick={showCodeHandler} />
+      </Tooltip>
       {children}
     </>
   );
