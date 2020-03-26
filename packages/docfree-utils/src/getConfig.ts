@@ -19,6 +19,10 @@ const defaultConfig: DocfreeConfig = {
     depth: 3,
     data: null,
   },
+  pageSidebar: {
+    show: true,
+    depth: 3,
+  },
   webpackConfig: {},
 };
 

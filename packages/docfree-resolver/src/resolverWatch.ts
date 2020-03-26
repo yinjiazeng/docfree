@@ -12,7 +12,7 @@ export default function resolverWatch() {
       ignored: /(^|[/\\])\../,
     })
     .on('all', (event, path) => {
-      if (statSync(path).isDirectory() || /^\.mdx$/i.test(extname(path))) {
+      if (statSync(path).isDirectory() || /^\.mdx?$/i.test(extname(path))) {
         resolver();
       }
     });

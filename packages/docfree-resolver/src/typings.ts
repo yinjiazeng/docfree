@@ -5,6 +5,7 @@ export interface RouteItem {
   title?: string;
   filename?: string;
   createTime?: number;
+  updateTime?: number;
 }
 
 export type Routes = Array<RouteItem>;

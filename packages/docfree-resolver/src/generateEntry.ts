@@ -4,9 +4,10 @@ import createBlogRouteEntry from './createBlogRouteEntry';
 
 export default function generateEntry(routes: Routes): string {
   const config = getConfig();
+  const isBlog = config.mode === 'blog';
   let routesString: string;
 
-  if (config.mode === 'blog') {
+  if (isBlog) {
     routes = createBlogRouteEntry(routes);
     routesString = formatJSON(routes);
     routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<BlogEntry />');
@@ -20,24 +21,19 @@ export default function generateEntry(routes: Routes): string {
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
-import { NotFound, BlogEntry, GlobalLayout } from 'docfree-components';
-${
-  config.mode !== 'blog' && config.sidebar.data
-    ? `
-const sidebarData = ${formatJSON(config.sidebar.data)}
-const routes = ${routesString};
+import { Router, Route, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
+import { NotFound${isBlog ? ', BlogEntry' : ''}, GlobalLayout } from 'docfree-components';
 
-const isObject = (obj) => ({}).toString.call(obj) === '[object Object]';
+const routes = ${routesString};
 
 const generateData = (raw, pathname = '/', data = []) => {
   raw.forEach((route) => {
-    const { path, children, render, effects, onInit, onChange, ...rest } = route;
-    route.pathname = pathname;
-    if (path !== "*") {
+    if (route.createTime) {
+      const { path, children, render, effects, onInit, onChange, ...rest } = route;
+      route.pathname = pathname;
       if (Array.isArray(children)) {
         data = generateData(children, router.megre(pathname, path), data);
-      } else {
+      } else${isBlog ? ' if(!/^README$/i.test(route.filename))' : ''} {
         data.push({ path, pathname, ...rest });
       }
     }
@@ -46,50 +42,84 @@ const generateData = (raw, pathname = '/', data = []) => {
 };
 
 // 按创建时间倒序
-const dataSource = generateData(routes).sort(({ createTime: a }, { createTime: b }) => {
+const dataSource = generateData(routes)
+${
+  isBlog
+    ? `.sort(({ createTime: a }, { createTime: b }) => {
   if (a < b) {
-      return 1;
+    return 1;
   }
   if (a > b) {
-      return -1;
+    return -1;
   }
   return 0;
 });
 
-const getMenus = function(array, menus = []) {
+const getTitleList = (pathname, { query }) => {
+  const prePath = query.pathname || pathname;
+  const list = [];
+
+  dataSource.forEach(({ title, pathname: pre }) => {
+    if (pre.startsWith(prePath)) {
+      list.push(title);
+    }
+  });
+
+  return list;
+};
+`
+    : ''
+}
+const getMenus = function(array, menus = [], list = []) {
   array.forEach((filename) => {
     if (typeof filename === 'string') {
-      const findData = dataSource.find((item) => {
-        return item.pathname === this.pathname && item.filename === filename;
-      });
+      const name = filename.trim();
 
-      if (findData) {
-        const { pathname, filename, title } = findData;
-        const menu = { to: pathname + filename, text: title };
+      if (name) {
+        const findData = dataSource.find((item) => {
+          return item.pathname === this.pathname && item.filename === name;
+        });
 
-        if (findData.path === this.path) {
-          const { sidebarMenus } = this.store.getState();
-          menu.menus = sidebarMenus;
+        let menuData;
+        if (findData) {
+          const { pathname, filename, title } = findData;
+          const menu = { to: pathname + filename, text: title };
+
+          if (findData.path === this.path) {
+            const { sidebarMenus } = this.store.getState();
+            menu.menus = sidebarMenus;
+          }
+
+          menuData = menu;
+
+        } else {
+          menuData = { to: this.pathname + name, text: name };
         }
 
-        menus.push(menu);
+        list.push(menuData.text);
+        menus.push(menuData);
       }
-    } else if (isObject(filename)) {
-      const { title, menus } = filename;
+    } else if (filename && typeof filename === 'object') {
+      if (Array.isArray(filename)) {
+        const { menus: m, list: l } = getMenus.call(this, filename);
+        list = list.concat(l);
+        menus = menus.concat(m);
+      } else {
+        const { title, menus: ms } = filename;
 
-      if (title) {
-        const menu = { text: title };
-
-        if (Array.isArray(menus)) {
-          menu.menus = getMenus.call(this, menus)
+        if (Array.isArray(ms)) {
+          const { menus: m, list: l } = getMenus.call(this, ms);
+          const menu = { text: title, menus: m };
+          list = list.concat(l);
+          menus.push(menu);
+        } else if (title) {
+          menus.push({ text: title });
         }
-
-        menus.push(menu);
       }
     }
   });
 
-  return menus;
+  return { menus, list };
 };
 
 const findFilename = (menus, filename) => {
@@ -107,11 +137,10 @@ const findFilename = (menus, filename) => {
 
 nuomi.config({
   onInit() {
-    const { title, id } = this;
+    const { title, id, data: routeData } = this;
 
     if (id !== 'global' && title) {
       const {
-        path,
         pathname,
         filename,
         sidebarTitle,
@@ -128,22 +157,36 @@ nuomi.config({
         pageSidebarMenus,
       };
 
-      if (!this.computedMenus) {
-        const data = sidebarData[pathname];
+      if (!routeData.computedSidebarMenus) {
+        let data;
+        ${
+          isBlog && config.sidebar.data
+            ? `
+        const sidebarData = ${formatJSON(config.sidebar.data)};
+        data = sidebarData[pathname];`
+            : ''
+        }
 
         if (data && findFilename(data.menus, filename)) {
           const { title, menus } = data;
           payload.sidebarTitle = title;
 
           if (Array.isArray(menus) && menus.length) {
-            this.computedMenus = getMenus.call(this, menus);
+            const { menus, list } = getMenus.call(this, menus);
+
+            routeData.titleList = list;
+            routeData.computedSidebarMenus = menus;
           }
         } else {
-          this.computedMenus = [{ to: pathname + filename, text: title, menus: sidebarMenus }];
+          routeData.titleList = [];
+          routeData.computedSidebarMenus = [{ text: title, menus: sidebarMenus }];
         }
       }
 
-      payload.sidebarMenus = this.computedMenus;
+      payload.sidebarMenus = routeData.computedSidebarMenus;
+      payload.titleList = ${
+        isBlog ? 'getTitleList(pathname, this.location)' : 'routeData.titleList'
+      };
 
       store.dispatch({
         type: 'global/_updateState',
@@ -151,9 +194,7 @@ nuomi.config({
       });
     }
   }
-});`
-    : ''
-}
+});
 
 const globalState = {
   dataSource,
@@ -161,6 +202,7 @@ const globalState = {
   pageSidebar: false,
   sidebarTtile: '',
   sidebarMenus: [],
+  titleList: [],
   pageSidebarMenus: [],
 };
 
@@ -174,6 +216,9 @@ const App = () => {
       <GlobalLayout nav={nav} footer={footer}>
         <Router type={routerType}>
           <ShapeRoute routes={routes} />
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Router>
       </GlobalLayout>
     </Nuomi>

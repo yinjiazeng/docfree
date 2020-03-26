@@ -1,5 +1,6 @@
 import * as babel from '@babel/core';
 import { matchHtml, tempPath } from 'docfree-utils';
+import { resolve } from 'path';
 
 module.exports = {
   lang: 'jsx',
@@ -34,9 +35,8 @@ module.exports = {
     }
 
     const res = babel.transformSync(`${importStyles.join('\n')}${newContent}`, {
-      configFile: false,
-      babelrc: false,
       presets: ['@babel/preset-env', '@babel/preset-react'],
+      filename: '',
     });
 
     if (res && res.code) {
