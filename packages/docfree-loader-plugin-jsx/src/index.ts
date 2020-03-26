@@ -46,7 +46,7 @@ module.exports = {
 
       return {
         type: 'html',
-        value: `<Playground code={${JSON.stringify(codes)}} render={${renderFunction}} />`,
+        value: `<Docfree.Playground code={${JSON.stringify(codes)}} render={${renderFunction}} />`,
       };
     }
   },

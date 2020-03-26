@@ -10,19 +10,19 @@ export default function generateEntry(routes: Routes): string {
   if (isBlog) {
     routes = createBlogRouteEntry(routes);
     routesString = formatJSON(routes);
-    routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<BlogEntry />');
+    routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<Docfree.BlogEntry />');
   } else {
     routesString = formatJSON(routes);
   }
 
   routesString = routesString
-    .replace(/("children":\s*)"NotFound"/g, '$1<NotFound />')
+    .replace(/("children":\s*)"NotFound"/g, '$1<Docfree.NotFound />')
     .replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
-import { NotFound${isBlog ? ', BlogEntry' : ''}, Layout } from 'docfree-components';
+import * as Docfree from 'docfree-components';
 import 'highlight.js/styles/${config.langTheme}.css';
 
 const routes = ${routesString};
@@ -214,14 +214,14 @@ const routerType = '${['hash', 'browser'].includes(config.router) ? config.route
 const App = () => {
   return (
     <Nuomi id="global" state={globalState}>
-      <Layout nav={nav} footer={footer}>
+      <Docfree.Layout nav={nav} footer={footer}>
         <Router type={routerType}>
           <ShapeRoute routes={routes} />
           <Route path="*">
-            <NotFound />
+            <Docfree.NotFound />
           </Route>
         </Router>
-      </Layout>
+      </Docfree.Layout>
     </Nuomi>
   );
 };

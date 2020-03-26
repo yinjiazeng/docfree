@@ -32,9 +32,9 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
         const text = getTexts([node]).join('');
         ret.data.push({ text, depth, level: depth > 1 ? depth - 2 : 0 });
         node.children = [
-          u('html', { value: `<HashLink to="#${depth === 1 ? '/' : text}">` }),
+          u('html', { value: `<Docfree.HashLink to="#${depth === 1 ? '/' : text}">` }),
           u('text', { value: '#' }),
-          u('html', { value: `</HashLink>` }),
+          u('html', { value: `</Docfree.HashLink>` }),
           u('text', { value: text }),
         ];
       } else if (node.type === 'code' && Array.isArray(options.plugins)) {
@@ -59,6 +59,17 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
         });
       } else if (node.children) {
         parser(node.children);
+      } else if (node.type === 'text') {
+        const matchAlert = node.value.match(
+          /^(:{3})(success|info|warning|error)?\n([^\n]+)(?:\n([\s\S]*?))?\n(\1)$/,
+        );
+        if (matchAlert) {
+          const [, , type = '', message = '', description = ''] = matchAlert;
+          arr[i] = {
+            type: 'html',
+            value: `<Docfree.Alert type="${type}" message="${message}" description="${description}" />`,
+          };
+        }
       }
     });
     return arr;

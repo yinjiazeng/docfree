@@ -4,4 +4,7 @@ import 'antd/lib/tooltip/style';
 import Card from 'antd/lib/card';
 import 'antd/lib/card/style';
 
-export { Tooltip, Card };
+import Alert from 'antd/lib/alert';
+import 'antd/lib/alert/style';
+
+export { Tooltip, Card, Alert };

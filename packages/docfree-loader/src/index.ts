@@ -72,9 +72,9 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     });
 
   content = `import React from 'react';
-  import { Content, HashLink, Playground } from 'docfree-components';
-  ${mdContent}\nexport default Content;`;
-
+  import * as Docfree from 'docfree-components';
+  ${mdContent}\nexport default Docfree.Content;`;
+  console.log(content);
   try {
     result = await mdx(content);
   } catch (err) {
@@ -84,7 +84,12 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   result = result
     .replace(/(export) default/, '$1')
     .replace('/* @jsx mdx */', '')
-    .replace(/\s+mdxType="[^"]+"/g, '');
+    .replace(/\s+mdxType="[^"]+"/g, '')
+    .replace(/(<[a-z][a-zA-Z]*)\sparentName="[^"]+"/g, '$1')
+    .replace(
+      /<(inlineCode)>([\s\S]*?)<\/\1>/g,
+      (a, b, c) => `<code className="inline">${c}</code>`,
+    );
 
   return callback(
     null,
