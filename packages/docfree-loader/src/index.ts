@@ -64,8 +64,8 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     });
 
   content = `import React from 'react';
-  import { Layout, HashLink, Playground } from 'docfree-components';
-  ${mdContent}\nexport default Layout;`;
+  import { Content, HashLink, Playground } from 'docfree-components';
+  ${mdContent}\nexport default Content;`;
 
   try {
     result = await mdx(content);

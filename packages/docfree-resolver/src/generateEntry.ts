@@ -22,7 +22,7 @@ export default function generateEntry(routes: Routes): string {
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi, router } from 'nuomi';
-import { NotFound${isBlog ? ', BlogEntry' : ''}, GlobalLayout } from 'docfree-components';
+import { NotFound${isBlog ? ', BlogEntry' : ''}, Layout } from 'docfree-components';
 
 const routes = ${routesString};
 
@@ -56,7 +56,7 @@ ${
 });
 
 const getTitleList = (pathname, { query }) => {
-  const prePath = query.pathname || pathname;
+  const prePath = query.referer || pathname;
   const list = [];
 
   dataSource.forEach(({ title, pathname: pre }) => {
@@ -136,11 +136,11 @@ const findFilename = (menus, filename) => {
 };
 
 nuomi.config({
-  onInit() {
-    const { title, id, data: routeData } = this;
-
-    if (id !== 'global' && title) {
+  effects: {
+    initData() {
+      const nuomiProps = this.getNuomiProps();
       const {
+        title,
         pathname,
         filename,
         sidebarTitle,
@@ -148,7 +148,9 @@ nuomi.config({
         showPageSidebar,
         sidebarMenus,
         pageSidebarMenus,
-      } = this;
+        location,
+        data: routeData,
+      } = nuomiProps;
 
       const payload = {
         sidebarTitle,
@@ -172,7 +174,7 @@ nuomi.config({
           payload.sidebarTitle = title;
 
           if (Array.isArray(menus) && menus.length) {
-            const { menus, list } = getMenus.call(this, menus);
+            const { menus, list } = getMenus.call(nuomiProps, menus);
 
             routeData.titleList = list;
             routeData.computedSidebarMenus = menus;
@@ -184,16 +186,14 @@ nuomi.config({
       }
 
       payload.sidebarMenus = routeData.computedSidebarMenus;
-      payload.titleList = ${
-        isBlog ? 'getTitleList(pathname, this.location)' : 'routeData.titleList'
-      };
+      payload.titleList = ${isBlog ? 'getTitleList(pathname, location)' : 'routeData.titleList'};
 
       store.dispatch({
         type: 'global/_updateState',
         payload,
       });
     }
-  }
+  },
 });
 
 const globalState = {
@@ -213,14 +213,14 @@ const routerType = '${['hash', 'browser'].includes(config.router) ? config.route
 const App = () => {
   return (
     <Nuomi id="global" state={globalState}>
-      <GlobalLayout nav={nav} footer={footer}>
+      <Layout nav={nav} footer={footer}>
         <Router type={routerType}>
           <ShapeRoute routes={routes} />
           <Route path="*">
             <NotFound />
           </Route>
         </Router>
-      </GlobalLayout>
+      </Layout>
     </Nuomi>
   );
 };

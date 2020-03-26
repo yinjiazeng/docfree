@@ -9,7 +9,7 @@ module.exports = {
     const importStyles: string[] = [];
     const codes = [
       {
-        lang: 'jsx',
+        lang: 'javascript',
         content: newContent,
       },
     ];

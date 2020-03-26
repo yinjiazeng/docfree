@@ -15,9 +15,12 @@
     "dts": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.3",
+    "antd": "^4.0.4",
     "docfree-utils": "^0.1.2",
-    "nuomi": "^0.8.9",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "highlight.js": "^9.18.1",
+    "nuomi": "^0.8.10",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   }
 }
