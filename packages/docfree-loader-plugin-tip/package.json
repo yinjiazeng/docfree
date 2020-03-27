@@ -1,10 +1,11 @@
 {
-  "name": "docfree-components",
+  "name": "docfree-loader-plugin-tip",
   "version": "0.1.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "sideEffects": false,
   "files": [
     "lib"
@@ -13,14 +14,5 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
-  },
-  "dependencies": {
-    "@ant-design/icons": "^4.0.3",
-    "antd": "^4.0.4",
-    "docfree-utils": "^0.1.2",
-    "highlight.js": "^9.18.1",
-    "nuomi": "^0.8.12",
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
   }
 }

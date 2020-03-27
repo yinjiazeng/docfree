@@ -142,7 +142,7 @@ export default function(options: Configuration): Configuration {
       test: mdExtReg,
       loader: 'docfree-loader',
       options: {
-        plugins: ['jsx'],
+        plugins: ['jsx', 'tip'],
       },
     },
     {

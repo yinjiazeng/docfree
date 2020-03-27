@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 module.exports = {
   lang: 'jsx',
-  transform(content: string, { filePath }) {
+  transform(content: string, args: any, { filePath }) {
     const { content: newContent, matchs } = matchHtml('style', content);
     const importStyles: string[] = [];
     const codes = [

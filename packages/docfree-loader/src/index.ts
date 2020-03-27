@@ -16,6 +16,10 @@ const getDepth = (settingDepth: number, defaultDepth: number) => {
   return depth;
 };
 
+const getBool = (settingBool: boolean, defaultBool: boolean) => {
+  return Boolean(typeof settingBool === 'boolean' ? settingBool : defaultBool);
+};
+
 module.exports = async function docfreeLoader(this: any, content: string) {
   const { resourcePath } = this;
   const options = getOptions(this);
@@ -30,12 +34,10 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   };
   const { content: mdContent, data: heading } = parseMarkdown(resource, options);
   const sidebarTitle = setting.sidebarTitle || '';
-  const showSidebar = Boolean(
-    typeof setting.sidebar === 'boolean' ? setting.sidebar : sidebar.show,
-  );
-  const showPageSidebar = Boolean(
-    typeof setting.pageSidebar === 'boolean' ? setting.pageSidebar : pageSidebar.show,
-  );
+  const showCode = getBool(setting.showCode, config.showCode);
+  const showCodeIcon = getBool(setting.showCodeIcon, config.showCodeIcon);
+  const showSidebar = getBool(setting.sidebar, sidebar.show);
+  const showPageSidebar = getBool(setting.pageSidebar, pageSidebar.show);
   const sidebarDepth = getDepth(setting.sidebarDepth, sidebar.depth);
   const pageSidebarDepth = getDepth(setting.pageSidebarDepth, pageSidebar.depth);
 
@@ -74,7 +76,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   content = `import React from 'react';
   import * as Docfree from 'docfree-components';
   ${mdContent}\nexport default Docfree.Content;`;
-  console.log(content);
+
   try {
     result = await mdx(content);
   } catch (err) {
@@ -97,14 +99,14 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
     const nuomiProps = {
       state: {
-        showCode: false,
+        showCode: ${showCode},
       },
       sidebarTitle: '${sidebarTitle}',
       showSidebar: ${showSidebar},
       showPageSidebar: ${showPageSidebar},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-      render: () => <MDXContent />
+      render: () => <MDXContent showIcon={${showCodeIcon}} />,
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}
     export default nuomiProps;

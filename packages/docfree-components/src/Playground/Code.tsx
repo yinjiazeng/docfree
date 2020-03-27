@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState, useRef } from 'react';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import hljs from 'highlight.js';
 import { Tooltip, Card } from '../antd';
+import PreCode from '../PreCode';
 
 export default function Code({ lang, content }) {
   const [copy, copyDispatch] = useState(false);
@@ -44,11 +45,7 @@ export default function Code({ lang, content }) {
           )}
         </Tooltip>
       }>
-      <pre>
-        <code ref={ref} className={`language-${lang}`}>
-          {content}
-        </code>
-      </pre>
+      <PreCode ref={ref} lang={lang} content={content} />
     </Card>
   );
 }

@@ -1,6 +1,6 @@
 import remark from 'remark';
 import parse from 'remark-parse';
-import u from 'unist-builder';
+import { getConfig } from 'docfree-utils';
 import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 
@@ -18,6 +18,7 @@ const getTexts = (arr: AstNode[]) => {
 };
 
 export default function parseMarkdown({ content, ...rest }, options: OptionObject) {
+  const config = getConfig();
   const ret: ParseResult = {
     data: [],
     content,
@@ -25,6 +26,7 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
   const astTree = remark()
     .use(parse)
     .parse(content);
+  const Link = config.router === 'browser' ? 'BrowserLink' : 'HashLink';
   const parser = (arr: AstNode[]) => {
     arr.forEach((node, i) => {
       if (node.type === 'heading') {
@@ -32,44 +34,39 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
         const text = getTexts([node]).join('');
         ret.data.push({ text, depth, level: depth > 1 ? depth - 2 : 0 });
         node.children = [
-          u('html', { value: `<Docfree.HashLink to="#${depth === 1 ? '/' : text}">` }),
-          u('text', { value: '#' }),
-          u('html', { value: `</Docfree.HashLink>` }),
-          u('text', { value: text }),
+          {
+            type: 'html',
+            value: `<Docfree.${Link} to="${text}">#</Docfree.${Link}> ${text}`,
+          },
         ];
       } else if (node.type === 'code' && Array.isArray(options.plugins)) {
-        options.plugins.forEach((value) => {
-          if (value) {
-            let plugin = value;
-            if (typeof plugin === 'string') {
-              plugin = require(`docfree-loader-plugin-${plugin}`);
-            }
-            if (!plugin.lang) {
-              throw new Error('docfree-loader插件返回值必须包含lang属性');
-            }
-            if (plugin.lang === node.lang) {
-              if (typeof plugin.transform === 'function') {
-                const ast = plugin.transform(node.value.trim(), rest);
-                if (ast && ast.type) {
-                  arr[i] = ast;
+        if (node.lang) {
+          const array = node.lang.split(':');
+          const lang = array[0];
+
+          options.plugins.forEach((value) => {
+            if (value) {
+              let plugin = value;
+              if (typeof plugin === 'string') {
+                plugin = require(`docfree-loader-plugin-${plugin}`);
+              }
+              if (!plugin.lang) {
+                throw new Error('docfree-loader插件返回值必须包含lang属性');
+              }
+              if (plugin.lang === lang) {
+                if (typeof plugin.transform === 'function') {
+                  const args = array.slice(1);
+                  const ast = plugin.transform(node.value.trim(), args, rest);
+                  if (ast && ast.type) {
+                    arr[i] = ast;
+                  }
                 }
               }
             }
-          }
-        });
+          });
+        }
       } else if (node.children) {
         parser(node.children);
-      } else if (node.type === 'text') {
-        const matchAlert = node.value.match(
-          /^(:{3})(success|info|warning|error)?\n([^\n]+)(?:\n([\s\S]*?))?\n(\1)$/,
-        );
-        if (matchAlert) {
-          const [, , type = '', message = '', description = ''] = matchAlert;
-          arr[i] = {
-            type: 'html',
-            value: `<Docfree.Alert type="${type}" message="${message}" description="${description}" />`,
-          };
-        }
       }
     });
     return arr;

@@ -1,10 +1,10 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import { useConnect, connect } from 'nuomi';
+import { useConnect } from 'nuomi';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import hljs from 'highlight.js';
 import { Tooltip } from '../antd';
 
-function Content({ children }) {
+function Content({ children, showIcon }) {
   const [{ showCode }, dispatch] = useConnect();
   const Icon = showCode ? EyeInvisibleOutlined : EyeOutlined;
 
@@ -27,12 +27,14 @@ function Content({ children }) {
 
   return (
     <>
-      <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
-        <Icon onClick={showCodeHandler} />
-      </Tooltip>
+      {showIcon && (
+        <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
+          <Icon onClick={showCodeHandler} />
+        </Tooltip>
+      )}
       {children}
     </>
   );
 }
 
-export default connect()(Content);
+export default Content;
