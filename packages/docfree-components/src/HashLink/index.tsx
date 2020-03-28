@@ -20,13 +20,15 @@ export default class HashLink extends PureComponent<LinkProps> {
     return (
       <RouterContext.Consumer>
         {({ type, location }) => {
+          const { pathname, search, hash } = location;
+          const activeClassName = hash === `#${to}` ? 'active' : undefined;
+
           if (type === 'hash') {
-            const { pathname, search } = location;
             id = `${pathname}${search}#${to}`;
           }
 
           return (
-            <a ref={this.ref} href={`#${id}`} id={id}>
+            <a ref={this.ref} href={`#${id}`} id={id} className={activeClassName}>
               {children}
             </a>
           );

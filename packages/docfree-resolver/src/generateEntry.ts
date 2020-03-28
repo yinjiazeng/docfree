@@ -29,13 +29,13 @@ const routes = ${routesString};
 
 const generateData = (raw, pathname = '/', data = []) => {
   raw.forEach((route) => {
-    if (route.createTime) {
-      const { path, children, render, effects, onInit, onChange, ...rest } = route;
+    if (route.path !== '*') {
       route.pathname = pathname;
+      const { path, children, render, effects, onInit, onChange, ...rest } = route;
       if (Array.isArray(children)) {
         data = generateData(children, router.megre(pathname, path), data);
-      } else${isBlog ? ' if(!/^README$/i.test(route.filename))' : ''} {
-        data.push({ path, pathname, ...rest });
+      } else${isBlog ? ' if(!/^README$/i.test(route.filename) && route.title)' : ''} {
+        data.push({ path, ...rest });
       }
     }
   });
@@ -56,13 +56,13 @@ ${
   return 0;
 });
 
-const getTitleList = (pathname, { query }) => {
+const getList = (pathname, { query }) => {
   const prePath = query.referer || pathname;
   const list = [];
 
-  dataSource.forEach(({ title, pathname: pre }) => {
+  dataSource.forEach(({ title, pathname: pre, filename, createTime }) => {
     if (pre.startsWith(prePath)) {
-      list.push(title);
+      list.push({ to: pre + filename + '?referer=' + prePath, text: title, createTime });
     }
   });
 
@@ -83,8 +83,8 @@ const getMenus = function(array, menus = [], list = []) {
 
         let menuData;
         if (findData) {
-          const { pathname, filename, title } = findData;
-          const menu = { to: pathname + filename, text: title };
+          const { pathname, filename, title, createTime } = findData;
+          const menu = { to: pathname + filename, text: title, createTime };
 
           if (findData.path === this.path) {
             const { sidebarMenus } = this.store.getState();
@@ -94,10 +94,10 @@ const getMenus = function(array, menus = [], list = []) {
           menuData = menu;
 
         } else {
-          menuData = { to: this.pathname + name, text: name };
+          menuData = { to: this.pathname + name, text: name, createTime: 0 };
         }
 
-        list.push(menuData.text);
+        list.push(menuData);
         menus.push(menuData);
       }
     } else if (filename && typeof filename === 'object') {
@@ -137,6 +137,9 @@ const findFilename = (menus, filename) => {
 };
 
 nuomi.config({
+  state: {
+    listSource: [],
+  },
   effects: {
     initData() {
       const nuomiProps = this.getNuomiProps();
@@ -169,7 +172,6 @@ nuomi.config({
         data = sidebarData[pathname];`
             : ''
         }
-
         if (data && findFilename(data.menus, filename)) {
           const { title, menus } = data;
           payload.sidebarTitle = title;
@@ -177,17 +179,25 @@ nuomi.config({
           if (Array.isArray(menus) && menus.length) {
             const { menus, list } = getMenus.call(nuomiProps, menus);
 
-            routeData.titleList = list;
+            routeData.listSource = list;
             routeData.computedSidebarMenus = menus;
           }
         } else {
-          routeData.titleList = [];
+          routeData.listSource = [];
           routeData.computedSidebarMenus = [{ text: title, menus: sidebarMenus }];
         }
       }
 
-      payload.sidebarMenus = routeData.computedSidebarMenus;
-      payload.titleList = ${isBlog ? 'getTitleList(pathname, location)' : 'routeData.titleList'};
+      payload.sidebarMenus = routeData.computedSidebarMenus || [];
+
+      const listSource = ${isBlog ? 'getList(pathname, location)' : 'routeData.listSource'} || [];
+
+      this.dispatch({
+        type: '_updateState',
+        payload: {
+          listSource,
+        },
+      });
 
       store.dispatch({
         type: 'global/_updateState',
@@ -203,7 +213,6 @@ const globalState = {
   pageSidebar: false,
   sidebarTtile: '',
   sidebarMenus: [],
-  titleList: [],
   pageSidebarMenus: [],
 };
 

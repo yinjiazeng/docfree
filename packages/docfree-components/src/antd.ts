@@ -1,10 +1,12 @@
-import Tooltip from 'antd/lib/tooltip';
+/* eslint-disable import/first */
+export { default as Tooltip } from 'antd/lib/tooltip';
 import 'antd/lib/tooltip/style';
 
-import Card from 'antd/lib/card';
+export { default as Card } from 'antd/lib/card';
 import 'antd/lib/card/style';
 
-import Alert from 'antd/lib/alert';
+export { default as Alert } from 'antd/lib/alert';
 import 'antd/lib/alert/style';
 
-export { Tooltip, Card, Alert };
+export { default as Pagination } from 'antd/lib/pagination';
+import 'antd/lib/pagination/style';
