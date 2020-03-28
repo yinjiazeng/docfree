@@ -18,7 +18,6 @@ const getTexts = (arr: AstNode[]) => {
 };
 
 export default function parseMarkdown({ content, ...rest }, options: OptionObject) {
-  const config = getConfig();
   const ret: ParseResult = {
     data: [],
     content,
@@ -26,7 +25,6 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
   const astTree = remark()
     .use(parse)
     .parse(content);
-  const Link = config.router === 'browser' ? 'BrowserLink' : 'HashLink';
   const parser = (arr: AstNode[]) => {
     arr.forEach((node, i) => {
       if (node.type === 'heading') {
@@ -36,7 +34,7 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
         node.children = [
           {
             type: 'html',
-            value: `<Docfree.${Link} to="${text}">#</Docfree.${Link}> ${text}`,
+            value: `<Docfree.EventHashLink to="${text}">#</Docfree.EventHashLink> ${text}`,
           },
         ];
       } else if (node.type === 'code' && Array.isArray(options.plugins)) {

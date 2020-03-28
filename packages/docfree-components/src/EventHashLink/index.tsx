@@ -1,25 +1,20 @@
-import React, { createRef, Component, RefObject } from 'react';
 import { router } from 'nuomi';
+import HashLink, { LinkProps } from '../HashLink';
 
-export interface LinkProps {
-  to: string;
-}
-
-export default class BrowserLink extends Component<LinkProps> {
-  ref: RefObject<any>;
+export default class EventHashLink extends HashLink {
+  static data: { top: number; to: string }[] = [];
 
   offsetTop: number;
 
   constructor(props: LinkProps) {
     super(props);
-    this.ref = createRef();
     this.offsetTop = 0;
   }
 
   componentDidMount() {
     this.offsetTop = this.ref.current.offsetTop;
     const { to } = this.props;
-    const { data } = BrowserLink;
+    const { data } = EventHashLink;
 
     if (!data.length) {
       window.addEventListener('scroll', this.scrollHandler);
@@ -30,11 +25,11 @@ export default class BrowserLink extends Component<LinkProps> {
 
   componentWillUnmount() {
     const { to } = this.props;
-    const { data } = BrowserLink;
+    const { data } = EventHashLink;
 
-    BrowserLink.data = data.filter((item) => item.to !== to);
+    EventHashLink.data = data.filter((item) => item.to !== to);
 
-    if (!BrowserLink.data.length) {
+    if (!EventHashLink.data.length) {
       window.removeEventListener('scroll', this.scrollHandler);
     }
   }
@@ -47,7 +42,7 @@ export default class BrowserLink extends Component<LinkProps> {
 
   findData = () => {
     const scrollTop = window.scrollY;
-    const { data } = BrowserLink;
+    const { data } = EventHashLink;
 
     return (
       data.find(({ top }, i) => {
@@ -60,16 +55,4 @@ export default class BrowserLink extends Component<LinkProps> {
       }) || { to: '' }
     );
   };
-
-  static data: { top: number; to: string }[] = [];
-
-  render() {
-    const { to, children } = this.props;
-
-    return (
-      <a ref={this.ref} href={`#${to}`} id={to}>
-        {children}
-      </a>
-    );
-  }
 }
