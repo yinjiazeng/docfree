@@ -27,7 +27,6 @@ export interface DocfreeConfig {
   mode: 'doc' | 'blog';
   title: string;
   favicon: string;
-  logo: string;
   dest: string;
   meta: ConfigMeta;
   nav: ConfigNav[];

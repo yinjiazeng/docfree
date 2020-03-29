@@ -1,7 +1,18 @@
 import React from 'react';
-import { useConnect } from 'nuomi';
+import Header from '../Header';
+import Sidebar from '../Sidebar';
+import Footer from '../Footer';
+import style from './style.module.less';
 
-export default function Layout({ children }) {
-  // const [state] = useConnect();
-  return <>{children}</>;
+export default function Layout({ children, footer, ...rest }) {
+  return (
+    <div className={style.layout}>
+      <Header {...rest} />
+      <Sidebar />
+      <div>
+        {children}
+        <Footer content={footer} />
+      </div>
+    </div>
+  );
 }

@@ -10,3 +10,9 @@ import 'antd/lib/alert/style';
 
 export { default as Pagination } from 'antd/lib/pagination';
 import 'antd/lib/pagination/style';
+
+export { default as Row } from 'antd/lib/row';
+import 'antd/lib/row/style';
+
+export { default as Col } from 'antd/lib/col';
+import 'antd/lib/col/style';

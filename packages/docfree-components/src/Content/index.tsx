@@ -26,14 +26,15 @@ function Content({ children, showIcon }) {
   }, []);
 
   return (
-    <>
+    <div>
       {showIcon && (
         <Tooltip placement="top" title={`${show ? '隐藏' : '显示'}全部代码`}>
           <Icon onClick={showCodeHandler} />
         </Tooltip>
       )}
       {children}
-    </>
+      <div>最后更新时间：xxx</div>
+    </div>
   );
 }
 

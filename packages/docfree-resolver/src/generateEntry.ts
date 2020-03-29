@@ -26,6 +26,7 @@ import * as Docfree from 'docfree-components';
 import 'highlight.js/styles/${config.langTheme}.css';
 
 const routes = ${routesString};
+const documentTitle = '${config.title}';
 
 const generateData = (raw, pathname = '/', data = []) => {
   raw.forEach((route) => {
@@ -205,10 +206,17 @@ nuomi.config({
       });
     }
   },
+  onInit() {
+    const { title } = this;
+    if (title) {
+      document.title = title + ' | ' + documentTitle;
+    } else {
+      document.title = documentTitle;
+    }
+  }
 });
 
 const globalState = {
-  dataSource,
   showSidebar: false,
   pageSidebar: false,
   sidebarTtile: '',
@@ -223,7 +231,7 @@ const routerType = '${['hash', 'browser'].includes(config.router) ? config.route
 const App = () => {
   return (
     <Nuomi id="global" state={globalState}>
-      <Docfree.Layout nav={nav} footer={footer}>
+      <Docfree.Layout title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
         <Router type={routerType}>
           <ShapeRoute routes={routes} />
           <Route path="*">

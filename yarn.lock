@@ -8892,10 +8892,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuomi@^0.8.12:
-  version "0.8.12"
-  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.12.tgz#59540dddad3816cdd714462a193a8ae8bbbf02c7"
-  integrity sha512-F92J90a0IZgV0VjcrCUurzcswHuDabUKoxjtSQ9YBY0sGL2Q94E5R4ZD5gFcQeyQ4CrM4BQtoQhTXb5Wd3YkPA==
+nuomi@^0.8.13:
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.13.tgz#94b7f1fb0c3f97b0a125b8eb47d74723cb3e35a8"
+  integrity sha512-famh9h0ts+5x7ISIeZN+XdB8fMgPIt2idZY4kS64x61rBQ2uV82IVyjT2GlU5kZM2xW9YKhs+h8zRp0ecCFULg==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"
