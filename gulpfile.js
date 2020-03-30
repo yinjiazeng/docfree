@@ -9,9 +9,6 @@ function task(stream) {
     if (item.startsWith('docfree')) {
       const package = `packages/${item}`;
       stream(package).pipe(dest(`${package}/lib`));
-
-      src(`${package}/src/**/*.{ts,tsx}`).pipe(babel());
-      src(`${package}/src/**/*.less`).pipe(dest(`${package}/lib`));
     }
   });
 }
