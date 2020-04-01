@@ -88,8 +88,7 @@ const getMenus = function(array, menus = [], list = []) {
           const menu = { to: pathname + filename, text: title, createTime };
 
           if (findData.path === this.path) {
-            const { sidebarMenus } = this.store.getState();
-            menu.menus = sidebarMenus;
+            menu.menus = this.sidebarMenus;
           }
 
           menuData = menu;
@@ -167,7 +166,7 @@ nuomi.config({
       if (!routeData.computedSidebarMenus) {
         let data;
         ${
-          isBlog && config.sidebar.data
+          !isBlog && config.sidebar.data
             ? `
         const sidebarData = ${formatJSON(config.sidebar.data)};
         data = sidebarData[pathname];`
@@ -178,10 +177,10 @@ nuomi.config({
           payload.sidebarTitle = title;
 
           if (Array.isArray(menus) && menus.length) {
-            const { menus, list } = getMenus.call(nuomiProps, menus);
+            const { menus: m, list } = getMenus.call(nuomiProps, menus);
 
             routeData.listSource = list;
-            routeData.computedSidebarMenus = menus;
+            routeData.computedSidebarMenus = m;
           }
         } else {
           routeData.listSource = [];
@@ -230,16 +229,16 @@ const routerType = '${['hash', 'browser'].includes(config.router) ? config.route
 
 const App = () => {
   return (
-    <Nuomi id="global" state={globalState}>
-      <Docfree.Layout title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
-        <Router type={routerType}>
+    <Router type={routerType}>
+      <Nuomi id="global" state={globalState}>
+        <Docfree.Layout title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
           <ShapeRoute routes={routes} />
           <Route path="*">
             <Docfree.NotFound />
           </Route>
-        </Router>
-      </Docfree.Layout>
-    </Nuomi>
+        </Docfree.Layout>
+      </Nuomi>
+    </Router>
   );
 };
 

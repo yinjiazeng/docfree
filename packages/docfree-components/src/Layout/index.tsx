@@ -9,10 +9,10 @@ export default function Layout({ children, footer, ...rest }) {
     <div className={style.layout}>
       <Header {...rest} />
       <Sidebar />
-      <div>
+      <section>
         {children}
         <Footer content={footer} />
-      </div>
+      </section>
     </div>
   );
 }
