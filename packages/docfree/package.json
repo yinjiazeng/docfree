@@ -5,11 +5,12 @@
   "keywords": [],
   "description": "",
   "bin": {
-    "docfree": "lib/bin.js"
+    "docfree": "bin.js"
   },
   "sideEffects": false,
   "files": [
-    "lib"
+    "lib",
+    "bin.js"
   ],
   "license": "MIT",
   "scripts": {

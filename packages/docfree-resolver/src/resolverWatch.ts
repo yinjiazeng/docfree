@@ -1,19 +1,27 @@
 import chokidar from 'chokidar';
 import { extname } from 'path';
-import { statSync } from 'fs';
 import { getDocPath } from 'docfree-utils';
 import resolver from './resolver';
 
 export default function resolverWatch() {
-  resolver();
-  chokidar
-    .watch(getDocPath(), {
-      // 忽略点文件
-      ignored: /(^|[/\\])\../,
-    })
-    .on('all', (event, path) => {
-      if (statSync(path).isDirectory() || /^\.mdx?$/i.test(extname(path))) {
-        resolver();
-      }
-    });
+  return new Promise((res) => {
+    let timer: any = null;
+    chokidar
+      .watch(getDocPath(), {
+        // 忽略点文件
+        ignored: /(^|[/\\])\../,
+      })
+      .on('all', (event, path) => {
+        if (
+          ['addDir', 'unlinkDir'].includes(event) ||
+          (['add', 'unlink'].includes(event) && /^\.mdx?$/i.test(extname(path)))
+        ) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            resolver();
+            res();
+          }, 100);
+        }
+      });
+  });
 }

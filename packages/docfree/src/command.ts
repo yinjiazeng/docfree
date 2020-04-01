@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import commander from 'commander';
-import { unlinkSync } from 'fs';
 import { tempPath } from 'docfree-utils';
 import { build, server } from 'docfree-webpack';
 import { resolver, resolverWatch } from 'docfree-resolver';
@@ -24,10 +23,10 @@ program
 program
   .command('dev <dir>')
   .description('启动Web服务')
-  .action(() => {
+  .action(async () => {
     process.env.NODE_ENV = 'development';
     tempPath.remove();
-    resolverWatch();
+    await resolverWatch();
     server();
   });
 
