@@ -2,17 +2,17 @@ import React from 'react';
 import { Row, Col } from '../antd';
 import Search from './Search';
 import Menus from '../Menus';
-import style from './style.module.less';
+import './style.less';
 
 export default function Header({ nav, title, dataSource }: any) {
   return (
-    <Row className={style.header}>
+    <Row className="docfree-header">
       <Col>
         <span>{title}</span>
       </Col>
       <Col flex="1">
-        <Search data={dataSource} />
         <Menus data={nav} />
+        <Search data={dataSource} />
       </Col>
     </Row>
   );

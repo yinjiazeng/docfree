@@ -1,0 +1,23 @@
+.docfree-header {
+  height: 50px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  .docfree-search {
+    float: right;
+  }
+  .docfree-menus {
+    float: right;
+    & > li {
+      float: left;
+      & > ul {
+        display: none;
+        background: #fff;
+      }
+      &:hover > ul {
+        display: block;
+      }
+    }
+  }
+}

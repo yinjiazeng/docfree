@@ -21,7 +21,7 @@ export default async function() {
     compress: true,
     // quiet: true,
     historyApiFallback: true,
-    hot: true,
+    // hot: true,
     disableHostCheck: true,
     ...devServer,
     watchOptions: {

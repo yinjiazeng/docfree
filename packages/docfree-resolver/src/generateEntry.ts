@@ -230,6 +230,8 @@ nuomi.config({
     } else {
       document.title = documentTitle;
     }
+
+    window.scrollTo({ top: 0 });
   }
 });
 
@@ -248,7 +250,7 @@ const routerType = '${['hash', 'browser'].includes(config.router) ? config.route
 const App = () => {
   return (
     <Router type={routerType}>
-      <Nuomi id="global" state={globalState}>
+      <Nuomi id="global" state={globalState} onInit={null}>
         <Docfree.Layout title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
           <ShapeRoute routes={routes} />
           <Route path="*">

@@ -2,11 +2,11 @@ import React from 'react';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import Footer from '../Footer';
-import style from './style.module.less';
+import './style.less';
 
 export default function Layout({ children, footer, ...rest }) {
   return (
-    <div className={style.layout}>
+    <div className="docfree-layout">
       <Header {...rest} />
       <Sidebar />
       <section>

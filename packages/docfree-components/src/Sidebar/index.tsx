@@ -1,7 +1,7 @@
 import React from 'react';
 import { useConnect } from 'nuomi';
 import Menus from '../Menus';
-import style from './style.module.less';
+import './style.less';
 
 export default function Sidebar() {
   const [
@@ -11,13 +11,13 @@ export default function Sidebar() {
   return (
     <>
       {!!showSidebar && (
-        <div className={style.sidebar}>
+        <div className="docfree-sidebar">
           {!!sidebarTitle && <strong>{sidebarTitle}</strong>}
           <Menus data={sidebarMenus} />
         </div>
       )}
       {!!showPageSidebar && (
-        <div className={style.pageSidebar}>
+        <div className="docfree-page-sidebar">
           <Menus data={pageSidebarMenus} />
         </div>
       )}

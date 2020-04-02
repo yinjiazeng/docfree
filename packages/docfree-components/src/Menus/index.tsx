@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { NavLink } from 'nuomi';
 import HashLink from '../HashLink';
+import './style.less';
 
 interface Menus {
   text: string;
@@ -66,7 +67,7 @@ export default function Menus({ data, isActive }: MenusProps) {
 
   const menus = getMenus(data);
   if (menus.length) {
-    return <ul>{menus}</ul>;
+    return <ul className="docfree-menus">{menus}</ul>;
   }
 
   return null;
