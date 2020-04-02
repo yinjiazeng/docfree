@@ -58,12 +58,12 @@ ${
 });
 
 const getList = (pathname, { query }) => {
-  const prePath = query.referer || pathname;
+  const prePath = query.basepath || pathname;
   const list = [];
 
   dataSource.forEach(({ title, pathname: pre, filename, createTime }) => {
     if (pre.startsWith(prePath)) {
-      list.push({ to: pre + filename + '?referer=' + prePath, text: title, createTime });
+      list.push({ to: pre + filename + '?basepath=' + prePath, text: title, createTime });
     }
   });
 
@@ -106,21 +106,39 @@ const getMenus = function(array, menus = [], list = []) {
         list = list.concat(l);
         menus = menus.concat(m);
       } else {
-        const { title, menus: ms } = filename;
-
-        if (Array.isArray(ms)) {
-          const { menus: m, list: l } = getMenus.call(this, ms);
-          const menu = { text: title, menus: m };
-          list = list.concat(l);
-          menus.push(menu);
-        } else if (title) {
-          menus.push({ text: title });
+        const { text, menus: ms } = filename;
+        if (text) {
+          if (Array.isArray(ms)) {
+            const { menus: m, list: l } = getMenus.call(this, ms);
+            const menu = { text, menus: m };
+            list = list.concat(l);
+            menus.push(menu);
+          } else {
+            menus.push({ text });
+          }
         }
       }
     }
   });
 
   return { menus, list };
+};
+
+const getNavMenus = function(array, menus = []) {
+  array.forEach(({ to, text, menus: ms }) => {
+    if (text) {
+      if (Array.isArray(ms)) {
+        menus.push({
+          text,
+          to,
+          menus: getNavMenus(ms),
+        });
+      } else {
+        menus.push({ text, to });
+      }
+    }
+  });
+  return menus;
 };
 
 const findFilename = (menus, filename) => {
@@ -223,7 +241,7 @@ const globalState = {
   pageSidebarMenus: [],
 };
 
-const nav = ${formatJSON(config.nav)};
+const nav = getNavMenus(${formatJSON(config.nav)});
 const footer = '${config.footer}';
 const routerType = '${['hash', 'browser'].includes(config.router) ? config.router : 'hash'}';
 

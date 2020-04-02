@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from '../antd';
 import Search from './Search';
-import Nav from './Nav';
+import Menus from '../Menus';
 import style from './style.module.less';
 
 export default function Header({ nav, title, dataSource }: any) {
@@ -12,7 +12,7 @@ export default function Header({ nav, title, dataSource }: any) {
       </Col>
       <Col flex="1">
         <Search data={dataSource} />
-        <Nav data={nav} />
+        <Menus data={nav} />
       </Col>
     </Row>
   );

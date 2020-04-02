@@ -1,6 +1,6 @@
 import React from 'react';
 import { useConnect } from 'nuomi';
-import Menus from './Menus';
+import Menus from '../Menus';
 import style from './style.module.less';
 
 export default function Sidebar() {
