@@ -31,3 +31,6 @@ import 'antd/lib/table/style';
 
 export { default as List } from 'antd/lib/list';
 import 'antd/lib/list/style';
+
+export { default as Button } from 'antd/lib/button';
+import 'antd/lib/button/style';

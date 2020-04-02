@@ -12,6 +12,7 @@ const defaultConfig: DocfreeConfig = {
   footer: '',
   nav: [],
   dest: '',
+  showTime: true,
   showCode: false,
   showCodeIcon: false,
   langTheme: 'github',

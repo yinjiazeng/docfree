@@ -1,6 +1,5 @@
 import * as babel from '@babel/core';
 import { matchHtml, tempPath } from 'docfree-utils';
-import { resolve } from 'path';
 
 module.exports = {
   lang: 'jsx',

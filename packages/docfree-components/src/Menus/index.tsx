@@ -44,7 +44,7 @@ export default function Menus({ data, isActive }: MenusProps) {
               );
             }
           } else {
-            elem = <span>{item.text}</span>;
+            elem = <b>{item.text}</b>;
           }
           if (item.menus) {
             const items = getMenus(item.menus);

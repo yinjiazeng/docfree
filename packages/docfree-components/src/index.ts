@@ -7,3 +7,4 @@ export { default as Props } from './Props';
 export { default as NotFound } from './NotFound';
 export { default as Tip } from './Tip';
 export { default as PreCode } from './PreCode';
+export { default as Home } from './Home';

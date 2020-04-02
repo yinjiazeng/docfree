@@ -1,6 +1,5 @@
 import remark from 'remark';
 import parse from 'remark-parse';
-import { getConfig } from 'docfree-utils';
 import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 

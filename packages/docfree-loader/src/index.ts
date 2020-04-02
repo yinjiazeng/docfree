@@ -35,9 +35,10 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const { content: mdContent, data: heading } = parseMarkdown(resource, options);
   const sidebarTitle = setting.sidebarTitle || '';
   const showCode = getBool(setting.showCode, config.showCode);
+  const showTime = getBool(setting.showTime, config.showTime);
   const showCodeIcon = getBool(setting.showCodeIcon, config.showCodeIcon);
-  const showSidebar = getBool(setting.sidebar, sidebar.show);
-  const showPageSidebar = getBool(setting.pageSidebar, pageSidebar.show);
+  const showSidebar = getBool(setting.showSidebar, sidebar.show);
+  const showPageSidebar = getBool(setting.showPageSidebar, pageSidebar.show);
   const sidebarDepth = getDepth(setting.sidebarDepth, sidebar.depth);
   const pageSidebarDepth = getDepth(setting.pageSidebarDepth, pageSidebar.depth);
 
@@ -107,7 +108,7 @@ ${mdContent}\nexport default Docfree.Content;`;
       showPageSidebar: ${showPageSidebar},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-      render: () => <MDXContent showIcon={${showCodeIcon}} />,
+      render: () => <MDXContent showIcon={${showCodeIcon}} showTime={${showTime}} />,
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}
     export default nuomiProps;

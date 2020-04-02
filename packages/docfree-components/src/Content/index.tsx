@@ -4,7 +4,7 @@ import { EyeInvisibleOutlined, EyeOutlined, LeftOutlined, RightOutlined } from '
 import hljs from 'highlight.js';
 import { Tooltip } from '../antd';
 
-function Content({ children, showIcon }) {
+function Content({ children, showIcon, showTime }) {
   const [{ showCode, listSource }, dispatch] = useConnect();
   const { nuomiProps } = useNuomi();
   const [prevNextData, prevNextDispatch]: [{ to: string; text: string }[], any] = useState([]);
@@ -43,7 +43,7 @@ function Content({ children, showIcon }) {
         </Tooltip>
       )}
       {children}
-      <div>最后更新时间：{new Date(nuomiProps.createTime).toString()}</div>
+      {showTime && <div>最后更新时间：{new Date(nuomiProps.createTime).toString()}</div>}
       {(!!prevNextData[0] || !!prevNextData[1]) && (
         <div>
           {!!prevNextData[0] && (
