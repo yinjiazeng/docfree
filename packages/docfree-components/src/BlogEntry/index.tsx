@@ -9,6 +9,7 @@ export default function BlogEntry() {
   const total = listSource.length;
   const [page, pageDispatch] = useState(1);
   const [data, dataDispatch] = useState([]);
+  const [loading, loadingDispatch] = useState(true);
 
   const onChange = (current: number) => {
     pageDispatch(current);
@@ -19,12 +20,18 @@ export default function BlogEntry() {
   }, []);
 
   useEffect(() => {
-    dataDispatch(listSource.slice((page - 1) * pageSize, pageSize));
+    loadingDispatch(true);
+    setTimeout(() => {
+      const startIndex = (page - 1) * pageSize;
+      dataDispatch(listSource.slice(startIndex, startIndex + pageSize));
+      loadingDispatch(false);
+    }, 300);
   }, [page, listSource]);
 
   return (
     <div className="docfree-blog">
       <List
+        loading={loading}
         dataSource={data}
         renderItem={({ to, text, createDate }) => (
           <List.Item>
