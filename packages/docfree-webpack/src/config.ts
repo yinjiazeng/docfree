@@ -109,6 +109,11 @@ export default function(options: Configuration): Configuration {
             options: {
               javascriptEnabled: true,
               sourceMap,
+              modifyVars: {
+                'link-color': 'rgba(0, 0, 0, 0.65)',
+                'link-hover-color': '#1890ff',
+                'border-color-base': '#ebedf1',
+              },
             },
           },
         ],

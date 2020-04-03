@@ -1,5 +1,6 @@
-import { readdirSync, statSync, utimes } from 'fs';
-import { join } from 'path';
+import { readdirSync, statSync } from 'fs';
+import { formatDate } from 'docfree-utils';
+import { join, extname } from 'path';
 import { Routes } from './typings';
 
 // 解析目录生成路由
@@ -21,9 +22,10 @@ export default function resolveToRoutes(docPath: string, routes: Routes = []): R
         routes.push({
           path: /^README$/i.test(filename) ? `/(${filename})?` : `/${filename}`,
           filename,
+          ext: extname(item),
           title: filename,
           createTime: stat.birthtimeMs,
-          updateTime: stat.ctimeMs,
+          createDate: formatDate(stat.birthtimeMs),
           require: itemPath,
         });
       }

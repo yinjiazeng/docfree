@@ -1,31 +1,38 @@
 import React from 'react';
 import { router } from 'nuomi';
-import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button } from '../antd';
+import './style.less';
 
-export default function Home({ title, description, link, features }) {
-  const onClick = () => {
-    router.location(link.to);
+export default function Home({ title, description, buttons, features }) {
+  const onClick = (to: string) => {
+    if (to) {
+      if (/(https?:)?\/\//.test(to)) {
+        window.location.href = to;
+      } else {
+        router.location(to);
+      }
+    }
   };
 
   return (
     <div className="docfree-home">
-      <h1>{title}</h1>
-      <h2>{description}</h2>
-      {!!link && !!link.text && (
+      {!!title && <h1>{title}</h1>}
+      {!!description && <h2>{description}</h2>}
+      {Array.isArray(buttons) && (
         <p>
-          <Button onClick={onClick}>
-            {link.text}
-            <ArrowRightOutlined />
-          </Button>
+          {buttons.map(({ to, text, ...rest }, i) => (
+            <Button size="large" {...rest} key={i} onClick={() => onClick(to)}>
+              {text}
+            </Button>
+          ))}
         </p>
       )}
       {Array.isArray(features) && (
         <div>
-          {features.map((item) => (
-            <dl>
+          {features.map((item, i) => (
+            <dl key={i}>
               <dt>{item.title}</dt>
-              <dd>{item.description}</dd>
+              <dd>{item.detail}</dd>
             </dl>
           ))}
         </div>

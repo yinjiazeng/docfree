@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useConnect } from 'nuomi';
 import Code from './Code';
+import './style.less';
 
 export default function Playground({ code, render, children }) {
   const component = render ? render() : children;
@@ -17,12 +18,12 @@ export default function Playground({ code, render, children }) {
   }, [showCode]);
 
   return (
-    <div>
+    <div className="docfree-playground">
       <div>{component}</div>
-      <div onClick={showHandler}>
+      <a onClick={showHandler}>
         {show ? <EyeInvisibleOutlined /> : <EyeOutlined />}
         {show ? '隐藏' : '显示'}代码
-      </div>
+      </a>
       {show && [].concat(code).map((item, i) => <Code {...item} key={i} />)}
     </div>
   );

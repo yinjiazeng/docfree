@@ -1,22 +1,114 @@
+@import (reference) '../default.less';
+
 .docfree-header {
-  height: 50px;
+  height: @header-height;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  .docfree-search {
-    float: right;
+  padding: 0 @header-height;
+  z-index: 1;
+  background: #fff;
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
+  & > div {
+    display: flex;
+    align-items: center;
   }
-  .docfree-menus {
-    float: right;
-    & > li {
-      float: left;
-      & > ul {
-        display: none;
-        background: #fff;
+}
+
+.docfree-nav {
+  list-style: none;
+  font-size: 16px;
+  ul {
+    list-style: none;
+  }
+  & > li {
+    float: left;
+    margin-left: 20px;
+    position: relative;
+    & > :first-child {
+      height: @header-height;
+      line-height: @header-height;
+      padding: 0 4px;
+      font-weight: normal;
+      &.active {
+        color: @primary-color;
+        border-bottom: 3px solid @primary-color;
       }
-      &:hover > ul {
-        display: block;
+      &:after {
+        position: absolute;
+        top: 50%;
+        right: -7px;
+        transform: translateY(-50%);
+        margin-top: 1px;
+        content: '';
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 5px solid @text-color;
+      }
+    }
+    & > a:only-child,
+    & > b:only-child {
+      &:after {
+        display: none;
+      }
+    }
+    & > ul {
+      display: none;
+      position: absolute;
+      top: @header-height;
+      right: -10px;
+      overflow: auto;
+      background: #fff;
+      padding: 8px;
+      max-width: 300px;
+      max-height: calc(100vh - @header-height);
+      border-radius: @border-radius-base;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+      li > b {
+        color: @heading-color;
+      }
+      & > li:not(:last-child) {
+        & > ul {
+          padding-bottom: 4px;
+          margin-bottom: 4px;
+          border-bottom: 1px solid #f0f0f0;
+        }
+      }
+    }
+    &:hover > ul {
+      display: block;
+    }
+  }
+}
+
+.docfree-search {
+  .ant-input-affix-wrapper {
+    border-radius: 100px;
+  }
+}
+
+.docfree-logo {
+  display: block;
+  height: 44px;
+  line-height: 42px;
+  font-size: 24px;
+  color: @heading-color;
+  &:hover {
+    color: @heading-color;
+  }
+}
+
+.docfree-popover {
+  transition: none !important;
+  .ant-popover-inner-content {
+    padding-top: 0;
+    padding-bottom: 0;
+    .ant-list-item {
+      padding: 8px 0;
+      b {
+        font-weight: normal;
+        color: @primary-color;
       }
     }
   }

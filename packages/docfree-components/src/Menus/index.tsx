@@ -13,18 +13,23 @@ interface Menus {
 
 interface MenusProps {
   data: Menus[];
+  className?: string;
   isActive?: Function;
 }
 
-export default function Menus({ data, isActive }: MenusProps) {
+export default function Menus({ data, isActive, className }: MenusProps) {
   const getMenus = (menus: Menus[], list: ReactElement[] = []) => {
     if (Array.isArray(menus) && menus.length) {
       menus.forEach((item, i) => {
         if (item.text) {
           let elem: ReactElement;
-          if (item.depth) {
+          if (item.level !== undefined) {
             elem = (
-              <HashLink id={null} style={{ marginLeft: item.level * 20 }} to={item.text}>
+              <HashLink
+                id={null}
+                style={{ paddingLeft: item.level * 16 }}
+                to={item.text}
+                title={item.text}>
                 {item.text}
               </HashLink>
             );
@@ -38,7 +43,7 @@ export default function Menus({ data, isActive }: MenusProps) {
               );
             } else {
               elem = (
-                <NavLink to={item.to} isActive={isActive}>
+                <NavLink to={item.to} isActive={isActive} title={item.text}>
                   {item.text}
                 </NavLink>
               );
@@ -67,7 +72,7 @@ export default function Menus({ data, isActive }: MenusProps) {
 
   const menus = getMenus(data);
   if (menus.length) {
-    return <ul className="docfree-menus">{menus}</ul>;
+    return <ul className={`docfree-menus${className ? ` ${className}` : ''}`}>{menus}</ul>;
   }
 
   return null;

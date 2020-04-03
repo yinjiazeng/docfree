@@ -61,9 +61,9 @@ const getList = (pathname, { query }) => {
   const prePath = query.basepath || pathname;
   const list = [];
 
-  dataSource.forEach(({ title, pathname: pre, filename, createTime }) => {
+  dataSource.forEach(({ title, pathname: pre, filename, createDate }) => {
     if (pre.startsWith(prePath)) {
-      list.push({ to: pre + filename + '?basepath=' + prePath, text: title, createTime });
+      list.push({ to: pre + filename + '?basepath=' + prePath, text: title, createDate });
     }
   });
 

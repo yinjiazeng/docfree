@@ -10,13 +10,13 @@ export default function Sidebar() {
 
   return (
     <>
-      {!!showSidebar && (
+      {!!showSidebar && !!sidebarMenus.length && (
         <div className="docfree-sidebar">
           {!!sidebarTitle && <strong>{sidebarTitle}</strong>}
           <Menus data={sidebarMenus} />
         </div>
       )}
-      {!!showPageSidebar && (
+      {!!showPageSidebar && !!pageSidebarMenus.length && (
         <div className="docfree-page-sidebar">
           <Menus data={pageSidebarMenus} />
         </div>

@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { store } from 'nuomi';
 import { Result } from '../antd';
+import './style.less';
 
 export default function NotFound() {
   useLayoutEffect(() => {
@@ -12,5 +13,9 @@ export default function NotFound() {
     });
   }, []);
 
-  return <Result status="404" title="404" />;
+  return (
+    <div className="docfree-404">
+      <Result status="404" title="404" />
+    </div>
+  );
 }

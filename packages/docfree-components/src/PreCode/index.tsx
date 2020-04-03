@@ -1,8 +1,8 @@
 import React from 'react';
 
-function PreCode({ lang, content, forwardRef }) {
+function PreCode({ lang, content, forwardRef }: any) {
   return (
-    <pre>
+    <pre style={{ margin: 0 }}>
       <code ref={forwardRef} className={`languge-${lang}`}>
         {content}
       </code>
@@ -10,4 +10,4 @@ function PreCode({ lang, content, forwardRef }) {
   );
 }
 
-export default React.forwardRef((props, ref) => <PreCode {...props} forwardRef={ref} />);
+export default React.forwardRef((props: any, ref) => <PreCode {...props} forwardRef={ref} />);

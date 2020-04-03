@@ -76,9 +76,10 @@ export default function Search({ data }) {
           }
         });
       });
+      visibleDispatch(true);
+    } else {
+      visibleDispatch(false);
     }
-
-    visibleDispatch(!!dataSource.length);
 
     sourceDispatch(dataSource);
   };
@@ -86,8 +87,13 @@ export default function Search({ data }) {
   return (
     <div className="docfree-search">
       <Popover
+        overlayClassName="docfree-popover"
+        overlayStyle={!visible ? { display: 'none' } : undefined}
         placement="bottomLeft"
         trigger="focus"
+        title="搜索结果"
+        visible={visible}
+        onVisibleChange={onVisibleChange}
         content={
           <List
             dataSource={source}
@@ -96,15 +102,12 @@ export default function Search({ data }) {
                 onClick={() => {
                   onClick(to);
                 }}>
-                {text}
+                <span>{text}</span>
               </List.Item>
             )}
           />
-        }
-        title="搜索结果"
-        visible={visible}
-        onVisibleChange={onVisibleChange}>
-        <Input prefix={<SearchOutlined />} onChange={onChange} />
+        }>
+        <Input prefix={<SearchOutlined />} onChange={onChange} placeholder="搜索内容..." />
       </Popover>
     </div>
   );

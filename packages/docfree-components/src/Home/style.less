@@ -1,0 +1,49 @@
+@import (reference) '../default.less';
+
+.docfree-home {
+  text-align: center;
+  & > h1,
+  & > h2,
+  & > div > dl > dt {
+    margin: @edge-size-large 0 @edge-size-small;
+  }
+  & > h1 {
+    margin-top: 8px;
+    font-size: 44px;
+  }
+  & > h2 {
+    font-size: 32px;
+    font-weight: normal;
+    color: @text-color-secondary;
+  }
+  & > p {
+    margin-top: @edge-size-large;
+    margin-bottom: @edge-size-small;
+    & > button {
+      margin: 0 8px;
+    }
+  }
+  & > div {
+    margin-top: @edge-size-large;
+    border-top: 1px solid @border-color-base;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & > dl {
+      text-align: left;
+      flex-grow: 1;
+      flex-basis: 30%;
+      max-width: 30%;
+      margin: 0;
+      & > dt {
+        font-weight: normal;
+        font-size: 24px;
+        color: @heading-color;
+      }
+      & > dd {
+        margin: 0;
+        font-size: 16px;
+      }
+    }
+  }
+}

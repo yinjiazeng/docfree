@@ -21,6 +21,6 @@
     "gray-matter": "^4.0.2",
     "loader-utils": "^2.0.0",
     "remark": "^11.0.2",
-    "remark-parse": "^7.0.2"
+    "remark-mdx": "^1.5.8"
   }
 }

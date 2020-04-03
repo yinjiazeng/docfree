@@ -1,8 +1,15 @@
 module.exports = {
   lang: 'tip',
   transform(content: string, args: any) {
-    const lang = args[1];
+    let [type, lang] = args;
     const match = content.match(/^([^\n]+)(?:\n+([\s\S]*))?$/);
+
+    if (!['success', 'warning', 'info', 'error'].includes(type)) {
+      if (type && !lang) {
+        lang = type;
+      }
+      type = 'info';
+    }
 
     if (match) {
       const message = (match[1] || '').trim();
@@ -21,8 +28,7 @@ module.exports = {
 
       return {
         type: 'html',
-        value: `<Docfree.Tip type="${args[0] ||
-          'info'}" message="${message}" description={${description}} />`,
+        value: `<Docfree.Tip type="${type}" message="${message}" description={${description}} />`,
       };
     }
   },

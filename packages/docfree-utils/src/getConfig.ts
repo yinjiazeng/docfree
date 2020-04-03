@@ -12,6 +12,10 @@ const defaultConfig: DocfreeConfig = {
   footer: '',
   nav: [],
   dest: '',
+  edit: {
+    name: 'Github',
+    path: '',
+  },
   showTime: true,
   showCode: false,
   showCodeIcon: false,
@@ -23,7 +27,7 @@ const defaultConfig: DocfreeConfig = {
   },
   pageSidebar: {
     show: true,
-    depth: 3,
+    depth: 6,
   },
   webpackConfig: {},
 };

@@ -1,12 +1,14 @@
-import { getConfig, formatJSON } from 'docfree-utils';
+import { getConfig, formatJSON, formatDate } from 'docfree-utils';
 import { dirname } from 'path';
+import { statSync } from 'fs';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parseMarkdown from './parseMarkdown';
 
 const getDepth = (settingDepth: number, defaultDepth: number) => {
-  const depth = Number(Number.isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
+  // eslint-disable-next-line no-restricted-globals
+  const depth = Number(isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
   if (depth < 1) {
     return 1;
   }
@@ -32,6 +34,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     dirPath: dirname(resourcePath),
     content: markdownContent,
   };
+  const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
   const { content: mdContent, data: heading } = parseMarkdown(resource, options);
   const sidebarTitle = setting.sidebarTitle || '';
   const showCode = getBool(setting.showCode, config.showCode);
@@ -41,6 +44,12 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const showPageSidebar = getBool(setting.showPageSidebar, pageSidebar.show);
   const sidebarDepth = getDepth(setting.sidebarDepth, sidebar.depth);
   const pageSidebarDepth = getDepth(setting.pageSidebarDepth, pageSidebar.depth);
+
+  let edit = false;
+
+  if (setting.showEdit !== false && config.edit) {
+    edit = config.edit;
+  }
 
   let result = '';
   let title = '';
@@ -69,7 +78,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     .map((item) => {
       const { level, depth, ...rest } = item;
       if (showSidebar) {
-        return { level: level - (depth - sidebarDepth + 1), ...rest };
+        return { level: depth - sidebarDepth, ...rest };
       }
       return item;
     });
@@ -108,7 +117,12 @@ ${mdContent}\nexport default Docfree.Content;`;
       showPageSidebar: ${showPageSidebar},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-      render: () => <MDXContent showIcon={${showCodeIcon}} showTime={${showTime}} />,
+      updateDate: '${updateDate}',
+      render() {
+        return <MDXContent showIcon={${showCodeIcon}} showTime={${showTime}} showEdit={${formatJSON(
+      edit,
+    )}} />
+      },
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}
     export default nuomiProps;

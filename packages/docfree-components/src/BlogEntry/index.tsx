@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useConnect } from 'nuomi';
-import { Pagination } from '../antd';
+import { Pagination, List } from '../antd';
+import './style.less';
 
 export default function BlogEntry() {
   const [{ listSource }, dispatch] = useConnect();
@@ -22,15 +23,17 @@ export default function BlogEntry() {
   }, [page, listSource]);
 
   return (
-    <div>
-      <ul>
-        {data.map(({ to, text }) => (
-          <li key={to}>
+    <div className="docfree-blog">
+      <List
+        dataSource={data}
+        renderItem={({ to, text, createDate }) => (
+          <List.Item>
             <Link to={to}>{text}</Link>
-          </li>
-        ))}
-      </ul>
-      <Pagination current={page} pageSize={pageSize} total={total} onChange={onChange} />
+            <span>{createDate}</span>
+          </List.Item>
+        )}
+      />
+      <Pagination current={page} simple pageSize={pageSize} total={total} onChange={onChange} />
     </div>
   );
 }

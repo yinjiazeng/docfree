@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'nuomi';
 import { Row, Col } from '../antd';
 import Search from './Search';
 import Menus from '../Menus';
@@ -10,13 +11,15 @@ export default function Header({ nav, title, dataSource }: any) {
   };
 
   return (
-    <Row className="docfree-header">
+    <Row className="docfree-header" justify="space-between">
       <Col>
-        <span>{title}</span>
+        <Link to="/" className="docfree-logo">
+          {title}
+        </Link>
       </Col>
-      <Col flex="1">
-        <Menus data={nav} isActive={isActive} />
+      <Col>
         <Search data={dataSource} />
+        <Menus className="docfree-nav" data={nav} isActive={isActive} />
       </Col>
     </Row>
   );

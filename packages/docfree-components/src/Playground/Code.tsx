@@ -36,6 +36,7 @@ export default function Code({ lang, content }) {
   return (
     <Card
       title={lang}
+      bordered={false}
       extra={
         <Tooltip placement="top" title={`复制${copy ? '成功' : '代码'}`}>
           {copy ? (

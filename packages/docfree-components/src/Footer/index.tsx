@@ -1,5 +1,6 @@
 import React from 'react';
+import './style.less';
 
 export default function Footer({ content }) {
-  return <footer>{content}</footer>;
+  return <footer className="docfree-footer">{content}</footer>;
 }

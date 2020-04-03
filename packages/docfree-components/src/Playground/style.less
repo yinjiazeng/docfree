@@ -1,0 +1,36 @@
+@import (reference) '../default.less';
+
+.docfree-playground {
+  margin: @edge-size-small 0;
+  border: 1px solid @border-color-base;
+  & > :first-child {
+    padding: @edge-size-large;
+  }
+  & > a {
+    display: block;
+    border-top: 1px dashed @border-color-base;
+    padding: 8px 0;
+    text-align: center;
+    & > :first-child {
+      margin-right: 4px;
+    }
+  }
+  & > .ant-card {
+    border: none;
+    border-top: 1px dashed @border-color-base;
+    & > .ant-card-head {
+      min-height: 40px;
+      height: 40px;
+      border-bottom-color: @border-color-base;
+      & > .ant-card-head-wrapper {
+        height: 100%;
+        & > .ant-card-head-title {
+          padding: 0;
+        }
+      }
+    }
+    & > .ant-card-body {
+      padding: 8px;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import (reference) '../default.less';
+
+.docfree-content {
+  margin: 0 240px;
+  padding-top: @edge-size-large;
+  padding-bottom: @edge-size-small;
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
+    margin: @edge-size-large 0 @edge-size-small;
+    & > a {
+      color: @primary-color;
+    }
+  }
+  & > h1 {
+    font-size: @header-size-base + 20;
+  }
+  & > h2 {
+    font-size: @header-size-base + 16;
+  }
+  & > h3 {
+    font-size: @header-size-base + 12;
+  }
+  & > h4 {
+    font-size: @header-size-base + 8;
+  }
+  & > h5 {
+    font-size: @header-size-base + 4;
+  }
+  & > h6 {
+    font-size: @header-size-base;
+  }
+  & > p {
+    margin: @edge-size-small 0;
+  }
+  & > :first-child {
+    margin-top: 0;
+  }
+}
+
+.docfree-content-extra {
+  margin: @edge-size-small 0;
+}
+
+.docfree-next-prev {
+  border-top: 1px solid @border-color-base;
+  padding-top: @edge-size-small;
+}

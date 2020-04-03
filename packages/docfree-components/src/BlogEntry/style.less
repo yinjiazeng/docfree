@@ -1,0 +1,28 @@
+@import (reference) '../default.less';
+
+.docfree-blog {
+  width: 960px;
+  margin: @edge-size-large auto;
+  text-align: center;
+  .ant-list-item {
+    padding: 0 8px;
+    border-bottom: 1px solid @border-color-base;
+    &:last-child {
+      border-bottom: 1px solid @border-color-base;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    & > a {
+      display: block;
+      padding: 12px 0;
+      flex: 1;
+      text-align: left;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+  }
+  .ant-pagination {
+    margin: @edge-size-large 0;
+  }
+}

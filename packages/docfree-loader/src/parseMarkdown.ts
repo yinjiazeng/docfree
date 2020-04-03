@@ -1,5 +1,5 @@
 import remark from 'remark';
-import parse from 'remark-parse';
+import mdx from 'remark-mdx';
 import { OptionObject } from 'loader-utils';
 import { AstNode, ParseResult } from './typings';
 
@@ -22,14 +22,17 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
     content,
   };
   const astTree = remark()
-    .use(parse)
+    .use(mdx)
     .parse(content);
+
   const parser = (arr: AstNode[]) => {
     arr.forEach((node, i) => {
-      if (node.type === 'heading') {
+      if (node.type === 'jsx') {
+        node.type = 'html';
+      } else if (node.type === 'heading') {
         const { depth } = node;
         const text = getTexts([node]).join('');
-        ret.data.push({ text, depth, level: depth > 1 ? depth - 2 : 0 });
+        ret.data.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
         node.children = [
           {
             type: 'html',
@@ -69,7 +72,9 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
     return arr;
   };
 
-  ret.content = remark().stringify(parser([astTree])[0]);
+  ret.content = remark()
+    .use(mdx)
+    .stringify(parser([astTree])[0]);
 
   return ret;
 }
