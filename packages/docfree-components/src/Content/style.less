@@ -1,6 +1,7 @@
 @import (reference) '../default.less';
 
 .docfree-content {
+  position: relative;
   margin: 0 240px;
   padding-top: @edge-size-large;
   padding-bottom: @edge-size-small;
@@ -11,6 +12,7 @@
   & > h5,
   & > h6 {
     margin: @edge-size-large 0 @edge-size-small;
+    word-break: break-all;
     & > a {
       color: @primary-color;
     }
@@ -39,6 +41,12 @@
   & > :first-child {
     margin-top: 0;
   }
+}
+
+.docfree-content-tools {
+  position: absolute;
+  right: 0;
+  top: @edge-size-large;
 }
 
 .docfree-content-extra {

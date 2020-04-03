@@ -50,7 +50,7 @@ export default function Search({ data }) {
           const index = text.indexOf(value);
           if (index !== -1) {
             const startText = text.substr(0, index);
-            const endText = text.substr(index + 1);
+            const endText = text.substr(index + value.length);
             const txt = (
               <>
                 {startText}

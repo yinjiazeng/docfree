@@ -51,12 +51,14 @@ function Content({ children, showIcon, showTime, showEdit }) {
 
   return (
     <div className="docfree-content">
-      {showIcon && (
-        <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
-          <Icon onClick={showCodeHandler} />
-        </Tooltip>
-      )}
       {children}
+      {showIcon && (
+        <div className="docfree-content-tools">
+          <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
+            <Icon onClick={showCodeHandler} />
+          </Tooltip>
+        </div>
+      )}
       {(showTime || !!showEdit) && (
         <Row justify="space-between" className="docfree-content-extra">
           <Col>
