@@ -21,6 +21,8 @@
     "gray-matter": "^4.0.2",
     "loader-utils": "^2.0.0",
     "remark": "^11.0.2",
+    "remark-emoji": "^2.1.0",
+    "remark-external-links": "^6.0.0",
     "remark-mdx": "^1.5.8"
   }
 }

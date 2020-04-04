@@ -1,6 +1,8 @@
 import remark from 'remark';
 import mdx from 'remark-mdx';
+import emoji from 'remark-emoji';
 import { OptionObject } from 'loader-utils';
+import extendLink from './extendLink';
 import { AstNode, ParseResult } from './typings';
 
 const getTexts = (arr: AstNode[]) => {
@@ -16,20 +18,21 @@ const getTexts = (arr: AstNode[]) => {
   return text;
 };
 
-export default function parseMarkdown({ content, ...rest }, options: OptionObject) {
+export default ({ content, ...rest }, options: OptionObject) => {
   const ret: ParseResult = {
     data: [],
     content,
   };
-  const astTree = remark()
+  let astTree = remark()
+    .use(emoji)
     .use(mdx)
     .parse(content);
 
+  astTree = extendLink(astTree);
+
   const parser = (arr: AstNode[]) => {
     arr.forEach((node, i) => {
-      if (node.type === 'jsx') {
-        node.type = 'html';
-      } else if (node.type === 'heading') {
+      if (node.type === 'heading') {
         const { depth } = node;
         const text = getTexts([node]).join('');
         ret.data.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
@@ -73,8 +76,9 @@ export default function parseMarkdown({ content, ...rest }, options: OptionObjec
   };
 
   ret.content = remark()
+    .use(emoji)
     .use(mdx)
     .stringify(parser([astTree])[0]);
 
   return ret;
-}
+};

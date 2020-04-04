@@ -4,7 +4,7 @@ import { statSync } from 'fs';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
-import parseMarkdown from './parseMarkdown';
+import parser from './parser';
 
 const getDepth = (settingDepth: number, defaultDepth: number) => {
   // eslint-disable-next-line no-restricted-globals
@@ -35,7 +35,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     content: markdownContent,
   };
   const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
-  const { content: mdContent, data: heading } = parseMarkdown(resource, options);
+  const { content: mdContent, data: heading } = parser(resource, options);
   const sidebarTitle = setting.sidebarTitle || '';
   const showCode = getBool(setting.showCode, config.showCode);
   const showTime = getBool(setting.showTime, config.showTime);
