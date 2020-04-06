@@ -1,5 +1,5 @@
 {
-  "name": "docfree-loader-plugin-vue",
+  "name": "remark-enhance-link",
   "version": "0.1.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
@@ -14,12 +14,5 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
-  },
-  "dependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/generator": "^7.8.8",
-    "@babel/parser": "^7.8.8",
-    "@babel/traverse": "^7.8.6",
-    "unist-builder": "^2.0.3"
   }
 }

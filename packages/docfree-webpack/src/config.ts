@@ -1,17 +1,17 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, tempPath } from 'docfree-utils';
-import { join, resolve } from 'path';
+import { getDocPath, getConfig, tempPath, qs } from 'docfree-utils';
+import { join } from 'path';
 import merge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import extToRegexp from './extToRegexp';
 
 export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
-  const { webpackConfig, dest: defaultDest, title, favicon, meta } = getConfig();
+  const { webpackConfig, dest: defaultDest, title, favicon, meta, theme } = getConfig();
 
   // 文档根目录
   const docPath = getDocPath();
@@ -24,7 +24,7 @@ export default function(options: Configuration): Configuration {
 
   const publicPath = (webpackConfig.output && webpackConfig.output.publicPath) || './';
   const publicjsPath = `js`;
-  const publicCssPath = `css`;
+  // const publicCssPath = `css`;
   const publicMediaPath = `media`;
 
   const jsExts = ['js', 'jsx', 'mjs'];
@@ -32,6 +32,7 @@ export default function(options: Configuration): Configuration {
   const cssExt = 'css';
   const lessExt = 'less';
   const sassExts = ['sass', 'scss'];
+  const stylusExts = ['styl', 'stylus'];
   const mdExts = ['md', 'mdx'];
   const extensions = exts.map((ext) => `.${ext}`);
   const jsExtReg = extToRegexp(jsExts);
@@ -41,8 +42,20 @@ export default function(options: Configuration): Configuration {
   const lessModuleExtReg = extToRegexp(lessExt, 'module');
   const sassExtReg = extToRegexp(sassExts);
   const sassModuleExtReg = extToRegexp(sassExts, 'module');
+  const stylusExtReg = extToRegexp(stylusExts);
+  const stylusModuleExtReg = extToRegexp(stylusExts, 'module');
   const mdExtReg = extToRegexp(mdExts);
   const extsReg = extToRegexp(exts);
+
+  let modifyVars: any;
+
+  if (theme) {
+    if (typeof theme === 'string') {
+      modifyVars = require(theme);
+    } else if (typeof theme === 'object' && !Array.isArray(theme)) {
+      modifyVars = theme;
+    }
+  }
 
   const plugins = [
     new HtmlWebpackPlugin({
@@ -58,20 +71,17 @@ export default function(options: Configuration): Configuration {
         to: destPath,
       },
     ]),
-    new MiniCssExtractPlugin({
-      filename: `${publicCssPath}/[name].[contenthash:8].css`,
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: `${publicCssPath}/[name].[contenthash:8].css`,
+    // }),
     new webpack.ProgressPlugin(),
   ];
 
-  const cssLoader = (module: boolean = false): RuleSetRule[] => {
+  const getStyleLoaders = (module: boolean = false): RuleSetRule[] => {
     const sourceMap = isDev;
     const use = [
       {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath,
-        },
+        loader: 'style-loader',
       },
       {
         loader: 'css-loader',
@@ -86,14 +96,14 @@ export default function(options: Configuration): Configuration {
           sourceMap,
           plugins: [
             autoprefixer({
-              overrideBrowserslist: ['last 1 version', '> 1%', 'ie >= 9'],
+              overrideBrowserslist: ['last 1 version', '> 1%', 'IE 11'],
             }),
           ],
         },
       },
     ];
 
-    return [
+    const rules = [
       {
         test: module ? cssModuleExtReg : cssExtReg,
         exclude: !module ? cssModuleExtReg : undefined,
@@ -109,11 +119,7 @@ export default function(options: Configuration): Configuration {
             options: {
               javascriptEnabled: true,
               sourceMap,
-              modifyVars: {
-                'link-color': 'rgba(0, 0, 0, 0.65)',
-                'link-hover-color': '#1890ff',
-                'border-color-base': '#ebedf1',
-              },
+              modifyVars,
             },
           },
         ],
@@ -131,8 +137,43 @@ export default function(options: Configuration): Configuration {
           },
         ],
       },
+      {
+        test: module ? stylusModuleExtReg : stylusExtReg,
+        exclude: !module ? stylusModuleExtReg : undefined,
+        use: [
+          ...use,
+          {
+            loader: 'stylus-loader',
+            options: {
+              sourceMap,
+            },
+          },
+        ],
+      },
     ];
+
+    return rules;
   };
+
+  const styleLoaders = getStyleLoaders();
+  const styleModuleLoaders = getStyleLoaders(true);
+  const inlineStyleLoaders = styleLoaders.map(({ test, use }: any) => ({
+    test: mdExtReg,
+    resourceQuery(query: string) {
+      const params = qs.parse(query.slice(1));
+
+      if (params.styleContent != null && params.styleLang != null) {
+        const extname = `.${params.styleLang}`;
+
+        if (test.test(extname)) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    use: ['docfree-loader', ...use],
+  }));
 
   const rules: RuleSetRule[] = [
     {
@@ -146,20 +187,18 @@ export default function(options: Configuration): Configuration {
     {
       test: mdExtReg,
       loader: 'docfree-loader',
-      options: {
-        plugins: ['jsx', 'tip'],
-      },
     },
     {
-      exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg, /\.html$/],
+      exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg, stylusExtReg, /\.html$/],
       loader: 'file-loader',
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,
         useRelativePath: true,
       },
     },
-    ...cssLoader(),
-    ...cssLoader(true),
+    ...inlineStyleLoaders,
+    ...styleLoaders,
+    ...styleModuleLoaders,
   ];
 
   const defaultConfig: Configuration = {

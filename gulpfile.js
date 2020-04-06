@@ -1,13 +1,13 @@
 const { src, dest, parallel, watch } = require('gulp');
 const babel = require('gulp-babel');
-const { readdirSync } = require('fs');
+const { readdirSync, statSync } = require('fs');
 
 const readdir = readdirSync('packages');
 
 function task(stream) {
   readdir.forEach((item) => {
-    if (item.startsWith('docfree')) {
-      const package = `packages/${item}`;
+    const package = `packages/${item}`;
+    if (!/^\./.test(item) && statSync(package).isDirectory()) {
       stream(package).pipe(dest(`${package}/lib`));
     }
   });

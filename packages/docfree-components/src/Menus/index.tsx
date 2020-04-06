@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { NavLink } from 'nuomi';
-import HashLink from '../HashLink';
+import AnchorLink from '../AnchorLink';
 import './style.less';
 
 interface Menus {
@@ -25,13 +25,13 @@ export default function Menus({ data, isActive, className }: MenusProps) {
           let elem: ReactElement;
           if (item.level !== undefined) {
             elem = (
-              <HashLink
+              <AnchorLink
                 id={null}
                 style={{ paddingLeft: item.level * 16 }}
                 to={item.text}
                 title={item.text}>
                 {item.text}
-              </HashLink>
+              </AnchorLink>
             );
           } else if (item.to) {
             if (/^(https?:)?\/\//.test(item.to)) {

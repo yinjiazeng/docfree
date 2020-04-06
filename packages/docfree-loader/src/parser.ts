@@ -1,9 +1,8 @@
 import remark from 'remark';
 import mdx from 'remark-mdx';
-import emoji from 'remark-emoji';
 import { OptionObject } from 'loader-utils';
 import extendLink from './extendLink';
-import { AstNode, ParseResult } from './typings';
+import { AstNode, ParserResult } from './typings';
 
 const getTexts = (arr: AstNode[]) => {
   let text: string[] = [];
@@ -18,13 +17,12 @@ const getTexts = (arr: AstNode[]) => {
   return text;
 };
 
-export default ({ content, ...rest }, options: OptionObject) => {
-  const ret: ParseResult = {
-    data: [],
+export default ({ content, ...rest }, plugins) => {
+  const ret: ParserResult = {
+    heading: [],
     content,
   };
   let astTree = remark()
-    .use(emoji)
     .use(mdx)
     .parse(content);
 
@@ -35,19 +33,19 @@ export default ({ content, ...rest }, options: OptionObject) => {
       if (node.type === 'heading') {
         const { depth } = node;
         const text = getTexts([node]).join('');
-        ret.data.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
+        ret.heading.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
         node.children = [
           {
             type: 'html',
-            value: `<Docfree.EventHashLink to="${text}">#</Docfree.EventHashLink> ${text}`,
+            value: `<Docfree.AnchorLinkEnhance to="${text}">#</Docfree.AnchorLinkEnhance> ${text}`,
           },
         ];
-      } else if (node.type === 'code' && Array.isArray(options.plugins)) {
+      } else if (node.type === 'code' && Array.isArray(plugins)) {
         if (node.lang) {
           const array = node.lang.split(':');
           const lang = array[0];
 
-          options.plugins.forEach((value) => {
+          plugins.forEach((value) => {
             if (value) {
               let plugin = value;
               if (typeof plugin === 'string') {
@@ -76,7 +74,6 @@ export default ({ content, ...rest }, options: OptionObject) => {
   };
 
   ret.content = remark()
-    .use(emoji)
     .use(mdx)
     .stringify(parser([astTree])[0]);
 

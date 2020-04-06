@@ -1,5 +1,5 @@
 {
-  "name": "docfree-utils",
+  "name": "remark-docfree-jsx",
   "version": "0.1.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
@@ -14,10 +14,5 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
-  },
-  "dependencies": {
-    "lodash.merge": "^4.6.2",
-    "qs": "^6.9.3",
-    "webpack": "^4.42.0"
   }
 }

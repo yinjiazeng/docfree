@@ -1,12 +1,12 @@
 import { router } from 'nuomi';
-import HashLink, { LinkProps } from '../HashLink';
+import AnchorLink, { AnchorLinkProps } from '../AnchorLink';
 
-export default class EventHashLink extends HashLink {
+export default class AnchorLinkEnhance extends AnchorLink {
   static data: { top: number; to: string }[] = [];
 
   offsetTop: number;
 
-  constructor(props: LinkProps) {
+  constructor(props: AnchorLinkProps) {
     super(props);
     this.offsetTop = 0;
   }
@@ -14,7 +14,7 @@ export default class EventHashLink extends HashLink {
   componentDidMount() {
     this.offsetTop = this.ref.current.offsetTop;
     const { to } = this.props;
-    const { data } = EventHashLink;
+    const { data } = AnchorLinkEnhance;
 
     if (!data.length) {
       window.addEventListener('scroll', this.scrollHandler);
@@ -25,11 +25,11 @@ export default class EventHashLink extends HashLink {
 
   componentWillUnmount() {
     const { to } = this.props;
-    const { data } = EventHashLink;
+    const { data } = AnchorLinkEnhance;
 
-    EventHashLink.data = data.filter((item) => item.to !== to);
+    AnchorLinkEnhance.data = data.filter((item) => item.to !== to);
 
-    if (!EventHashLink.data.length) {
+    if (!AnchorLinkEnhance.data.length) {
       window.removeEventListener('scroll', this.scrollHandler);
     }
   }
@@ -42,7 +42,7 @@ export default class EventHashLink extends HashLink {
 
   findData = () => {
     const scrollTop = window.scrollY;
-    const { data } = EventHashLink;
+    const { data } = AnchorLinkEnhance;
 
     return (
       data.find(({ top }, i) => {

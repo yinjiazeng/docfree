@@ -14,7 +14,7 @@ export interface Heading {
   level: number;
 }
 
-export interface ParseResult {
-  data: Heading[];
+export interface ParserResult {
+  heading: Heading[];
   content: string;
 }

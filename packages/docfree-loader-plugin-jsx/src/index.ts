@@ -1,9 +1,9 @@
 import * as babel from '@babel/core';
-import { matchHtml, tempPath } from 'docfree-utils';
+import { matchHtml } from 'docfree-utils';
 
 module.exports = {
   lang: 'jsx',
-  transform(content: string, args: any, { filePath }) {
+  transform(content: string, args: any, { resourcePath }) {
     const { content: newContent, matchs } = matchHtml('style', content);
     const importStyles: string[] = [];
     const codes = [
@@ -18,10 +18,11 @@ module.exports = {
         lang = 'css';
       }
 
-      const fileName = `style/${filePath.replace(/[/\\]/g, '_')}_${i}.${lang}`;
-      const path = tempPath.write(fileName, styleContent);
-
-      importStyles.push(`import '${path}'`);
+      importStyles.push(
+        `import '${resourcePath}?styleContent=${Buffer.from(styleContent).toString(
+          'base64',
+        )}&styleLang=${lang}'`,
+      );
 
       codes.push({
         lang,

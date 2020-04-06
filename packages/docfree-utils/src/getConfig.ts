@@ -29,6 +29,8 @@ const defaultConfig: DocfreeConfig = {
     show: true,
     depth: 6,
   },
+  plugins: [],
+  theme: null,
   webpackConfig: {},
 };
 

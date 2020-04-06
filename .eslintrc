@@ -8,6 +8,7 @@
     "consistent-return": "off",
     "no-param-reassign": "off",
     "global-require": "off",
+    "no-restricted-globals": "off",
     "no-unused-expressions": "off",
     "prefer-promise-reject-errors": "off",
     "import/extensions": "off",

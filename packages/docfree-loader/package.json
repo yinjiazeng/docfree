@@ -18,11 +18,15 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
     "docfree-utils": "^0.1.2",
+    "docfree-loader-plugin-jsx": "^0.1.2",
+    "docfree-loader-plugin-tip": "^0.1.2",
     "gray-matter": "^4.0.2",
     "loader-utils": "^2.0.0",
     "remark": "^11.0.2",
-    "remark-emoji": "^2.1.0",
-    "remark-external-links": "^6.0.0",
+    "remark-enhance-link": "^0.1.2",
+    "remark-docfree-heading-link": "^0.1.2",
+    "remark-docfree-jsx": "^0.1.2",
+    "remark-docfree-tip": "^0.1.2",
     "remark-mdx": "^1.5.8"
   }
 }

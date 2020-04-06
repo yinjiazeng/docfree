@@ -1,5 +1,4 @@
-import { getConfig, formatJSON, formatDate } from 'docfree-utils';
-import { dirname } from 'path';
+import { getConfig, formatJSON, formatDate, qs } from 'docfree-utils';
 import { statSync } from 'fs';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
@@ -7,7 +6,6 @@ import { getOptions } from 'loader-utils';
 import parser from './parser';
 
 const getDepth = (settingDepth: number, defaultDepth: number) => {
-  // eslint-disable-next-line no-restricted-globals
   const depth = Number(isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
   if (depth < 1) {
     return 1;
@@ -23,19 +21,20 @@ const getBool = (settingBool: boolean, defaultBool: boolean) => {
 };
 
 module.exports = async function docfreeLoader(this: any, content: string) {
-  const { resourcePath } = this;
-  const options = getOptions(this);
+  const { resourcePath, resourceQuery } = this;
+  const params = qs.parse(resourceQuery.slice(1));
+
+  if (params.styleContent != null) {
+    return Buffer.from(params.styleContent, 'base64').toString();
+  }
+
   const callback = this.async();
   const config = getConfig();
   const { sidebar, pageSidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
-  const resource = {
-    filePath: resourcePath,
-    dirPath: dirname(resourcePath),
-    content: markdownContent,
-  };
+  const resource = { resourcePath, content: markdownContent };
   const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
-  const { content: mdContent, data: heading } = parser(resource, options);
+  const { content: mdContent, heading } = parser(resource, config.plugins);
   const sidebarTitle = setting.sidebarTitle || '';
   const showCode = getBool(setting.showCode, config.showCode);
   const showTime = getBool(setting.showTime, config.showTime);
@@ -128,4 +127,21 @@ ${mdContent}\nexport default Docfree.Content;`;
     export default nuomiProps;
   `,
   );
+};
+
+module.exports.pitch = function docfreeLoaderPitch(this: any, request: string) {
+  const options = getOptions(this);
+  const params = qs.parse(this.resourceQuery.slice(1));
+
+  if (options.style == null && params.styleContent != null) {
+    let requests = request.split('!');
+
+    requests = requests
+      .slice(0, -1)
+      .concat(`${require.resolve('docfree-loader')}?style=true`, requests.slice(-1));
+
+    requests = Array.from(new Set(requests));
+
+    return `module.exports = require('!!${requests.join('!')}');`;
+  }
 };

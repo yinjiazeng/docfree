@@ -1,15 +1,15 @@
 import React, { PureComponent, RefObject, createRef } from 'react';
 import { RouterContext } from 'nuomi/lib/components/Context';
 
-export interface LinkProps {
+export interface AnchorLinkProps {
   to: string;
   [key: string]: any;
 }
 
-export default class HashLink extends PureComponent<LinkProps> {
+export default class AnchorLink extends PureComponent<AnchorLinkProps> {
   ref: RefObject<any>;
 
-  constructor(props: LinkProps) {
+  constructor(props: AnchorLinkProps) {
     super(props);
     this.ref = createRef();
   }

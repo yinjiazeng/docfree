@@ -1,0 +1,59 @@
+import remark from 'remark';
+import mdx from 'remark-mdx';
+import vfile from 'vfile';
+import docfreeHeadingLink from 'remark-docfree-heading-link';
+import docfreeJsx from 'remark-docfree-jsx';
+import docfreeTip from 'remark-docfree-tip';
+import enhanceLink from 'remark-enhance-link';
+import { OptionObject } from 'loader-utils';
+import { ParserResult } from './typings';
+
+export default ({ content, resourcePath }, plugins): ParserResult => {
+  let heading = [];
+  let remarkPlugins = [
+    remark()
+      .use(mdx)
+      .use(docfreeHeadingLink, {
+        complete(data: any) {
+          heading = data;
+        },
+      })
+      .use(docfreeJsx)
+      .use(docfreeTip)
+      .use(enhanceLink),
+  ];
+
+  if (Array.isArray(plugins)) {
+    remarkPlugins = remarkPlugins.concat(plugins);
+  }
+
+  const processors = remarkPlugins.reduce((processor, plugin: any) => {
+    if (plugin) {
+      let opts = {};
+
+      if (Array.isArray(plugin)) {
+        opts = plugin[1] || {};
+        plugin = plugin[0] || null;
+      }
+
+      if (typeof plugin === 'string') {
+        if (!plugin.startsWith('remark-')) {
+          plugin = `remark-${plugin}`;
+        }
+
+        plugin = require(plugin);
+      }
+
+      return processor.use(plugin, opts);
+    }
+
+    return processor;
+  });
+
+  const { contents } = processors.processSync(vfile({ contents: content, path: resourcePath }));
+
+  return {
+    heading,
+    content: contents.toString(),
+  };
+};
