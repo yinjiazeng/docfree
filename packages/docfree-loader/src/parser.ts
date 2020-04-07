@@ -3,6 +3,7 @@ import mdx from 'remark-mdx';
 import vfile from 'vfile';
 import docfreeHeadingLink, { Heading } from 'remark-docfree-heading-link';
 import docfreeJsx from 'remark-docfree-jsx';
+import docfreeVue from 'remark-docfree-vue';
 import docfreeTip from 'remark-docfree-tip';
 import enhanceLink from 'remark-enhance-link';
 import { ParserResult } from './typings';
@@ -17,6 +18,7 @@ export default ({ content, resourcePath }, plugins: any): ParserResult => {
         },
       })
       .use(docfreeJsx)
+      .use(docfreeVue)
       .use(docfreeTip)
       .use(enhanceLink)
       .use(mdx),
@@ -42,7 +44,6 @@ export default ({ content, resourcePath }, plugins: any): ParserResult => {
 
         plugin = require(plugin);
       }
-
       return processor.use(plugin, opts);
     }
 

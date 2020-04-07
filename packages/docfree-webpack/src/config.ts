@@ -11,7 +11,7 @@ import extToRegexp from './extToRegexp';
 export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
-  const { webpackConfig, dest: defaultDest, title, favicon, meta, theme } = getConfig();
+  const { webpackConfig, dest: defaultDest, title, favicon, meta, theme, ignoreExts } = getConfig();
 
   // 文档根目录
   const docPath = getDocPath();
@@ -212,7 +212,15 @@ export default function(options: Configuration): Configuration {
     ...styleLoaders,
     ...styleModuleLoaders,
     {
-      exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg, stylusExtReg, /\.html$/],
+      exclude: [
+        mdExtReg,
+        extsReg,
+        cssExtReg,
+        lessExtReg,
+        sassExtReg,
+        stylusExtReg,
+        /\.html$/,
+      ].concat(ignoreExts),
       loader: 'file-loader',
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,

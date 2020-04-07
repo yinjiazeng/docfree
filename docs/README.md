@@ -46,4 +46,19 @@ body {
 .div { color:#ddd }
 </style>
 ```
-:dog:
+
+```vue
+<template>
+  <app />
+</template>
+
+<script>
+import App from './App.vue';
+
+export default {
+  components: {
+    app: App
+  }
+}
+</script>
+```

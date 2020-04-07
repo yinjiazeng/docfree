@@ -30,6 +30,7 @@ const defaultConfig: DocfreeConfig = {
     depth: 6,
   },
   plugins: [],
+  ignoreExts: [],
   theme: null,
   webpackConfig: {},
 };

@@ -18,6 +18,8 @@
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@babel/traverse": "^7.9.0",
+    "@babel/types": "^7.9.0",
     "docfree-utils": "^0.1.2"
   }
 }
