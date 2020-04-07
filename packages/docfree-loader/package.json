@@ -18,8 +18,6 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
     "docfree-utils": "^0.1.2",
-    "docfree-loader-plugin-jsx": "^0.1.2",
-    "docfree-loader-plugin-tip": "^0.1.2",
     "gray-matter": "^4.0.2",
     "loader-utils": "^2.0.0",
     "remark": "^11.0.2",

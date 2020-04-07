@@ -1,20 +1,6 @@
-// eslint-disable-next-line import/no-unresolved
-import { Node } from 'unist';
-
-export interface AstNode extends Node {
-  children?: AstNode[];
-  value?: any;
-  lang?: string;
-  [key: string]: any;
-}
-
-export interface Heading {
-  text: string;
-  depth: number;
-  level: number;
-}
+import { Heading } from 'remark-docfree-heading-link';
 
 export interface ParserResult {
-  heading: Heading[];
+  headings: Heading[];
   content: string;
 }

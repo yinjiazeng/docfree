@@ -29,7 +29,7 @@ showEdit: false
 />
 
 ## 谁在用？
-[诺诺网](http://logos/nuonuo.png '{target}')
+[诺诺网](http://logos/nuonuo.png '{target: '_self'}')
 
 ```jsx
 <div className={$style.div}>1111</div>
@@ -46,3 +46,4 @@ body {
 .div { color:#ddd }
 </style>
 ```
+:dog:

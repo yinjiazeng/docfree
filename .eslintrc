@@ -12,6 +12,7 @@
     "no-unused-expressions": "off",
     "prefer-promise-reject-errors": "off",
     "import/extensions": "off",
+    "import/no-unresolved": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",

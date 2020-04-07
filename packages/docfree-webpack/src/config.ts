@@ -207,6 +207,10 @@ export default function(options: Configuration): Configuration {
       test: mdExtReg,
       loader: 'docfree-loader',
     },
+    ...playgroundStyleLoaders,
+    ...playgroundStyleModuleLoaders,
+    ...styleLoaders,
+    ...styleModuleLoaders,
     {
       exclude: [mdExtReg, extsReg, cssExtReg, lessExtReg, sassExtReg, stylusExtReg, /\.html$/],
       loader: 'file-loader',
@@ -215,10 +219,6 @@ export default function(options: Configuration): Configuration {
         useRelativePath: true,
       },
     },
-    ...playgroundStyleLoaders,
-    ...playgroundStyleModuleLoaders,
-    ...styleLoaders,
-    ...styleModuleLoaders,
   ];
 
   const defaultConfig: Configuration = {

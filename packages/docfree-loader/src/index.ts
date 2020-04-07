@@ -35,7 +35,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const { content: markdownContent, data: setting } = matter(content);
   const resource = { resourcePath, content: markdownContent };
   const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
-  const { content: mdContent, heading } = parser(resource, config.plugins);
+  const { content: mdContent, headings: hs } = parser(resource, config.plugins);
   const sidebarTitle = setting.sidebarTitle || '';
   const showCode = getBool(setting.showCode, config.showCode);
   const showTime = getBool(setting.showTime, config.showTime);
@@ -54,7 +54,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   let result = '';
   let title = '';
 
-  const headings = heading.filter((item) => {
+  const headings = hs.filter((item) => {
     const { depth, text } = item;
     if (depth === 1) {
       if (!title) {
