@@ -1,4 +1,4 @@
-import { getConfig, formatJSON, formatDate, qs } from 'docfree-utils';
+import { getConfig, formatJSON, formatDate, qs, storage } from 'docfree-utils';
 import { statSync } from 'fs';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
@@ -22,10 +22,11 @@ const getBool = (settingBool: boolean, defaultBool: boolean) => {
 
 module.exports = async function docfreeLoader(this: any, content: string) {
   const { resourcePath, resourceQuery } = this;
-  const params = qs.parse(resourceQuery.slice(1));
+  const { styleContentKey } = qs.parse(resourceQuery.slice(1));
 
-  if (params.styleContent != null) {
-    return Buffer.from(params.styleContent, 'base64').toString();
+  if (styleContentKey) {
+    const styleContent = storage.get(styleContentKey);
+    return styleContent;
   }
 
   const callback = this.async();
@@ -133,7 +134,7 @@ module.exports.pitch = function docfreeLoaderPitch(this: any, request: string) {
   const options = getOptions(this);
   const params = qs.parse(this.resourceQuery.slice(1));
 
-  if (options.style == null && params.styleContent != null) {
+  if (options.style !== true && params.styleContentKey) {
     let requests = request.split('!');
 
     requests = requests

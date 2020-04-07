@@ -157,15 +157,34 @@ export default function(options: Configuration): Configuration {
 
   const styleLoaders = getStyleLoaders();
   const styleModuleLoaders = getStyleLoaders(true);
-  const inlineStyleLoaders = styleLoaders.map(({ test, use }: any) => ({
+
+  const playgroundStyleLoaders = styleLoaders.map(({ test, use }: any) => ({
     test: mdExtReg,
     resourceQuery(query: string) {
       const params = qs.parse(query.slice(1));
 
-      if (params.styleContent != null && params.styleLang != null) {
+      if (params.styleContentKey && params.styleLang) {
         const extname = `.${params.styleLang}`;
 
-        if (test.test(extname)) {
+        if (!params.module && test.test(extname)) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    use: ['docfree-loader', ...use],
+  }));
+
+  const playgroundStyleModuleLoaders = styleModuleLoaders.map(({ test, use }: any) => ({
+    test: mdExtReg,
+    resourceQuery(query: string) {
+      const params = qs.parse(query.slice(1));
+
+      if (params.styleContentKey && params.styleLang) {
+        const extname = `.module.${params.styleLang}`;
+
+        if (params.module && test.test(extname)) {
           return true;
         }
       }
@@ -196,7 +215,8 @@ export default function(options: Configuration): Configuration {
         useRelativePath: true,
       },
     },
-    ...inlineStyleLoaders,
+    ...playgroundStyleLoaders,
+    ...playgroundStyleModuleLoaders,
     ...styleLoaders,
     ...styleModuleLoaders,
   ];

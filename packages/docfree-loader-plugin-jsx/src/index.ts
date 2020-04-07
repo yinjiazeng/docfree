@@ -1,5 +1,5 @@
 import * as babel from '@babel/core';
-import { matchHtml } from 'docfree-utils';
+import { matchHtml, storage } from 'docfree-utils';
 
 module.exports = {
   lang: 'jsx',
@@ -13,15 +13,21 @@ module.exports = {
       },
     ];
 
-    matchs.forEach(({ attrs: { lang }, content: styleContent }, i: number) => {
+    matchs.forEach(({ attrs: { lang, module }, content: styleContent }, i: number) => {
+      const styleContentKey = storage.set(styleContent);
+
       if (!lang) {
         lang = 'css';
       }
 
+      module = module != null ? module || '$style' : null;
+
       importStyles.push(
-        `import '${resourcePath}?styleContent=${Buffer.from(styleContent).toString(
-          'base64',
-        )}&styleLang=${lang}'`,
+        `import${
+          module ? ` ${module} from` : ''
+        } '${resourcePath}?styleContentKey=${styleContentKey}&styleLang=${lang}${
+          module ? '&module=true' : ''
+        }'`,
       );
 
       codes.push({

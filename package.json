@@ -13,6 +13,7 @@
     "publish": "npm run clean && npm run build && lerna publish",
     "test": "jest",
     "doc:dev": "docfree dev docs",
+    "doc:dev2": "docfree dev docs2",
     "doc:build": "docfree build docs"
   },
   "husky": {

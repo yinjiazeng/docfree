@@ -28,13 +28,14 @@ import 'highlight.js/styles/${config.langTheme}.css';
 const routes = ${routesString};
 const documentTitle = '${config.title}';
 
-const generateData = (raw, pathname = '/', data = []) => {
+const generateData = (raw, pathname = '', data = []) => {
+  pathname = pathname + '/';
   raw.forEach((route) => {
     if (route.path !== '*') {
       route.pathname = pathname;
       const { path, children, render, effects, onInit, onChange, ...rest } = route;
       if (Array.isArray(children)) {
-        data = generateData(children, router.megre(pathname, path), data);
+        data = generateData(children, router.mergePath(pathname, path), data);
       } else${isBlog ? ' if(!/^README$/i.test(route.filename) && route.title)' : ''} {
         data.push({ path, ...rest });
       }
