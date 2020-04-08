@@ -12,15 +12,17 @@ const getAttrs = (content: string) => {
 };
 
 export default (tag: string, source: string) => {
-  tag = tag.toLocaleLowerCase();
-  const htmlRegexp = new RegExp(`\\s*<${tag}(\\s*|\\s+[^>]*)>([\\s\\S]*?)<\\/${tag}>\\s*`, 'ig');
+  const htmlRegexp = new RegExp(
+    `\\s*<${tag}(\\s*|\\s+[^>]*)(?:\\/|>([\\s\\S]*?)<\\/${tag})>\\s*`,
+    'ig',
+  );
   const result: { tag: string; content: string; matchs: any[] } = {
     tag,
     content: source,
     matchs: [],
   };
 
-  result.content = source.replace(htmlRegexp, (html, attrs, content) => {
+  result.content = source.replace(htmlRegexp, (html, attrs = '', content = '') => {
     result.matchs.push({
       attrs: getAttrs(attrs.trim()),
       content: content.trim(),

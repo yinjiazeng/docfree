@@ -14,5 +14,12 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.9.0",
+    "@babel/traverse": "^7.9.0",
+    "@babel/types": "^7.9.0",
+    "docfree-utils": "^0.1.2",
+    "unist-util-visit": "^2.0.2"
   }
 }

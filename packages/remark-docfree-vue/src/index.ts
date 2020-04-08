@@ -16,7 +16,7 @@ export default () => {
         const importStyles: string[] = [];
         const codes = [
           {
-            lang: 'html',
+            lang: 'vue',
             content,
           },
         ];

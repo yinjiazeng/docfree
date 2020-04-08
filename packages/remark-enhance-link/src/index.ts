@@ -17,7 +17,7 @@ const visit = (array: TreeNode[] = [], newAst: TreeNode[] = []) => {
         target: '_blank',
       };
 
-      if (title && title.startsWith('{') && title.endsWith('}')) {
+      if (title && title.trimLeft().startsWith('{') && title.trimRight().endsWith('}')) {
         try {
           // eslint-disable-next-line no-eval
           const { href, ...restProps } = eval(`(${title})`);

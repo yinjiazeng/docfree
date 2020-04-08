@@ -9,7 +9,7 @@ export default () => {
         const importStyles: string[] = [];
         const codes = [
           {
-            lang: 'javascript',
+            lang: 'jsx',
             content,
           },
         ];
