@@ -26,8 +26,8 @@ export default () => {
           const codes: any = [];
           const render = `function() {
             const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
-            const Playgrund = _interopRequireDefault(require('${src}'));
-            return <Playgrund />;
+            const Playground = _interopRequireDefault(require('${src}'));
+            return <Playground />;
           }`;
 
           const absolutePath = resolve(dir, src);
