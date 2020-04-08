@@ -1,4 +1,4 @@
-const attrRegexp = new RegExp(`([\\w-$]+)(?:=['"]([^"']+)['"])?`, 'ig');
+const attrRegexp = new RegExp(`([\\w-$]+)(?:=['"]([^"']*)['"])?`, 'ig');
 const getAttrs = (content: string) => {
   const result: { [key: string]: string } = {};
   if (content) {

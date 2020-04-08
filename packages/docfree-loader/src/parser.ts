@@ -3,17 +3,23 @@ import mdx from 'remark-mdx';
 import vfile from 'vfile';
 import docfreeHeadingLink, { Heading } from 'remark-docfree-heading-link';
 import docfreePlayground from 'remark-docfree-playground';
+import docfreeProps from 'remark-docfree-props';
 import docfreeJsx from 'remark-docfree-jsx';
 import docfreeVue from 'remark-docfree-vue';
 import docfreeTip from 'remark-docfree-tip';
 import enhanceLink from 'remark-enhance-link';
-import { ParserResult } from './typings';
+
+export interface ParserResult {
+  headings: Heading[];
+  content: string;
+}
 
 export default ({ content, resourcePath }, plugins: any): ParserResult => {
   let headings: Heading[] = [];
   let remarkPlugins = [
     remark()
       .use(docfreePlayground)
+      .use(docfreeProps)
       .use(docfreeHeadingLink, {
         complete(data: Heading[]) {
           headings = data;

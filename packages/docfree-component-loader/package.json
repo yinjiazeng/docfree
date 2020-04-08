@@ -14,5 +14,11 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.9.0",
+    "@babel/traverse": "^7.9.0",
+    "@babel/generator": "^7.9.0",
+    "@babel/types": "^7.9.0"
   }
 }

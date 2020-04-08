@@ -1,0 +1,72 @@
+import * as parser from '@babel/parser';
+import * as types from '@babel/types';
+import traverse from '@babel/traverse';
+import generate from '@babel/generator';
+import { ObjectExpression, ExpressionStatement } from '@babel/types';
+
+module.exports = function(content: string) {
+  const ast: any = parser.parse(content, {
+    sourceType: 'module',
+    plugins: ['jsx'],
+  });
+
+  traverse(ast, {
+    StringLiteral(path: any) {
+      if (path.node.value === 'prop-types' && types.isImportDeclaration(path.parent)) {
+        path.replaceWith(types.stringLiteral('docfree-prop-types'));
+      }
+    },
+    ExpressionStatement(path: any) {
+      if (types.isProgram(path.parent)) {
+        const { node } = path;
+
+        if (
+          types.isExpressionStatement(node) &&
+          types.isAssignmentExpression(node.expression) &&
+          types.isMemberExpression(node.expression.left) &&
+          types.isIdentifier(node.expression.left.object) &&
+          types.isIdentifier(node.expression.left.property) &&
+          node.expression.left.property.name === 'propTypes' &&
+          types.isObjectExpression(node.expression.right)
+        ) {
+          const {
+            expression: { left, right },
+          }: ExpressionStatement = node;
+          const { properties }: ObjectExpression = right;
+          const desc = {};
+
+          properties.forEach((item) => {
+            if (types.isObjectProperty(item)) {
+              if (types.isIdentifier(item.key) && item.leadingComments) {
+                const { name: prop } = item.key;
+                const lastComment = item.leadingComments.slice(-1);
+
+                if (lastComment.length) {
+                  desc[prop] = lastComment[0].value;
+                }
+              }
+            }
+          });
+
+          path.insertAfter(
+            types.expressionStatement(
+              types.assignmentExpression(
+                '=',
+                types.memberExpression(left.object, types.identifier('__PROPTYPES_DESCRIPTIONS__')),
+                types.objectExpression(
+                  Object.keys(desc).map((key) =>
+                    types.objectProperty(types.identifier(key), types.stringLiteral(desc[key])),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+    },
+  });
+
+  const { code } = generate(ast, {}, content);
+
+  return code;
+};

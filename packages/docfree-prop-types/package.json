@@ -14,5 +14,8 @@
   "scripts": {
     "test": "jest",
     "dts": "tsc"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
   }
 }

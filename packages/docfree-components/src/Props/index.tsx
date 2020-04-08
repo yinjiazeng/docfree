@@ -6,30 +6,28 @@ export type PropsApi = string | ReactElement;
 
 export interface PropsProps {
   titles: string[];
-  apis?: PropsApi[][];
-  of?: ComponentType;
+  datas?: PropsApi[][];
+  of?: ComponentType & {
+    __PROPTYPES_DESCRIPTIONS__?: {
+      [key: string]: any;
+    };
+  };
 }
 
-function Props({ titles, apis, of }: PropsProps) {
+function Props({ titles, datas, of }: PropsProps) {
   const props = useMemo(() => {
     let array: PropsApi[][] = [];
-    if (apis) {
-      array = [...apis];
+    if (datas) {
+      array = [...datas];
     } else if (of) {
-      if (!of.propTypes) {
-        throw new Error(`组件${of.displayName || of.name || ''}必须包含propTypes属性`);
-      }
-
-      const keys = Object.keys(of.propTypes);
+      const propTypes = of.propTypes || {};
+      const defaultProps = of.defaultProps || {};
+      // eslint-disable-next-line no-underscore-dangle
+      const descriptions = of.__PROPTYPES_DESCRIPTIONS__ || {};
+      const keys = Object.keys(propTypes);
 
       keys.forEach((key) => {
-        const prop = [key, ''];
-
-        if (of.defaultProps) {
-          prop.push(JSON.stringify(of.defaultProps[key]));
-        }
-
-        array.push(prop);
+        array.push([key, propTypes[key].type, defaultProps[key], descriptions[key]]);
       });
     }
 
@@ -74,20 +72,13 @@ function Props({ titles, apis, of }: PropsProps) {
 
 Props.defaultProps = {
   titles: ['参数', '类型', '默认值', '说明'],
-  apis: null,
+  datas: null,
   of: null,
 };
 
-// const a = PropTypes.arrayOf(PropTypes.string);
-// try {
-//   PropTypes.checkPropTypes({ title: PropTypes.oneOf(['x1xx']).isRequired }, null, 'title', 'xxx');
-// } catch (e) {
-//   // console.log(e);
-// }
-
 Props.propTypes = {
   titles: PropTypes.arrayOf(PropTypes.string),
-  apis: PropTypes.oneOfType([
+  datas: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.element)),
   ]),

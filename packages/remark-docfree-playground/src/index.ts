@@ -3,7 +3,7 @@ import { Parent, Node } from 'unist';
 import { matchHtml } from 'docfree-utils';
 import { resolve, dirname } from 'path';
 import { readFileSync } from 'fs';
-import * as parser from '@babel/parser';
+import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import traverse from '@babel/traverse';
 
@@ -39,44 +39,50 @@ export default () => {
             content: content.trim(),
           });
 
-          const ast = parser.parse(content, { sourceType: 'module', plugins: ['jsx'] });
-          const paths: string[] = [];
-
-          traverse(ast, {
-            ImportDeclaration(path) {
-              const { source } = path.node;
-
-              if (types.isStringLiteral(source)) {
-                paths.push(source.value);
-              }
-            },
-            CallExpression(path) {
-              const { arguments: args, callee: cle } = path.node;
-
-              if (
-                types.isStringLiteral(args[0]) &&
-                types.isIdentifier(cle) &&
-                cle.name === 'require'
-              ) {
-                paths.push(args[0].value);
-              }
-            },
+          const ast = babel.parseSync(content, {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            filename: '',
           });
 
-          paths.forEach((path) => {
-            const matchLang = path.match(/\.(css|less|sass|scss|styl|stylus)$/);
+          if (ast) {
+            const paths: string[] = [];
 
-            if (matchLang) {
-              const styleContent = readFileSync(resolve(fileDirname, path)).toString();
+            traverse(ast, {
+              ImportDeclaration(path) {
+                const { source } = path.node;
 
-              codes.push({
-                lang: matchLang[1],
-                content: styleContent.trim(),
-              });
-            }
-          });
+                if (types.isStringLiteral(source)) {
+                  paths.push(source.value);
+                }
+              },
+              CallExpression(path) {
+                const { arguments: args, callee: cle } = path.node;
 
-          node.value = `<${COMPONENT_NAME} code={${JSON.stringify(codes)}} render={${render}} />`;
+                if (
+                  types.isStringLiteral(args[0]) &&
+                  types.isIdentifier(cle) &&
+                  cle.name === 'require'
+                ) {
+                  paths.push(args[0].value);
+                }
+              },
+            });
+
+            paths.forEach((path) => {
+              const matchLang = path.match(/\.(css|less|sass|scss|styl|stylus)$/);
+
+              if (matchLang) {
+                const styleContent = readFileSync(resolve(fileDirname, path)).toString();
+
+                codes.push({
+                  lang: matchLang[1],
+                  content: styleContent.trim(),
+                });
+              }
+            });
+
+            node.value = `<${COMPONENT_NAME} code={${JSON.stringify(codes)}} render={${render}} />`;
+          }
         }
       }
     });
