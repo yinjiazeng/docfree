@@ -1,6 +1,6 @@
 {
   "name": "docfree",
-  "version": "0.1.4",
+  "version": "0.1.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "commander": "^4.1.1",
-    "docfree-resolver": "^0.1.2",
+    "docfree-generate": "^0.1.2",
+    "docfree-template": "^0.1.2",
     "docfree-utils": "^0.1.2",
-    "docfree-webpack": "^0.1.2",
-    "lodash.merge": "^4.6.2"
+    "docfree-webpack": "^0.1.2"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "name": "docfree-template",
+  "version": "0.1.2",
+  "author": "Aniu <yinjiazeng@163.com>",
+  "keywords": [],
+  "description": "",
+  "sideEffects": false,
+  "files": [
+    "docs"
+  ],
+  "license": "MIT"
+}
