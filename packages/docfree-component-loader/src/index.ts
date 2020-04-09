@@ -37,11 +37,20 @@ module.exports = function(content: string) {
 
           properties.forEach((item) => {
             if (types.isObjectProperty(item)) {
-              if (types.isIdentifier(item.key) && item.leadingComments) {
-                const { name: prop } = item.key;
+              if (
+                (types.isIdentifier(item.key) || types.isStringLiteral(item.key)) &&
+                item.leadingComments
+              ) {
+                let prop: string;
                 const lastComment = item.leadingComments.slice(-1);
 
-                if (lastComment.length) {
+                if (types.isIdentifier(item.key)) {
+                  prop = item.key.name;
+                } else {
+                  prop = item.key.value;
+                }
+
+                if (lastComment.length && prop) {
                   desc[prop] = lastComment[0].value;
                 }
               }
