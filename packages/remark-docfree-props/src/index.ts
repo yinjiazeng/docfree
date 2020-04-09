@@ -1,6 +1,5 @@
-import visit from 'unist-util-visit';
 import { Parent, Node } from 'unist';
-import { matchHtml } from 'docfree-utils';
+import { matchHtml, visit } from 'docfree-utils';
 
 export default () => {
   return (tree: Parent) => {

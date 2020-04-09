@@ -7,8 +7,6 @@ const defaultConfig: DocfreeConfig = {
   router: 'hash',
   mode: 'doc',
   title: '',
-  meta: {},
-  favicon: '',
   footer: '',
   nav: [],
   dest: '',

@@ -1,7 +1,6 @@
-import inquirer from 'inquirer';
 import { join, dirname } from 'path';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
-import { getDocPath, fsExtra, logger, formatJSON, chalk, ObjectAny } from 'docfree-utils';
+import { getDocPath, fsExtra, logger, formatJSON, chalk, inquirer, ObjectAny } from 'docfree-utils';
 
 export default async function(name: string) {
   let docsPath = getDocPath();

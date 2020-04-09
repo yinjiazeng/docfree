@@ -1,5 +1,4 @@
-import * as babel from '@babel/core';
-import { matchHtml, storage } from 'docfree-utils';
+import { matchHtml, storage, babel, babelOptions } from 'docfree-utils';
 
 export default () => {
   return ({ children }, file: any) => {
@@ -41,7 +40,7 @@ export default () => {
         }
 
         const res = babel.transformSync(`${importStyles.join('\n')}${content}`, {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
+          ...babelOptions,
           filename: '',
         });
 

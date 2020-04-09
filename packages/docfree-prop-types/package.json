@@ -12,7 +12,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "jest",
     "dts": "tsc"
   },
   "dependencies": {

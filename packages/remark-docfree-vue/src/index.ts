@@ -1,7 +1,4 @@
-import * as babel from '@babel/core';
-import * as types from '@babel/types';
-import { NodePath } from '@babel/traverse';
-import { matchHtml, storage } from 'docfree-utils';
+import { matchHtml, storage, traverse, types, babel, babelOptions } from 'docfree-utils';
 
 export default () => {
   return ({ children }, file: any) => {
@@ -43,7 +40,7 @@ export default () => {
         }
 
         const visitor = {
-          ExportDefaultDeclaration(path: NodePath) {
+          ExportDefaultDeclaration(path: traverse.NodePath) {
             const { declaration }: any = path.node;
             const returnStatement: any = types.returnStatement(declaration);
 
@@ -52,7 +49,7 @@ export default () => {
         };
 
         const res = babel.transformSync(scriptContent, {
-          presets: ['@babel/preset-env'],
+          presets: [babelOptions.presets[0]],
           plugins: [
             {
               visitor,

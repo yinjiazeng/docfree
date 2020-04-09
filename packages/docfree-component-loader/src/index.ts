@@ -1,8 +1,4 @@
-import * as parser from '@babel/parser';
-import * as types from '@babel/types';
-import traverse from '@babel/traverse';
-import generate from '@babel/generator';
-import { ObjectExpression, ExpressionStatement } from '@babel/types';
+import { parser, types, traverse, generator } from 'docfree-utils';
 
 module.exports = function(content: string) {
   const ast: any = parser.parse(content, {
@@ -31,8 +27,8 @@ module.exports = function(content: string) {
         ) {
           const {
             expression: { left, right },
-          }: ExpressionStatement = node;
-          const { properties }: ObjectExpression = right;
+          }: types.ExpressionStatement = node;
+          const { properties }: types.ObjectExpression = right;
           const desc = {};
 
           properties.forEach((item) => {
@@ -75,7 +71,7 @@ module.exports = function(content: string) {
     },
   });
 
-  const { code } = generate(ast, {}, content);
+  const { code } = generator(ast, {}, content);
 
   return code;
 };

@@ -10,7 +10,7 @@ export default function resolverWatch() {
     chokidar
       .watch(getDocPath(), {
         // 忽略点文件
-        ignored: /(^|[/\\])\../,
+        ignored: [/(^|[/\\])\../, /node_modules/],
       })
       .on('all', (event, path) => {
         if (

@@ -1,17 +1,17 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, tempPath, qs } from 'docfree-utils';
+import { getDocPath, getConfig, tempPath, qs, babelOptions } from 'docfree-utils';
 import { join } from 'path';
-import merge from 'webpack-merge';
+import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import extToRegexp from './extToRegexp';
 
 export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
-  const { webpackConfig, dest: defaultDest, title, favicon, meta, theme, ignoreExts } = getConfig();
+  const { webpackConfig, dest: defaultDest, title, theme, ignoreExts } = getConfig();
 
   // 文档根目录
   const docPath = getDocPath();
@@ -24,7 +24,6 @@ export default function(options: Configuration): Configuration {
 
   const publicPath = (webpackConfig.output && webpackConfig.output.publicPath) || './';
   const publicjsPath = `js`;
-  // const publicCssPath = `css`;
   const publicMediaPath = `media`;
 
   const jsExts = ['js', 'jsx', 'mjs'];
@@ -60,10 +59,7 @@ export default function(options: Configuration): Configuration {
   const plugins = [
     new HtmlWebpackPlugin({
       title,
-      // filename: join(destPath, 'index.html'),
       template: join(staticPath, 'index.html'),
-      // favicon: resolve(publicPath, favicon),
-      meta,
     }),
     new CopyWebpackPlugin([
       {
@@ -71,9 +67,6 @@ export default function(options: Configuration): Configuration {
         to: destPath,
       },
     ]),
-    // new MiniCssExtractPlugin({
-    //   filename: `${publicCssPath}/[name].[contenthash:8].css`,
-    // }),
     new webpack.ProgressPlugin(),
   ];
 
@@ -81,7 +74,7 @@ export default function(options: Configuration): Configuration {
     const sourceMap = isDev;
     const use = [
       {
-        loader: 'style-loader',
+        loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
       },
       {
         loader: 'css-loader',
@@ -200,7 +193,7 @@ export default function(options: Configuration): Configuration {
       exclude: /node_modules/,
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-react'],
+        ...babelOptions,
       },
     },
     {
@@ -258,5 +251,5 @@ export default function(options: Configuration): Configuration {
     plugins,
   };
 
-  return merge(defaultConfig, options, webpackConfig);
+  return webpackMerge(defaultConfig, options, webpackConfig);
 }

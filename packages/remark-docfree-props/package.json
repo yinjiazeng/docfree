@@ -12,11 +12,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "jest",
     "dts": "tsc"
   },
   "dependencies": {
-    "docfree-utils": "^0.1.2",
-    "unist-util-visit": "^2.0.2"
+    "docfree-utils": "^0.1.2"
   }
 }

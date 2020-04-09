@@ -1,11 +1,7 @@
-import visit from 'unist-util-visit';
 import { Parent, Node } from 'unist';
-import { matchHtml } from 'docfree-utils';
+import { matchHtml, visit, babel, types, traverse, babelOptions } from 'docfree-utils';
 import { resolve, dirname } from 'path';
 import { readFileSync } from 'fs';
-import * as babel from '@babel/core';
-import * as types from '@babel/types';
-import traverse from '@babel/traverse';
 
 export default () => {
   return (tree: Parent, { dirname: dir }) => {
@@ -40,7 +36,7 @@ export default () => {
           });
 
           const ast = babel.parseSync(content, {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            ...babelOptions,
             filename: '',
           });
 

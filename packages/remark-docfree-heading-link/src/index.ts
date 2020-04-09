@@ -1,4 +1,4 @@
-import visit from 'unist-util-visit';
+import { visit } from 'docfree-utils';
 import { Parent, Node } from 'unist';
 
 export type Heading = {

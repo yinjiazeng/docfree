@@ -1,11 +1,5 @@
-import { Configuration } from 'webpack';
-
 export interface ObjectAny {
   [key: string]: any;
-}
-
-export interface ConfigMeta {
-  [key: string]: string;
 }
 
 export interface ConfigNav {
@@ -30,11 +24,9 @@ export interface ConfigSidebar {
 export interface DocfreeConfig {
   mode: 'doc' | 'blog';
   title: string;
-  favicon: string;
   dest: string;
-  meta: ConfigMeta;
   nav: ConfigNav[];
   sidebar: ConfigSidebar;
-  webpackConfig: Configuration;
+  webpackConfig: ObjectAny;
   [key: string]: any;
 }

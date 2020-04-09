@@ -3,17 +3,15 @@ import { formatDate } from 'docfree-utils';
 import { join, extname } from 'path';
 import { Routes } from './typings';
 
-// 解析目录生成路由
 export default function resolveToRoutes(docPath: string, routes: Routes = []): Routes {
   const readdir = readdirSync(docPath);
 
   readdir.forEach((item) => {
-    // 排除.开头文件或文件夹
     if (!/^\./.test(item)) {
       const itemPath = join(docPath, item);
       const stat = statSync(itemPath);
 
-      if (stat.isDirectory()) {
+      if (stat.isDirectory() && item !== 'node_modules') {
         routes.push({
           path: `/${item}`,
           children: resolveToRoutes(itemPath, []).concat({ path: '*', children: 'NotFound' }),
