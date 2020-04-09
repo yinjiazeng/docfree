@@ -12,6 +12,7 @@
     "no-unused-expressions": "off",
     "func-names": "off",
     "no-multi-assign": "off",
+    "no-useless-return": "off",
     "prefer-promise-reject-errors": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",

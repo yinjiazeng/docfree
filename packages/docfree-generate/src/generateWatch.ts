@@ -1,7 +1,7 @@
 import chokidar from 'chokidar';
 import { extname } from 'path';
 import { getDocPath } from 'docfree-utils';
-import resolver from './resolver';
+import generate from './generate';
 
 export default function resolverWatch() {
   return new Promise((res) => {
@@ -19,7 +19,7 @@ export default function resolverWatch() {
         ) {
           clearTimeout(timer);
           timer = setTimeout(() => {
-            resolver();
+            generate();
             res();
           }, 100);
         }
