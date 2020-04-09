@@ -41,6 +41,7 @@ export function oneOf(types: any[]) {
 
     return typeof item;
   });
+
   return func;
 }
 

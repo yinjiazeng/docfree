@@ -21,6 +21,7 @@ const visit = (array: TreeNode[] = [], newAst: TreeNode[] = []) => {
         try {
           // eslint-disable-next-line no-eval
           const { href, ...restProps } = eval(`(${title})`);
+
           props = { ...props, title: null, ...restProps };
         } catch (e) {
           //
@@ -29,6 +30,7 @@ const visit = (array: TreeNode[] = [], newAst: TreeNode[] = []) => {
 
       Object.keys(props).forEach((key) => {
         const value = props[key];
+
         if (typeof value === 'string') {
           attrs.push(`${key}="${value}"`);
         }

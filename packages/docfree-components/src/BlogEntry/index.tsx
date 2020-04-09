@@ -23,6 +23,7 @@ export default function BlogEntry() {
     loadingDispatch(true);
     setTimeout(() => {
       const startIndex = (page - 1) * pageSize;
+
       dataDispatch(listSource.slice(startIndex, startIndex + pageSize));
       loadingDispatch(false);
     }, 300);

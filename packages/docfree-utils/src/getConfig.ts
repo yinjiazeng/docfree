@@ -37,6 +37,7 @@ const defaultConfig: DocfreeConfig = {
 
 export default function getConfig(): DocfreeConfig {
   const configPath = join(getDocPath(), '/.docfree/config.js');
+
   try {
     return merge({}, defaultConfig, require(configPath));
   } catch (e) {

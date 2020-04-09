@@ -46,6 +46,7 @@ export default () => {
           ExportDefaultDeclaration(path: NodePath) {
             const { declaration }: any = path.node;
             const returnStatement: any = types.returnStatement(declaration);
+
             path.replaceWith(returnStatement);
           },
         };

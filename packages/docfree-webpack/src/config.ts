@@ -207,6 +207,7 @@ export default function(options: Configuration): Configuration {
       test: jsExtReg,
       resourceQuery(query: string) {
         const params = qs.parse(query.slice(1));
+
         return params.getPropTypesDescription === '1';
       },
       loader: 'docfree-component-loader',

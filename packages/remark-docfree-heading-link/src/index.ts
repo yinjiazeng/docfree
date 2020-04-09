@@ -19,10 +19,12 @@ export type HeadingNode = Node & {
 
 const getTexts = (tree: Node[]) => {
   let text: any = [];
+
   tree.forEach(({ value, type, children }) => {
     if (type === 'text' && value) {
       text.push(value);
     }
+
     if (Array.isArray(children)) {
       text = getTexts(children).concat(text);
     }
@@ -37,6 +39,7 @@ export default (options: Options = {}) => {
     visit(tree, 'heading', (node: HeadingNode) => {
       const { depth } = node;
       const text = getTexts([node]).join('');
+
       headings.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
       node.children = [
         {

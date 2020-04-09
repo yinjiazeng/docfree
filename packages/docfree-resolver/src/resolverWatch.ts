@@ -6,6 +6,7 @@ import resolver from './resolver';
 export default function resolverWatch() {
   return new Promise((res) => {
     let timer: any = null;
+
     chokidar
       .watch(getDocPath(), {
         // 忽略点文件

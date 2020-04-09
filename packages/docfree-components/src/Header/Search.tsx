@@ -23,8 +23,10 @@ export default function Search({ data }) {
 
   const onClick = ({ pathname, hash }) => {
     const location = router.location();
+
     if (location.pathname === pathname) {
       router.location(pathname, true);
+
       if (hash) {
         setTimeout(() => {
           const { hash: h } = window.location;
@@ -48,6 +50,7 @@ export default function Search({ data }) {
 
         menus.forEach(({ text, depth }) => {
           const index = text.indexOf(value);
+
           if (index !== -1) {
             const startText = text.substr(0, index);
             const endText = text.substr(index + value.length);

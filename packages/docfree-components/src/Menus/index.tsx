@@ -23,6 +23,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
       menus.forEach((item, i) => {
         if (item.text) {
           let elem: ReactElement;
+
           if (item.level !== undefined) {
             elem = (
               <AnchorLink
@@ -53,6 +54,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
           }
           if (item.menus) {
             const items = getMenus(item.menus);
+
             if (items.length) {
               elem = (
                 <>
@@ -62,6 +64,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
               );
             }
           }
+
           list.push(<li key={i}>{elem}</li>);
         }
       });
@@ -71,6 +74,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
   };
 
   const menus = getMenus(data);
+
   if (menus.length) {
     return <ul className={`docfree-menus${className ? ` ${className}` : ''}`}>{menus}</ul>;
   }

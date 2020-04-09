@@ -1,9 +1,12 @@
 const attrRegexp = new RegExp(`([\\w-$]+)(?:=['"]([^"']*)['"])?`, 'ig');
+
 const getAttrs = (content: string) => {
   const result: { [key: string]: string } = {};
+
   if (content) {
     content.replace(attrRegexp, (attr, key, value) => {
       result[key] = value || '';
+
       return attr;
     });
   }
@@ -16,6 +19,7 @@ export default (tag: string, source: string) => {
     `\\s*<${tag}(\\s*|\\s+[^>]*)(?:\\/|>([\\s\\S]*?)<\\/${tag})>\\s*`,
     'ig',
   );
+
   const result: { tag: string; content: string; matchs: any[] } = {
     tag,
     content: source,
@@ -27,6 +31,7 @@ export default (tag: string, source: string) => {
       attrs: getAttrs(attrs.trim()),
       content: content.trim(),
     });
+
     return '';
   });
 

@@ -7,6 +7,7 @@ import parser from './parser';
 
 const getDepth = (settingDepth: number, defaultDepth: number) => {
   const depth = Number(isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
+
   if (depth < 1) {
     return 1;
   }
@@ -26,6 +27,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
   if (styleContentKey) {
     const styleContent = storage.get(styleContentKey);
+
     return styleContent;
   }
 
@@ -56,12 +58,15 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
   const headings = hs.filter((item) => {
     const { depth, text } = item;
+
     if (depth === 1) {
       if (!title) {
         title = text;
       }
+
       return false;
     }
+
     return true;
   });
 
@@ -70,16 +75,20 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const pageSidebarMenus = headings
     .filter(({ depth }) => {
       const bool = depth <= pageSidebarDepth;
+
       if (!showSidebar) {
         return bool;
       }
+
       return bool && depth > sidebarDepth;
     })
     .map((item) => {
       const { level, depth, ...rest } = item;
+
       if (showSidebar) {
         return { level: depth - sidebarDepth, ...rest };
       }
+
       return item;
     });
 

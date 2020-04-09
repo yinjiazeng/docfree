@@ -17,6 +17,7 @@ export interface PropsProps {
 function Props({ titles, datas, of }: PropsProps) {
   const props = useMemo(() => {
     let array: PropsApi[][] = [];
+
     if (datas) {
       array = [...datas];
     } else if (of) {

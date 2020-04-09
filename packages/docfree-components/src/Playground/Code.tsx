@@ -10,6 +10,7 @@ export default function Code({ lang, content }) {
 
   const createCopyNode = () => {
     const node = document.createElement('textarea');
+
     node.style.position = 'fixed';
     node.style.top = '-999em';
     node.style.left = '-999em';
@@ -17,11 +18,13 @@ export default function Code({ lang, content }) {
     document.body.append(node);
     node.select();
     document.execCommand('copy');
+
     return node;
   };
 
   const copyHandler = () => {
     const node = createCopyNode();
+
     copyDispatch(true);
     node.remove();
     setTimeout(() => {

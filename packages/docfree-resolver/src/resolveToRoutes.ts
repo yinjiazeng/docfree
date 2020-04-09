@@ -6,6 +6,7 @@ import { Routes } from './typings';
 // 解析目录生成路由
 export default function resolveToRoutes(docPath: string, routes: Routes = []): Routes {
   const readdir = readdirSync(docPath);
+
   readdir.forEach((item) => {
     // 排除.开头文件或文件夹
     if (!/^\./.test(item)) {
@@ -19,6 +20,7 @@ export default function resolveToRoutes(docPath: string, routes: Routes = []): R
         });
       } else if (/\.mdx?$/i.test(item)) {
         const filename = item.replace(/\.mdx?$/i, '');
+
         routes.push({
           path: /^README$/i.test(filename) ? `/(${filename})?` : `/${filename}`,
           filename,

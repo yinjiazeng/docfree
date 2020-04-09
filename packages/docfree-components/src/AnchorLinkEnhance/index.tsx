@@ -37,6 +37,7 @@ export default class AnchorLinkEnhance extends AnchorLink {
   scrollHandler = () => {
     const { to: hash } = this.findData();
     const { pathname, search } = router.location();
+
     router.location({ pathname, search, hash });
   };
 
@@ -48,9 +49,11 @@ export default class AnchorLinkEnhance extends AnchorLink {
       data.find(({ top }, i) => {
         const next = data[i + 1];
         const bool = top <= scrollTop;
+
         if (!next) {
           return bool;
         }
+
         return bool && scrollTop < next.top;
       }) || { to: '' }
     );
