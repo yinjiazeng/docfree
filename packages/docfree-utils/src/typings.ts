@@ -1,5 +1,9 @@
 import { Configuration } from 'webpack';
 
+export interface ObjectAny {
+  [key: string]: any;
+}
+
 export interface ConfigMeta {
   [key: string]: string;
 }

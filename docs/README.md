@@ -5,6 +5,10 @@ showTime: false
 showEdit: false
 ---
 
+import Demo from './Demo';
+
+<Demo title={'22'} data={{title: '1'}} />
+
 <Docfree.Home
   title="Docfree.js"
   description="React + Redux + Router最佳实践"
@@ -37,10 +41,10 @@ showEdit: false
 <style lang="less" module>
 body {
   &:hover {
-    color: #fff;
+    color: #333;
   }
   & > div {
-    color: #ddd;
+
   }
 }
 .div { color:#ddd }

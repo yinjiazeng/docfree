@@ -16,6 +16,7 @@
     "dts": "tsc"
   },
   "dependencies": {
+    "docfree-utils": "^0.1.2",
     "prop-types": "^15.7.2"
   }
 }

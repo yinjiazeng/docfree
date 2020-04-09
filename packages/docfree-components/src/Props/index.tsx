@@ -27,7 +27,22 @@ function Props({ titles, datas, of }: PropsProps) {
       const keys = Object.keys(propTypes);
 
       keys.forEach((key) => {
-        array.push([key, propTypes[key].type, defaultProps[key], descriptions[key]]);
+        let { type } = propTypes[key];
+        let desc = descriptions[key];
+
+        if (type) {
+          type = [].concat(type).join(' | ');
+        }
+
+        if (typeof desc === 'string') {
+          desc = desc
+            .trim()
+            .split(/[\r\n]+/)
+            .filter((txt) => !!txt.trim())
+            .map((txt, i) => <div key={i}>{txt.trim()}</div>);
+        }
+
+        array.push([key, type, defaultProps[key], desc]);
       });
     }
 
@@ -61,7 +76,7 @@ function Props({ titles, datas, of }: PropsProps) {
         {props.map((item, i) => (
           <tr key={i}>
             {item.map((text, j) => (
-              <td key={j}>{text === undefined ? '-' : text}</td>
+              <td key={j}>{text == null ? '-' : text}</td>
             ))}
           </tr>
         ))}

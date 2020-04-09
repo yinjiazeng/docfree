@@ -11,6 +11,7 @@
     "no-restricted-globals": "off",
     "no-unused-expressions": "off",
     "func-names": "off",
+    "no-multi-assign": "off",
     "prefer-promise-reject-errors": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",

@@ -1,11 +1,10 @@
-import propTypes from 'prop-types';
+import * as baseTypes from './baseTypes';
+import * as funcTypes from './funcTypes';
 
-const string = () => {};
-
-string.type = 'string';
-
-export { string };
+export * from './baseTypes';
+export * from './funcTypes';
 
 export default {
-  string,
+  ...baseTypes,
+  ...funcTypes,
 };
