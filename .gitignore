@@ -5,3 +5,4 @@ package-lock.json
 
 # docfree临时文件目录
 **/.docfree/.temp
+**/.docfree/dist

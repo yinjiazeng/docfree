@@ -10,6 +10,7 @@ export default async function() {
   const { devServer, ...webpackConfig }: any = config({
     mode: 'development',
     devtool: 'eval-source-map',
+    plugins: [new webpack.HotModuleReplacementPlugin()],
   });
 
   const serverConfig: any = {
