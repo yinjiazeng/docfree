@@ -10,6 +10,11 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "lib",
+      "style": true
+    }]
   ]
 }

@@ -36,6 +36,14 @@
   & > p {
     margin: @edge-size-small 0;
   }
+  & > ul,
+  & > ol {
+    padding-left: @edge-size-small;
+    ul,
+    ol {
+      padding-left: @edge-size-small;
+    }
+  }
   & > table {
     .docfree-props;
   }
@@ -53,6 +61,10 @@
   }
   pre {
     margin: 0;
+  }
+  blockquote {
+    border-left: 4px solid @border-color-base;
+    padding: @edge-size-small;
   }
 }
 

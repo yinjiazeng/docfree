@@ -39,7 +39,6 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
   const { content: mdContent, headings: hs } = parser(resource, config.plugins);
   const sidebarTitle = setting.sidebarTitle || '';
-  const showCode = getBool(setting.showCode, config.showCode);
   const showTime = getBool(setting.showTime, config.showTime);
   const showCodeIcon = getBool(setting.showCodeIcon, config.showCodeIcon);
   const showSidebar = getBool(setting.showSidebar, sidebar.show);
@@ -119,7 +118,7 @@ ${mdContent}\nexport default Docfree.Content;`;
 
     const nuomiProps = {
       state: {
-        showCode: ${showCode},
+        showCode: false,
       },
       sidebarTitle: '${sidebarTitle}',
       showSidebar: ${showSidebar},
@@ -128,9 +127,7 @@ ${mdContent}\nexport default Docfree.Content;`;
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       updateDate: '${updateDate}',
       render() {
-        return <MDXContent showIcon={${showCodeIcon}} showTime={${showTime}} showEdit={${formatJSON(
-      edit,
-    )}} />
+        return <MDXContent showTime={${showTime}} showEdit={${formatJSON(edit)}} />
       },
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}

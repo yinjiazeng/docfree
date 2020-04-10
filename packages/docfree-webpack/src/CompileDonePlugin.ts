@@ -1,11 +1,11 @@
 import { Compiler } from 'webpack';
 import { resolve } from 'path';
-import { logger, chalk } from 'docfree-utils';
+import { logger, chalk, ObjectAny } from 'docfree-utils';
 
 export default class CompileDonePlugin {
   options = {};
 
-  constructor(options: any) {
+  constructor(options: ObjectAny) {
     this.options = options;
   }
 

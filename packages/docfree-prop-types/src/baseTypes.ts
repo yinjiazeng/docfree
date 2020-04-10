@@ -30,8 +30,7 @@ const basePropTypes: ObjectAny = {};
     type = 'boolean';
   }
 
-  func.type = type;
-  func.isRequired.type = `* ${func.type}`;
+  func.type = func.isRequired.type = type;
 });
 
 export const {

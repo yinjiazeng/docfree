@@ -59,6 +59,8 @@ ${
   return 0;
 });
 
+console.log(dataSource)
+
 const getList = (pathname, { query }) => {
   const prePath = query.basepath || pathname;
   const list = [];

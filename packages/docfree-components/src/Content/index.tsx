@@ -1,24 +1,14 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useConnect, useNuomi, Link } from 'nuomi';
-import { EyeInvisibleOutlined, EyeOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import hljs from 'highlight.js';
-import { Tooltip, Row, Col } from '../antd';
+import { Row, Col } from '../antd';
 import './style.less';
 
-function Content({ children, showIcon, showTime, showEdit }) {
-  const [{ showCode, listSource }, dispatch] = useConnect();
+function Content({ children, showTime, showEdit }) {
+  const [{ listSource }, dispatch] = useConnect();
   const { nuomiProps } = useNuomi();
   const [prevNextData, prevNextDispatch]: [{ to: string; text: string }[], any] = useState([]);
-  const Icon = showCode ? EyeInvisibleOutlined : EyeOutlined;
-
-  const showCodeHandler = () => {
-    dispatch({
-      type: '_updateState',
-      payload: {
-        showCode: !showCode,
-      },
-    });
-  };
 
   const getEditUrl = () => {
     let { path } = showEdit;
@@ -52,13 +42,6 @@ function Content({ children, showIcon, showTime, showEdit }) {
   return (
     <div className="docfree-content">
       {children}
-      {showIcon && (
-        <div className="docfree-content-tools">
-          <Tooltip placement="top" title={`${showCode ? '隐藏' : '显示'}全部代码`}>
-            <Icon onClick={showCodeHandler} />
-          </Tooltip>
-        </div>
-      )}
       {(showTime || !!showEdit) && (
         <Row justify="space-between" className="docfree-content-extra">
           <Col>
