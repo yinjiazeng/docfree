@@ -6,7 +6,7 @@ export const log = (message: any = '') => {
 };
 
 export const error = (message: any = '') => {
-  log(chalk.red(message));
+  log(chalk.redBright(message));
 };
 
 export const warn = (message: any = '') => {
@@ -14,11 +14,11 @@ export const warn = (message: any = '') => {
 };
 
 export const success = (message: string = '', extra: string = '') => {
-  log(`${chalk.green('success')} ${message} ${extra ? chalk.cyan(extra) : ''}`);
+  log(`${chalk.greenBright('success')} ${message} ${extra ? chalk.cyan(extra) : ''}`);
 };
 
 export const info = (message: string = '', extra: string = '') => {
-  log(`${chalk.gray('info')} ${message} ${extra ? chalk.green(extra) : ''}`);
+  log(`${chalk.gray('info')} ${message} ${extra ? chalk.greenBright(extra) : ''}`);
 };
 
 export const shell = (cmd: string = '') => {

@@ -4,5 +4,4 @@ import typescript from '@babel/preset-typescript';
 
 export default {
   presets: [env, react, typescript],
-  plugins: [],
 };

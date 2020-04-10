@@ -6,7 +6,8 @@ export default () => {
       if (node.type === 'code' && node.lang === 'vue') {
         const content = node.value.trim();
         const script = matchHtml('script', content);
-        const scriptContent = (script.matchs[0] || {}).content || '';
+        const scriptData = script.matchs[0] || { attrs: {}, content: '' };
+        const scriptContent = scriptData.content;
         const template = matchHtml('template', script.content);
         const templateContent = (template.matchs[0] || {}).content || '';
         const style = matchHtml('style', template.content);
@@ -49,13 +50,13 @@ export default () => {
         };
 
         const res = babel.transformSync(scriptContent, {
-          presets: [babelOptions.presets[0]],
+          presets: babelOptions.presets,
           plugins: [
             {
               visitor,
             },
           ],
-          filename: '',
+          filename: `demo.${scriptData.attrs.lang === 'ts' ? 't' : 'j'}s`,
         });
 
         if (res && res.code) {

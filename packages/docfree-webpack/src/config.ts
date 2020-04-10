@@ -6,7 +6,11 @@ import autoprefixer from 'autoprefixer';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import extToRegexp from './extToRegexp';
+
+function extToRegexp(ext: string | string[], prefix?: string): RegExp {
+  const str = Array.isArray(ext) ? ext.join('|') : ext;
+  return new RegExp(`${prefix ? `\\.${prefix}` : ''}\\.(${str})$`);
+}
 
 export default function(options: Configuration): Configuration {
   const { mode } = options;
@@ -28,7 +32,7 @@ export default function(options: Configuration): Configuration {
   const publicjsPath = `js`;
   const publicMediaPath = `media`;
 
-  const jsExts = ['js', 'jsx', 'mjs'];
+  const jsExts = ['js', 'jsx', 'mjs', 'ts', 'tsx'];
   const exts = [...jsExts, 'json'];
   const cssExt = 'css';
   const lessExt = 'less';

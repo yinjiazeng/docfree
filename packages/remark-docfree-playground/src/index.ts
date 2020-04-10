@@ -1,10 +1,10 @@
 import { Parent, Node } from 'unist';
 import { matchHtml, visit, babel, types, traverse, babelOptions } from 'docfree-utils';
-import { resolve, dirname } from 'path';
+import { resolve, dirname, basename } from 'path';
 import { readFileSync } from 'fs';
 
 export default () => {
-  return (tree: Parent, { dirname: dir }) => {
+  return (tree: Parent, file: any) => {
     visit(tree, 'jsx', (node: Node) => {
       const { value } = node;
       const COMPONENT_NAME = 'Docfree.Playground';
@@ -26,7 +26,7 @@ export default () => {
             return <Playground />;
           }`;
 
-          const absolutePath = resolve(dir, src);
+          const absolutePath = resolve(file.dirname, src);
           const fileDirname = dirname(absolutePath);
           const content = readFileSync(absolutePath).toString();
 
@@ -37,7 +37,7 @@ export default () => {
 
           const ast = babel.parseSync(content, {
             ...babelOptions,
-            filename: '',
+            filename: basename(src),
           });
 
           if (ast) {

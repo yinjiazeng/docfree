@@ -35,7 +35,9 @@ import Demo from './Demo';
 ## 谁在用？
 [诺诺网](http://logos/nuonuo.png '{target: "_self"}')
 
-```jsx
+```tsx
+const a: any = 1;
+
 <div className={$style.div}>1111</div>
 
 <style lang="less" module>
@@ -56,9 +58,10 @@ body {
   <app />
 </template>
 
-<script>
+<script lang="ts">
 import App from './App.vue';
 
+const a: any = 1;
 export default {
   components: {
     app: App
@@ -67,9 +70,9 @@ export default {
 </script>
 ```
 
-<Docfree.Playground src="./Demo.jsx" />
+<Docfree.Playground src="./Demo.tsx" />
 
-<Docfree.Props src="./Demo.jsx" />
+<Docfree.Props src="./Demo.tsx" />
 
 name | 价格 |  数量
 -|-|-

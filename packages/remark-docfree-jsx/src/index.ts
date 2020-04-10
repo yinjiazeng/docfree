@@ -3,12 +3,12 @@ import { matchHtml, storage, babel, babelOptions } from 'docfree-utils';
 export default () => {
   return ({ children }, file: any) => {
     children.forEach((node: any, i: number) => {
-      if (node.type === 'code' && node.lang === 'jsx') {
+      if (node.type === 'code' && (node.lang === 'jsx' || node.lang === 'tsx')) {
         const { content, matchs } = matchHtml('style', node.value.trim());
         const importStyles: string[] = [];
         const codes = [
           {
-            lang: 'js',
+            lang: node.lang === 'jsx' ? 'javascript' : 'typescript',
             content,
           },
         ];
@@ -41,7 +41,7 @@ export default () => {
 
         const res = babel.transformSync(`${importStyles.join('\n')}${content}`, {
           ...babelOptions,
-          filename: '',
+          filename: `demo.${node.lang}`,
         });
 
         if (res && res.code) {
