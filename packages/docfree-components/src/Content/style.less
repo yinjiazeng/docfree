@@ -48,7 +48,7 @@
     .docfree-props;
   }
   code:not(.hljs) {
-    background: #f2f4f5;
+    background: @block-background-color;
     padding: 3px;
     margin: 0 3px;
     border-radius: 3px;
@@ -63,15 +63,17 @@
     margin: 0;
   }
   blockquote {
-    border-left: 4px solid @border-color-base;
+    border-left: 6px solid @primary-color;
     padding: @edge-size-small;
+    background: @block-background-color;
+    word-break: break-all;
+    & > p {
+      margin: 0;
+    }
   }
-}
-
-.docfree-content-tools {
-  position: absolute;
-  right: 0;
-  top: @edge-size-large;
+  img {
+    max-width: 100%;
+  }
 }
 
 .docfree-content-extra {
