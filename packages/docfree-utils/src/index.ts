@@ -1,5 +1,5 @@
-import * as qs from 'qs';
-import * as chalk from 'chalk';
+import qs from 'qs';
+import chalk from 'chalk';
 import * as inquirer from 'inquirer';
 import merge from 'lodash.merge';
 import visit from 'unist-util-visit';
@@ -8,11 +8,11 @@ import traverse from '@babel/traverse';
 import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import * as parser from '@babel/parser';
+import * as fsExtra from 'fs-extra';
+
 import * as logger from './logger';
 import * as tempPath from './tempPath';
-import * as fsExtra from './fsExtra';
 import * as storage from './storage';
-
 import getDocPath from './getDocPath';
 import getConfig from './getConfig';
 import formatJSON from './formatJSON';

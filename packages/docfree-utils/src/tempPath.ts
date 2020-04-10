@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { ensureWriteFileSync, removeSync } from './fsExtra';
+import { fsExtra } from '.';
 import getDocPath from './getDocPath';
 
 export const create = (path: string = '') => {
@@ -11,13 +11,13 @@ export const create = (path: string = '') => {
 export const remove = (path: string = '') => {
   const removePath = create(path);
 
-  removeSync(removePath);
+  fsExtra.removeSync(removePath);
   return removePath;
 };
 
 export const write = (path: string, content: string) => {
   const writePath = create(path);
 
-  ensureWriteFileSync(writePath, content);
+  fsExtra.outputFileSync(writePath, content);
   return writePath;
 };

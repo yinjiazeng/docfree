@@ -10,7 +10,6 @@ export default async function() {
   const { devServer, ...webpackConfig }: any = config({
     mode: 'development',
     devtool: 'eval-source-map',
-    plugins: [new CompileDonePlugin()],
   });
 
   const serverConfig: any = {
@@ -19,8 +18,9 @@ export default async function() {
     clientLogLevel: 'error',
     compress: true,
     quiet: true,
+    overlay: true,
     historyApiFallback: true,
-    // hot: true,
+    hot: true,
     disableHostCheck: true,
     ...devServer,
     contentBase: join(getDocPath(), '.docfree/public'),
@@ -33,7 +33,15 @@ export default async function() {
   portfinder.basePort = serverConfig.port;
   serverConfig.port = await portfinder.getPortPromise();
 
-  // WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
+  webpackConfig.plugins.push(
+    new CompileDonePlugin({
+      port: serverConfig.port,
+      host: serverConfig.host,
+      path: webpackConfig.output.publicPath,
+    }),
+  );
+
+  WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverConfig);
 
   const compiler = webpack(webpackConfig);
 

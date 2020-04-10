@@ -1,6 +1,6 @@
 import { join, dirname } from 'path';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
-import { getDocPath, fsExtra, logger, formatJSON, chalk, inquirer, ObjectAny } from 'docfree-utils';
+import { getDocPath, fsExtra, logger, formatJSON, inquirer, ObjectAny } from 'docfree-utils';
 
 export default async function(name: string) {
   let docsPath = getDocPath();
@@ -79,15 +79,13 @@ export default async function(name: string) {
     writeFileSync(pkgPath, formatJSON(pkg));
   }
 
-  logger.log(`
+  logger.log('\n创建文档模板成功！');
 
-  创建文档模板成功！
+  logger.log('\n启动项目');
+  logger.shell(`${devCommand} ${name}`);
 
-  启动项目
-  ${chalk.gray('$')} ${chalk.cyan(`${devCommand} ${name}`)}
+  logger.log('\n打包项目');
+  logger.shell(`${buildCommand} ${name}`);
 
-  打包项目
-  ${chalk.gray('$')} ${chalk.cyan(`${buildCommand} ${name}`)}
-
-  `);
+  logger.log();
 }

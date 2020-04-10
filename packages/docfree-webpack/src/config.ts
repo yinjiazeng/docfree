@@ -84,6 +84,7 @@ export default function(options: Configuration): Configuration {
         : {
             removeComments: true,
             collapseWhitespace: true,
+            minifyCSS: true,
             minifyJS: true,
           },
       title,
