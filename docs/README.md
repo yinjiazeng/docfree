@@ -7,7 +7,7 @@ showEdit: false
 
 import Demo from './Demo';
 
-<Demo title={'22'} data={{title: '1'}} />
+<Demo title={'22'} data={{title: '11yinjiazeng'}} />
 
 <Docfree.Home
   title="Docfree.js"

@@ -79,6 +79,13 @@ export default function(options: Configuration): Configuration {
 
   const plugins = [
     new HtmlWebpackPlugin({
+      minify: isDev
+        ? false
+        : {
+            removeComments: true,
+            collapseWhitespace: true,
+            minifyJS: true,
+          },
       title,
       template: join(staticPath, 'index.html'),
     }),
@@ -251,9 +258,22 @@ export default function(options: Configuration): Configuration {
     },
     output: {
       path: destPath,
-      // filename: `${publicjsPath}/[name].[contenthash:8].js`,
-      filename: `${publicjsPath}/[name].[hash:8].js`,
+      filename: `${publicjsPath}/[name].[${isDev ? 'hash' : 'contenthash'}:8].js`,
       publicPath,
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /node_modules/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+        },
+      },
+      runtimeChunk: {
+        name: 'runtime',
+      },
     },
     resolve: {
       extensions,
