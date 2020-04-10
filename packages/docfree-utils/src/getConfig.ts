@@ -1,6 +1,5 @@
 import { join } from 'path';
-import merge from 'lodash.merge';
-import getDocPath from './getDocPath';
+import { merge, getDocPath } from '.';
 import { DocfreeConfig } from './typings';
 
 const defaultConfig: DocfreeConfig = {
@@ -28,8 +27,6 @@ const defaultConfig: DocfreeConfig = {
     depth: 6,
   },
   plugins: [],
-  ignoreExts: [],
-  theme: null,
   webpackConfig: {},
 };
 

@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, tempPath, qs, babelOptions } from 'docfree-utils';
+import { getDocPath, getConfig, tempPath, qs, babelOptions, merge } from 'docfree-utils';
 import { join } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -11,12 +11,14 @@ import extToRegexp from './extToRegexp';
 export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
-  const { webpackConfig, dest: defaultDest, title, theme, ignoreExts } = getConfig();
+  const { webpackConfig, dest: defaultDest, title } = getConfig();
 
   // 文档根目录
   const docPath = getDocPath();
   // 文档配置目录
   const docfreePath = join(docPath, '.docfree');
+  // less主题配置文件
+  const themePath = join(docfreePath, 'theme.js');
   // 静态资源目录
   const staticPath = join(docfreePath, 'public');
   // 构建输出文件目录
@@ -46,15 +48,34 @@ export default function(options: Configuration): Configuration {
   const mdExtReg = extToRegexp(mdExts);
   const extsReg = extToRegexp(exts);
 
+  let fileLoaderExcludes = [
+    mdExtReg,
+    extsReg,
+    cssExtReg,
+    lessExtReg,
+    sassExtReg,
+    stylusExtReg,
+    /\.html$/,
+  ];
+
+  if (webpackConfig.module && Array.isArray(webpackConfig.module.rules)) {
+    webpackConfig.module.rules = webpackConfig.module.rules.filter((rule: any) => {
+      if (rule && rule.loader === 'file-loader') {
+        if (rule.exclude) {
+          fileLoaderExcludes = fileLoaderExcludes.concat(rule.exclude);
+        }
+        return false;
+      }
+      return true;
+    });
+  }
+
   let modifyVars: any;
 
-  if (theme) {
-    if (typeof theme === 'string') {
-      modifyVars = require(theme);
-    } else if (typeof theme === 'object' && !Array.isArray(theme)) {
-      modifyVars = theme;
-    }
-  }
+  try {
+    modifyVars = require(themePath);
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
 
   const plugins = [
     new HtmlWebpackPlugin({
@@ -192,9 +213,9 @@ export default function(options: Configuration): Configuration {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
       loader: 'babel-loader',
-      options: {
-        ...babelOptions,
-      },
+      options: merge(babelOptions, {
+        plugins: ['transform-es2015-modules-commonjs'],
+      }),
     },
     {
       test: jsExtReg,
@@ -214,15 +235,7 @@ export default function(options: Configuration): Configuration {
     ...styleLoaders,
     ...styleModuleLoaders,
     {
-      exclude: [
-        mdExtReg,
-        extsReg,
-        cssExtReg,
-        lessExtReg,
-        sassExtReg,
-        stylusExtReg,
-        /\.html$/,
-      ].concat(ignoreExts),
+      exclude: fileLoaderExcludes,
       loader: 'file-loader',
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,

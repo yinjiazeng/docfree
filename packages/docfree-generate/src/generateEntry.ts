@@ -1,3 +1,4 @@
+import { isAbsolute } from 'path';
 import { getConfig, formatJSON } from 'docfree-utils';
 import { Routes } from './typings';
 import createBlogRouteEntry from './createBlogRouteEntry';
@@ -245,7 +246,7 @@ const globalState = {
 };
 
 const nav = getNavMenus(${formatJSON(config.nav)});
-const footer = '${config.footer}';
+const footer = ${isAbsolute(config.footer) ? `require('${config.footer}')` : `'${config.footer}'`};
 const routerType = '${['hash', 'browser'].includes(config.router) ? config.router : 'hash'}';
 
 const App = () => {

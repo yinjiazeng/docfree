@@ -3,5 +3,6 @@ import react from '@babel/preset-react';
 import typescript from '@babel/preset-typescript';
 
 export default {
-  presets: [env, react],
+  presets: [env, react, typescript],
+  plugins: [],
 };

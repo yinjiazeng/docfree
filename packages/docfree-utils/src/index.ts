@@ -1,6 +1,7 @@
 import * as qs from 'qs';
 import * as chalk from 'chalk';
 import * as inquirer from 'inquirer';
+import merge from 'lodash.merge';
 import visit from 'unist-util-visit';
 import generator from '@babel/generator';
 import traverse from '@babel/traverse';
@@ -23,6 +24,7 @@ export {
   qs,
   chalk,
   inquirer,
+  merge,
   fsExtra,
   logger,
   tempPath,

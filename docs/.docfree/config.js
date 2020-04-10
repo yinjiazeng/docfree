@@ -3,7 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin-webpack4');
 module.exports = {
   title: 'Docfree.js',
   mode: 'blog',
-  foot: 'MIT Licensed | Copyright © 2019-present',
+  footer: require.resolve('./footer'),
   nav: [
     {
       text: '指南',
@@ -64,13 +64,16 @@ module.exports = {
     },
   },
   plugins: ['emoji'],
-  ignoreExts: [/\.vue$/],
   webpackConfig: {
     module: {
       rules: [
         {
           test: /\.vue$/,
           loader: 'vue-loader',
+        },
+        {
+          exclude: /\.vue$/,
+          loader: 'file-loader',
         },
       ],
     },
