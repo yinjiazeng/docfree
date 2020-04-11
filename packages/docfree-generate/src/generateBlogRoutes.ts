@@ -1,16 +1,17 @@
-import { Routes } from './typings';
+import { Route } from './generateData';
 
-export default function createBlogRouteEntry(routes: Routes): Routes {
+export default function generateBlogRoutes(routes: Route[] = []): Route[] {
   routes.forEach((data) => {
     const { children } = data;
 
     if (Array.isArray(children)) {
-      createBlogRouteEntry(children);
+      generateBlogRoutes(children);
     }
   });
 
   routes.unshift({
     path: '/',
+    pathname: routes[0].pathname,
     children: 'BlogEntry',
   });
 

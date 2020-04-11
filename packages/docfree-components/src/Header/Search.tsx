@@ -3,7 +3,7 @@ import { SearchOutlined, RightOutlined } from '@ant-design/icons';
 import { router } from 'nuomi';
 import { Input, Popover, List } from '../antd';
 
-interface DataSource {
+export interface DataSource {
   to: { pathname: string; hash: string };
   text: string | ReactElement;
   key: number;
@@ -45,10 +45,10 @@ export default function Search({ data }) {
 
     if (value) {
       data.forEach(({ pathname, filename, title, sidebarMenus, pageSidebarMenus }) => {
-        const menus = [{ text: title, depth: 1 }, ...sidebarMenus, ...pageSidebarMenus];
+        const titles = [{ text: title, depth: 1 }, ...sidebarMenus, ...pageSidebarMenus];
         const path = pathname + filename;
 
-        menus.forEach(({ text, depth }) => {
+        titles.forEach(({ text, depth }) => {
           const index = text.indexOf(value);
 
           if (index !== -1) {

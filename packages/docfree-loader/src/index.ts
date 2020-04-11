@@ -1,15 +1,14 @@
-import { getConfig, formatJSON, formatDate, qs, storage } from 'docfree-utils';
-import { statSync } from 'fs';
+import { getConfig, formatJSON, qs, storage, tempData } from 'docfree-utils';
 import mdx from '@mdx-js/mdx';
 import matter from 'gray-matter';
 import { getOptions } from 'loader-utils';
 import parser from './parser';
 
-const getDepth = (settingDepth: number, defaultDepth: number) => {
-  const depth = Number(isNaN(settingDepth) ? defaultDepth : settingDepth) || 3;
+const getDepth = (settingDepth: any, defaultDepth: number) => {
+  const depth = Number(isNaN(settingDepth) ? defaultDepth : settingDepth) || 0;
 
-  if (depth < 1) {
-    return 1;
+  if (depth < 0) {
+    return 0;
   }
   if (depth > 6) {
     return 6;
@@ -17,7 +16,7 @@ const getDepth = (settingDepth: number, defaultDepth: number) => {
   return depth;
 };
 
-const getBool = (settingBool: boolean, defaultBool: boolean) => {
+const getBool = (settingBool: any, defaultBool: boolean) => {
   return Boolean(typeof settingBool === 'boolean' ? settingBool : defaultBool);
 };
 
@@ -33,18 +32,14 @@ module.exports = async function docfreeLoader(this: any, content: string) {
 
   const callback = this.async();
   const config = getConfig();
-  const { sidebar, pageSidebar } = config;
+  const { sidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
   const resource = { resourcePath, content: markdownContent };
-  const updateDate = formatDate(statSync(resourcePath).ctimeMs, true);
   const { content: mdContent, headings: hs } = parser(resource, config.plugins);
   const sidebarTitle = setting.sidebarTitle || '';
   const showTime = getBool(setting.showTime, config.showTime);
-  const showCodeIcon = getBool(setting.showCodeIcon, config.showCodeIcon);
-  const showSidebar = getBool(setting.showSidebar, sidebar.show);
-  const showPageSidebar = getBool(setting.showPageSidebar, pageSidebar.show);
-  const sidebarDepth = getDepth(setting.sidebarDepth, sidebar.depth);
-  const pageSidebarDepth = getDepth(setting.pageSidebarDepth, pageSidebar.depth);
+  const sidebarDepth = getDepth(setting.depth, sidebar.depth);
+  const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
 
   let edit = false;
 
@@ -69,27 +64,29 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     return true;
   });
 
-  const sidebarMenus = headings.filter(({ depth }) => depth <= sidebarDepth);
+  const sidebarMenus = sidebarDepth ? headings.filter(({ depth }) => depth <= sidebarDepth) : [];
 
-  const pageSidebarMenus = headings
-    .filter(({ depth }) => {
-      const bool = depth <= pageSidebarDepth;
+  const pageSidebarMenus = pageSidebarDepth
+    ? headings
+        .filter(({ depth }) => {
+          const bool = depth <= pageSidebarDepth;
 
-      if (!showSidebar) {
-        return bool;
-      }
+          if (!sidebarDepth) {
+            return bool;
+          }
 
-      return bool && depth > sidebarDepth;
-    })
-    .map((item) => {
-      const { level, depth, ...rest } = item;
+          return bool && depth > sidebarDepth;
+        })
+        .map((item) => {
+          const { level, depth, ...rest } = item;
 
-      if (showSidebar) {
-        return { level: depth - sidebarDepth, ...rest };
-      }
+          if (sidebarDepth) {
+            return { level: depth - sidebarDepth, ...rest };
+          }
 
-      return item;
-    });
+          return item;
+        })
+    : [];
 
   content = `import React from 'react';
 import * as Docfree from 'docfree-components';
@@ -121,11 +118,11 @@ ${mdContent}\nexport default Docfree.Content;`;
         showCode: false,
       },
       sidebarTitle: '${sidebarTitle}',
-      showSidebar: ${showSidebar},
-      showPageSidebar: ${showPageSidebar},
+      showSidebar: ${Boolean(sidebarDepth)},
+      showPageSidebar: ${Boolean(pageSidebarDepth)},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-      updateDate: '${updateDate}',
+      utime: ${tempData.get(resourcePath).utime},
       render() {
         return <MDXContent showTime={${showTime}} showEdit={${formatJSON(edit)}} />
       },

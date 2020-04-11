@@ -1,6 +1,6 @@
 ---
-showSidebar: false
-showPageSidebar: false
+depth: 0
+pageDepth: 0
 showTime: false
 showEdit: false
 ---

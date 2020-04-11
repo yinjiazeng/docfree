@@ -1,33 +1,71 @@
-import { isAbsolute } from 'path';
-import { getConfig, formatJSON } from 'docfree-utils';
-import generateBlogRoutes from './generateBlogRoutes';
-import { Route } from './generateData';
-
-export default function generateEntry(routes: Route[]): string {
-  const config = getConfig();
-  const isBlog = config.mode === 'blog';
-  let routesString: string;
-
-  if (isBlog) {
-    routes = generateBlogRoutes(routes);
-    routesString = formatJSON(routes);
-    routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<Docfree.BlogEntry />');
-  } else {
-    routesString = formatJSON(routes);
-  }
-
-  routesString = routesString
-    .replace(/("children":\s*)"NotFound"/g, '$1<Docfree.NotFound />')
-    .replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
-
-  const content = `import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from 'nuomi';
 import * as Docfree from 'docfree-components';
-import 'highlight.js/styles/${config.langTheme}.css';
+import 'highlight.js/styles/github.css';
 
-const routes = ${routesString};
-const documentTitle = '${config.title}';
+const routes = [
+  {
+    "path": "/",
+    "pathname": "/",
+    "children": <Docfree.BlogEntry />
+  },
+  {
+    "ctime": 1586583200643.4714,
+    "utime": 1586612590533.1438,
+    "pathname": "/",
+    "filename": "README1",
+    "ext": ".md",
+    "title": "README1",
+    "path": "/README1",
+    ...require("/Users/aniu/Documents/GitHub/docfree/docs/README1.md").default
+  },
+  {
+    "path": "/a",
+    "children": [
+      {
+        "path": "/",
+        "pathname": "/a/",
+        "children": <Docfree.BlogEntry />
+      },
+      {
+        "ctime": 1586428092064.951,
+        "utime": 1586616512271.1057,
+        "pathname": "/a/",
+        "filename": "README",
+        "ext": ".md",
+        "title": "README",
+        "path": "/(README)?",
+        ...require("/Users/aniu/Documents/GitHub/docfree/docs/a/README.md").default
+      },
+      {
+        "ctime": 1586428092065.844,
+        "utime": 1586617870405.4631,
+        "pathname": "/a/",
+        "filename": "a",
+        "ext": ".md",
+        "title": "a",
+        "path": "/a",
+        ...require("/Users/aniu/Documents/GitHub/docfree/docs/a/a.md").default
+      },
+      {
+        "path": "*",
+        "children": <Docfree.NotFound />
+      }
+    ]
+  },
+  {
+    "ctime": 1586428083783.0173,
+    "utime": 1586617834407.2432,
+    "pathname": "/",
+    "filename": "b",
+    "ext": ".md",
+    "title": "b",
+    "path": "/b",
+    ...require("/Users/aniu/Documents/GitHub/docfree/docs/b.md").default
+  }
+];
+const documentTitle = 'Docfree.js';
 
 const generateData = (rawData, data = []) => {
   rawData.forEach((route) => {
@@ -44,9 +82,7 @@ const generateData = (rawData, data = []) => {
 };
 
 const dataSource = generateData(routes)
-${
-  isBlog
-    ? `.sort(({ ctime: a }, { ctime: b }) => {
+.sort(({ ctime: a }, { ctime: b }) => {
   if (a < b) {
     return 1;
   }
@@ -68,9 +104,7 @@ const getList = (pathname, { query }) => {
 
   return list;
 };
-`
-    : ''
-}
+
 const getMenus = function(array, menus = [], list = []) {
   array.forEach((item) => {
     if (typeof item === 'string') {
@@ -182,13 +216,7 @@ nuomi.config({
 
       if (!routeData.computedSidebarMenus) {
         let data;
-        ${
-          !isBlog && config.sidebar.data
-            ? `
-        const sidebarData = ${formatJSON(config.sidebar.data)};
-        data = sidebarData[pathname];`
-            : ''
-        }
+        
         if (data && findFilename(data.menus, filename)) {
           const { title, menus } = data;
           payload.sidebarTitle = title;
@@ -207,7 +235,7 @@ nuomi.config({
 
       payload.sidebarMenus = routeData.computedSidebarMenus || [];
 
-      const listSource = ${isBlog ? 'getList(pathname, location)' : 'routeData.listSource'} || [];
+      const listSource = getList(pathname, location) || [];
 
       this.dispatch({
         type: '_updateState',
@@ -242,9 +270,59 @@ const globalState = {
   pageSidebarMenus: [],
 };
 
-const nav = getNavMenus(${formatJSON(config.nav)});
-const footer = ${isAbsolute(config.footer) ? `require('${config.footer}')` : `'${config.footer}'`};
-const routerType = '${['hash', 'browser'].includes(config.router) ? config.router : 'hash'}';
+const nav = getNavMenus([
+  {
+    "text": "指南",
+    "to": "/a"
+  },
+  {
+    "text": "API",
+    "menus": [
+      {
+        "text": "xx",
+        "menus": [
+          {
+            "text": "1xxxxx",
+            "to": "http://xxx"
+          },
+          {
+            "text": "xxx",
+            "to": "http://xxx"
+          },
+          {
+            "text": "xxxx",
+            "menus": [
+              {
+                "text": "1xxxxx",
+                "to": "http://xxx"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "xxx",
+        "to": "http://xxx"
+      },
+      {
+        "text": "xxx",
+        "to": "http://xxx",
+        "menus": [
+          {
+            "text": "1xxxxx",
+            "to": "http://xxx"
+          },
+          {
+            "text": "1xxxxx",
+            "to": "http://xxx"
+          }
+        ]
+      }
+    ]
+  }
+]);
+const footer = require('/Users/aniu/Documents/GitHub/docfree/docs/.docfree/footer.js');
+const routerType = 'hash';
 
 const App = () => {
   return (
@@ -261,7 +339,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));`;
-
-  return content;
-}
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,27 +1,28 @@
 import chokidar from 'chokidar';
-import { extname } from 'path';
 import { getDocPath } from 'docfree-utils';
 import generate from './generate';
+import { MDX_REGEXP, updateData } from './generateData';
 
-export default function resolverWatch() {
+export default function() {
   return new Promise((res) => {
     let timer: any = null;
 
     chokidar
       .watch(getDocPath(), {
-        // 忽略点文件
         ignored: [/(^|[/\\])\../, /node_modules/],
       })
       .on('all', (event, path) => {
-        if (
-          ['addDir', 'unlinkDir'].includes(event) ||
-          (['add', 'unlink'].includes(event) && /^\.mdx?$/i.test(extname(path)))
-        ) {
+        if (['add', 'unlink'].includes(event) && MDX_REGEXP.test(path)) {
           clearTimeout(timer);
           timer = setTimeout(() => {
             generate();
             res();
           }, 100);
+        }
+      })
+      .on('change', (path) => {
+        if (MDX_REGEXP.test(path)) {
+          updateData(path);
         }
       });
   });

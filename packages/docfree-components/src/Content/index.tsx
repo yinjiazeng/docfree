@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useConnect, useNuomi, Link } from 'nuomi';
+import format from 'date-format';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import hljs from 'highlight.js';
 import { Row, Col } from '../antd';
@@ -52,7 +53,11 @@ function Content({ children, showTime, showEdit }) {
               </a>
             )}
           </Col>
-          <Col>{showTime && <>最后更新时间：{nuomiProps.updateDate}</>}</Col>
+          <Col>
+            {showTime && (
+              <>最后更新时间：{format('yyyy/MM/dd hh:mm:ss', new Date(nuomiProps.utime))}</>
+            )}
+          </Col>
         </Row>
       )}
       {(!!prevNextData[0] || !!prevNextData[1]) && (

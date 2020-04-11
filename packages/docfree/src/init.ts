@@ -52,10 +52,10 @@ export default async function(name: string) {
     if (fsExtra.pathExistsSync(gitignorePath)) {
       const gitignoreContent = readFileSync(gitignorePath).toString();
 
-      if (gitignoreContent.indexOf('**/.docfree/.temp') === -1) {
+      if (gitignoreContent.indexOf('.docfree/temp') === -1) {
         writeFileSync(
           gitignorePath,
-          `${gitignoreContent}\n# docfree临时文件目录\n**/.docfree/.temp`,
+          `${gitignoreContent}\n# docfree临时文件目录\n**/.docfree/temp/docfree.js`,
         );
       }
     }

@@ -1,6 +1,6 @@
 import { Parent, Node } from 'unist';
 import { matchHtml, babel, types, traverse, babelOptions, pathParse } from 'docfree-utils';
-import { resolve, dirname, extname } from 'path';
+import { resolve, dirname } from 'path';
 import { readFileSync } from 'fs';
 
 const visit = ({ children }: Parent, file: any) => {
@@ -19,17 +19,18 @@ const visit = ({ children }: Parent, file: any) => {
         } = matchHtml(COMPONENT_NAME, value);
 
         if (src) {
-          const ext = pathParse(src).ext || '.jsx';
+          const parsed = pathParse(src);
+          const ext = parsed.ext || '.jsx';
           const codes: any = [];
 
-          const absolutePath = resolve(file.dirname, src);
+          const absolutePath = resolve(file.dirname, parsed.path);
           const fileDirname = dirname(absolutePath);
           const content = readFileSync(absolutePath).toString();
 
           if (/^\.(js|ts)x?$/.test(ext)) {
             const render = `function() {
               const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
-              const Playground = _interopRequireDefault(require('${src}'));
+              const Playground = _interopRequireDefault(require('${parsed.path}'));
               return <Playground />;
             }`;
 

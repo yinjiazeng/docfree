@@ -5,14 +5,7 @@ import getDocPath from './getDocPath';
 export const create = (path: string = '') => {
   const docPath = getDocPath();
 
-  return join(docPath, '.docfree/.temp', path);
-};
-
-export const remove = (path: string = '') => {
-  const removePath = create(path);
-
-  fsExtra.removeSync(removePath);
-  return removePath;
+  return join(docPath, '.docfree/temp', path);
 };
 
 export const write = (path: string, content: string) => {

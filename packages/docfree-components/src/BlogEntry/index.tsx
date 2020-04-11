@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useConnect } from 'nuomi';
+import format from 'date-format';
 import { Pagination, List } from '../antd';
 import './style.less';
 
@@ -34,10 +35,10 @@ export default function BlogEntry() {
       <List
         loading={loading}
         dataSource={data}
-        renderItem={({ to, text, createDate }) => (
+        renderItem={({ to, text, ctime }) => (
           <List.Item>
             <Link to={to}>{text}</Link>
-            <span>{createDate}</span>
+            <span>{format('yyyy/MM/dd', new Date(ctime))}</span>
           </List.Item>
         )}
       />

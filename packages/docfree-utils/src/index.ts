@@ -14,6 +14,7 @@ import * as fsExtra from 'fs-extra';
 import * as logger from './logger';
 import * as tempPath from './tempPath';
 import * as storage from './storage';
+import * as tempData from './tempData';
 import getDocPath from './getDocPath';
 import getConfig from './getConfig';
 import formatJSON from './formatJSON';
@@ -30,6 +31,7 @@ export {
   pathParse,
   logger,
   tempPath,
+  tempData,
   storage,
   visit,
   babel,

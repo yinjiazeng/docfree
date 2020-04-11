@@ -2,7 +2,7 @@ import { join } from 'path';
 import { merge, getDocPath } from '.';
 import { DocfreeConfig } from './typings';
 
-const defaultConfig: DocfreeConfig = {
+const defaultConfig: any = {
   router: 'hash',
   mode: 'doc',
   title: '',
@@ -18,13 +18,9 @@ const defaultConfig: DocfreeConfig = {
   showCodeIcon: false,
   langTheme: 'github',
   sidebar: {
-    show: true,
     depth: 3,
+    pageDepth: 6,
     data: null,
-  },
-  pageSidebar: {
-    show: true,
-    depth: 6,
   },
   plugins: [],
   webpackConfig: {},

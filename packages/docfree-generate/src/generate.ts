@@ -1,11 +1,12 @@
-import { getDocPath, tempPath } from 'docfree-utils';
-import resolveToRoutes from './resolveToRoutes';
+import { getDocPath, tempPath, tempData } from 'docfree-utils';
+import generateData from './generateData';
 import generateEntry from './generateEntry';
 
-export default function resolver() {
+export default function() {
   const docPath = getDocPath();
-  const routes = resolveToRoutes(docPath);
-  const entry = generateEntry(routes);
+  const { routes, data } = generateData(docPath);
+  const content = generateEntry(routes);
 
-  tempPath.write('docfree.js', entry);
+  tempData.write(data);
+  tempPath.write('docfree.js', content);
 }
