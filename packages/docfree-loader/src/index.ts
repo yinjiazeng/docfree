@@ -69,13 +69,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const pageSidebarMenus = pageSidebarDepth
     ? headings
         .filter(({ depth }) => {
-          const bool = depth <= pageSidebarDepth;
-
-          if (!sidebarDepth) {
-            return bool;
-          }
-
-          return bool && depth > sidebarDepth;
+          return depth <= pageSidebarDepth && depth > sidebarDepth;
         })
         .map((item) => {
           const { level, depth, ...rest } = item;
@@ -118,8 +112,7 @@ ${mdContent}\nexport default Docfree.Content;`;
         showCode: false,
       },
       sidebarTitle: '${sidebarTitle}',
-      showSidebar: ${Boolean(sidebarDepth)},
-      showPageSidebar: ${Boolean(pageSidebarDepth)},
+      headings: ${formatJSON(headings)},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       utime: ${tempData.get(resourcePath).utime},

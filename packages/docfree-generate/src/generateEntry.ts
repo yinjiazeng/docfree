@@ -165,8 +165,6 @@ nuomi.config({
         pathname,
         filename,
         sidebarTitle,
-        showSidebar,
-        showPageSidebar,
         sidebarMenus,
         pageSidebarMenus,
         location,
@@ -175,8 +173,8 @@ nuomi.config({
 
       const payload = {
         sidebarTitle,
-        showSidebar,
-        showPageSidebar,
+        showSidebar: sidebarMenus > 0,
+        showPageSidebar: pageSidebarMenus > 0,
         pageSidebarMenus,
       };
 

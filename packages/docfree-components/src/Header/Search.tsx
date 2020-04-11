@@ -44,8 +44,8 @@ export default function Search({ data }) {
     let key = 0;
 
     if (value) {
-      data.forEach(({ pathname, filename, title, sidebarMenus, pageSidebarMenus }) => {
-        const titles = [{ text: title, depth: 1 }, ...sidebarMenus, ...pageSidebarMenus];
+      data.forEach(({ pathname, filename, title, headings }) => {
+        const titles = [{ text: title, depth: 1 }, ...headings];
         const path = pathname + filename;
 
         titles.forEach(({ text, depth }) => {
