@@ -1,5 +1,5 @@
 import { Parent, Node } from 'unist';
-import { matchHtml, visit } from 'docfree-utils';
+import { matchHtml, visit, pathParse } from 'docfree-utils';
 
 export default () => {
   return (tree: Parent) => {
@@ -17,13 +17,11 @@ export default () => {
         } = matchHtml(COMPONENT_NAME, value);
 
         if (src) {
-          let queryStart = '?';
-          if (src.indexOf('?') !== -1) {
-            queryStart = '&';
-          }
           const $of = `(function() {
             const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
-            return _interopRequireDefault(require('${src}${queryStart}getPropTypesDescription=1'));
+            return _interopRequireDefault(require('${
+              pathParse(src).path
+            }?getPropTypesDescription=1'));
           })()`;
 
           node.value = `<${COMPONENT_NAME} of={${$of}} />`;

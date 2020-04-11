@@ -43,7 +43,7 @@ export default (options: Options = {}) => {
       headings.push({ text, depth, level: depth > 1 ? depth - 1 : 0 });
       node.children = [
         {
-          type: 'html',
+          type: 'jsx',
           value: `<Docfree.AnchorLinkEnhance to="${text}">#</Docfree.AnchorLinkEnhance> ${text}`,
         },
       ];

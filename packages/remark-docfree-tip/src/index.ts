@@ -33,7 +33,7 @@ export default () => {
             }
 
             children[i] = {
-              type: 'html',
+              type: 'jsx',
               value: `<Docfree.Tip type="${type}" message="${message}" description={${description}} />`,
             };
           }

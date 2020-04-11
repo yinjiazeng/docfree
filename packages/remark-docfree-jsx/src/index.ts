@@ -51,7 +51,7 @@ export default () => {
         }
 
         children[i] = {
-          type: 'html',
+          type: 'jsx',
           value: `<Docfree.Playground code={${JSON.stringify(codes)}} render={${render}} />`,
         };
       }

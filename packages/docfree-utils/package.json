@@ -26,6 +26,7 @@
     "chalk": "^4.0.0",
     "inquirer": "^7.1.0",
     "lodash.merge": "^4.6.2",
+    "path-parse-plus": "^1.0.2",
     "qs": "^6.9.3",
     "unist-util-visit": "^2.0.2"
   }

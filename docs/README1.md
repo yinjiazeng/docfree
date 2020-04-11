@@ -75,6 +75,8 @@ export default {
 
 <Docfree.Playground src="./Demo.tsx" />
 
+<Docfree.Playground src="./App.vue" />
+
 <Docfree.Props src="./Demo.tsx" />
 
 name | 价格 |  数量

@@ -41,7 +41,7 @@ export default () => {
         }
 
         const visitor = {
-          ExportDefaultDeclaration(path: traverse.NodePath) {
+          ExportDefaultDeclaration(path) {
             const { declaration }: any = path.node;
             const returnStatement: any = types.returnStatement(declaration);
 
@@ -72,7 +72,7 @@ export default () => {
         }
 
         children[i] = {
-          type: 'html',
+          type: 'jsx',
           value: `<Docfree.Playground code={${JSON.stringify(codes)}} render={${render}} />`,
         };
       }

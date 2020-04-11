@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import * as inquirer from 'inquirer';
 import merge from 'lodash.merge';
 import visit from 'unist-util-visit';
+import pathParse from 'path-parse-plus';
 import generator from '@babel/generator';
 import traverse from '@babel/traverse';
 import * as babel from '@babel/core';
@@ -26,6 +27,7 @@ export {
   inquirer,
   merge,
   fsExtra,
+  pathParse,
   logger,
   tempPath,
   storage,

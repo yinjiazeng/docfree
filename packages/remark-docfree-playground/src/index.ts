@@ -1,11 +1,11 @@
 import { Parent, Node } from 'unist';
-import { matchHtml, visit, babel, types, traverse, babelOptions } from 'docfree-utils';
-import { resolve, dirname, basename } from 'path';
+import { matchHtml, babel, types, traverse, babelOptions, pathParse } from 'docfree-utils';
+import { resolve, dirname, extname } from 'path';
 import { readFileSync } from 'fs';
 
-export default () => {
-  return (tree: Parent, file: any) => {
-    visit(tree, 'jsx', (node: Node) => {
+const visit = ({ children }: Parent, file: any) => {
+  children.forEach((node: any, i) => {
+    if (node.type === 'jsx') {
       const { value } = node;
       const COMPONENT_NAME = 'Docfree.Playground';
 
@@ -19,68 +19,76 @@ export default () => {
         } = matchHtml(COMPONENT_NAME, value);
 
         if (src) {
+          const ext = pathParse(src).ext || '.jsx';
           const codes: any = [];
-          const render = `function() {
-            const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
-            const Playground = _interopRequireDefault(require('${src}'));
-            return <Playground />;
-          }`;
 
           const absolutePath = resolve(file.dirname, src);
           const fileDirname = dirname(absolutePath);
           const content = readFileSync(absolutePath).toString();
 
-          codes.push({
-            lang: 'jsx',
-            content: content.trim(),
-          });
+          if (/^\.(js|ts)x?$/.test(ext)) {
+            const render = `function() {
+              const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
+              const Playground = _interopRequireDefault(require('${src}'));
+              return <Playground />;
+            }`;
 
-          const ast = babel.parseSync(content, {
-            ...babelOptions,
-            filename: basename(src),
-          });
-
-          if (ast) {
-            const paths: string[] = [];
-
-            traverse(ast, {
-              ImportDeclaration(path) {
-                const { source } = path.node;
-
-                if (types.isStringLiteral(source)) {
-                  paths.push(source.value);
-                }
-              },
-              CallExpression(path) {
-                const { arguments: args, callee: cle } = path.node;
-
-                if (
-                  types.isStringLiteral(args[0]) &&
-                  types.isIdentifier(cle) &&
-                  cle.name === 'require'
-                ) {
-                  paths.push(args[0].value);
-                }
-              },
+            const ast = babel.parseSync(content, {
+              ...babelOptions,
+              filename: `demo${ext}`,
             });
 
-            paths.forEach((path) => {
-              const matchLang = path.match(/\.(css|less|sass|scss|styl|stylus)$/);
+            if (ast) {
+              traverse(ast, {
+                ImportDeclaration(path) {
+                  const { source } = path.node;
+                  let matchLang = null;
 
-              if (matchLang) {
-                const styleContent = readFileSync(resolve(fileDirname, path)).toString();
+                  if (
+                    types.isStringLiteral(source) &&
+                    // eslint-disable-next-line no-cond-assign
+                    (matchLang = source.value.match(/\.(css|less|sass|scss|styl|stylus)$/))
+                  ) {
+                    const styleContent = readFileSync(
+                      resolve(fileDirname, source.value),
+                    ).toString();
 
-                codes.push({
-                  lang: matchLang[1],
-                  content: styleContent.trim(),
-                });
-              }
-            });
+                    codes.push({
+                      lang: matchLang[1],
+                      content: styleContent.trim(),
+                    });
 
-            node.value = `<${COMPONENT_NAME} code={${JSON.stringify(codes)}} render={${render}} />`;
+                    path.remove();
+                  }
+                },
+              });
+
+              codes.unshift({
+                lang: /^\.jsx?$/.test(ext) ? 'javascript' : 'typescript',
+                content: content.trim(),
+              });
+
+              node.value = `<${COMPONENT_NAME} code={${JSON.stringify(
+                codes,
+              )}} render={${render}} />`;
+            }
+          } else {
+            children[i] = {
+              type: 'code',
+              lang: ext.replace(/^\./, ''),
+              value: content.trim(),
+            };
           }
         }
       }
-    });
+    } else if (node.children) {
+      visit(node, file);
+    }
+  });
+};
+
+export default () => {
+  return (tree: Parent, file: any) => {
+    visit(tree, file);
   };
 };

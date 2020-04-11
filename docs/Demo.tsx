@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-require('./a.css');
-require('./a.less');
+import './a.css';
 
 export default function Demo({ title = 'xx', data, item, haha }: any) {
   return <div>{title}</div>;
