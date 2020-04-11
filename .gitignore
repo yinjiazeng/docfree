@@ -3,6 +3,8 @@
 **/lib
 package-lock.json
 
+
+
 # docfree临时文件目录
-**/.docfree/.temp
+**/.docfree/temp/docfree.js
 **/.docfree/dist
