@@ -1,1 +1,3 @@
-export default (data: object) => JSON.stringify(data, null, '  ');
+export default function(data: object) {
+  return JSON.stringify(data, null, '  ');
+}

@@ -1,5 +1,4 @@
-import { visit } from 'docfree-utils';
-import { Parent, Node } from 'unist';
+import { unistVisit, UnistNode } from 'docfree-utils';
 
 export type Heading = {
   text: string;
@@ -12,12 +11,12 @@ export type Options = {
   [key: string]: any;
 };
 
-export type HeadingNode = Node & {
-  children: Node[];
+export type HeadingNode = UnistNode & {
+  children: UnistNode[];
   depth: number;
 };
 
-const getTexts = (tree: Node[]) => {
+const getTexts = (tree: UnistNode[]) => {
   let text: any = [];
 
   tree.forEach(({ value, type, children }) => {
@@ -32,11 +31,11 @@ const getTexts = (tree: Node[]) => {
   return text;
 };
 
-export default (options: Options = {}) => {
-  return (tree: Parent) => {
+export default function(options: Options = {}) {
+  return function(tree: UnistNode) {
     const headings: Heading[] = [];
 
-    visit(tree, 'heading', (node: HeadingNode) => {
+    unistVisit(tree, 'heading', (node: HeadingNode) => {
       const { depth } = node;
       const text = getTexts([node]).join('');
 
@@ -53,4 +52,4 @@ export default (options: Options = {}) => {
       options.complete(headings);
     }
   };
-};
+}

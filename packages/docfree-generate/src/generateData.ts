@@ -2,9 +2,9 @@ import { readdirSync, statSync } from 'fs';
 import { join, extname, basename } from 'path';
 import { tempData } from 'docfree-utils';
 
-export interface Route {
+export interface RouteItem {
   path: string;
-  children?: Route[] | string;
+  children?: RouteItem[] | string;
   require?: string;
   pathname?: string;
   title?: string;
@@ -12,8 +12,6 @@ export interface Route {
   ext?: string;
   ctime?: number;
   utile?: number;
-  cdate?: string;
-  udate?: string;
   [key: string]: any;
 }
 
@@ -40,7 +38,7 @@ export default function(docPath: string) {
   const data = {};
   const fileData = tempData.get();
 
-  const generateRoutes = function(rootPath: string, array: Route[] = []): Route[] {
+  const generateRoutes = function(rootPath: string, array: RouteItem[] = []): RouteItem[] {
     readdirSync(rootPath).forEach((item) => {
       const itemPath = join(rootPath, item);
       const stat = statSync(itemPath);

@@ -1,81 +1,98 @@
-import { matchHtml, storage, traverse, types, babel, babelOptions } from 'docfree-utils';
+import {
+  matchHtml,
+  storage,
+  types,
+  babel,
+  babelOptions,
+  VFile,
+  UnistNode,
+  NodePath,
+} from 'docfree-utils';
 
-export default () => {
-  return ({ children }, file: any) => {
-    children.forEach((node: any, i: number) => {
-      if (node.type === 'code' && node.lang === 'vue') {
-        const content = node.value.trim();
-        const script = matchHtml('script', content);
-        const scriptData = script.matchs[0] || { attrs: {}, content: '' };
-        const scriptContent = scriptData.content;
-        const template = matchHtml('template', script.content);
-        const templateContent = (template.matchs[0] || {}).content || '';
-        const style = matchHtml('style', template.content);
-        const importStyles: string[] = [];
-        const codes = [
-          {
-            lang: 'vue',
-            content,
-          },
-        ];
-        let render: string = 'null';
+export interface Node extends UnistNode {
+  lang?: string;
+}
 
-        style.matchs.forEach(({ attrs: { lang, module }, content: styleContent }) => {
-          const styleContentKey = storage.set(styleContent);
+export default function() {
+  return function({ children }: UnistNode, file: VFile) {
+    if (Array.isArray(children)) {
+      children.forEach((node: Node, i) => {
+        if (node.type === 'code' && typeof node.value === 'string' && node.lang === 'vue') {
+          const content = node.value.trim();
+          const script = matchHtml('script', content);
+          const scriptData = script.matchs[0] || { attrs: {}, content: '' };
+          const scriptContent = scriptData.content;
+          const template = matchHtml('template', script.content);
+          const templateContent = (template.matchs[0] || {}).content || '';
+          const style = matchHtml('style', template.content);
+          const importStyles: string[] = [];
+          const codes = [
+            {
+              lang: 'vue',
+              content,
+            },
+          ];
+          let render: string = 'null';
 
-          if (!lang) {
-            lang = 'css';
+          style.matchs.forEach(({ attrs: { lang, module }, content: styleContent }) => {
+            const styleContentKey = storage.set(styleContent);
+
+            if (!lang) {
+              lang = 'css';
+            }
+
+            const mod: any = module != null ? module || '$style' : null;
+
+            importStyles.push(
+              `import${module ? ` ${module} from` : ''} '${
+                file.path
+              }?styleContentKey=${styleContentKey}&styleLang=${lang}${
+                module ? '&module=true' : ''
+              }'`,
+            );
+          });
+
+          if (importStyles.length) {
+            importStyles.push('');
           }
 
-          module = module != null ? module || '$style' : null;
+          const visitor = {
+            ExportDefaultDeclaration(path: NodePath) {
+              const { declaration }: any = path.node;
+              const returnStatement: any = types.returnStatement(declaration);
 
-          importStyles.push(
-            `import${module ? ` ${module} from` : ''} '${
-              file.path
-            }?styleContentKey=${styleContentKey}&styleLang=${lang}${module ? '&module=true' : ''}'`,
-          );
-        });
-
-        if (importStyles.length) {
-          importStyles.push('');
-        }
-
-        const visitor = {
-          ExportDefaultDeclaration(path) {
-            const { declaration }: any = path.node;
-            const returnStatement: any = types.returnStatement(declaration);
-
-            path.replaceWith(returnStatement);
-          },
-        };
-
-        const res = babel.transformSync(scriptContent, {
-          presets: babelOptions.presets,
-          plugins: [
-            {
-              visitor,
+              path.replaceWith(returnStatement);
             },
-          ],
-          filename: `demo.${scriptData.attrs.lang === 'ts' ? 't' : 'j'}s`,
-        });
+          };
 
-        if (res && res.code) {
-          render = `function($el) {
-              const Vue = require('vue/dist/vue');
-              const getVueOptions = function() {${res.code}};
-              new Vue({
-                ...getVueOptions(),
-                el: $el,
-                template: '${templateContent}',
-              });
-            }`.replace(/\n+/g, '\n');
+          const res = babel.transformSync(scriptContent, {
+            presets: babelOptions.presets,
+            plugins: [
+              {
+                visitor,
+              },
+            ],
+            filename: `demo.${scriptData.attrs.lang === 'ts' ? 't' : 'j'}s`,
+          });
+
+          if (res && res.code) {
+            render = `function($el) {
+                const Vue = require('vue/dist/vue');
+                const getVueOptions = function() {${res.code}};
+                new Vue({
+                  ...getVueOptions(),
+                  el: $el,
+                  template: '${templateContent}',
+                });
+              }`.replace(/\n+/g, '\n');
+          }
+
+          children[i] = {
+            type: 'jsx',
+            value: `<Docfree.Playground code={${JSON.stringify(codes)}} render={${render}} />`,
+          };
         }
-
-        children[i] = {
-          type: 'jsx',
-          value: `<Docfree.Playground code={${JSON.stringify(codes)}} render={${render}} />`,
-        };
-      }
-    });
+      });
+    }
   };
-};
+}

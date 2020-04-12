@@ -1,2 +1,5 @@
-export { default as generate } from './generate';
-export { default as generateWatch } from './generateWatch';
+import generate from './generate';
+import generateWatch from './generateWatch';
+
+export { RouteItem } from './generateData';
+export { generate, generateWatch };

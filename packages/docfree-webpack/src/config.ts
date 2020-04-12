@@ -1,5 +1,6 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
 import { getDocPath, getConfig, tempPath, qs, babelOptions, merge } from 'docfree-utils';
+
 import { join } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';

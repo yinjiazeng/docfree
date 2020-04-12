@@ -1,6 +1,6 @@
+import vfile from 'vfile';
 import remark from 'remark';
 import mdx from 'remark-mdx';
-import vfile from 'vfile';
 import docfreeHeadingLink, { Heading } from 'remark-docfree-heading-link';
 import docfreePlayground from 'remark-docfree-playground';
 import docfreeProps from 'remark-docfree-props';
@@ -14,7 +14,7 @@ export interface ParserResult {
   content: string;
 }
 
-export default ({ content, resourcePath }, plugins: any): ParserResult => {
+export default function({ content, resourcePath }, plugins: any): ParserResult {
   let headings: Heading[] = [];
   let remarkPlugins = [
     remark()
@@ -64,4 +64,4 @@ export default ({ content, resourcePath }, plugins: any): ParserResult => {
     headings,
     content,
   };
-};
+}

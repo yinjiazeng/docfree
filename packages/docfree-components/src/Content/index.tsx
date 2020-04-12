@@ -6,13 +6,13 @@ import hljs from 'highlight.js';
 import { Row, Col } from '../antd';
 import './style.less';
 
-function Content({ children, showTime, showEdit }) {
+function Content({ children, pageExtra }) {
   const [{ listSource }, dispatch] = useConnect();
   const { nuomiProps } = useNuomi();
   const [prevNextData, prevNextDispatch]: [{ to: string; text: string }[], any] = useState([]);
 
   const getEditUrl = () => {
-    let { path } = showEdit;
+    let { platformPath: path } = pageExtra;
 
     if (typeof path === 'string' && path) {
       const { ext, filename, pathname } = nuomiProps;
@@ -43,21 +43,14 @@ function Content({ children, showTime, showEdit }) {
   return (
     <div className="docfree-content">
       {children}
-      {(showTime || !!showEdit) && (
+      {!!pageExtra && (
         <Row justify="space-between" className="docfree-content-extra">
           <Col>
-            {!!showEdit && (
-              // eslint-disable-next-line react/jsx-no-target-blank
-              <a href={getEditUrl()} target="_blank">
-                在{showEdit.name}上编辑此文件
-              </a>
-            )}
+            <a href={getEditUrl()} target="_blank">
+              在{pageExtra.platform}上编辑此文件
+            </a>
           </Col>
-          <Col>
-            {showTime && (
-              <>最后更新时间：{format('yyyy/MM/dd hh:mm:ss', new Date(nuomiProps.utime))}</>
-            )}
-          </Col>
+          <Col>最后更新时间：{format(pageExtra.format, new Date(nuomiProps.utime))}</Col>
         </Row>
       )}
       {(!!prevNextData[0] || !!prevNextData[1]) && (

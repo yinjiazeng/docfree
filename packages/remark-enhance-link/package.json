@@ -13,5 +13,8 @@
   "license": "MIT",
   "scripts": {
     "dts": "tsc"
+  },
+  "dependencies": {
+    "unist-util-visit": "^2.0.2"
   }
 }

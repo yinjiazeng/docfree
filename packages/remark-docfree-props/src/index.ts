@@ -1,9 +1,8 @@
-import { Parent, Node } from 'unist';
-import { matchHtml, visit, pathParse } from 'docfree-utils';
+import { matchHtml, pathParse, unistVisit, UnistNode } from 'docfree-utils';
 
-export default () => {
-  return (tree: Parent) => {
-    visit(tree, 'jsx', (node: Node) => {
+export default function() {
+  return function(tree: UnistNode) {
+    unistVisit(tree, 'jsx', (node: UnistNode) => {
       const { value } = node;
       const COMPONENT_NAME = 'Docfree.Props';
 
@@ -29,4 +28,4 @@ export default () => {
       }
     });
   };
-};
+}

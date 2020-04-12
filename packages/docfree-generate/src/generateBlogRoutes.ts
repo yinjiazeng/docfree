@@ -1,6 +1,6 @@
-import { Route } from './generateData';
+import { RouteItem } from './generateData';
 
-export default function generateBlogRoutes(routes: Route[] = []): Route[] {
+export default function generateBlogRoutes(routes: RouteItem[] = []): RouteItem[] {
   routes.forEach((data) => {
     const { children } = data;
 

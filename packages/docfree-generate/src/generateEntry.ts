@@ -1,9 +1,9 @@
 import { isAbsolute } from 'path';
 import { getConfig, formatJSON } from 'docfree-utils';
 import generateBlogRoutes from './generateBlogRoutes';
-import { Route } from './generateData';
+import { RouteItem } from './generateData';
 
-export default function generateEntry(routes: Route[]): string {
+export default function generateEntry(routes: RouteItem[]): string {
   const config = getConfig();
   const isBlog = config.mode === 'blog';
   let routesString: string;
@@ -11,7 +11,10 @@ export default function generateEntry(routes: Route[]): string {
   if (isBlog) {
     routes = generateBlogRoutes(routes);
     routesString = formatJSON(routes);
-    routesString = routesString.replace(/("children":\s*)"BlogEntry"/g, '$1<Docfree.BlogEntry />');
+    routesString = routesString.replace(
+      /("children":\s*)"BlogEntry"/g,
+      `$1<Docfree.BlogEntry pageSize={${Number(config.pageSize) || 20}} />`,
+    );
   } else {
     routesString = formatJSON(routes);
   }

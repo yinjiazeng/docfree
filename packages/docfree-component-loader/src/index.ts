@@ -2,14 +2,14 @@ import { babel, types, traverse, generator, babelOptions } from 'docfree-utils';
 import { basename } from 'path';
 
 module.exports = function(this: any, content: string) {
-  const ast = babel.parseSync(content, {
+  const ast: any = babel.parseSync(content, {
     ...babelOptions,
     filename: basename(this.resourcePath),
   });
 
   if (ast) {
     traverse(ast, {
-      StringLiteral(path: any) {
+      StringLiteral(path: babel.NodePath<types.StringLiteral>) {
         if (path.node.value === 'prop-types' && types.isImportDeclaration(path.parent)) {
           path.replaceWith(types.stringLiteral('docfree-prop-types'));
         }

@@ -4,9 +4,8 @@ import format from 'date-format';
 import { Pagination, List } from '../antd';
 import './style.less';
 
-export default function BlogEntry() {
+export default function BlogEntry({ pageSize }) {
   const [{ listSource }, dispatch] = useConnect();
-  const pageSize = 20;
   const total = listSource.length;
   const [page, pageDispatch] = useState(1);
   const [data, dataDispatch] = useState([]);

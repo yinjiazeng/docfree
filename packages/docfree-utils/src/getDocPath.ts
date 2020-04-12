@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 
-export default function getDocPath(): string {
+export default function(): string {
   const dir = process.argv[3];
   const cwd = process.cwd();
 

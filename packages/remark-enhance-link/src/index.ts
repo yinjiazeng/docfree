@@ -1,4 +1,4 @@
-import { Node, Parent } from 'unist';
+import { Node } from 'unist';
 
 export type TreeNode = Node & {
   children?: TreeNode[];
@@ -57,8 +57,10 @@ const visit = (array: TreeNode[] = [], newAst: TreeNode[] = []) => {
   return newAst;
 };
 
-export default () => {
-  return (tree: Parent) => {
-    tree.children = visit(tree.children);
+export default function() {
+  return function(tree: Node) {
+    if (Array.isArray(tree.children)) {
+      tree.children = visit(tree.children);
+    }
   };
-};
+}

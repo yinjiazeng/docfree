@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from 'react';
+import React, { useLayoutEffect, useState, useRef, RefObject } from 'react';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import hljs from 'highlight.js';
 import { Tooltip, Card } from '../antd';
@@ -6,7 +6,7 @@ import PreCode from '../PreCode';
 
 export default function Code({ lang, content }) {
   const [copy, copyDispatch] = useState(false);
-  const ref = useRef();
+  const ref: RefObject<any> = useRef();
 
   const createCopyNode = () => {
     const node = document.createElement('textarea');

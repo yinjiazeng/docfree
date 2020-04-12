@@ -1,10 +1,23 @@
-export { default as Playground } from './Playground';
-export { default as BlogEntry } from './BlogEntry';
-export { default as Content } from './Content';
-export { default as AnchorLinkEnhance } from './AnchorLinkEnhance';
-export { default as Layout } from './Layout';
-export { default as Props } from './Props';
-export { default as NotFound } from './NotFound';
-export { default as Tip } from './Tip';
-export { default as PreCode } from './PreCode';
-export { default as Home } from './Home';
+import Playground from './Playground';
+import BlogEntry from './BlogEntry';
+import Content from './Content';
+import AnchorLinkEnhance from './AnchorLinkEnhance';
+import Layout from './Layout';
+import Props from './Props';
+import NotFound from './NotFound';
+import Tip from './Tip';
+import PreCode from './PreCode';
+import Home from './Home';
+
+export {
+  Playground,
+  BlogEntry,
+  Content,
+  AnchorLinkEnhance,
+  Layout,
+  Props,
+  NotFound,
+  Tip,
+  PreCode,
+  Home,
+};

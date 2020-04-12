@@ -16,10 +16,6 @@ const getDepth = (settingDepth: any, defaultDepth: number) => {
   return depth;
 };
 
-const getBool = (settingBool: any, defaultBool: boolean) => {
-  return Boolean(typeof settingBool === 'boolean' ? settingBool : defaultBool);
-};
-
 module.exports = async function docfreeLoader(this: any, content: string) {
   const { resourcePath, resourceQuery } = this;
   const { styleContentKey } = qs.parse(resourceQuery.slice(1));
@@ -31,21 +27,14 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   }
 
   const callback = this.async();
-  const config = getConfig();
+  const config: any = getConfig();
   const { sidebar } = config;
   const { content: markdownContent, data: setting } = matter(content);
   const resource = { resourcePath, content: markdownContent };
   const { content: mdContent, headings: hs } = parser(resource, config.plugins);
-  const sidebarTitle = setting.sidebarTitle || '';
-  const showTime = getBool(setting.showTime, config.showTime);
+  const sidebarTitle = setting.title || '';
   const sidebarDepth = getDepth(setting.depth, sidebar.depth);
   const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
-
-  let edit = false;
-
-  if (setting.showEdit !== false && config.edit) {
-    edit = config.edit;
-  }
 
   let result = '';
   let title = '';
@@ -117,7 +106,9 @@ ${mdContent}\nexport default Docfree.Content;`;
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       utime: ${tempData.get(resourcePath).utime},
       render() {
-        return <MDXContent showTime={${showTime}} showEdit={${formatJSON(edit)}} />
+        return <MDXContent pageExtra={${formatJSON(
+          setting.extra !== false ? config.pageExtra : false,
+        )}} />
       },
     };
     ${title ? `nuomiProps.title = '${title}';` : ''}
