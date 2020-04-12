@@ -5,13 +5,15 @@ import { Pagination, List } from '../antd';
 import './style.less';
 
 export default function BlogEntry({ pageSize }) {
+  pageSize = 1;
   const [{ listSource }, dispatch] = useConnect();
   const {
     nuomiProps: { location },
   }: any = useNuomi();
   const total = listSource.length;
-  const [page, pageDispatch] = useState(1);
-  const [data, dataDispatch] = useState([]);
+  const page = Number(location.query.page) || 1;
+  const startIndex = (page - 1) * pageSize;
+  const data = listSource.slice(startIndex, startIndex + pageSize);
 
   const onChange = (current: number) => {
     const { url, search, ...rest } = location;
@@ -20,26 +22,13 @@ export default function BlogEntry({ pageSize }) {
 
   useLayoutEffect(() => {
     dispatch({ type: 'initData' });
-
-    const unListener = router.listener(({ query }: any) => {
-      pageDispatch(Number(query.page) || 1);
-    });
-
-    return () => {
-      unListener();
-    };
   }, []);
-
-  useLayoutEffect(() => {
-    const startIndex = (page - 1) * pageSize;
-    dataDispatch(listSource.slice(startIndex, startIndex + pageSize));
-  }, [page, listSource]);
 
   return (
     <div className="docfree-blog">
       <List
         dataSource={data}
-        renderItem={({ to, text, ctime }) => (
+        renderItem={({ to, text, ctime }: any) => (
           <List.Item>
             <Link to={to}>{text}</Link>
             <span>{format('yyyy/MM/dd', new Date(ctime))}</span>
