@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useConnect } from 'nuomi';
+import React, { useState, useLayoutEffect } from 'react';
+import { Link, useConnect, useNuomi, router } from 'nuomi';
 import format from 'date-format';
 import { Pagination, List } from '../antd';
 import './style.less';
 
 export default function BlogEntry({ pageSize }) {
   const [{ listSource }, dispatch] = useConnect();
+  const {
+    nuomiProps: { location },
+  }: any = useNuomi();
   const total = listSource.length;
   const [page, pageDispatch] = useState(1);
   const [data, dataDispatch] = useState([]);
-  const [loading, loadingDispatch] = useState(true);
 
   const onChange = (current: number) => {
-    pageDispatch(current);
+    const { url, search, ...rest } = location;
+    router.location({ ...rest, query: { page: current } });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch({ type: 'initData' });
+
+    const unListener = router.listener(({ query }: any) => {
+      pageDispatch(Number(query.page) || 1);
+    });
+
+    return () => {
+      unListener();
+    };
   }, []);
 
-  useEffect(() => {
-    loadingDispatch(true);
-    setTimeout(() => {
-      const startIndex = (page - 1) * pageSize;
-
-      dataDispatch(listSource.slice(startIndex, startIndex + pageSize));
-      loadingDispatch(false);
-    }, 300);
+  useLayoutEffect(() => {
+    const startIndex = (page - 1) * pageSize;
+    dataDispatch(listSource.slice(startIndex, startIndex + pageSize));
   }, [page, listSource]);
 
   return (
     <div className="docfree-blog">
       <List
-        loading={loading}
         dataSource={data}
         renderItem={({ to, text, ctime }) => (
           <List.Item>
