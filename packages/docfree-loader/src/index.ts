@@ -102,12 +102,14 @@ ${mdContent}\nexport default Docfree.Content;`;
       },
       sidebarTitle: '${sidebarTitle}',
       headings: ${formatJSON(headings)},
+      showSidebar: ${sidebarDepth > 0},
+      showPageSidebar: ${pageSidebarDepth > 0},
       sidebarMenus: ${formatJSON(sidebarMenus)},
       pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
       utime: ${tempData.get(resourcePath).utime},
       render() {
         return <MDXContent pageExtra={${formatJSON(
-          setting.extra !== false ? config.pageExtra : false,
+          setting.pageExtra !== false ? config.pageExtra : false,
         )}} />
       },
     };

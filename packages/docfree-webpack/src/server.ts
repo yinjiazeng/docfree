@@ -34,11 +34,17 @@ export default async function() {
   portfinder.basePort = serverConfig.port;
   serverConfig.port = await portfinder.getPortPromise();
 
+  const { publicPath } = webpackConfig.output;
+
+  if (/^\//.test(publicPath)) {
+    webpackConfig.output.publicPath = '/';
+  }
+
   webpackConfig.plugins.push(
     new CompileDonePlugin({
       port: serverConfig.port,
       host: serverConfig.host,
-      path: webpackConfig.output.publicPath,
+      path: publicPath,
     }),
   );
 

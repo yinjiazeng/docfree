@@ -11004,10 +11004,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuomi@^0.8.14:
-  version "0.8.14"
-  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.14.tgz#1bda4b0c8f6f53b39805483a9aad6121fcb9e23f"
-  integrity sha512-7b9DpW2a98mHW7/E9UMvFb0XZcIPdzjEpllZ/Y4NWjjHz8130TGNRiznNqFFKqKdOCdszZEmGOKI95Ka8qc7+w==
+nuomi@^0.8.16:
+  version "0.8.16"
+  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.16.tgz#db3cb0a9cffb0c53c693298992b9539df3a80646"
+  integrity sha512-7Tb53KQZaY/BfvGCMpZDH+hWpBa0ykaU775/8I63b9DFqyP4GZxbkMeEElREmrzKAHqaVnpVstTai1Fb12BLRg==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"

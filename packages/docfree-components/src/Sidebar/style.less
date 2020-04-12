@@ -1,13 +1,10 @@
 @import '../default.less';
 
-@sidebar-width: 300px;
-@page-sidebar-width: 240px;
-
 .docfree-sidebar,
 .docfree-page-sidebar {
-  padding-top: @edge-size-large;
   position: fixed;
   top: @header-height;
+  padding: @sidebar-edge-size;
   bottom: 0;
   overflow: auto;
   background: #fff;
@@ -20,13 +17,12 @@
   left: 0;
   width: @sidebar-width;
   border-right: 1px solid @border-color-base;
-  padding: @edge-size-large;
   & ~ section {
     margin-left: @sidebar-width;
   }
   & > strong {
     display: block;
-    margin-bottom: @edge-size-small;
+    margin-bottom: 16px;
     font-size: @font-size-base + 8;
     color: @heading-color;
   }
@@ -57,11 +53,10 @@
 .docfree-page-sidebar {
   right: 0;
   width: @page-sidebar-width;
+  padding-left: 0;
   & ~ section {
     margin-right: @page-sidebar-width;
   }
-  padding-right: @edge-size-large;
-  padding-bottom: @edge-size-large;
   & > ul {
     li > a {
       border-left: 2px solid @border-color-base;

@@ -15,7 +15,7 @@ export default function NotFound() {
 
   return (
     <div className="docfree-404">
-      <Result status="404" title="404" />
+      <Result status="404" title="Not Found" />
     </div>
   );
 }

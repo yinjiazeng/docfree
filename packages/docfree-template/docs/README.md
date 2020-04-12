@@ -1,8 +1,7 @@
 ---
-showSidebar: false
-showPageSidebar: false
-showTime: false
-showEdit: false
+depth: 0
+pageDepth: 0
+pageExtra: false
 ---
 
 <Docfree.Home

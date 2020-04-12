@@ -38,7 +38,7 @@ const generateData = (rawData, data = []) => {
       const { path, children, render, effects, onInit, onChange, ...rest } = route;
       if (Array.isArray(children)) {
         data = generateData(children, data);
-      } else if (route.title) {
+      } else if (${isBlog ? '!/^README$/i.test(route.filename) && ' : ''}route.title) {
         data.push(rest);
       }
     }
@@ -60,12 +60,12 @@ ${
 });
 
 const getList = (pathname, { query }) => {
-  const prePath = query.basepath || pathname;
+  const prePath = query._ || pathname;
   const list = [];
 
   dataSource.forEach(({ title, pathname: pre, filename, ctime }) => {
     if (pre.startsWith(prePath) && !/^README$/i.test(filename)) {
-      list.push({ to: pre + filename + '?basepath=' + prePath, text: title, ctime });
+      list.push({ to: pre + filename + '?_=' + prePath, text: title, ctime });
     }
   });
 
@@ -87,7 +87,7 @@ const getMenus = function(array, menus = [], list = []) {
         let menuData;
         if (findData) {
           const { pathname, filename, title, ext } = findData;
-          const menu = { to: pathname + filename, text: title };
+          const menu = { to: pathname + (/^README$/i.test(filename) ? '' : filename), text: title };
 
           if (filename === this.filename && ext === this.ext) {
             menu.menus = this.sidebarMenus;
@@ -144,16 +144,18 @@ const getNavMenus = function(array, menus = []) {
 };
 
 const findFilename = (menus, filename) => {
+  let find = false;
   if (Array.isArray(menus)) {
     for(let item of menus) {
       if (item === filename) {
-        return true;
-      } else if (item && item.menus) {
-        return findFilename(item.menus, filename);
+        find = true;
+        break;
+      } else if (!find && item && item.menus) {
+        find = findFilename(item.menus, filename);
       }
     }
   }
-  return false;
+  return find;
 };
 
 nuomi.config({
@@ -167,17 +169,19 @@ nuomi.config({
         title,
         pathname,
         filename,
+        showSidebar,
+        showPageSidebar,
         sidebarTitle,
         sidebarMenus,
         pageSidebarMenus,
-        location,
         data: routeData,
+        location,
       } = nuomiProps;
 
       const payload = {
         sidebarTitle,
-        showSidebar: sidebarMenus > 0,
-        showPageSidebar: pageSidebarMenus > 0,
+        showSidebar: !!showSidebar,
+        showPageSidebar: !!showPageSidebar,
         pageSidebarMenus,
       };
 

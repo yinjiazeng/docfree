@@ -82,10 +82,10 @@ export default async function(name: string) {
   logger.log('\n创建文档模板成功！');
 
   logger.log('\n启动项目');
-  logger.shell(`${devCommand} ${name}`);
+  logger.shell(`${devCommand}`);
 
   logger.log('\n打包项目');
-  logger.shell(`${buildCommand} ${name}`);
+  logger.shell(`${buildCommand}`);
 
   logger.log();
 }

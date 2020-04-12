@@ -12,7 +12,10 @@ export default function() {
         ignored: [/(^|[/\\])\../, /node_modules/],
       })
       .on('all', (event, path) => {
-        if (['add', 'unlink'].includes(event) && MDX_REGEXP.test(path)) {
+        if (
+          ['addDir', 'unlinkDir'].includes(event) ||
+          (['add', 'unlink'].includes(event) && MDX_REGEXP.test(path))
+        ) {
           clearTimeout(timer);
           timer = setTimeout(() => {
             generate();

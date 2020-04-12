@@ -107,9 +107,14 @@ export default function(options: Configuration): Configuration {
   const getStyleLoaders = (module: boolean = false): RuleSetRule[] => {
     const sourceMap = isDev;
     const use = [
-      {
-        loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-      },
+      isDev
+        ? { loader: 'style-loader' }
+        : {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+            },
+          },
       {
         loader: 'css-loader',
         options: {
@@ -252,7 +257,6 @@ export default function(options: Configuration): Configuration {
       loader: 'file-loader',
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,
-        useRelativePath: true,
       },
     },
   ];

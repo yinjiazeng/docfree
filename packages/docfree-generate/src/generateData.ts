@@ -61,7 +61,7 @@ export default function(docPath: string) {
           filename,
           ext: extname(item),
           title: filename,
-          path: /^README$/i.test(filename) ? `/(${filename})?` : `/${filename}`,
+          path: /^README$/i.test(filename) ? '/' : `/${filename}`,
           require: itemPath,
         });
       } else if (stat.isDirectory() && item !== 'node_modules' && !/^\./.test(item)) {

@@ -1,82 +1,42 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin-webpack4');
-
 module.exports = {
-  title: 'Docfree.js',
+  title: 'Docfree',
   mode: 'blog',
-  footer: 'MIT Licensed | Copyright © 2019-present',
-  nav: [
-    {
-      text: '指南',
-      to: '/a',
-    },
-    {
-      text: 'API',
-      menus: [
-        {
-          text: 'xx',
-          menus: [
-            {
-              text: '1xxxxx',
-              to: 'http://xxx',
-            },
-            {
-              text: 'xxx',
-              to: 'http://xxx',
-            },
-            {
-              text: 'xxxx',
-              menus: [
-                {
-                  text: '1xxxxx',
-                  to: 'http://xxx',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          text: 'xxx',
-          to: 'http://xxx',
-        },
-        {
-          text: 'xxx',
-          to: 'http://xxx',
-          menus: [
-            {
-              text: '1xxxxx',
-              to: 'http://xxx',
-            },
-            {
-              text: '1xxxxx',
-              to: 'http://xxx',
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  nav: [{
+    text: '前端',
+    to: '/b'
+  }, {
+    text: '列表',
+    to: '/a',
+    menus: [{
+      text: '列表',
+      menus: [{
+        text: '列表',
+        to: '/a',
+      }]
+    }]
+  }],
   sidebar: {
     data: {
       '/': {
-        title: '指南',
-        menus: [],
-      },
-    },
+        title: '标题',
+        menus: [
+          {
+            text: 'xx',
+            menus: [
+              'a',
+              'b',
+            ]
+          },
+          {
+            text: 'xxxxx',
+            menus: [
+              'README'
+            ]
+          }
+        ]
+      }
+    }
   },
-  plugins: ['emoji', 'docfree-tip'],
-  webpackConfig: {
-    module: {
-      rules: [
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-        },
-        {
-          exclude: /\.vue$/,
-          loader: 'file-loader',
-        },
-      ],
-    },
-    plugins: [new VueLoaderPlugin()],
-  },
+  footer: 'MIT Licensed | Copyright © 2020-present',
+  plugins: [],
 };

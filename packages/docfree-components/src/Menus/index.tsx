@@ -37,7 +37,6 @@ export default function Menus({ data, isActive, className }: MenusProps) {
           } else if (item.to) {
             if (/^(https?:)?\/\//.test(item.to)) {
               elem = (
-                // eslint-disable-next-line react/jsx-no-target-blank
                 <a href={item.to} target="_blank">
                   {item.text}
                 </a>
