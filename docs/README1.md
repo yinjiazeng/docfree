@@ -10,6 +10,17 @@ import { DatePicker } from 'antd';
 
 <DatePicker />
 
+:::error:jsx
+xxx
+xxxxx
+:::
+
+:::error:jsx
+xxx
+xxxxx
+:::
+
+
 <Demo title={'22'} data={{title: '11yinjiazeng'}} />
 
 <Docfree.Home

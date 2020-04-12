@@ -5,9 +5,6 @@ import 'antd/lib/tooltip/style';
 export { default as Card } from 'antd/lib/card';
 import 'antd/lib/card/style';
 
-export { default as Alert } from 'antd/lib/alert';
-import 'antd/lib/alert/style';
-
 export { default as Pagination } from 'antd/lib/pagination';
 import 'antd/lib/pagination/style';
 

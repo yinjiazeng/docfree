@@ -5,9 +5,9 @@ import AnchorLinkEnhance from './AnchorLinkEnhance';
 import Layout from './Layout';
 import Props from './Props';
 import NotFound from './NotFound';
-import Tip from './Tip';
 import PreCode from './PreCode';
 import Home from './Home';
+import Component from './Component';
 
 export {
   Playground,
@@ -17,7 +17,7 @@ export {
   Layout,
   Props,
   NotFound,
-  Tip,
   PreCode,
   Home,
+  Component,
 };

@@ -23,7 +23,7 @@
     "remark-docfree-heading-link": "^0.1.2",
     "remark-docfree-jsx": "^0.1.2",
     "remark-docfree-playground": "^0.1.2",
-    "remark-docfree-tip": "^0.1.2",
+    "remark-docfree-props": "^0.1.2",
     "remark-enhance-link": "^0.1.2",
     "remark-mdx": "^1.5.8"
   }

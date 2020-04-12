@@ -13,7 +13,7 @@ export interface Node extends UnistNode {
   lang?: string;
 }
 
-export default function() {
+module.exports = function() {
   return function({ children }: UnistNode, file: VFile) {
     if (Array.isArray(children)) {
       children.forEach((node: Node, i) => {
@@ -44,11 +44,9 @@ export default function() {
             const mod: any = module != null ? module || '$style' : null;
 
             importStyles.push(
-              `import${module ? ` ${module} from` : ''} '${
+              `import${mod ? ` ${mod} from` : ''} '${
                 file.path
-              }?styleContentKey=${styleContentKey}&styleLang=${lang}${
-                module ? '&module=true' : ''
-              }'`,
+              }?styleContentKey=${styleContentKey}&styleLang=${lang}${mod ? '&module=true' : ''}'`,
             );
           });
 
@@ -95,4 +93,4 @@ export default function() {
       });
     }
   };
-}
+};

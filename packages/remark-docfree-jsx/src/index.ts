@@ -1,6 +1,6 @@
 import { matchHtml, storage, babel, babelOptions, VFile, UnistNode } from 'docfree-utils';
 
-export default function() {
+module.exports = function() {
   return function({ children }: UnistNode, file: VFile) {
     if (Array.isArray(children)) {
       children.forEach((node: UnistNode, i) => {
@@ -63,4 +63,4 @@ export default function() {
       });
     }
   };
-}
+};

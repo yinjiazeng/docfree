@@ -5,8 +5,6 @@ import docfreeHeadingLink, { Heading } from 'remark-docfree-heading-link';
 import docfreePlayground from 'remark-docfree-playground';
 import docfreeProps from 'remark-docfree-props';
 import docfreeJsx from 'remark-docfree-jsx';
-import docfreeVue from 'remark-docfree-vue';
-import docfreeTip from 'remark-docfree-tip';
 import enhanceLink from 'remark-enhance-link';
 
 export interface ParserResult {
@@ -26,8 +24,6 @@ export default function({ content, resourcePath }, plugins: any): ParserResult {
         },
       })
       .use(docfreeJsx)
-      .use(docfreeVue)
-      .use(docfreeTip)
       .use(enhanceLink)
       .use(mdx),
   ];
@@ -52,6 +48,7 @@ export default function({ content, resourcePath }, plugins: any): ParserResult {
 
         plugin = require(plugin);
       }
+
       return processor.use(plugin, opts);
     }
 

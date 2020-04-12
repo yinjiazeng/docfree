@@ -63,7 +63,7 @@ module.exports = {
       },
     },
   },
-  plugins: ['emoji'],
+  plugins: ['emoji', 'docfree-tip'],
   webpackConfig: {
     module: {
       rules: [
