@@ -1,11 +1,10 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Link, useConnect, useNuomi, router } from 'nuomi';
 import format from 'date-format';
 import { Pagination, List } from '../antd';
 import './style.less';
 
 export default function BlogEntry({ pageSize }) {
-  pageSize = 1;
   const [{ listSource }, dispatch] = useConnect();
   const {
     nuomiProps: { location },
