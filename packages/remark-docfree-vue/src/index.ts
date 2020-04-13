@@ -70,7 +70,7 @@ module.exports = function() {
                 visitor,
               },
             ],
-            filename: `demo.${scriptData.attrs.lang === 'ts' ? 't' : 'j'}s`,
+            filename: `${file.path}.${scriptData.attrs.lang === 'ts' ? 't' : 'j'}s`,
           });
 
           if (res && res.code) {

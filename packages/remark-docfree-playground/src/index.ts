@@ -45,7 +45,7 @@ const visit = ({ children }: UnistNode, file: VFile) => {
 
               const ast = babel.parseSync(content, {
                 ...babelOptions,
-                filename: `demo${ext}`,
+                filename: `${file.path}.${ext}`,
               });
 
               if (ast) {

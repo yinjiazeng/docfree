@@ -72,7 +72,7 @@ module.exports = function() {
                 visitor,
               },
             ],
-            filename: `demo.${node.lang}`,
+            filename: `${file.path}.${node.lang}`,
           });
 
           if (res && res.code) {

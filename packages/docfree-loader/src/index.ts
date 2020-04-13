@@ -115,6 +115,10 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     `,
     );
   } catch (e) {
+    if (e.message.startsWith(resourcePath)) {
+      e.message = e.message.replace(/^[^:]+/, resourcePath);
+    }
+
     return callback(e);
   }
 };

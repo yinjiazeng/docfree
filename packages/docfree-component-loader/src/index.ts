@@ -1,10 +1,9 @@
 import { babel, types, traverse, generator, babelOptions } from 'docfree-utils';
-import { basename } from 'path';
 
 module.exports = function(this: any, content: string) {
   const ast: any = babel.parseSync(content, {
     ...babelOptions,
-    filename: basename(this.resourcePath),
+    filename: this.resourcePath,
   });
 
   if (ast) {
