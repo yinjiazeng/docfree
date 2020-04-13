@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Docfree',
-  mode: 'blog',
+  // mode: 'blog',
   nav: [{
     text: '前端',
     to: '/b'
@@ -22,7 +22,7 @@ module.exports = {
           {
             text: 'xx',
             menus: [
-              'a',
+              'c',
               'b',
             ]
           },
