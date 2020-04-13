@@ -1,10 +1,10 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import portfinder from 'portfinder';
-import { getDocPath } from 'docfree-utils';
+import { getDocPath, logger } from 'docfree-utils';
 import { join } from 'path';
 import config from './config';
-import CompileDonePlugin from './CompileDonePlugin';
+import CompilePlugin from './CompilePlugin';
 
 export default async function() {
   const { devServer, ...webpackConfig }: any = config({
@@ -41,7 +41,7 @@ export default async function() {
   }
 
   webpackConfig.plugins.push(
-    new CompileDonePlugin({
+    new CompilePlugin({
       port: serverConfig.port,
       host: serverConfig.host,
       path: publicPath,
@@ -58,5 +58,7 @@ export default async function() {
     if (err) {
       throw err;
     }
+
+    logger.clear();
   });
 }

@@ -10,11 +10,11 @@ export default class CompileDonePlugin {
   }
 
   apply(compiler: Compiler) {
-    compiler.hooks.beforeCompile.tap('compile-done-plugin', () => {
+    compiler.hooks.invalid.tap('invalid', () => {
       logger.clear();
     });
 
-    compiler.hooks.done.tap('compile-done-plugin', (stats) => {
+    compiler.hooks.done.tap('done', (stats) => {
       if (stats.hasErrors()) {
         logger.error(stats.toJson().errors);
         return;
