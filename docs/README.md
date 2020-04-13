@@ -27,3 +27,30 @@ class Demo extends React.Component {
 }
 </style>
 ```
+
+```vue
+<template>
+  <div :class="$style.color" @click="toggle">{{title}}</div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: '1',
+    }
+  },
+  methods: {
+    toggle() {
+      this.title = this.title === '1' ? '2' : '1';
+    }
+  },
+}
+</script>
+
+<style module>
+.color {
+  color: red;
+}
+</style>
+```

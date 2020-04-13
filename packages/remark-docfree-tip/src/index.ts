@@ -1,6 +1,6 @@
 import { UnistNode } from 'docfree-utils';
 
-module.exports = function() {
+export default function() {
   return function({ children }) {
     if (Array.isArray(children)) {
       children.forEach((node: UnistNode, i) => {
@@ -61,4 +61,4 @@ module.exports = function() {
       });
     }
   };
-};
+}

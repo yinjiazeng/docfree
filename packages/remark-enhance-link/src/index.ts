@@ -57,10 +57,10 @@ const visit = (array: TreeNode[] = [], newAst: TreeNode[] = []) => {
   return newAst;
 };
 
-module.exports = function() {
+export default function() {
   return function(tree: Node) {
     if (Array.isArray(tree.children)) {
       tree.children = visit(tree.children);
     }
   };
-};
+}

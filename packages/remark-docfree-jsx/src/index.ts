@@ -9,7 +9,7 @@ import {
   NodePath,
 } from 'docfree-utils';
 
-module.exports = function() {
+export default function() {
   return function({ children }: UnistNode, file: VFile) {
     if (Array.isArray(children)) {
       children.forEach((node: UnistNode, i) => {
@@ -89,4 +89,4 @@ module.exports = function() {
       });
     }
   };
-};
+}

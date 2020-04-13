@@ -1,6 +1,6 @@
 import { matchHtml, pathParse, unistVisit, UnistNode } from 'docfree-utils';
 
-module.exports = function() {
+export default function() {
   return function(tree: UnistNode) {
     unistVisit(tree, 'jsx', (node: UnistNode) => {
       const { value } = node;
@@ -28,4 +28,4 @@ module.exports = function() {
       }
     });
   };
-};
+}

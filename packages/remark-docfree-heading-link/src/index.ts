@@ -31,7 +31,7 @@ const getTexts = (tree: UnistNode[]) => {
   return text;
 };
 
-module.exports = function(options: Options = {}) {
+export default function(options: Options = {}) {
   return function(tree: UnistNode) {
     const headings: Heading[] = [];
 
@@ -52,4 +52,4 @@ module.exports = function(options: Options = {}) {
       options.complete(headings);
     }
   };
-};
+}

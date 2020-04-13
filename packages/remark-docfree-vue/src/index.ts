@@ -13,7 +13,7 @@ export interface Node extends UnistNode {
   lang?: string;
 }
 
-module.exports = function() {
+export default function() {
   return function({ children }: UnistNode, file: VFile) {
     if (Array.isArray(children)) {
       children.forEach((node: Node, i) => {
@@ -33,26 +33,6 @@ module.exports = function() {
             },
           ];
           let render: string = 'null';
-
-          style.matchs.forEach(({ attrs: { lang, module }, content: styleContent }) => {
-            const styleContentKey = storage.set(styleContent);
-
-            if (!lang) {
-              lang = 'css';
-            }
-
-            const mod: any = module != null ? module || '$style' : null;
-
-            importStyles.push(
-              `import${mod ? ` ${mod} from` : ''} '${
-                file.path
-              }?styleContentKey=${styleContentKey}&styleLang=${lang}${mod ? '&module=true' : ''}'`,
-            );
-          });
-
-          if (importStyles.length) {
-            importStyles.push('');
-          }
 
           const visitor = {
             ExportDefaultDeclaration(path: NodePath) {
@@ -74,13 +54,45 @@ module.exports = function() {
           });
 
           if (res && res.code) {
+            style.matchs.forEach(({ attrs: { lang, module }, content: styleContent }) => {
+              const styleContentKey = storage.set(styleContent);
+
+              if (!lang) {
+                lang = 'css';
+              }
+
+              const mod: any = module != null ? module || '$style' : null;
+
+              importStyles.push(
+                `${mod ? `data['${mod === '$style' ? `docfree${mod}` : mod}'] = ` : ''}require('${
+                  file.path
+                }?styleContentKey=${styleContentKey}&styleLang=${lang}${
+                  mod ? '&module=true' : ''
+                }');`,
+              );
+            });
+
+            if (importStyles.length) {
+              importStyles.push('');
+            }
+
             render = `function($el) {
                 const Vue = require('vue/dist/vue');
                 const getVueOptions = function() {${res.code}};
+                const { mixins = [], ...rest } = getVueOptions() || {};
+                const data = {};
+                ${importStyles.join('\n')}
+                let template = '${templateContent}';
+                if (data.docfree$style) {
+                  template = template.replace(/(\\$style\\.)/g, 'docfree$1');
+                }
                 new Vue({
-                  ...getVueOptions(),
+                  ...rest,
                   el: $el,
-                  template: '${templateContent}',
+                  template,
+                  mixins: [...mixins, {
+                    data,
+                  }]
                 });
               }`.replace(/\n+/g, '\n');
           }
@@ -93,4 +105,4 @@ module.exports = function() {
       });
     }
   };
-};
+}

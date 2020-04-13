@@ -47,6 +47,7 @@ export default function({ content, resourcePath }, plugins: any): ParserResult {
         }
 
         plugin = require(plugin);
+        plugin = plugin.default || plugin;
       }
 
       return processor.use(plugin, opts);

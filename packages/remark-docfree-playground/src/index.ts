@@ -98,8 +98,8 @@ const visit = ({ children }: UnistNode, file: VFile) => {
   }
 };
 
-module.exports = function() {
+export default function() {
   return function(tree: UnistNode, file: VFile): void {
     visit(tree, file);
   };
-};
+}
