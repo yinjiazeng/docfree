@@ -11,6 +11,7 @@
     "no-restricted-globals": "off",
     "no-unused-expressions": "off",
     "func-names": "off",
+    "no-empty": "off",
     "no-cond-assign": "off",
     "no-multi-assign": "off",
     "no-useless-return": "off",

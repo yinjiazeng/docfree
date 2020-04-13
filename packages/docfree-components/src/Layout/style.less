@@ -1,9 +1,12 @@
-@import '../default.less';
+@import '../style/default.less';
 
 .docfree-layout {
-  padding-top: @header-height;
+  padding-top: @docfree-header-height;
 }
 
 a {
-  color: @link-color;
+  color: @text-color;
+  &:hover {
+    color: @primary-color;
+  }
 }

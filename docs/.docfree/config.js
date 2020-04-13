@@ -39,4 +39,7 @@ module.exports = {
   },
   footer: 'MIT Licensed | Copyright © 2020-present',
   plugins: [],
+  pageExtra: {
+    path: 'https://github.com/yinjiazeng/docfree/tree/master/docs'
+  }
 };

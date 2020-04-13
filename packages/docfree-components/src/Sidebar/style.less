@@ -1,10 +1,10 @@
-@import '../default.less';
+@import '../style/default.less';
 
 .docfree-sidebar,
 .docfree-page-sidebar {
   position: fixed;
-  top: @header-height;
-  padding: @sidebar-edge-size;
+  top: @docfree-header-height;
+  padding: @docfree-sidebar-edge-size;
   bottom: 0;
   overflow: auto;
   background: #fff;
@@ -15,10 +15,10 @@
 
 .docfree-sidebar {
   left: 0;
-  width: @sidebar-width;
-  border-right: 1px solid @border-color-base;
+  width: @docfree-sidebar-width;
+  border-right: 1px solid @docfree-layout-border-color;
   & ~ section {
-    margin-left: @sidebar-width;
+    margin-left: @docfree-sidebar-width;
   }
   & > strong {
     display: block;
@@ -38,7 +38,7 @@
     }
     & > li {
       & > b {
-        border-bottom: 1px solid @border-color-base;
+        border-bottom: 1px solid @docfree-layout-border-color;
         padding-bottom: 8px;
         color: @heading-color;
       }
@@ -52,14 +52,14 @@
 
 .docfree-page-sidebar {
   right: 0;
-  width: @page-sidebar-width;
+  width: @docfree-page-sidebar-width;
   padding-left: 0;
   & ~ section {
-    margin-right: @page-sidebar-width;
+    margin-right: @docfree-page-sidebar-width;
   }
   & > ul {
     li > a {
-      border-left: 2px solid @border-color-base;
+      border-left: 2px solid @docfree-layout-border-color;
       &.current {
         border-left-color: @primary-color;
       }

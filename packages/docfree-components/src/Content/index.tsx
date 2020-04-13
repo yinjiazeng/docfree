@@ -12,7 +12,7 @@ function Content({ children, pageExtra }) {
   const [prevNextData, prevNextDispatch]: [{ to: string; text: string }[], any] = useState([]);
 
   const getEditUrl = () => {
-    let { platformPath: path } = pageExtra;
+    let { path } = pageExtra;
 
     if (typeof path === 'string' && path) {
       const { ext, filename, pathname } = nuomiProps;

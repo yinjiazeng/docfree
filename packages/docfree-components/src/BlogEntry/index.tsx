@@ -1,8 +1,19 @@
 import React, { useLayoutEffect } from 'react';
 import { Link, useConnect, useNuomi, router } from 'nuomi';
 import format from 'date-format';
-import { Pagination, List } from '../antd';
+import { Pagination } from '../antd';
 import './style.less';
+
+export interface Data {
+  to: string;
+  text: string;
+  date: string;
+}
+
+export interface GroupData {
+  year: string;
+  list: Data[];
+}
 
 export default function BlogEntry({ pageSize }) {
   const [{ listSource }, dispatch] = useConnect();
@@ -12,7 +23,25 @@ export default function BlogEntry({ pageSize }) {
   const total = listSource.length;
   const page = Number(location.query.page) || 1;
   const startIndex = (page - 1) * pageSize;
-  const data = listSource.slice(startIndex, startIndex + pageSize);
+  const source = listSource.slice(startIndex, startIndex + pageSize);
+  const data: GroupData[] = [];
+
+  source.forEach(({ to, text, ctime }) => {
+    const dateStr = format('yyyyMM/dd', new Date(ctime));
+    const year = dateStr.substr(0, 4);
+    const date = dateStr.substr(4);
+    const find = data.find((item) => item.year === year);
+    const item: Data = { date, to, text };
+
+    if (find && find.year === year) {
+      find.list.push(item);
+    } else {
+      data.push({
+        year,
+        list: [item],
+      });
+    }
+  });
 
   const onChange = (current: number) => {
     const { url, search, ...rest } = location;
@@ -25,15 +54,19 @@ export default function BlogEntry({ pageSize }) {
 
   return (
     <div className="docfree-blog">
-      <List
-        dataSource={data}
-        renderItem={({ to, text, ctime }: any) => (
-          <List.Item>
-            <Link to={to}>{text}</Link>
-            <span>{format('yyyy/MM/dd', new Date(ctime))}</span>
-          </List.Item>
-        )}
-      />
+      <div className="docfree-blog-list">
+        {data.map(({ year, list }) => (
+          <dl>
+            <dt>{year}</dt>
+            {list.map(({ to, text, date }) => (
+              <dd key={to}>
+                <span>{date}</span>
+                <Link to={to}>{text}</Link>
+              </dd>
+            ))}
+          </dl>
+        ))}
+      </div>
       <Pagination current={page} simple pageSize={pageSize} total={total} onChange={onChange} />
     </div>
   );

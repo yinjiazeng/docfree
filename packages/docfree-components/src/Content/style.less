@@ -1,55 +1,58 @@
-@import '../default.less';
+@import '../style/default.less';
 @import (reference) '../Props/style.less';
 
 .docfree-content {
   position: relative;
   margin: 0 240px;
-  padding-top: @edge-size-large;
-  padding-bottom: @edge-size-small;
+  padding-top: @docfree-edge-size-large;
+  padding-bottom: @docfree-edge-size-small;
   & > h1,
   & > h2,
   & > h3,
   & > h4,
   & > h5,
   & > h6 {
-    margin: @edge-size-large 0 @edge-size-small;
+    margin: @docfree-edge-size-large 0 @docfree-edge-size-small;
     word-break: break-all;
   }
   & > h1 {
-    font-size: @header-size-base + 10;
+    font-size: @font-size-base + 12;
   }
   & > h2 {
-    font-size: @header-size-base + 8;
+    font-size: @font-size-base + 10;
   }
   & > h3 {
-    font-size: @header-size-base + 6;
+    font-size: @font-size-base + 8;
   }
   & > h4 {
-    font-size: @header-size-base + 4;
+    font-size: @font-size-base + 6;
   }
   & > h5 {
-    font-size: @header-size-base + 2;
+    font-size: @font-size-base + 4;
   }
   & > h6 {
-    font-size: @header-size-base;
+    font-size: @font-size-base + 2;
   }
   & > p,
   & > section {
-    margin: @edge-size-small 0;
+    margin: @docfree-edge-size-small 0;
   }
   & > ul,
   & > ol {
-    padding-left: @edge-size-small;
+    padding-left: @docfree-edge-size-small;
     ul,
     ol {
-      padding-left: @edge-size-small;
+      padding-left: @docfree-edge-size-small;
     }
   }
   & > table {
     .docfree-props;
   }
+  code.hljs {
+    padding: @docfree-edge-size-small;
+  }
   code:not(.hljs) {
-    background: @block-background-color;
+    background: @docfree-block-background;
     padding: 3px;
     margin: 0 3px;
     border-radius: 3px;
@@ -65,8 +68,8 @@
   }
   blockquote {
     border-left: 6px solid @primary-color;
-    padding: @edge-size-small;
-    background: @block-background-color;
+    padding: @docfree-edge-size-small;
+    background: @docfree-block-background;
     word-break: break-all;
     & > p {
       margin: 0;
@@ -78,10 +81,10 @@
 }
 
 .docfree-content-extra {
-  margin: @edge-size-small 0;
+  margin: @docfree-edge-size-large 0 @docfree-edge-size-small;
 }
 
 .docfree-next-prev {
-  border-top: 1px solid @border-color-base;
-  padding-top: @edge-size-small;
+  border-top: 1px solid @docfree-layout-border-color;
+  padding-top: @docfree-edge-size-small;
 }

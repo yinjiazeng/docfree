@@ -1,14 +1,14 @@
-@import '../default.less';
+@import '../style/default.less';
 
 .docfree-playground {
-  margin: @edge-size-small 0;
-  border: 1px solid @border-color-base;
+  margin: @docfree-edge-size-small 0;
+  border: 1px solid @docfree-layout-border-color;
   & > :first-child {
-    padding: @edge-size-large;
+    padding: @docfree-edge-size-large;
   }
   & > a {
     display: block;
-    border-top: 1px dashed @border-color-base;
+    border-top: 1px dashed @docfree-layout-border-color;
     padding: 8px 0;
     text-align: center;
     & > :first-child {
@@ -17,11 +17,11 @@
   }
   & > .ant-card {
     border: none;
-    border-top: 1px dashed @border-color-base;
+    border-top: 1px dashed @docfree-layout-border-color;
     & > .ant-card-head {
       min-height: 40px;
       height: 40px;
-      border-bottom-color: @border-color-base;
+      border-bottom-color: @docfree-layout-border-color;
       & > .ant-card-head-wrapper {
         height: 100%;
         & > .ant-card-head-title {

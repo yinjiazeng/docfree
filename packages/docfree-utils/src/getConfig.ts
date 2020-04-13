@@ -36,7 +36,7 @@ export interface DocfreeConfig {
   pageSize: number;
   pageExtra: null | {
     platform: string;
-    platformPath: string;
+    path: string;
     format: string;
   };
   langTheme: string;
@@ -52,13 +52,13 @@ const defaultConfig: DocfreeConfig = {
   footer: '',
   nav: [],
   dest: '',
-  pageSize: 20,
+  pageSize: 30,
   pageExtra: {
     platform: 'Github',
-    platformPath: '',
+    path: '',
     format: 'yyyy/MM/dd hh:mm:ss',
   },
-  langTheme: 'github',
+  langTheme: '',
   sidebar: {
     depth: 3,
     pageDepth: 0,

@@ -1,28 +1,57 @@
-@import '../default.less';
+@import '../style/default.less';
 
 .docfree-blog {
-  width: 960px;
-  margin: @edge-size-large auto;
-  text-align: center;
-  .ant-list-item {
-    padding: 0 8px;
-    border-bottom: 1px solid @border-color-base;
-    &:last-child {
-      border-bottom: 1px solid @border-color-base;
-    }
-    &:hover {
-      background: rgba(0, 0, 0, 0.02);
-    }
-    & > a {
-      display: block;
-      padding: 12px 0;
-      flex: 1;
-      text-align: left;
-      margin-right: 12px;
-      font-size: 16px;
-    }
-  }
+  width: 800px;
+  margin: @docfree-edge-size-large auto;
   .ant-pagination {
-    margin: @edge-size-large 0;
+    text-align: center;
+    margin: @docfree-edge-size-large 0;
   }
+}
+
+.docfree-blog-list {
+  & > dl {
+    border-top: 1px solid @docfree-layout-border-color;
+    &:first-child {
+      border-top: none;
+      & > dt {
+        margin-top: 0;
+      }
+    }
+    & > dt {
+      margin: 10px 0 8px;
+      font-size: @font-size-base + 10;
+      color: @heading-color;
+    }
+    & > dd {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      & > span {
+        margin-right: 16px;
+        color: @text-color-secondary;
+        font-size: @font-size-base + 2;
+      }
+      & > a {
+        font-size: @font-size-base + 4;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  // list-style: none;
+  // font-size: @font-size-base + 2;
+  // & > li {
+  //   margin-bottom: 8px;
+  //   & > span {
+  //     color: #333;
+  //     margin-right: 16px;
+  //   }
+  //   & > a {
+  //     &:hover {
+  //       text-decoration: underline;
+  //     }
+  //   }
+  // }
 }

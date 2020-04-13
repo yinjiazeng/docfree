@@ -1,12 +1,12 @@
-@import '../default.less';
+@import '../style/default.less';
 
 .docfree-header {
-  height: @header-height;
+  height: @docfree-header-height;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  padding: 0 @edge-size-large;
+  padding: 0 @docfree-edge-size-large;
   z-index: 1;
   background: #fff;
   box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
@@ -18,7 +18,7 @@
 
 .docfree-nav {
   list-style: none;
-  font-size: @font-size-base + 2;
+  font-size: @font-size-base + 1;
   ul {
     list-style: none;
   }
@@ -27,8 +27,8 @@
     margin-left: 20px;
     position: relative;
     & > :first-child {
-      height: @header-height;
-      line-height: @header-height;
+      height: @docfree-header-height;
+      line-height: @docfree-header-height;
       padding: 0 4px;
       max-width: 120px;
       font-weight: normal;
@@ -57,16 +57,15 @@
     & > ul {
       display: none;
       position: absolute;
-      top: @header-height;
+      top: @docfree-header-height;
       right: -10px;
       overflow: auto;
       background: #fff;
       padding: 10px;
       max-width: 300px;
-      max-height: calc(100vh - @header-height);
+      max-height: calc(100vh - @docfree-header-height);
       border-radius: @border-radius-base;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
-      font-size: @font-size-base;
       li {
         text-overflow: ellipsis;
         white-space: nowrap;

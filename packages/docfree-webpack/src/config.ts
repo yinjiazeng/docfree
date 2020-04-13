@@ -1,7 +1,7 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
 import { getDocPath, getConfig, tempPath, qs, babelOptions, merge } from 'docfree-utils';
-
 import { join } from 'path';
+import { readFileSync } from 'fs';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -23,7 +23,7 @@ export default function(options: Configuration): Configuration {
   // 文档配置目录
   const docfreePath = join(docPath, '.docfree');
   // less主题配置文件
-  const themePath = join(docfreePath, 'theme.js');
+  const modifyVarsPath = join(docfreePath, 'modify-vars.js');
   // 静态资源目录
   const staticPath = join(docfreePath, 'public');
   // 构建输出文件目录
@@ -75,11 +75,10 @@ export default function(options: Configuration): Configuration {
     });
   }
 
-  let modifyVars: any;
+  let modifyVars = {};
 
   try {
-    modifyVars = require(themePath);
-    // eslint-disable-next-line no-empty
+    modifyVars = require(modifyVarsPath);
   } catch (e) {}
 
   const plugins = [

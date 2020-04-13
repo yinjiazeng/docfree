@@ -26,11 +26,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
 
           if (item.level !== undefined) {
             elem = (
-              <AnchorLink
-                id={null}
-                style={{ paddingLeft: item.level * 16 }}
-                to={item.text}
-                title={item.text}>
+              <AnchorLink id={null} style={{ paddingLeft: item.level * 16 }} to={item.text}>
                 {item.text}
               </AnchorLink>
             );
@@ -43,7 +39,7 @@ export default function Menus({ data, isActive, className }: MenusProps) {
               );
             } else {
               elem = (
-                <NavLink to={item.to} isActive={isActive} title={item.text}>
+                <NavLink to={item.to} isActive={isActive}>
                   {item.text}
                 </NavLink>
               );
