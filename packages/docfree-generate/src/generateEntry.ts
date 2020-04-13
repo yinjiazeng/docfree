@@ -195,7 +195,7 @@ nuomi.config({
           !isBlog && config.sidebar.data
             ? `
         const sidebarData = ${formatJSON(config.sidebar.data)};
-        data = sidebarData[pathname];`
+        data = sidebarData[pathname] || sidebarData[pathname.replace(/\\/+$/, '') || '/'];`
             : ''
         }
         if (data && findFilename(data.menus, filename)) {
@@ -232,16 +232,36 @@ nuomi.config({
     }
   },
   onInit() {
-    const { title } = this;
+    const { path, title, location, data } = this;
+    // 文章页面
     if (title) {
       document.title = title + ' | ' + documentTitle;
+
+      // search跳转来
+      if (data.hash) {
+        const { hash: h } = window.location;
+        setTimeout(() => {
+          window.location.hash = h + '#' + data.hash;
+        });
+        return;
+      }
+
+      if (!location.hash) {
+        window.scrollTo({ top: 0 });
+      }
     } else {
+      // 博客首页
+      if (path) {
+        window.scrollTo({ top: 0 });
+      }
       document.title = documentTitle;
     }
-
-    window.scrollTo({ top: 0 });
   }
 });
+
+const nav = getNavMenus(${formatJSON(config.nav)});
+const footer = ${isAbsolute(config.footer) ? `require('${config.footer}')` : `'${config.footer}'`};
+const routerType = '${['hash', 'browser'].includes(config.type) ? config.type : 'hash'}';
 
 const globalState = {
   showSidebar: false,
@@ -251,15 +271,11 @@ const globalState = {
   pageSidebarMenus: [],
 };
 
-const nav = getNavMenus(${formatJSON(config.nav)});
-const footer = ${isAbsolute(config.footer) ? `require('${config.footer}')` : `'${config.footer}'`};
-const routerType = '${['hash', 'browser'].includes(config.router) ? config.router : 'hash'}';
-
 const App = () => {
   return (
     <Router type={routerType}>
       <Nuomi id="global" state={globalState} onInit={null}>
-        <Docfree.Layout title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
+        <Docfree.Layout type={routerType} title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
           <ShapeRoute routes={routes} />
           <Route path="*">
             <Docfree.NotFound />

@@ -27,96 +27,96 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   }
 
   const callback = this.async();
-  const config: any = getConfig();
-  const { sidebar } = config;
-  const { content: markdownContent, data: setting } = matter(content);
-  const resource = { resourcePath, content: markdownContent };
-  const { content: mdContent, headings: hs } = parser(resource, config.plugins);
-  const sidebarTitle = setting.title || '';
-  const sidebarDepth = getDepth(setting.depth, sidebar.depth);
-  const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
-
-  let result = '';
-  let title = '';
-
-  const headings = hs.filter((item) => {
-    const { depth, text } = item;
-
-    if (depth === 1) {
-      if (!title) {
-        title = text;
-      }
-
-      return false;
-    }
-
-    return true;
-  });
-
-  const sidebarMenus = sidebarDepth ? headings.filter(({ depth }) => depth <= sidebarDepth) : [];
-
-  const pageSidebarMenus = pageSidebarDepth
-    ? headings
-        .filter(({ depth }) => {
-          return depth <= pageSidebarDepth && depth > sidebarDepth;
-        })
-        .map((item) => {
-          const { level, depth, ...rest } = item;
-
-          if (sidebarDepth) {
-            return { level: depth - sidebarDepth, ...rest };
-          }
-
-          return item;
-        })
-    : [];
-
-  content = `import React from 'react';
-import * as Docfree from 'docfree-components';
-
-${mdContent}\nexport default Docfree.Content;`;
 
   try {
-    result = await mdx(content);
-  } catch (err) {
-    return callback(err);
-  }
+    const config: any = getConfig();
+    const { sidebar } = config;
+    const { content: markdownContent, data: setting } = matter(content);
+    const resource = { resourcePath, content: markdownContent };
+    const { content: mdContent, headings: hs } = parser(resource, config.plugins);
+    const sidebarTitle = setting.title || '';
+    const sidebarDepth = getDepth(setting.depth, sidebar.depth);
+    const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
 
-  result = result
-    .replace(/(export) default/, '$1')
-    .replace('/* @jsx mdx */', '')
-    .replace(/\s+mdxType="[^"]+"/g, '')
-    .replace(/(<[a-z][a-zA-Z]*)\sparentName="[^"]+"/g, '$1')
-    .replace(
-      /<(inlineCode)>([\s\S]*?)<\/\1>/g,
-      (a, b, c) => `<code className="inline">${c}</code>`,
+    let title = '';
+
+    const headings = hs.filter((item) => {
+      const { depth, text } = item;
+
+      if (depth === 1) {
+        if (!title) {
+          title = text;
+        }
+
+        return false;
+      }
+
+      return true;
+    });
+
+    const sidebarMenus = sidebarDepth ? headings.filter(({ depth }) => depth <= sidebarDepth) : [];
+
+    const pageSidebarMenus = pageSidebarDepth
+      ? headings
+          .filter(({ depth }) => {
+            return depth <= pageSidebarDepth && depth > sidebarDepth;
+          })
+          .map((item) => {
+            const { level, depth, ...rest } = item;
+
+            if (sidebarDepth) {
+              return { level: depth - sidebarDepth, ...rest };
+            }
+
+            return item;
+          })
+      : [];
+
+    content = `import React from 'react';
+  import * as Docfree from 'docfree-components';
+
+  ${mdContent}\nexport default Docfree.Content;`;
+
+    let result = await mdx(content);
+
+    result = result
+      .replace(/(export) default/, '$1')
+      .replace('/* @jsx mdx */', '')
+      .replace(/\s+mdxType="[^"]+"/g, '')
+      .replace(/(<[a-z][a-zA-Z]*)\sparentName="[^"]+"/g, '$1')
+      .replace(
+        /<(inlineCode)>([\s\S]*?)<\/\1>/g,
+        (a, b, c) => `<code className="inline">${c}</code>`,
+      );
+
+    return callback(
+      null,
+      `${result}
+
+      const nuomiProps = {
+        state: {
+          showCode: false,
+        },
+        sidebarTitle: '${sidebarTitle}',
+        headings: ${formatJSON(headings)},
+        showSidebar: ${sidebarDepth > 0 && sidebarMenus.length > 0},
+        showPageSidebar: ${pageSidebarDepth > 0 && pageSidebarMenus.length > 0},
+        sidebarMenus: ${formatJSON(sidebarMenus)},
+        pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
+        utime: ${tempData.get(resourcePath).utime},
+        render() {
+          return <MDXContent pageExtra={${formatJSON(
+            setting.pageExtra !== false ? config.pageExtra : false,
+          )}} />
+        },
+      };
+      ${title ? `nuomiProps.title = '${title}';` : ''}
+      export default nuomiProps;
+    `,
     );
-
-  return callback(
-    null,
-    `${result}
-
-    const nuomiProps = {
-      state: {
-        showCode: false,
-      },
-      sidebarTitle: '${sidebarTitle}',
-      headings: ${formatJSON(headings)},
-      showSidebar: ${sidebarDepth > 0 && sidebarMenus.length > 0},
-      showPageSidebar: ${pageSidebarDepth > 0 && pageSidebarMenus.length > 0},
-      sidebarMenus: ${formatJSON(sidebarMenus)},
-      pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-      utime: ${tempData.get(resourcePath).utime},
-      render() {
-        return <MDXContent pageExtra={${formatJSON(
-          setting.pageExtra !== false ? config.pageExtra : false,
-        )}} />
-      },
-    };
-    ${title ? `nuomiProps.title = '${title}';` : ''}
-    export default nuomiProps;
-  `,
-  );
+  } catch (e) {
+    return callback(e);
+  }
 };
 
 module.exports.pitch = function docfreeLoaderPitch(this: any, request: string) {

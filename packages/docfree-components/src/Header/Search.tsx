@@ -9,7 +9,7 @@ export interface DataSource {
   key: number;
 }
 
-export default function Search({ data }) {
+export default function Search({ data, type }) {
   const [visible, visibleDispatch] = useState(false);
   const [source, sourceDispatch]: [DataSource[], any] = useState([]);
 
@@ -25,16 +25,14 @@ export default function Search({ data }) {
     const location = router.location();
 
     if (location.pathname === pathname) {
-      router.location(pathname, true);
-
-      if (hash) {
-        setTimeout(() => {
-          const { hash: h } = window.location;
-          window.location.hash = `${h}#${hash}`;
-        }, 0);
+      hash = `#${hash}`;
+      if (type === 'hash') {
+        hash = `#${pathname}${location.search}${hash}`;
       }
+      window.location.hash = hash;
     } else {
-      router.location({ pathname, hash });
+      // 在onInit中处理
+      router.location({ pathname }, { hash });
     }
   };
 

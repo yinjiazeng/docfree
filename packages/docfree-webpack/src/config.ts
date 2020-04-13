@@ -16,7 +16,7 @@ function extToRegexp(ext: string | string[], prefix?: string): RegExp {
 export default function(options: Configuration): Configuration {
   const { mode } = options;
   const isDev = mode === 'development';
-  const { webpackConfig, dest: defaultDest, title } = getConfig();
+  const { webpack: webpackConfig, dest: defaultDest, title, type } = getConfig();
 
   // 文档根目录
   const docPath = getDocPath();
@@ -29,7 +29,8 @@ export default function(options: Configuration): Configuration {
   // 构建输出文件目录
   const destPath = defaultDest || join(docfreePath, 'dist');
 
-  const publicPath = (webpackConfig.output && webpackConfig.output.publicPath) || './';
+  const publicPath =
+    (webpackConfig.output && webpackConfig.output.publicPath) || (type === 'hash' ? './' : '/');
   const publicjsPath = `js`;
   const publicMediaPath = `media`;
 

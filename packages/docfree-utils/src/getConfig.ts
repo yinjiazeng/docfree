@@ -41,7 +41,7 @@ export interface DocfreeConfig {
   };
   langTheme: string;
   plugins: DocfreePlugin[];
-  webpackConfig: Configuration;
+  webpack: Configuration;
   [key: string]: any;
 }
 
@@ -65,7 +65,7 @@ const defaultConfig: DocfreeConfig = {
     data: null,
   },
   plugins: [],
-  webpackConfig: {},
+  webpack: {},
 };
 
 export default function(): DocfreeConfig {

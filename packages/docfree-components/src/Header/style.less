@@ -67,6 +67,7 @@
       border-radius: @border-radius-base;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
       li {
+        padding: 2px 0;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -106,13 +107,18 @@
 }
 
 .docfree-popover {
-  transition: none !important;
+  .ant-popover-title {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
   .ant-popover-inner-content {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
     .ant-list-item {
-      padding: 8px 0;
+      padding: 6px 12px;
       cursor: pointer;
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
       b {
         font-weight: normal;
         color: @primary-color;

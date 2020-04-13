@@ -12,6 +12,7 @@ export default class AnchorLinkEnhance extends AnchorLink {
   }
 
   componentDidMount() {
+    // 解决offsetTop不准
     setTimeout(() => {
       const { current } = this.ref;
       const style = window.getComputedStyle(current);
@@ -20,7 +21,10 @@ export default class AnchorLinkEnhance extends AnchorLink {
       const { data } = AnchorLinkEnhance;
 
       if (!data.length) {
-        window.addEventListener('scroll', this.scrollHandler);
+        // 延迟绑定滚动事件，防止和首次打开页面hash跳转冲突
+        setTimeout(() => {
+          window.addEventListener('scroll', this.scrollHandler);
+        }, 1500);
       }
 
       data.push({ to, top: this.offsetTop });
