@@ -12,8 +12,15 @@
   & > h4,
   & > h5,
   & > h6 {
-    margin: @docfree-edge-size-large 0 @docfree-edge-size-small;
+    margin: -6-@docfree-edge-size-large 0 @docfree-edge-size-small;
     word-break: break-all;
+    & > a[id] {
+      display: inline-block;
+      padding-top: @docfree-header-height;
+    }
+    &:first-child {
+      margin-top: -@docfree-header-height;
+    }
   }
   & > h1 {
     font-size: @font-size-base + 12;

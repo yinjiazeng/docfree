@@ -9,5 +9,21 @@ pageDepth: 4
 
 ### xxx
 
+```jsx
+import React, { useState } from 'react';
+import { Button } from 'antd';
 
-#### xx
+class Demo extends React.Component {
+  render() {
+    return <Button className={$style.color}>11111</Button>
+  }
+};
+
+<Demo />
+
+<style module>
+.color {
+  color: red;
+}
+</style>
+```

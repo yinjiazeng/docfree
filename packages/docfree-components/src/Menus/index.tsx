@@ -3,52 +3,54 @@ import { NavLink } from 'nuomi';
 import AnchorLink from '../AnchorLink';
 import './style.less';
 
-interface Menus {
-  text: string;
+export interface MenusData {
+  text?: string;
   to?: string;
   depth?: number;
-  level: number;
-  menus?: Menus[];
+  level?: number;
+  menus?: MenusData[];
+  [key: string]: any;
 }
 
-interface MenusProps {
-  data: Menus[];
+export type MenusItems = MenusData[];
+
+export interface MenusProps {
+  data: MenusItems;
   className?: string;
-  isActive?: Function;
 }
 
-export default function Menus({ data, isActive, className }: MenusProps) {
-  const getMenus = (menus: Menus[], list: ReactElement[] = []) => {
+export default function Menus({ data, className }: MenusProps) {
+  const getMenus = (menus: MenusItems, list: ReactElement[] = []) => {
     if (Array.isArray(menus) && menus.length) {
-      menus.forEach((item, i) => {
-        if (item.text) {
+      menus.forEach(({ depth, level, text, to, menus: m, isActive, ...rest }, i) => {
+        if (text) {
           let elem: ReactElement;
 
-          if (item.level !== undefined) {
+          if (level !== undefined) {
             elem = (
-              <AnchorLink id={null} style={{ paddingLeft: item.level * 16 }} to={item.text}>
-                {item.text}
+              <AnchorLink id={null} to={text} {...rest} style={{ paddingLeft: level * 12 }}>
+                {text}
               </AnchorLink>
             );
-          } else if (item.to) {
-            if (/^(https?:)?\/\//.test(item.to)) {
+          } else if (to) {
+            if (/^(https?:)?\/\//.test(to)) {
               elem = (
-                <a href={item.to} target="_blank">
-                  {item.text}
+                <a href={to} target="_blank" {...rest}>
+                  {text}
                 </a>
               );
             } else {
               elem = (
-                <NavLink to={item.to} isActive={isActive}>
-                  {item.text}
+                <NavLink to={to} isActive={isActive} {...rest}>
+                  {text}
                 </NavLink>
               );
             }
           } else {
-            elem = <b>{item.text}</b>;
+            elem = <b>{text}</b>;
           }
-          if (item.menus) {
-            const items = getMenus(item.menus);
+          if (m) {
+            const items = getMenus(m);
 
             if (items.length) {
               elem = (

@@ -6,7 +6,6 @@ module.exports = {
     to: '/b'
   }, {
     text: '列表',
-    to: '/a',
     menus: [{
       text: '列表',
       menus: [{

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'nuomi';
 import { Row, Col } from '../antd';
 import Search from './Search';
-import Menus from '../Menus';
+import Nav from './Nav';
 import './style.less';
 
 export default function Header({ nav, title, dataSource }: any) {
@@ -19,7 +19,7 @@ export default function Header({ nav, title, dataSource }: any) {
       </Col>
       <Col>
         <Search data={dataSource} />
-        <Menus className="docfree-nav" data={nav} isActive={isActive} />
+        <Nav data={nav} />
       </Col>
     </Row>
   );

@@ -12,15 +12,19 @@ export default class AnchorLinkEnhance extends AnchorLink {
   }
 
   componentDidMount() {
-    this.offsetTop = this.ref.current.offsetTop;
-    const { to } = this.props;
-    const { data } = AnchorLinkEnhance;
+    setTimeout(() => {
+      const { current } = this.ref;
+      const style = window.getComputedStyle(current);
+      this.offsetTop = current.offsetTop + parseFloat(style.paddingTop) || 0;
+      const { to } = this.props;
+      const { data } = AnchorLinkEnhance;
 
-    if (!data.length) {
-      window.addEventListener('scroll', this.scrollHandler);
-    }
+      if (!data.length) {
+        window.addEventListener('scroll', this.scrollHandler);
+      }
 
-    data.push({ to, top: this.offsetTop });
+      data.push({ to, top: this.offsetTop });
+    }, 0);
   }
 
   componentWillUnmount() {
@@ -38,7 +42,7 @@ export default class AnchorLinkEnhance extends AnchorLink {
     const { to: hash } = this.findData();
     const { pathname, search } = router.location();
 
-    router.location({ pathname, search, hash });
+    router.replace({ pathname, search, hash });
   };
 
   findData = () => {

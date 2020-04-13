@@ -42,7 +42,7 @@ const generateData = (rawData, data = []) => {
       const { path, children, render, effects, onInit, onChange, ...rest } = route;
       if (Array.isArray(children)) {
         data = generateData(children, data);
-      } else if (${isBlog ? '!/^README$/i.test(route.filename) && ' : ''}route.title) {
+      } else if (${isBlog ? `path !== '/' && ` : ''}route.title) {
         data.push(rest);
       }
     }
@@ -68,7 +68,7 @@ const getList = (pathname, { query }) => {
   const list = [];
 
   dataSource.forEach(({ title, pathname: pre, filename, ctime }) => {
-    if (pre.startsWith(prePath) && !/^README$/i.test(filename)) {
+    if (pre.startsWith(prePath)) {
       list.push({ to: pre + filename + '?_=' + prePath, text: title, ctime });
     }
   });

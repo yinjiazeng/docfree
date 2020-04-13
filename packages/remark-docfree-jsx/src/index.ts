@@ -1,4 +1,13 @@
-import { matchHtml, storage, babel, babelOptions, VFile, UnistNode } from 'docfree-utils';
+import {
+  matchHtml,
+  storage,
+  babel,
+  types,
+  babelOptions,
+  VFile,
+  UnistNode,
+  NodePath,
+} from 'docfree-utils';
 
 module.exports = function() {
   return function({ children }: UnistNode, file: VFile) {
@@ -44,8 +53,25 @@ module.exports = function() {
             importStyles.push('');
           }
 
+          const visitor = {
+            ImportDefaultSpecifier(path: NodePath) {
+              if (
+                types.isImportDeclaration(path.parent) &&
+                types.isStringLiteral(path.parent.source) &&
+                path.parent.source.value === 'react'
+              ) {
+                path.remove();
+              }
+            },
+          };
+
           const res = babel.transformSync(`${importStyles.join('\n')}${content}`, {
-            ...babelOptions,
+            presets: babelOptions.presets,
+            plugins: [
+              {
+                visitor,
+              },
+            ],
             filename: `demo.${node.lang}`,
           });
 

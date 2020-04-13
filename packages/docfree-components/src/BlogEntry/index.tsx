@@ -56,7 +56,7 @@ export default function BlogEntry({ pageSize }) {
     <div className="docfree-blog">
       <div className="docfree-blog-list">
         {data.map(({ year, list }) => (
-          <dl>
+          <dl key={year}>
             <dt>{year}</dt>
             {list.map(({ to, text, date }) => (
               <dd key={to}>

@@ -9,6 +9,14 @@ export default function generateBlogRoutes(routes: RouteItem[] = [], pathname = 
     }
   });
 
+  for (const route of routes) {
+    const { title, path }: any = route;
+    if (path === '/' && /^README$/i.test(title)) {
+      route.path = `/${title}`;
+      break;
+    }
+  }
+
   routes.unshift({
     path: '/',
     pathname,
