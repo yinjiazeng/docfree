@@ -34,11 +34,9 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     const { content: markdownContent, data: setting } = matter(content);
     const resource = { resourcePath, content: markdownContent };
     const { content: mdContent, headings: hs } = parser(resource, config.plugins);
-    const sidebarTitle = setting.title || '';
     const sidebarDepth = getDepth(setting.depth, sidebar.depth);
     const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
-
-    let title = '';
+    let title = setting.title || '';
 
     const headings = hs.filter((item) => {
       const { depth, text } = item;
@@ -97,9 +95,8 @@ module.exports = async function docfreeLoader(this: any, content: string) {
         state: {
           showCode: false,
         },
-        sidebarTitle: '${sidebarTitle}',
         headings: ${formatJSON(headings)},
-        showSidebar: ${sidebarDepth > 0 && sidebarMenus.length > 0},
+        showSidebar: ${sidebarDepth > 0},
         showPageSidebar: ${pageSidebarDepth > 0 && pageSidebarMenus.length > 0},
         sidebarMenus: ${formatJSON(sidebarMenus)},
         pageSidebarMenus: ${formatJSON(pageSidebarMenus)},

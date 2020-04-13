@@ -6,43 +6,8 @@
   margin: 0 240px;
   padding-top: @docfree-edge-size-large;
   padding-bottom: @docfree-edge-size-small;
-  & > h1,
-  & > h2,
-  & > h3,
-  & > h4,
-  & > h5,
-  & > h6 {
-    margin: -6-@docfree-edge-size-large 0 @docfree-edge-size-small;
-    word-break: break-all;
-    & > a[id] {
-      display: inline-block;
-      padding-top: @docfree-header-height;
-    }
-    &:first-child {
-      margin-top: -@docfree-header-height;
-    }
-  }
-  & > h1 {
-    font-size: @font-size-base + 12;
-  }
-  & > h2 {
-    font-size: @font-size-base + 10;
-  }
-  & > h3 {
-    font-size: @font-size-base + 8;
-  }
-  & > h4 {
-    font-size: @font-size-base + 6;
-  }
-  & > h5 {
-    font-size: @font-size-base + 4;
-  }
-  & > h6 {
-    font-size: @font-size-base + 2;
-  }
-  & > p,
-  & > section {
-    margin: @docfree-edge-size-small 0;
+  pre {
+    margin: 0;
   }
   & > ul,
   & > ol {
@@ -70,9 +35,6 @@
   & > :first-child {
     margin-top: 0;
   }
-  pre {
-    margin: 0;
-  }
   blockquote {
     border-left: 6px solid @primary-color;
     padding: @docfree-edge-size-small;
@@ -84,6 +46,53 @@
   }
   img {
     max-width: 100%;
+  }
+
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
+    margin: -6-@docfree-edge-size-large 0 @docfree-edge-size-small;
+    word-break: break-all;
+    & > a[id] {
+      display: inline-block;
+      margin-right: 8px;
+      padding-top: @docfree-header-height;
+    }
+    & > span {
+      display: inline-block;
+    }
+    &:first-child {
+      margin-top: -@docfree-header-height;
+    }
+  }
+  & > h1 {
+    font-size: @font-size-base + 14;
+  }
+  & > h2 {
+    font-size: @font-size-base + 10;
+  }
+  & > h3 {
+    font-size: @font-size-base + 8;
+  }
+  & > h4 {
+    font-size: @font-size-base + 6;
+  }
+  & > h5 {
+    font-size: @font-size-base + 4;
+  }
+  & > h6 {
+    font-size: @font-size-base + 2;
+  }
+  & > ol,
+  & > ul,
+  & > p,
+  & > section,
+  & > blockquote,
+  & > pre {
+    margin: @docfree-edge-size-small 0;
   }
 }
 

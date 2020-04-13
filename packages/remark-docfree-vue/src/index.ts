@@ -82,7 +82,7 @@ export default function() {
                 const { mixins = [], ...rest } = getVueOptions() || {};
                 const data = {};
                 ${importStyles.join('\n')}
-                let template = '${templateContent}';
+                let template = \`${templateContent}\`;
                 if (data.docfree$style) {
                   template = template.replace(/(\\$style\\.)/g, 'docfree$1');
                 }

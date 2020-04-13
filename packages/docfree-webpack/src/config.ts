@@ -29,7 +29,7 @@ export default function(options: Configuration): Configuration {
   const destPath = defaultDest || join(docfreePath, 'dist');
 
   const publicPath =
-    (webpackConfig.output && webpackConfig.output.publicPath) || (type === 'hash' ? './' : '/');
+    (webpackConfig.output && webpackConfig.output.publicPath) || (type === 'browser' ? '/' : './');
   const publicjsPath = `js`;
   const publicMediaPath = `media`;
 

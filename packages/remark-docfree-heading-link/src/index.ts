@@ -43,7 +43,7 @@ export default function(options: Options = {}) {
       node.children = [
         {
           type: 'jsx',
-          value: `<Docfree.AnchorLinkEnhance to="${text}">#</Docfree.AnchorLinkEnhance> ${text}`,
+          value: `<Docfree.AnchorLinkEnhance to="${text}">#</Docfree.AnchorLinkEnhance><span>${text}</span>`,
         },
       ];
     });

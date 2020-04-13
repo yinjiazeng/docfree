@@ -42,9 +42,9 @@ export default function Search({ data, type }) {
     let key = 0;
 
     if (value) {
-      data.forEach(({ pathname, filename, title, headings }) => {
+      data.forEach(({ pathname, filename, title, headings, path: p }) => {
         const titles = [{ text: title, depth: 1 }, ...headings];
-        const path = pathname + filename;
+        const path = pathname + (/^README$/i.test(filename) && p === '/' ? '' : filename);
 
         titles.forEach(({ text, depth }) => {
           const index = text.indexOf(value);

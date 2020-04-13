@@ -7,7 +7,7 @@ export default function Home({ title, description, buttons, features }) {
   const onClick = (to: string) => {
     if (to) {
       if (/^(https?:)?\/\//.test(to)) {
-        window.location.href = to;
+        window.open(to);
       } else {
         router.location(to);
       }
