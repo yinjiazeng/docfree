@@ -299,7 +299,8 @@ export default function(options: Configuration): Configuration {
       alias: {
         react$: require.resolve('react'),
         'react-dom$': require.resolve('react-dom'),
-        '@components': resolve(require.resolve('docfree-components'), '../../'),
+        'docfree-components$': require.resolve('docfree-components'),
+        'docfree-prop-types$': require.resolve('docfree-prop-types'),
         '@nuomi': resolve(require.resolve('nuomi'), '../../'),
         '@antd': resolve(require.resolve('antd'), '../../'),
         '@highlight': resolve(require.resolve('highlight.js'), '../../'),

@@ -1,3 +1,3 @@
 ## 介绍
 
-webpack 控制
+webpack 配置

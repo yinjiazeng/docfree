@@ -23,6 +23,7 @@
     "css-loader": "^3.4.2",
     "docfree-component-loader": "^0.2.5",
     "docfree-components": "^0.2.6",
+    "docfree-prop-types": "^0.2.5",
     "docfree-loader": "^0.2.6",
     "docfree-utils": "^0.2.5",
     "file-loader": "^6.0.0",

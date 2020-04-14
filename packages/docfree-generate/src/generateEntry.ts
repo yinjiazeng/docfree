@@ -26,11 +26,11 @@ export default function generateEntry(routes: RouteItem[]): string {
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from '@nuomi';
-import * as Docfree from '@components';
+import * as Docfree from 'docfree-components';
 import ${
     config.langTheme
       ? `'@highlight/styles/${config.langTheme}.css';`
-      : `'@components/lib/style/lang.less';`
+      : `'docfree-components/lib/style/lang.less';`
   }
 
 const routes = ${routesString};
