@@ -12,7 +12,7 @@
     "clean": "rimraf packages/**/lib",
     "publish": "npm run clean && npm run build && lerna run dts && lerna publish",
     "test": "jest",
-    "doc:init": "docfree init",
+    "doc:init": "docfree init docs2",
     "doc:dev": "docfree dev docs",
     "doc:build": "docfree build docs"
   },
