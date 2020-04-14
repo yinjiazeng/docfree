@@ -2,4 +2,4 @@
 **/lib
 **/*.d.ts
 **/docs
-**/.temp.js
+**/.docfree/temp/docfree.js

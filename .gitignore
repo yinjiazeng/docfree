@@ -3,4 +3,5 @@
 **/lib
 **/.temp
 **/.docfree/dist
+**/.docfree/temp/docfree.js
 package-lock.json
