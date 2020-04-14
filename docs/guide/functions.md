@@ -135,7 +135,7 @@ const Buttons: ElementType<any> = () => (
 ## 支持Vue
 
 ```sh
-yarn add webpack vue-loader vue-loader
+yarn add webpack vue-loader vue
 ```
 
 ```js
