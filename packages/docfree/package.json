@@ -1,6 +1,6 @@
 {
   "name": "docfree",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "commander": "^4.1.1",
-    "docfree-generate": "^0.2.5",
+    "docfree-generate": "^0.2.6",
     "docfree-template": "^0.2.1-alpha.0",
     "docfree-utils": "^0.2.5",
-    "docfree-webpack": "^0.2.5"
+    "docfree-webpack": "^0.2.6"
   }
 }
