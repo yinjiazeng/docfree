@@ -223,7 +223,7 @@ export default {
 ### tip
 
 ```sh
-yarn add --dev antd remark-docfree-tip
+yarn add antd remark-docfree-tip
 ```
 
 ```js
@@ -262,7 +262,7 @@ module.exports = {
 ### emoji
 
 ```sh
-yarn add --dev remark-emoji
+yarn add remark-emoji
 ```
 
 ```js
