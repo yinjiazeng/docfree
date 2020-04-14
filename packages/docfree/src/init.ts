@@ -1,5 +1,5 @@
 import { join, resolve } from 'path';
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
+import { readdirSync, writeFileSync } from 'fs';
 import { getDocPath, fsExtra, logger, formatJSON, inquirer, ObjectAny } from 'docfree-utils';
 
 export default async function(name: string) {
@@ -44,21 +44,9 @@ export default async function(name: string) {
   const pkgPath = join(cwd, 'package.json');
 
   if (fsExtra.pathExistsSync(pkgPath)) {
-    const gitignorePath = join(cwd, '.gitignore');
     const yarnLockPath = join(cwd, 'yarn.lock');
     const scriptCommand = fsExtra.pathExistsSync(yarnLockPath) ? 'yarn' : 'npm run';
     let pkg: ObjectAny = {};
-
-    if (fsExtra.pathExistsSync(gitignorePath)) {
-      const gitignoreContent = readFileSync(gitignorePath).toString();
-
-      if (gitignoreContent.indexOf('.docfree/temp') === -1) {
-        writeFileSync(
-          gitignorePath,
-          `${gitignoreContent}\n# docfree临时文件目录\n**/.docfree/temp/docfree.js`,
-        );
-      }
-    }
 
     try {
       pkg = require(pkgPath);

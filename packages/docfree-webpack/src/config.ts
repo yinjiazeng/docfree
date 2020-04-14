@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, tempPath, qs, babelOptions, merge } from 'docfree-utils';
+import { getDocPath, getConfig, qs, babelOptions, merge } from 'docfree-utils';
 import { join } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -273,7 +273,7 @@ export default function(options: Configuration): Configuration {
   const defaultConfig: Configuration = {
     stats: 'errors-only',
     entry: {
-      docfree: tempPath.create('docfree.js'),
+      docfree: join(require.resolve('docfree-generate'), '../../.temp.js'),
     },
     output: {
       path: destPath,
