@@ -297,10 +297,10 @@ export default function(options: Configuration): Configuration {
     resolve: {
       extensions,
       alias: {
-        react$: require.resolve('react'),
-        'react-dom$': require.resolve('react-dom'),
-        'docfree-components$': require.resolve('docfree-components'),
-        'docfree-prop-types$': require.resolve('docfree-prop-types'),
+        react: require.resolve('react'),
+        'react-dom': require.resolve('react-dom'),
+        'docfree-components': resolve(require.resolve('docfree-components'), '../../'),
+        'docfree-prop-types': resolve(require.resolve('docfree-prop-types'), '../../'),
         '@nuomi': resolve(require.resolve('nuomi'), '../../'),
         '@antd': resolve(require.resolve('antd'), '../../'),
         '@highlight': resolve(require.resolve('highlight.js'), '../../'),
