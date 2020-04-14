@@ -38,10 +38,8 @@ yarn global add docfree
 docfree init docs
 
 # 开始写作
-docfree doc:dev docs
+docfree dev docs
 
 # 构建静态文件
-docfree doc:build docs
+docfree build docs
 ```
-
-> 请确保你的 Node.js 版本 >= 8.6。

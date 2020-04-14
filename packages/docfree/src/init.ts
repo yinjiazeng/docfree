@@ -1,10 +1,10 @@
-import { join, dirname } from 'path';
+import { join, resolve } from 'path';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { getDocPath, fsExtra, logger, formatJSON, inquirer, ObjectAny } from 'docfree-utils';
 
 export default async function(name: string) {
   let docsPath = getDocPath();
-
+  console.log(resolve('../../docfree-template', 'docs'));
   if (!name) {
     const result = await inquirer.prompt({
       type: 'confirm',
@@ -32,7 +32,7 @@ export default async function(name: string) {
     }
   }
 
-  const templateDir = join(dirname(require.resolve('docfree-template')), 'docs');
+  const templateDir = resolve('../../docfree-template', 'docs');
 
   readdirSync(templateDir).forEach((item) => {
     fsExtra.copySync(join(templateDir, item), join(docsPath, item));

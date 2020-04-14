@@ -1,5 +1,4 @@
 const store = {};
-
 let id = 0;
 
 export const set = function(value: any) {
@@ -11,7 +10,7 @@ export const set = function(value: any) {
 
 export const get = function(key: any) {
   const value = store[key];
-  // delete store[key];
+  delete store[key];
 
   return value;
 };

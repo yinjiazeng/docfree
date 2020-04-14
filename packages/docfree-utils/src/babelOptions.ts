@@ -1,7 +1,7 @@
-import env from '@babel/preset-env';
-import react from '@babel/preset-react';
-import typescript from '@babel/preset-typescript';
-
 export default {
-  presets: [env, react, typescript],
+  presets: [
+    require.resolve('@babel/preset-env'),
+    require.resolve('@babel/preset-react'),
+    require.resolve('@babel/preset-typescript'),
+  ],
 };

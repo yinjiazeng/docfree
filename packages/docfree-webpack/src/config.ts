@@ -65,7 +65,7 @@ export default function(options: Configuration): Configuration {
 
   if (webpackConfig.module && Array.isArray(webpackConfig.module.rules)) {
     webpackConfig.module.rules = webpackConfig.module.rules.filter((rule: any) => {
-      if (rule && rule.loader === 'file-loader') {
+      if (rule && typeof rule.loader === 'string' && rule.loader.indexOf('file-loader') !== -1) {
         if (rule.exclude) {
           fileLoaderExcludes = fileLoaderExcludes.concat(rule.exclude);
         }
@@ -107,7 +107,7 @@ export default function(options: Configuration): Configuration {
     const sourceMap = isDev;
     const use = [
       isDev
-        ? { loader: 'style-loader' }
+        ? { loader: require.resolve('style-loader') }
         : {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -115,14 +115,14 @@ export default function(options: Configuration): Configuration {
             },
           },
       {
-        loader: 'css-loader',
+        loader: require.resolve('css-loader'),
         options: {
           modules: module,
           sourceMap,
         },
       },
       {
-        loader: 'postcss-loader',
+        loader: require.resolve('postcss-loader'),
         options: {
           sourceMap,
           plugins: [
@@ -146,7 +146,7 @@ export default function(options: Configuration): Configuration {
         use: [
           ...use,
           {
-            loader: 'less-loader',
+            loader: require.resolve('less-loader'),
             options: {
               javascriptEnabled: true,
               sourceMap,
@@ -204,7 +204,12 @@ export default function(options: Configuration): Configuration {
 
       return false;
     },
-    use: ['docfree-loader', ...use],
+    use: [
+      {
+        loader: require.resolve('docfree-loader'),
+      },
+      ...use,
+    ],
   }));
 
   const playgroundStyleModuleLoaders = styleModuleLoaders.map(({ test, use }: any) => ({
@@ -222,16 +227,21 @@ export default function(options: Configuration): Configuration {
 
       return false;
     },
-    use: ['docfree-loader', ...use],
+    use: [
+      {
+        loader: require.resolve('docfree-loader'),
+      },
+      ...use,
+    ],
   }));
 
   const rules: RuleSetRule[] = [
     {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
-      loader: 'babel-loader',
+      loader: require.resolve('babel-loader'),
       options: merge(babelOptions, {
-        plugins: ['transform-es2015-modules-commonjs'],
+        plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
       }),
     },
     {
@@ -241,11 +251,11 @@ export default function(options: Configuration): Configuration {
 
         return params.getPropTypesDescription === '1';
       },
-      loader: 'docfree-component-loader',
+      loader: require.resolve('docfree-component-loader'),
     },
     {
       test: mdExtReg,
-      loader: 'docfree-loader',
+      loader: require.resolve('docfree-loader'),
     },
     ...playgroundStyleLoaders,
     ...playgroundStyleModuleLoaders,
@@ -253,7 +263,7 @@ export default function(options: Configuration): Configuration {
     ...styleModuleLoaders,
     {
       exclude: fileLoaderExcludes,
-      loader: 'file-loader',
+      loader: require.resolve('file-loader'),
       options: {
         name: `${publicMediaPath}/[name].[hash:8].[ext]`,
       },
@@ -263,7 +273,7 @@ export default function(options: Configuration): Configuration {
   const defaultConfig: Configuration = {
     stats: 'errors-only',
     entry: {
-      docfree: ['@babel/polyfill', tempPath.create('docfree.js')],
+      docfree: tempPath.create('docfree.js'),
     },
     output: {
       path: destPath,

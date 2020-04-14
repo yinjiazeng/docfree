@@ -4,6 +4,7 @@
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
+  "main": "index.js",
   "sideEffects": false,
   "files": [
     "docs"

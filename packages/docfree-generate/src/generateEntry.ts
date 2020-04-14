@@ -233,10 +233,15 @@ nuomi.config({
   },
   onInit() {
     const { path, title, location, data } = this;
+
+    if (title && path !== '/') {
+      document.title = title + ' | ' + documentTitle;
+    } else {
+      document.title = documentTitle;
+    }
+
     // 文章页面
     if (title) {
-      document.title = title + ' | ' + documentTitle;
-
       // search跳转来
       if (data.hash) {
         const { hash: h } = window.location;
@@ -254,7 +259,6 @@ nuomi.config({
       if (path) {
         window.scrollTo({ top: 0 });
       }
-      document.title = documentTitle;
     }
   }
 });
