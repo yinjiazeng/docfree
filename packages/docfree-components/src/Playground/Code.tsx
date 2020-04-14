@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState, useRef, RefObject } from 'react';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
-import hljs from 'highlight.js';
-import { Tooltip, Card } from '../antd';
+import { Tooltip, Card, hljs } from '../components';
 import PreCode from '../PreCode';
 
 export default function Code({ lang, content }) {

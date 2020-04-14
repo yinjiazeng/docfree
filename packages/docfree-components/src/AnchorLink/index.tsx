@@ -1,5 +1,5 @@
 import React, { PureComponent, RefObject, createRef } from 'react';
-import { RouterContext } from 'nuomi/lib/components/Context';
+import { RouterContext } from '../components';
 
 export interface AnchorLinkProps {
   to: string;

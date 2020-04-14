@@ -25,6 +25,7 @@
     "react/destructuring-assignment": "off",
     "react/forbid-foreign-prop-types": "off",
     "class-methods-use-this": "off",
+    "import/named": "off",
     "import/no-dynamic-require": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",

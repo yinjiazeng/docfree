@@ -1,7 +1,6 @@
 import React, { useState, ReactElement } from 'react';
 import { SearchOutlined, RightOutlined } from '@ant-design/icons';
-import { router } from 'nuomi';
-import { Input, Popover, List } from '../antd';
+import { router, Input, Popover, List } from '../components';
 
 export interface DataSource {
   to: { pathname: string; hash: string };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useConnect } from 'nuomi';
+import { useConnect } from '../components';
 import Menus from '../Menus';
 import './style.less';
 

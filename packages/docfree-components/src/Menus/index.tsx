@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { NavLink } from 'nuomi';
+import { NavLink } from '../components';
 import AnchorLink from '../AnchorLink';
 import './style.less';
 

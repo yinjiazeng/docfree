@@ -1,6 +1,6 @@
 **/node_modules
 **/.DS_Store
 **/lib
-**/.temp.js
+**/.temp
 **/.docfree/dist
 package-lock.json

@@ -1,4 +1,4 @@
-import { router } from 'nuomi';
+import { router } from '../components';
 import AnchorLink, { AnchorLinkProps } from '../AnchorLink';
 
 export default class AnchorLinkEnhance extends AnchorLink {

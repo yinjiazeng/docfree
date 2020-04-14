@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'nuomi';
-import { Row, Col } from '../antd';
+import { Row, Col, Link } from '../components';
 import Search from './Search';
 import Nav from './Nav';
 import './style.less';

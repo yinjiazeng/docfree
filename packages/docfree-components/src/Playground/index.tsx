@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, RefObject } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { useConnect } from 'nuomi';
+import { useConnect } from '../components';
 import Code from './Code';
 import './style.less';
 

@@ -71,7 +71,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       : [];
 
     content = `import React from 'react';
-  import * as Docfree from 'docfree-components';
+  import * as Docfree from '@components';
 
   ${mdContent}\nexport default Docfree.Content;`;
 

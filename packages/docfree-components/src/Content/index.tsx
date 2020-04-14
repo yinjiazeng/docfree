@@ -1,9 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useConnect, useNuomi, Link } from 'nuomi';
 import format from 'date-format';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import hljs from 'highlight.js';
-import { Row, Col } from '../antd';
+import { useConnect, useNuomi, Link, hljs, Row, Col } from '../components';
 import './style.less';
 
 function Content({ children, pageExtra }) {

@@ -43,8 +43,8 @@ module.exports = function() {
               children[i] = {
                 type: 'jsx',
                 value: `<section><Docfree.Component render={function(){
-                  const { Alert } = require('antd');
-                  require('antd/lib/alert/style');
+                  const { Alert } = require('@antd');
+                  require('@antd/lib/alert/style');
                   return <Alert type="${type}" message="${message}" description={${description}} />;
                 }} /></section>`,
               };

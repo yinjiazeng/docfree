@@ -1,6 +1,5 @@
 import React from 'react';
-import { router } from 'nuomi';
-import { Button } from '../antd';
+import { router, Button } from '../components';
 import './style.less';
 
 export default function Home({ title, description, buttons, features }) {

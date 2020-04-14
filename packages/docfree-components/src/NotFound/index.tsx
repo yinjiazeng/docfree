@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { store } from 'nuomi';
-import { Result } from '../antd';
+import { store, Result } from '../components';
 import './style.less';
 
 export default function NotFound() {

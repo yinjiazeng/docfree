@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, qs, babelOptions, merge } from 'docfree-utils';
+import { getDocPath, getConfig, qs, babelOptions, merge, tempPath } from 'docfree-utils';
 import { join, resolve } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -27,8 +27,6 @@ export default function(options: Configuration): Configuration {
   const staticPath = join(docfreePath, 'public');
   // 构建输出文件目录
   const destPath = defaultDest || join(docfreePath, 'dist');
-  // 入口
-  const entry = resolve(require.resolve('docfree-generate'), '../../.temp.js');
 
   const publicPath =
     (webpackConfig.output && webpackConfig.output.publicPath) || (type === 'browser' ? '/' : './');
@@ -237,22 +235,14 @@ export default function(options: Configuration): Configuration {
     ],
   }));
 
-  const babelRule = {
-    loader: require.resolve('babel-loader'),
-    options: merge(babelOptions, {
-      plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
-    }),
-  };
-
   const rules: RuleSetRule[] = [
-    {
-      include: entry,
-      ...babelRule,
-    },
     {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
-      ...babelRule,
+      loader: require.resolve('babel-loader'),
+      options: merge(babelOptions, {
+        plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
+      }),
     },
     {
       test: jsExtReg,
@@ -283,7 +273,7 @@ export default function(options: Configuration): Configuration {
   const defaultConfig: Configuration = {
     stats: 'errors-only',
     entry: {
-      docfree: entry,
+      docfree: tempPath.create('docfree.js'),
     },
     output: {
       path: destPath,
@@ -307,9 +297,12 @@ export default function(options: Configuration): Configuration {
     resolve: {
       extensions,
       alias: {
-        'docfree-components$': require.resolve('docfree-components'),
         react$: require.resolve('react'),
         'react-dom$': require.resolve('react-dom'),
+        '@components': resolve(require.resolve('docfree-components'), '../../'),
+        '@nuomi': resolve(require.resolve('nuomi'), '../../'),
+        '@antd': resolve(require.resolve('antd'), '../../'),
+        '@highlight': resolve(require.resolve('highlight.js'), '../../'),
       },
     },
     module: {

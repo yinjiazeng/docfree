@@ -14,6 +14,6 @@
     "noEmitOnError": true,
     "jsx": "react",
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
   }
 }

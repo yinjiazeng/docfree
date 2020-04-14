@@ -1,5 +1,4 @@
-import { getDocPath, tempData, fsExtra } from 'docfree-utils';
-import { resolve } from 'path';
+import { getDocPath, tempData, tempPath } from 'docfree-utils';
 import generateData from './generateData';
 import generateEntry from './generateEntry';
 
@@ -9,5 +8,5 @@ export default function() {
   const content = generateEntry(routes);
 
   tempData.write(data);
-  fsExtra.outputFileSync(resolve(__dirname, '../.temp.js'), content);
+  tempPath.write('docfree.js', content);
 }

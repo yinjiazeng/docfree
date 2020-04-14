@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from 'nuomi';
-import * as Docfree from 'docfree-components';
-import 'docfree-components/lib/style/lang.less';
+import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from '@nuomi';
+import * as Docfree from '@components';
+import '@components/lib/style/lang.less';
 
 const routes = [
   {

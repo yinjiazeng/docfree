@@ -1,7 +1,6 @@
 import React, { useLayoutEffect } from 'react';
-import { Link, useConnect, useNuomi, router } from 'nuomi';
 import format from 'date-format';
-import { Pagination } from '../antd';
+import { Link, useConnect, useNuomi, router, Pagination } from '../components';
 import './style.less';
 
 export interface Data {
