@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   footer: 'MIT Licensed | Copyright © 2020-present',
-  plugins: ['emoji', 'docfree-vue', 'docfree-tip'],
+  plugins: ['emoji', 'docfree-tip'],
   webpack: {
     plugins: [new VuePlugin()],
     module: {

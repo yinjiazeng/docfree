@@ -4,6 +4,7 @@ import remark from 'remark';
 import mdx from 'remark-mdx';
 import docfreeHeadingLink, { Heading } from 'remark-docfree-heading-link';
 import docfreePlayground from 'remark-docfree-playground';
+import docfreeVue from 'remark-docfree-vue';
 import docfreeProps from 'remark-docfree-props';
 import docfreeJsx from 'remark-docfree-jsx';
 import enhanceLink from 'remark-enhance-link';
@@ -25,6 +26,7 @@ export default function({ content, resourcePath }, plugins: any): ParserResult {
         },
       })
       .use(docfreeJsx)
+      .use(docfreeVue)
       .use(enhanceLink)
       .use(mdx),
   ];

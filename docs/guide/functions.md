@@ -132,12 +132,10 @@ const Buttons: ElementType<any> = () => (
 <Docfree.Props /> 和 <Docfree.Playground /> src属性必须包含文件类型后缀，比如.jsx/.tsx。
 ```
 
-## 插件使用
-
-### 支持Vue
+## 支持Vue
 
 ```sh
-yarn add remark-docfree-vue --dev
+yarn add webpack vue-loader vue-loader
 ```
 
 ```js
@@ -147,7 +145,6 @@ const VuePlugin = require('vue-loader/lib/plugin-webpack4');
 
 module.exports = {
   // ...其他选项
-  plugins: ['docfree-vue'],
   webpack: {
     plugins: [new VuePlugin()],
     module: {
@@ -221,7 +218,48 @@ export default {
 //```
 ```
 
-### 支持emoji
+## 插件使用
+
+### tip
+
+```sh
+yarn add --dev antd docfree-tip
+```
+
+```js
+// docs/.docfree/config.js
+
+module.exports = {
+  // ...其他选项
+  plugins: ['docfree-tip'],
+};
+```
+
+```tip:success:jsx
+正确
+<div></div>
+```
+
+```tip:error:jsx
+错误
+<div></d>
+```
+
+**markdown代码**
+
+```
+//```tip:success:jsx
+正确
+<div></div>
+//```
+
+//```tip:error:jsx
+错误
+<div></d>
+//```
+```
+
+### emoji
 
 ```sh
 yarn add --dev remark-emoji
