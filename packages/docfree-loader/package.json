@@ -1,6 +1,6 @@
 {
   "name": "docfree-loader",
-  "version": "0.2.0-alpha.0",
+  "version": "0.2.1-alpha.0",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
-    "docfree-utils": "^0.2.0-alpha.0",
+    "docfree-utils": "^0.2.1-alpha.0",
     "gray-matter": "^4.0.2",
     "loader-utils": "^2.0.0",
     "remark": "^11.0.2",
-    "remark-docfree-heading-link": "^0.2.0-alpha.0",
-    "remark-docfree-jsx": "^0.2.0-alpha.0",
-    "remark-docfree-playground": "^0.2.0-alpha.0",
-    "remark-docfree-props": "^0.2.0-alpha.0",
+    "remark-docfree-heading-link": "^0.2.1-alpha.0",
+    "remark-docfree-jsx": "^0.2.1-alpha.0",
+    "remark-docfree-playground": "^0.2.1-alpha.0",
+    "remark-docfree-props": "^0.2.1-alpha.0",
     "remark-enhance-link": "^0.2.0-alpha.0",
     "remark-mdx": "^1.5.8"
   }
