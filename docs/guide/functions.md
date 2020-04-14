@@ -223,7 +223,7 @@ export default {
 ### tip
 
 ```sh
-yarn add --dev antd docfree-tip
+yarn add --dev antd remark-docfree-tip
 ```
 
 ```js
