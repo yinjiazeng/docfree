@@ -12,11 +12,8 @@
     "clean": "rimraf packages/**/lib",
     "publish": "npm run clean && npm run build && lerna run dts && lerna publish",
     "test": "jest",
-    "doc:init": "docfree init docs",
-    "doc:dev": "docfree dev docs",
-    "doc:build": "docfree build docs",
-    "doc:dev2": "docfree dev docs2",
-    "doc:build2": "docfree build docs2"
+    "doc:dev": "docfree dev doc",
+    "doc:build": "docfree build doc"
   },
   "husky": {
     "hooks": {
