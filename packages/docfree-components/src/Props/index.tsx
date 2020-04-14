@@ -5,6 +5,7 @@ import './style.less';
 export type PropsApi = string | ReactElement;
 
 export interface PropsProps {
+  widths: any[];
   titles: string[];
   datas?: PropsApi[][];
   of?: ComponentType & {
@@ -14,7 +15,7 @@ export interface PropsProps {
   };
 }
 
-function Props({ titles, datas, of }: PropsProps) {
+function Props({ titles, datas, of, widths }: PropsProps) {
   const props = useMemo(() => {
     let array: PropsApi[][] = [];
 
@@ -69,7 +70,9 @@ function Props({ titles, datas, of }: PropsProps) {
       <thead>
         <tr>
           {titles.map((text, i) => (
-            <th key={i}>{text}</th>
+            <th key={i} style={{ width: widths[i] }}>
+              {text}
+            </th>
           ))}
         </tr>
       </thead>
@@ -87,12 +90,14 @@ function Props({ titles, datas, of }: PropsProps) {
 }
 
 Props.defaultProps = {
+  widths: ['22%', '22%', '22%'],
   titles: ['参数', '类型', '默认值', '说明'],
   datas: null,
   of: null,
 };
 
 Props.propTypes = {
+  widths: PropTypes.arrayOf(PropTypes.any),
   titles: PropTypes.arrayOf(PropTypes.string),
   datas: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
