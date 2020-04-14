@@ -240,9 +240,14 @@ export default function(options: Configuration): Configuration {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
       loader: require.resolve('babel-loader'),
-      options: merge(babelOptions, {
+      options: {
+        presets: [
+          require.resolve('@babel/preset-env'),
+          require.resolve('@babel/preset-react'),
+          require.resolve('@babel/preset-typescript'),
+        ],
         plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
-      }),
+      },
     },
     {
       test: jsExtReg,
