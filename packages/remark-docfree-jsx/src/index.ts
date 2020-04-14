@@ -38,9 +38,11 @@ export default function() {
             const mod: any = module != null ? module || '$style' : null;
 
             importStyles.push(
-              `import${mod ? ` ${mod} from` : ''} '${
-                file.path
-              }?styleContentKey=${styleContentKey}&styleLang=${lang}${mod ? '&module=true' : ''}'`,
+              `import${mod ? ` ${mod} from` : ''} ${JSON.stringify(
+                `${file.path}?styleContentKey=${styleContentKey}&styleLang=${lang}${
+                  mod ? '&module=true' : ''
+                }`,
+              )}`,
             );
 
             codes.push({

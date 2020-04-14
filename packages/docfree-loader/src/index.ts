@@ -133,6 +133,6 @@ module.exports.pitch = function docfreeLoaderPitch(this: any, request: string) {
 
     requests = Array.from(new Set(requests));
 
-    return `module.exports = require('!!${requests.join('!')}');`;
+    return `module.exports = require(${JSON.stringify(`!!${requests.join('!')}`)});`;
   }
 };

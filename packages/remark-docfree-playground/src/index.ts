@@ -39,7 +39,7 @@ const visit = ({ children }: UnistNode, file: VFile) => {
             if (/^\.(js|ts)x?$/.test(ext)) {
               const render = `function() {
                 const _interopRequireDefault = function(obj) { return obj && obj.default ? obj.default : obj };
-                const Playground = _interopRequireDefault(require('${parsed.path}'));
+                const Playground = _interopRequireDefault(require(${JSON.stringify(parsed.path)}));
                 return <Playground />;
               }`;
 

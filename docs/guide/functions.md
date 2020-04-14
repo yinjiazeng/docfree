@@ -135,7 +135,7 @@ const Buttons: ElementType<any> = () => (
 ## 支持Vue
 
 ```sh
-yarn add webpack vue-loader vue
+yarn add webpack vue-loader vue vue-template-compiler
 ```
 
 ```js
@@ -223,7 +223,7 @@ export default {
 ### tip
 
 ```sh
-yarn add antd remark-docfree-tip
+yarn add antd remark-docfree-tip remark-emoji
 ```
 
 ```js

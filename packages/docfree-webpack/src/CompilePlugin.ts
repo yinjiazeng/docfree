@@ -1,5 +1,5 @@
 import { Compiler } from 'webpack';
-import { resolve } from 'path';
+import { join } from 'path';
 import { logger, chalk, ObjectAny } from 'docfree-utils';
 
 export default class CompileDonePlugin {
@@ -21,7 +21,7 @@ export default class CompileDonePlugin {
       }
 
       const { host, port, path }: any = this.options;
-      const url = `http://${host}:${port}${resolve('/', path)}`;
+      const url = `http://${host}:${port}${join('/', path).replace(/\\/g, '/')}`;
 
       logger.clear();
       logger.success(`编译完成！`);

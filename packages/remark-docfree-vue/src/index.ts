@@ -64,11 +64,13 @@ export default function() {
               const mod: any = module != null ? module || '$style' : null;
 
               importStyles.push(
-                `${mod ? `data['${mod === '$style' ? `docfree${mod}` : mod}'] = ` : ''}require('${
-                  file.path
-                }?styleContentKey=${styleContentKey}&styleLang=${lang}${
-                  mod ? '&module=true' : ''
-                }');`,
+                `${
+                  mod ? `data['${mod === '$style' ? `docfree${mod}` : mod}'] = ` : ''
+                }require(${JSON.stringify(
+                  `${file.path}?styleContentKey=${styleContentKey}&styleLang=${lang}${
+                    mod ? '&module=true' : ''
+                  }`,
+                )});`,
               );
             });
 
