@@ -1,3 +1,4 @@
+import { isAbsolute, resolve } from 'path';
 import vfile from 'vfile';
 import remark from 'remark';
 import mdx from 'remark-mdx';
@@ -42,8 +43,12 @@ export default function({ content, resourcePath }, plugins: any): ParserResult {
       }
 
       if (typeof plugin === 'string') {
-        if (!plugin.startsWith('remark-')) {
-          plugin = `remark-${plugin}`;
+        if (!isAbsolute(plugin)) {
+          if (!plugin.startsWith('remark-')) {
+            plugin = `remark-${plugin}`;
+          }
+
+          plugin = resolve(process.cwd(), 'node_modules', plugin);
         }
 
         plugin = require(plugin);

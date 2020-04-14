@@ -13,8 +13,5 @@
   "license": "MIT",
   "scripts": {
     "dts": "tsc"
-  },
-  "dependencies": {
-    "docfree-utils": "^0.2.9"
   }
 }

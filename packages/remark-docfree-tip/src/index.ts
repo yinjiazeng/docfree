@@ -1,4 +1,4 @@
-import { UnistNode } from 'docfree-utils';
+import { Node as UnistNode } from 'unist';
 
 export interface Node extends UnistNode {
   lang?: string;
