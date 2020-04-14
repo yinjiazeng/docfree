@@ -2924,7 +2924,7 @@
           return u.default.createElement(p, {
             pageExtra: {
               platform: 'Github',
-              path: 'https://github.com/yinjiazeng/docfree/doc',
+              path: 'https://github.com/yinjiazeng/docfree/tree/master/doc',
               format: 'yyyy/MM/dd hh:mm:ss',
             },
           });
@@ -3563,7 +3563,7 @@
           return u.default.createElement(v, {
             pageExtra: {
               platform: 'Github',
-              path: 'https://github.com/yinjiazeng/docfree/doc',
+              path: 'https://github.com/yinjiazeng/docfree/tree/master/doc',
               format: 'yyyy/MM/dd hh:mm:ss',
             },
           });
