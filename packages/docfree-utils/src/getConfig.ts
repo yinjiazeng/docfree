@@ -1,5 +1,4 @@
 import { join } from 'path';
-import { Configuration } from 'webpack';
 import { merge, getDocPath } from '.';
 
 export type DocfreeSidebarDepth = 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -41,7 +40,7 @@ export interface DocfreeConfig {
   };
   langTheme: string;
   plugins: DocfreePlugin[];
-  webpack: Configuration;
+  webpack: any;
   [key: string]: any;
 }
 
@@ -71,9 +70,5 @@ const defaultConfig: DocfreeConfig = {
 export default function(): DocfreeConfig {
   const configPath = join(getDocPath(), '/.docfree/config.js');
 
-  try {
-    return merge({}, defaultConfig, require(configPath));
-  } catch (e) {
-    return defaultConfig;
-  }
+  return merge({}, defaultConfig, require(configPath));
 }

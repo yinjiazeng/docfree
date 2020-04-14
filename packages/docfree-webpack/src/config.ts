@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, qs, babelOptions, merge, tempPath } from 'docfree-utils';
+import { getDocPath, getConfig, qs, babelOptions, merge, tempPath, fsExtra } from 'docfree-utils';
 import { join, resolve } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -77,9 +77,9 @@ export default function(options: Configuration): Configuration {
 
   let modifyVars = {};
 
-  try {
+  if (fsExtra.pathExistsSync(modifyVarsPath)) {
     modifyVars = require(modifyVarsPath);
-  } catch (e) {}
+  }
 
   const plugins = [
     new HtmlWebpackPlugin({
