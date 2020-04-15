@@ -3,7 +3,7 @@ const VuePlugin = require('vue-loader/lib/plugin-webpack4');
 module.exports = {
   dest: '../../docs',
   title: 'Docfree',
-  mode: 'blog',
+  mode: 'doc',
   pageExtra: {
     path: 'https://github.com/yinjiazeng/docfree/tree/master/doc'
   },
