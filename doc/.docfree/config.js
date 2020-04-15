@@ -10,18 +10,6 @@ module.exports = {
   nav: [{
     text: '指南',
     to: '/guide',
-    menus: [{
-      text: '指南',
-      to: '/guide',
-    }]
-  }, {
-    text: '指南',
-    menus: [{
-      text: '指南',
-    }, {
-      text: '指南',
-      to: '/guide',
-    }]
   }, {
     text: '版本',
     to: 'https://github.com/yinjiazeng/docfree/releases',

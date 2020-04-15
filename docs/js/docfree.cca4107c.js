@@ -743,7 +743,7 @@
               d(
                 {
                   ctime: 1586786416848.8818,
-                  utime: 1586945299450.1355,
+                  utime: 1586945635136.1978,
                   pathname: '/guide/',
                   filename: 'functions',
                   ext: '.md',
@@ -846,8 +846,7 @@
             n
           );
         })([
-          { text: '指南', to: '/guide', menus: [{ text: '指南', to: '/guide' }] },
-          { text: '指南', menus: [{ text: '指南' }, { text: '指南', to: '/guide' }] },
+          { text: '指南', to: '/guide' },
           { text: '版本', to: 'https://github.com/yinjiazeng/docfree/releases' },
           { text: 'GitHub', to: 'https://github.com/yinjiazeng/docfree' },
         ]),
@@ -3601,10 +3600,9 @@
           { text: 'emoji', depth: 3, level: 2 },
           { text: '其他功能', depth: 2, level: 1 },
         ],
-        showSidebar: !1,
-        showPageSidebar: !0,
-        sidebarMenus: [],
-        pageSidebarMenus: [
+        showSidebar: !0,
+        showPageSidebar: !1,
+        sidebarMenus: [
           { text: '展示组件', depth: 2, level: 1 },
           { text: '支持Typescript', depth: 2, level: 1 },
           { text: '引入文件展示组件', depth: 2, level: 1 },
@@ -3615,7 +3613,8 @@
           { text: 'emoji', depth: 3, level: 2 },
           { text: '其他功能', depth: 2, level: 1 },
         ],
-        utime: 1586945299450.1355,
+        pageSidebarMenus: [],
+        utime: 1586945635136.1978,
         render: function() {
           return u.default.createElement(v, {
             pageExtra: {

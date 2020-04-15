@@ -1,6 +1,6 @@
 ---
-depth: 0
-pageDepth: 3
+depth: 3
+pageDepth: 0
 ---
 
 

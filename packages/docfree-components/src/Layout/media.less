@@ -1,0 +1,118 @@
+@import '../style/default.less';
+
+@media screen and (max-width: 800px) {
+  .docfree-header-left-col {
+    display: flex !important;
+  }
+
+  .docfree-header-left-col,
+  .docfree-header-right-col {
+    & > .docfree-drawer-icon {
+      display: inline-block;
+    }
+  }
+
+  .docfree-header-right-col {
+    & > div {
+      display: none;
+      padding: @docfree-edge-size-small;
+      width: 240px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: #fff;
+      border-left: 1px solid @docfree-layout-border-color;
+      overflow: auto;
+      & > .docfree-nav {
+        padding-left: 12px;
+        margin-top: @docfree-edge-size-small;
+        li > :first-child {
+          margin-bottom: 6px;
+        }
+        & > li {
+          float: none;
+          margin-left: 0;
+          line-height: normal;
+          & > :first-child {
+            height: auto;
+            line-height: initial;
+            padding: 0;
+            max-width: none;
+            &.active {
+              border: none;
+            }
+            &:after {
+              display: none;
+            }
+          }
+          & > ul {
+            display: block;
+            position: static;
+            max-width: none;
+            max-height: none;
+            box-shadow: none;
+            padding: 0;
+            li {
+              padding: 0 0 0 12px;
+            }
+            & > li:not(:last-child) {
+              & > ul {
+                padding-bottom: 0;
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .docfree-sidebar {
+    width: auto;
+    overflow: visible;
+    padding: 0;
+    border-right: none;
+    top: 0;
+    bottom: 0;
+    z-index: 12;
+    background: none;
+    & > .docfree-drawer-icon {
+      display: inline-block;
+      position: fixed;
+      top: @docfree-header-height / 2 - 17px;
+      left: @docfree-edge-size-large;
+    }
+    & > div {
+      position: relative;
+      height: 100%;
+      display: none;
+      z-index: 1;
+      width: 300px;
+      overflow: auto;
+      padding: @docfree-edge-size-large;
+      border-right: 1px solid @docfree-layout-border-color;
+      background: #fff;
+    }
+  }
+  .docfree-page-sidebar {
+    display: none;
+  }
+  .docfree-sidebar,
+  .docfree-page-sidebar {
+    & ~ section {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .docfree-sidebar {
+    & + .docfree-page-sidebar {
+      display: none;
+    }
+    & ~ section {
+      margin-right: 0;
+    }
+  }
+}

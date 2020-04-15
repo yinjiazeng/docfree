@@ -535,19 +535,6 @@
   text-align: center;
   border-top: 1px solid #ebedf1;
 }
-.docfree-layout {
-  padding-top: 60px;
-}
-.docfree-layout > .ant-back-top {
-  right: 16px;
-  bottom: 16px;
-}
-a {
-  color: rgba(0, 0, 0, 0.65);
-}
-a:hover {
-  color: #1890ff;
-}
 @media screen and (max-width: 800px) {
   .docfree-header-left-col {
     display: flex !important;
@@ -649,6 +636,19 @@ a:hover {
   .docfree-sidebar ~ section {
     margin-right: 0;
   }
+}
+.docfree-layout {
+  padding-top: 60px;
+}
+.docfree-layout > .ant-back-top {
+  right: 16px;
+  bottom: 16px;
+}
+a {
+  color: rgba(0, 0, 0, 0.65);
+}
+a:hover {
+  color: #1890ff;
 }
 .docfree-props {
   width: 100%;
