@@ -84,7 +84,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       .replace(/(<[a-z][a-zA-Z]*)\sparentName="[^"]+"/g, '$1')
       .replace(
         /<(inlineCode)>([\s\S]*?)<\/\1>/g,
-        (a, b, c) => `<code className="inline">${c}</code>`,
+        (a: string, b: string, c: string) => `<code className="inline">${c}</code>`,
       );
 
     return callback(

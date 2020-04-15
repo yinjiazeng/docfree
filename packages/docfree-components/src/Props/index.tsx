@@ -16,6 +16,23 @@ export interface PropsProps {
 }
 
 function Props({ titles, datas, of, widths }: PropsProps) {
+  const getDefault = (value: any) => {
+    if (value === undefined) {
+      return;
+    }
+
+    if (
+      typeof value === 'object' ||
+      typeof value === 'string' ||
+      typeof value === 'number' ||
+      typeof value === 'boolean'
+    ) {
+      return JSON.stringify(value);
+    }
+
+    return typeof value;
+  };
+
   const props = useMemo(() => {
     let array: PropsApi[][] = [];
 
@@ -31,9 +48,10 @@ function Props({ titles, datas, of, widths }: PropsProps) {
       keys.forEach((key) => {
         let { type } = propTypes[key];
         let desc = descriptions[key];
+        const def = getDefault(defaultProps[key]);
 
         if (type) {
-          type = [].concat(type).join(' | ');
+          type = Array.from(new Set([].concat(type))).join(' | ');
         }
 
         if (typeof desc === 'string') {
@@ -44,7 +62,7 @@ function Props({ titles, datas, of, widths }: PropsProps) {
             .map((txt, i) => <div key={i}>{txt.trim()}</div>);
         }
 
-        array.push([key, type, defaultProps[key], desc]);
+        array.push([key, type, def, desc]);
       });
     }
 

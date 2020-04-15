@@ -15,24 +15,13 @@ export function oneOf(types: any[]) {
   const func: any = propTypes.oneOf(types);
 
   func.type = types.map((item) => {
-    if (typeof item === 'string') {
-      return `'${item}'`;
-    }
-
-    if (typeof item === 'number') {
-      return item;
-    }
-
-    if (typeof item === 'function') {
-      return item.name;
-    }
-
-    if (item === null) {
-      return 'null';
-    }
-
-    if (item === undefined) {
-      return 'undefined';
+    if (
+      item == null ||
+      typeof item === 'string' ||
+      typeof item === 'number' ||
+      typeof item === 'boolean'
+    ) {
+      return JSON.stringify(item);
     }
 
     if (Array.isArray(item)) {
