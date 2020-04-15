@@ -1,3 +1,9 @@
+---
+depth: 0
+pageDepth: 3
+---
+
+
 # 查看功能
 
 ## 展示组件
@@ -131,6 +137,7 @@ const Buttons: ElementType<any> = () => (
 注意
 <Docfree.Props /> 和 <Docfree.Playground /> src属性必须包含文件类型后缀，比如.jsx/.tsx。
 ```
+
 
 ## 支持Vue
 

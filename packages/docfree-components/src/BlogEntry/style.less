@@ -1,8 +1,9 @@
 @import '../style/default.less';
 
 .docfree-blog {
-  width: 800px;
+  max-width: 800px;
   margin: @docfree-edge-size-large auto;
+  padding: 0 @docfree-layout-margin;
   .ant-pagination {
     text-align: center;
     margin: @docfree-edge-size-large 0;
@@ -40,18 +41,4 @@
       }
     }
   }
-  // list-style: none;
-  // font-size: @font-size-base + 2;
-  // & > li {
-  //   margin-bottom: 8px;
-  //   & > span {
-  //     color: #333;
-  //     margin-right: 16px;
-  //   }
-  //   & > a {
-  //     &:hover {
-  //       text-decoration: underline;
-  //     }
-  //   }
-  // }
 }

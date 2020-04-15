@@ -3,13 +3,25 @@ const VuePlugin = require('vue-loader/lib/plugin-webpack4');
 module.exports = {
   dest: '../../docs',
   title: 'Docfree',
-  mode: 'doc',
+  mode: 'blog',
   pageExtra: {
     path: 'https://github.com/yinjiazeng/docfree/tree/master/doc'
   },
   nav: [{
     text: '指南',
     to: '/guide',
+    menus: [{
+      text: '指南',
+      to: '/guide',
+    }]
+  }, {
+    text: '指南',
+    menus: [{
+      text: '指南',
+    }, {
+      text: '指南',
+      to: '/guide',
+    }]
   }, {
     text: '版本',
     to: 'https://github.com/yinjiazeng/docfree/releases',

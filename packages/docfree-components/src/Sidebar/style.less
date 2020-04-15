@@ -9,7 +9,7 @@
   overflow: auto;
   background: #fff;
   & ~ section > div {
-    margin: 0 40px;
+    max-width: none;
   }
 }
 
@@ -20,32 +20,37 @@
   & ~ section {
     margin-left: @docfree-sidebar-width;
   }
-  & > strong {
-    display: block;
-    margin-bottom: 16px;
-    font-size: @font-size-base + 8;
-    color: @heading-color;
+  & > .docfree-drawer-icon {
+    display: none;
   }
-  ul {
-    list-style: none;
-  }
-  & > ul {
-    font-size: @font-size-base + 2;
-    li {
-      margin-bottom: 6px;
+  & > div {
+    & > strong {
+      display: block;
+      margin-bottom: 16px;
+      font-size: @font-size-base + 8;
+      color: @heading-color;
     }
     ul {
-      margin-top: 6px;
+      list-style: none;
     }
-    & > li {
-      & > b {
-        border-bottom: 1px solid @docfree-layout-border-color;
-        padding-bottom: 6px;
-        color: @heading-color;
+    & > ul {
+      font-size: @font-size-base + 2;
+      li {
+        margin-bottom: 6px;
       }
-      li > b {
-        font-weight: normal;
-        color: @text-color-secondary;
+      ul {
+        margin-top: 6px;
+      }
+      & > li {
+        & > b {
+          border-bottom: 1px solid @docfree-layout-border-color;
+          padding-bottom: 6px;
+          color: @heading-color;
+        }
+        li > b {
+          font-weight: normal;
+          color: @text-color-secondary;
+        }
       }
     }
   }
@@ -55,6 +60,7 @@
   right: 0;
   width: @docfree-page-sidebar-width;
   padding-left: 0;
+  background: #fff;
   & ~ section {
     margin-right: @docfree-page-sidebar-width;
   }

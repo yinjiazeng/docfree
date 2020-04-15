@@ -36,3 +36,6 @@ import '@antd/lib/list/style';
 
 export { default as Button } from '@antd/lib/button';
 import '@antd/lib/button/style';
+
+export { default as BackTop } from '@antd/lib/back-top';
+import '@antd/lib/back-top/style';

@@ -7,9 +7,23 @@
   right: 0;
   left: 0;
   padding: 0 @docfree-edge-size-large;
-  z-index: 1;
+  z-index: 11;
   background: #fff;
   box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.docfree-header-left-col {
+  display: none !important;
+}
+
+.docfree-header-right-col {
+  & > .docfree-drawer-icon {
+    display: none;
+  }
   & > div {
     display: flex;
     align-items: center;
