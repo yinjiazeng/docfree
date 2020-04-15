@@ -23,7 +23,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   if (styleContentKey) {
     const styleContent = storage.get(styleContentKey);
 
-    return styleContent;
+    return styleContent || '';
   }
 
   const callback = this.async();
