@@ -711,11 +711,6 @@
       }
       n(673);
       var y = [
-          {
-            path: '/',
-            pathname: '/',
-            children: r.default.createElement(u.BlogEntry, { pageSize: 30 }),
-          },
           d(
             {
               ctime: 1586786416847.3335,
@@ -724,18 +719,13 @@
               filename: 'README',
               ext: '.md',
               title: 'README',
-              path: '/README',
+              path: '/',
             },
             n(674).default,
           ),
           {
             path: '/guide',
             children: [
-              {
-                path: '/',
-                pathname: '/guide/',
-                children: r.default.createElement(u.BlogEntry, { pageSize: 30 }),
-              },
               d(
                 {
                   ctime: 1586786416848.5488,
@@ -744,7 +734,7 @@
                   filename: 'README',
                   ext: '.md',
                   title: 'README',
-                  path: '/README',
+                  path: '/',
                 },
                 n(675).default,
               ),
@@ -776,16 +766,57 @@
                     t.onInit,
                     t.onChange,
                     f(t, ['children', 'render', 'effects', 'onInit', 'onChange']));
-                Array.isArray(r) ? (n = e(r, n)) : '/' !== t.path && t.title && n.push(o);
+                Array.isArray(r) ? (n = e(r, n)) : t.title && n.push(o);
               }
             }),
             n
           );
-        })(y).sort(function(e, t) {
-          var n = e.ctime,
-            r = t.ctime;
-          return n < r ? 1 : n > r ? -1 : 0;
-        });
+        })(y),
+        b = function e(t) {
+          var n = this,
+            r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
+            o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [];
+          return (
+            t.forEach(function(t) {
+              if ('string' == typeof t) {
+                var a = t.trim();
+                if (a) {
+                  var u,
+                    l = m.find(function(e) {
+                      return e.pathname === n.pathname && e.filename === a;
+                    });
+                  if (l) {
+                    var c = l.pathname,
+                      f = l.filename,
+                      s = l.title,
+                      d = l.ext,
+                      p = { to: c + (/^README$/i.test(f) ? '' : f), text: s };
+                    f === n.filename && d === n.ext && (p.menus = n.sidebarMenus), (u = p);
+                  } else u = { to: n.pathname + a, text: a };
+                  o.push(u), r.push(u);
+                }
+              } else if (t && 'object' === i(t))
+                if (Array.isArray(t)) {
+                  var y = e.call(n, t),
+                    b = y.menus,
+                    v = y.list;
+                  (o = o.concat(v)), (r = r.concat(b));
+                } else {
+                  var h = t.text,
+                    O = t.menus;
+                  if (h)
+                    if (Array.isArray(O)) {
+                      var g = e.call(n, O),
+                        E = g.menus,
+                        j = g.list,
+                        P = { text: h, menus: E };
+                      (o = o.concat(j)), r.push(P);
+                    } else r.push({ text: h });
+                }
+            }),
+            { menus: r, list: o }
+          );
+        };
       a.nuomi.config({
         state: { listSource: [] },
         effects: {
@@ -793,33 +824,63 @@
             var e = this.getNuomiProps(),
               t = e.title,
               n = e.pathname,
-              r = (e.filename, e.showSidebar),
-              o = e.showPageSidebar,
-              u = e.sidebarTitle,
-              l = e.sidebarMenus,
-              c = e.pageSidebarMenus,
-              i = e.data,
-              f = e.location,
-              s = { sidebarTitle: u, showSidebar: !!r, showPageSidebar: !!o, pageSidebarMenus: c };
-            i.computedSidebarMenus ||
-              ((i.listSource = []), (i.computedSidebarMenus = [{ text: t, menus: l }]));
-            s.sidebarMenus = i.computedSidebarMenus || [];
-            var d =
-              (function(e, t) {
-                var n = t.query._ || e,
-                  r = [];
-                return (
-                  m.forEach(function(e) {
-                    var t = e.title,
-                      o = e.pathname,
-                      a = e.filename,
-                      u = e.ctime;
-                    o.startsWith(n) && r.push({ to: o + a + '?_=' + n, text: t, ctime: u });
-                  }),
-                  r
-                );
-              })(n, f) || [];
-            this.dispatch({ type: '_updateState', payload: { listSource: d } }),
+              r = e.filename,
+              o = e.showSidebar,
+              u = e.showPageSidebar,
+              l = e.sidebarTitle,
+              c = e.sidebarMenus,
+              i = e.pageSidebarMenus,
+              f = e.data,
+              s =
+                (e.location,
+                { sidebarTitle: l, showSidebar: !!o, showPageSidebar: !!u, pageSidebarMenus: i });
+            if (!f.computedSidebarMenus) {
+              var d,
+                p = { '/guide': { title: '指南', menus: ['README', 'functions'] } };
+              if (
+                (d = p[n] || p[n.replace(/\/+$/, '') || '/']) &&
+                (function e(t, n) {
+                  var r = !1;
+                  if (Array.isArray(t)) {
+                    var o = !0,
+                      a = !1,
+                      u = void 0;
+                    try {
+                      for (var l, c = t[Symbol.iterator](); !(o = (l = c.next()).done); o = !0) {
+                        var i = l.value;
+                        if (i === n) {
+                          r = !0;
+                          break;
+                        }
+                        !r && i && i.menus && (r = e(i.menus, n));
+                      }
+                    } catch (e) {
+                      (a = !0), (u = e);
+                    } finally {
+                      try {
+                        o || null == c.return || c.return();
+                      } finally {
+                        if (a) throw u;
+                      }
+                    }
+                  }
+                  return r;
+                })(d.menus, r)
+              ) {
+                var y = d,
+                  m = y.title,
+                  v = y.menus;
+                if (((s.sidebarTitle = m), Array.isArray(v) && v.length)) {
+                  var h = b.call(e, v),
+                    O = h.menus,
+                    g = h.list;
+                  (f.listSource = g), (f.computedSidebarMenus = O);
+                }
+              } else (f.listSource = []), (f.computedSidebarMenus = [{ text: t, menus: c }]);
+            }
+            s.sidebarMenus = f.computedSidebarMenus || [];
+            var E = f.listSource || [];
+            this.dispatch({ type: '_updateState', payload: { listSource: E } }),
               a.store.dispatch({ type: 'global/_updateState', payload: s });
           },
         },
@@ -839,7 +900,7 @@
           } else e && window.scrollTo({ top: 0 });
         },
       });
-      var b = (function e(t) {
+      var v = (function e(t) {
           var n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [];
           return (
             t.forEach(function(t) {
@@ -858,7 +919,7 @@
           { text: '版本', to: 'https://github.com/yinjiazeng/docfree/releases' },
           { text: 'GitHub', to: 'https://github.com/yinjiazeng/docfree' },
         ]),
-        v = {
+        h = {
           showSidebar: !1,
           pageSidebar: !1,
           sidebarTtile: '',
@@ -872,13 +933,13 @@
             { type: 'hash' },
             r.default.createElement(
               a.Nuomi,
-              { id: 'global', state: v, onInit: null },
+              { id: 'global', state: h, onInit: null },
               r.default.createElement(
                 u.Layout,
                 {
                   type: 'hash',
                   title: 'Docfree',
-                  nav: b,
+                  nav: v,
                   footer: 'MIT Licensed | Copyright © 2020-present',
                   dataSource: m,
                 },
