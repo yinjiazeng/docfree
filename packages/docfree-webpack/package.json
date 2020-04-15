@@ -1,6 +1,6 @@
 {
   "name": "docfree-webpack",
-  "version": "0.2.17",
+  "version": "0.2.18",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -23,7 +23,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "docfree-component-loader": "^0.2.11",
-    "docfree-components": "^0.2.16",
+    "docfree-components": "^0.2.18",
     "docfree-loader": "^0.2.17",
     "docfree-prop-types": "^0.2.16",
     "docfree-utils": "^0.2.11",
