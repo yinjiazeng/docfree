@@ -16,7 +16,7 @@
     & > div {
       display: none;
       padding: @docfree-edge-size-small;
-      width: 240px;
+      width: @docfree-sidebar-width;
       position: fixed;
       right: 0;
       top: 0;
@@ -88,20 +88,33 @@
       height: 100%;
       display: none;
       z-index: 1;
-      width: 300px;
+      width: @docfree-sidebar-width;
       overflow: auto;
-      padding: @docfree-edge-size-large;
+      padding: @docfree-edge-size-large @docfree-edge-size-small+12;
       border-right: 1px solid @docfree-layout-border-color;
       background: #fff;
     }
   }
+
   .docfree-page-sidebar {
     display: none;
   }
+
   .docfree-sidebar,
   .docfree-page-sidebar {
     & ~ section {
       margin: 0;
+    }
+  }
+
+  .docfree-content {
+    .docfree-home {
+      & > div {
+        display: block;
+        & > dl {
+          max-width: none;
+        }
+      }
     }
   }
 }

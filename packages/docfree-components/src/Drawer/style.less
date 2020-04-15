@@ -1,3 +1,5 @@
+@import '../style/default.less';
+
 .docfree-drawer-background {
   display: none;
   position: fixed;
@@ -15,7 +17,7 @@
 
 @keyframes showRight {
   0% {
-    transform: translateX(400px);
+    transform: translateX(@docfree-sidebar-width);
   }
   100% {
     transform: translateX(0);
@@ -27,13 +29,13 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(400px);
+    transform: translateX(@docfree-sidebar-width);
   }
 }
 
 @keyframes showLeft {
   0% {
-    transform: translateX(-400px);
+    transform: translateX(-@docfree-sidebar-width);
   }
   100% {
     transform: translateX(0);
@@ -45,7 +47,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-400px);
+    transform: translateX(-@docfree-sidebar-width);
   }
 }
 

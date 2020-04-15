@@ -354,8 +354,8 @@
 }
 @-webkit-keyframes showRight {
   0% {
-    -webkit-transform: translateX(400px);
-    transform: translateX(400px);
+    -webkit-transform: translateX(240px);
+    transform: translateX(240px);
   }
   to {
     -webkit-transform: translateX(0);
@@ -364,8 +364,8 @@
 }
 @keyframes showRight {
   0% {
-    -webkit-transform: translateX(400px);
-    transform: translateX(400px);
+    -webkit-transform: translateX(240px);
+    transform: translateX(240px);
   }
   to {
     -webkit-transform: translateX(0);
@@ -378,8 +378,8 @@
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(400px);
-    transform: translateX(400px);
+    -webkit-transform: translateX(240px);
+    transform: translateX(240px);
   }
 }
 @keyframes hideRight {
@@ -388,14 +388,14 @@
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(400px);
-    transform: translateX(400px);
+    -webkit-transform: translateX(240px);
+    transform: translateX(240px);
   }
 }
 @-webkit-keyframes showLeft {
   0% {
-    -webkit-transform: translateX(-400px);
-    transform: translateX(-400px);
+    -webkit-transform: translateX(-240px);
+    transform: translateX(-240px);
   }
   to {
     -webkit-transform: translateX(0);
@@ -404,8 +404,8 @@
 }
 @keyframes showLeft {
   0% {
-    -webkit-transform: translateX(-400px);
-    transform: translateX(-400px);
+    -webkit-transform: translateX(-240px);
+    transform: translateX(-240px);
   }
   to {
     -webkit-transform: translateX(0);
@@ -418,8 +418,8 @@
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(-400px);
-    transform: translateX(-400px);
+    -webkit-transform: translateX(-240px);
+    transform: translateX(-240px);
   }
 }
 @keyframes hideLeft {
@@ -428,8 +428,8 @@
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(-400px);
-    transform: translateX(-400px);
+    -webkit-transform: translateX(-240px);
+    transform: translateX(-240px);
   }
 }
 .docfree-animate-show-right {
@@ -615,9 +615,9 @@
     height: 100%;
     display: none;
     z-index: 1;
-    width: 300px;
+    width: 240px;
     overflow: auto;
-    padding: 32px;
+    padding: 32px 28px;
     border-right: 1px solid #ebedf1;
     background: #fff;
   }
@@ -627,6 +627,12 @@
   .docfree-page-sidebar ~ section,
   .docfree-sidebar ~ section {
     margin: 0;
+  }
+  .docfree-content .docfree-home > div {
+    display: block;
+  }
+  .docfree-content .docfree-home > div > dl {
+    max-width: none;
   }
 }
 @media screen and (max-width: 1100px) {

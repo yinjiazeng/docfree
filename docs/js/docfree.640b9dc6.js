@@ -733,7 +733,7 @@
               d(
                 {
                   ctime: 1586786416848.8818,
-                  utime: 1586945635136.1978,
+                  utime: 1586947241226.944,
                   pathname: '/guide/',
                   filename: 'functions',
                   ext: '.md',
@@ -3195,12 +3195,6 @@
           b,
           i({}, m, r, { components: t }),
           u.default.createElement(
-            'h1',
-            null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '查看功能' }, '#'),
-            u.default.createElement('span', null, '查看功能'),
-          ),
-          u.default.createElement(
             'h2',
             null,
             u.default.createElement(l.AnchorLinkEnhance, { to: '展示组件' }, '#'),
@@ -3675,7 +3669,7 @@
           { text: '其他功能', depth: 2, level: 1 },
         ],
         pageSidebarMenus: [],
-        utime: 1586945635136.1978,
+        utime: 1586947241226.944,
         render: function() {
           return u.default.createElement(v, {
             pageExtra: {

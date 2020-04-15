@@ -15,10 +15,10 @@
 
 .docfree-sidebar {
   left: 0;
-  width: @docfree-sidebar-width;
+  width: @docfree-sidebar-width + 60;
   border-right: 1px solid @docfree-layout-border-color;
   & ~ section {
-    margin-left: @docfree-sidebar-width;
+    margin-left: @docfree-sidebar-width + 60;
   }
   & > .docfree-drawer-icon {
     display: none;
@@ -58,11 +58,11 @@
 
 .docfree-page-sidebar {
   right: 0;
-  width: @docfree-page-sidebar-width;
+  width: @docfree-sidebar-width;
   padding-left: 0;
   background: #fff;
   & ~ section {
-    margin-right: @docfree-page-sidebar-width;
+    margin-right: @docfree-sidebar-width;
   }
   & > ul {
     li > a {
