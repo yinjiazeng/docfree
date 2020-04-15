@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import format from 'date-format';
-import { Link, useConnect, useNuomi, router, Pagination } from '../components';
+import { Link, useConnect, useNuomi, router, Pagination, Empty } from '../components';
 import './style.less';
 
 export interface Data {
@@ -54,17 +54,21 @@ export default function BlogEntry({ pageSize }) {
   return (
     <div className="docfree-blog">
       <div className="docfree-blog-list">
-        {data.map(({ year, list }) => (
-          <dl key={year}>
-            <dt>{year}</dt>
-            {list.map(({ to, text, date }) => (
-              <dd key={to}>
-                <span>{date}</span>
-                <Link to={to}>{text}</Link>
-              </dd>
-            ))}
-          </dl>
-        ))}
+        {data.length ? (
+          data.map(({ year, list }) => (
+            <dl key={year}>
+              <dt>{year}</dt>
+              {list.map(({ to, text, date }) => (
+                <dd key={to}>
+                  <span>{date}</span>
+                  <Link to={to}>{text}</Link>
+                </dd>
+              ))}
+            </dl>
+          ))
+        ) : (
+          <Empty description={false} />
+        )}
       </div>
       <Pagination current={page} simple pageSize={pageSize} total={total} onChange={onChange} />
     </div>
