@@ -64,6 +64,7 @@
     "gulp-babel": "^8.0.0",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
+    "leancloud-storage": "^4.5.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
@@ -74,6 +75,7 @@
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-prettier": "^1.1.2",
     "typescript": "^3.8.3",
+    "valine": "^1.4.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11"

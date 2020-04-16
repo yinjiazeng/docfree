@@ -1,0 +1,17 @@
+{
+  "name": "remark-docfree-valine",
+  "version": "0.0.1",
+  "author": "Aniu <yinjiazeng@163.com>",
+  "keywords": [],
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dts": "tsc"
+  }
+}

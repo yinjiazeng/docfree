@@ -1,24 +1,17 @@
-import React, { useEffect, useState, useRef, RefObject } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useConnect } from '../components';
 import Code from './Code';
+import Component from '../Component';
 import './style.less';
 
 export default function Playground({ code, render, children }) {
-  const ref: RefObject<any> = useRef();
   const [{ showCode }] = useConnect();
-  const [component, componentDispatch] = useState(children);
   const [show, showDispatch] = useState(false);
 
   const showHandler = () => {
     showDispatch(!show);
   };
-
-  useEffect(() => {
-    if (render) {
-      componentDispatch(render(ref.current));
-    }
-  }, []);
 
   useEffect(() => {
     showDispatch(showCode);
@@ -27,7 +20,7 @@ export default function Playground({ code, render, children }) {
   return (
     <div className="docfree-playground">
       <div>
-        <div ref={ref}>{component}</div>
+        <Component render={render}>{children}</Component>
       </div>
       <a onClick={showHandler}>
         {show ? <EyeInvisibleOutlined /> : <EyeOutlined />}

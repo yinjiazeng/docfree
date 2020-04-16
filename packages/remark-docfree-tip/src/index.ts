@@ -4,7 +4,7 @@ export interface Node extends UnistNode {
   lang?: string;
 }
 
-module.exports = function() {
+export default function() {
   return function({ children }: UnistNode) {
     if (Array.isArray(children)) {
       children.forEach((node: Node, i) => {
@@ -54,4 +54,4 @@ module.exports = function() {
       });
     }
   };
-};
+}

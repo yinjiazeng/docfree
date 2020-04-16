@@ -26,7 +26,14 @@ module.exports = {
     }
   },
   footer: 'MIT Licensed | Copyright © 2020-present',
-  plugins: ['emoji', 'docfree-tip'],
+  plugins: [
+    'emoji',
+    'docfree-tip',
+    ['docfree-valine', {
+      appId: 'dGttSTqRILSLU8UewRynugPd-gzGzoHsz',
+      appKey: '2EN9v9dynsReU0lQIdBGRno7',
+    }]
+  ],
   webpack: {
     plugins: [new VuePlugin()],
     module: {

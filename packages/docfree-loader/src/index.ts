@@ -95,6 +95,7 @@ module.exports = async function docfreeLoader(this: any, content: string) {
         state: {
           showCode: false,
         },
+        setting: ${formatJSON(setting)},
         headings: ${formatJSON(headings)},
         showSidebar: ${sidebarDepth > 0},
         showPageSidebar: ${pageSidebarDepth > 0 && pageSidebarMenus.length > 0},
