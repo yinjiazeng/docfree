@@ -1,6 +1,6 @@
 {
   "name": "docfree-components",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -17,7 +17,7 @@
     "@ant-design/icons": "^4.0.3",
     "antd": "^4.0.4",
     "date-format": "^3.0.0",
-    "docfree-utils": "^0.2.11",
+    "docfree-utils": "^0.2.20",
     "highlight.js": "^9.18.1",
     "nuomi": "^0.8.17",
     "prop-types": "^15.7.2",
