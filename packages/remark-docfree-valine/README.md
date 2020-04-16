@@ -7,7 +7,7 @@
 先去[LeanCloud](https://leancloud.cn/)申请`appId`和`appKey`
 
 ```
-yarn add valine leancloud-storage remark-docfree-valine
+yarn add remark-docfree-valine
 ```
 
 ```js
