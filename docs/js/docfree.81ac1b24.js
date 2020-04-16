@@ -55,18 +55,18 @@
           return h(a).default;
         },
       });
-      var u = n(104);
+      var l = n(104);
       Object.defineProperty(t, 'Pagination', {
         enumerable: !0,
         get: function() {
-          return h(u).default;
+          return h(l).default;
         },
       });
-      var l = n(156);
+      var u = n(156);
       Object.defineProperty(t, 'Row', {
         enumerable: !0,
         get: function() {
-          return h(l).default;
+          return h(u).default;
         },
       });
       var c = n(158);
@@ -167,7 +167,7 @@
             return e;
           }).apply(this, arguments);
       }
-      function u(e) {
+      function l(e) {
         var t = e.lang,
           n = e.content,
           r = e.forwardRef;
@@ -177,10 +177,10 @@
           o.default.createElement('code', { ref: r, className: 'languge-'.concat(t) }, n),
         );
       }
-      var l = o.default.forwardRef(function(e, t) {
-        return o.default.createElement(u, a({}, e, { forwardRef: t }));
+      var u = o.default.forwardRef(function(e, t) {
+        return o.default.createElement(l, a({}, e, { forwardRef: t }));
       });
-      t.default = l;
+      t.default = u;
     },
     188: function(e, t, n) {
       'use strict';
@@ -201,15 +201,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -263,19 +263,19 @@
           var t = e.render,
             n = e.children,
             a = o(e, ['render', 'children']),
-            c = (0, u.useRef)(),
-            f = r((0, u.useState)(n), 2),
+            c = (0, l.useRef)(),
+            f = r((0, l.useState)(n), 2),
             s = f[0],
             d = f[1],
-            p = (0, l.useNuomi)().nuomiProps;
+            p = (0, u.useNuomi)().nuomiProps;
           return (
-            (0, u.useEffect)(function() {
+            (0, l.useEffect)(function() {
               t && d(t(c.current, p));
             }, []),
-            u.default.createElement('div', i({}, a, { ref: c }), s)
+            l.default.createElement('div', i({}, a, { ref: c }), s)
           );
         });
-      var u = (function(e) {
+      var l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== a(e) && 'function' != typeof e)) return { default: e };
           var t = c();
@@ -284,13 +284,13 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var o in e)
             if (Object.prototype.hasOwnProperty.call(e, o)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, o) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, o, u) : (n[o] = e[o]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, o) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, o, l) : (n[o] = e[o]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        l = n(18);
+        u = n(18);
       function c() {
         if ('function' != typeof WeakMap) return null;
         var e = new WeakMap();
@@ -353,13 +353,13 @@
               return e.__proto__ || Object.getPrototypeOf(e);
             })(e);
       }
-      function u(e) {
+      function l(e) {
         if (void 0 === e)
           throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
         return e;
       }
-      function l(e, t) {
-        return (l =
+      function u(e, t) {
+        return (u =
           Object.setPrototypeOf ||
           function(e, t) {
             return (e.__proto__ = t), e;
@@ -420,7 +420,7 @@
       }
       var p = (function(e) {
         function t(e) {
-          var n, r, o, l, f, s;
+          var n, r, o, u, f, s;
           return (
             (function(e, t) {
               if (!(e instanceof t)) throw new TypeError('Cannot call a class as a function');
@@ -428,18 +428,18 @@
             (r = this),
             (n =
               !(o = a(t).call(this, e)) || ('object' !== c(o) && 'function' != typeof o)
-                ? u(r)
+                ? l(r)
                 : o),
-            (l = u(n)),
+            (u = l(n)),
             (s = void 0),
-            (f = 'ref') in l
-              ? Object.defineProperty(l, f, {
+            (f = 'ref') in u
+              ? Object.defineProperty(u, f, {
                   value: s,
                   enumerable: !0,
                   configurable: !0,
                   writable: !0,
                 })
-              : (l[f] = s),
+              : (u[f] = s),
             (n.ref = (0, i.createRef)()),
             n
           );
@@ -452,7 +452,7 @@
             (e.prototype = Object.create(t && t.prototype, {
               constructor: { value: e, writable: !0, configurable: !0 },
             })),
-              t && l(e, t);
+              t && u(e, t);
           })(t, e),
           (n = t),
           (s = [
@@ -466,20 +466,20 @@
                   a = r(t, ['to', 'children']);
                 return i.default.createElement(f.RouterContext.Consumer, null, function(t) {
                   var r = t.type,
-                    u = t.location,
-                    l = n,
-                    c = u.pathname,
-                    f = u.search,
-                    s = u.hash === '#'.concat(n) ? 'current' : void 0;
+                    l = t.location,
+                    u = n,
+                    c = l.pathname,
+                    f = l.search,
+                    s = l.hash === '#'.concat(n) ? 'current' : void 0;
                   return (
                     'hash' === r &&
-                      (l = ''
+                      (u = ''
                         .concat(c)
                         .concat(f, '#')
                         .concat(n)),
                     i.default.createElement(
                       'a',
-                      d({ id: l }, a, { ref: e.ref, href: '#'.concat(l), className: s }),
+                      d({ id: u }, a, { ref: e.ref, href: '#'.concat(u), className: s }),
                       o,
                     )
                   );
@@ -521,12 +521,12 @@
         (t.default = function(e) {
           var t = e.data,
             n = e.className,
-            l = (function e(t) {
+            u = (function e(t) {
               var n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [];
               return (
                 Array.isArray(t) &&
                   t.length &&
-                  t.forEach(function(t, l) {
+                  t.forEach(function(t, u) {
                     t.depth;
                     var i = t.level,
                       f = t.text,
@@ -540,7 +540,7 @@
                         ((m =
                           void 0 !== i
                             ? o.default.createElement(
-                                u.default,
+                                l.default,
                                 c({ id: null, to: f }, y, { style: { paddingLeft: 12 * i } }),
                                 f,
                               )
@@ -560,24 +560,24 @@
                             o.default.createElement('ul', null, b),
                           ));
                       }
-                      n.push(o.default.createElement('li', { key: l }, m));
+                      n.push(o.default.createElement('li', { key: u }, m));
                     }
                   }),
                 n
               );
             })(t);
-          if (l.length)
+          if (u.length)
             return o.default.createElement(
               'ul',
               { className: 'docfree-menus'.concat(n ? ' '.concat(n) : '') },
-              l,
+              u,
             );
           return null;
         });
-      var o = l(n(0)),
+      var o = u(n(0)),
         a = n(18),
-        u = l(n(190));
-      function l(e) {
+        l = u(n(190));
+      function u(e) {
         return e && e.__esModule ? e : { default: e };
       }
       function c() {
@@ -613,15 +613,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -653,10 +653,10 @@
           var t = e.icon,
             n = e.dir,
             o = void 0 === n ? 'right' : n,
-            u = e.children,
-            l = r((0, a.useState)(null), 2),
-            c = l[0],
-            i = l[1],
+            l = e.children,
+            u = r((0, a.useState)(null), 2),
+            c = u[0],
+            i = u[1],
             f = r((0, a.useState)(null), 2),
             s = f[0],
             d = f[1],
@@ -697,29 +697,29 @@
                   }, 100);
               },
             }),
-            a.default.createElement('div', { className: y, style: p }, u),
+            a.default.createElement('div', { className: y, style: p }, l),
           );
         });
       var a = (function(e) {
         if (e && e.__esModule) return e;
         if (null === e || ('object' !== o(e) && 'function' != typeof e)) return { default: e };
-        var t = u();
+        var t = l();
         if (t && t.has(e)) return t.get(e);
         var n = {},
           r = Object.defineProperty && Object.getOwnPropertyDescriptor;
         for (var a in e)
           if (Object.prototype.hasOwnProperty.call(e, a)) {
-            var l = r ? Object.getOwnPropertyDescriptor(e, a) : null;
-            l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
+            var u = r ? Object.getOwnPropertyDescriptor(e, a) : null;
+            u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
           }
         (n.default = e), t && t.set(e, n);
         return n;
       })(n(0));
-      function u() {
+      function l() {
         if ('function' != typeof WeakMap) return null;
         var e = new WeakMap();
         return (
-          (u = function() {
+          (l = function() {
             return e;
           }),
           e
@@ -735,10 +735,10 @@
       var r = c(n(0)),
         o = c(n(10)),
         a = n(127),
-        u = (function(e) {
+        l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== i(e) && 'function' != typeof e)) return { default: e };
-          var t = l();
+          var t = u();
           if (t && t.has(e)) return t.get(e);
           var n = {},
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
@@ -750,11 +750,11 @@
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(65));
-      function l() {
+      function u() {
         if ('function' != typeof WeakMap) return null;
         var e = new WeakMap();
         return (
-          (l = function() {
+          (u = function() {
             return e;
           }),
           e
@@ -872,7 +872,7 @@
               d(
                 {
                   ctime: 1586786416848.8818,
-                  utime: 1586955002855.816,
+                  utime: 1587033349627.2737,
                   pathname: '/guide/',
                   filename: 'functions',
                   ext: '.md',
@@ -881,7 +881,7 @@
                 },
                 n(678).default,
               ),
-              { path: '*', children: r.default.createElement(u.NotFound, null) },
+              { path: '*', children: r.default.createElement(l.NotFound, null) },
             ],
           },
         ],
@@ -913,19 +913,19 @@
               if ('string' == typeof t) {
                 var a = t.trim();
                 if (a) {
-                  var u,
-                    l = m.find(function(e) {
+                  var l,
+                    u = m.find(function(e) {
                       return e.pathname === n.pathname && e.filename === a;
                     });
-                  if (l) {
-                    var c = l.pathname,
-                      f = l.filename,
-                      s = l.title,
-                      d = l.ext,
+                  if (u) {
+                    var c = u.pathname,
+                      f = u.filename,
+                      s = u.title,
+                      d = u.ext,
                       p = { to: c + (/^README$/i.test(f) ? '' : f), text: s };
-                    f === n.filename && d === n.ext && (p.menus = n.sidebarMenus), (u = p);
-                  } else u = { to: n.pathname + a, text: a };
-                  o.push(u), r.push(u);
+                    f === n.filename && d === n.ext && (p.menus = n.sidebarMenus), (l = p);
+                  } else l = { to: n.pathname + a, text: a };
+                  o.push(l), r.push(l);
                 }
               } else if (t && 'object' === i(t))
                 if (Array.isArray(t)) {
@@ -935,12 +935,12 @@
                   (o = o.concat(v)), (r = r.concat(b));
                 } else {
                   var h = t.text,
-                    O = t.menus;
+                    g = t.menus;
                   if (h)
-                    if (Array.isArray(O)) {
-                      var g = e.call(n, O),
-                        E = g.menus,
-                        j = g.list,
+                    if (Array.isArray(g)) {
+                      var O = e.call(n, g),
+                        E = O.menus,
+                        j = O.list,
                         w = { text: h, menus: E };
                       (o = o.concat(j)), r.push(w);
                     } else r.push({ text: h });
@@ -958,14 +958,14 @@
               n = e.pathname,
               r = e.filename,
               o = e.showSidebar,
-              u = e.showPageSidebar,
-              l = e.sidebarTitle,
+              l = e.showPageSidebar,
+              u = e.sidebarTitle,
               c = e.sidebarMenus,
               i = e.pageSidebarMenus,
               f = e.data,
               s =
                 (e.location,
-                { sidebarTitle: l, showSidebar: !!o, showPageSidebar: !!u, pageSidebarMenus: i });
+                { sidebarTitle: u, showSidebar: !!o, showPageSidebar: !!l, pageSidebarMenus: i });
             if (!f.computedSidebarMenus) {
               var d,
                 p = { '/guide': { title: '指南', menus: ['README', 'functions'] } };
@@ -976,10 +976,10 @@
                   if (Array.isArray(t)) {
                     var o = !0,
                       a = !1,
-                      u = void 0;
+                      l = void 0;
                     try {
-                      for (var l, c = t[Symbol.iterator](); !(o = (l = c.next()).done); o = !0) {
-                        var i = l.value;
+                      for (var u, c = t[Symbol.iterator](); !(o = (u = c.next()).done); o = !0) {
+                        var i = u.value;
                         if (i === n) {
                           r = !0;
                           break;
@@ -987,12 +987,12 @@
                         !r && i && i.menus && (r = e(i.menus, n));
                       }
                     } catch (e) {
-                      (a = !0), (u = e);
+                      (a = !0), (l = e);
                     } finally {
                       try {
                         o || null == c.return || c.return();
                       } finally {
-                        if (a) throw u;
+                        if (a) throw l;
                       }
                     }
                   }
@@ -1004,9 +1004,9 @@
                   v = y.menus;
                 if (((s.sidebarTitle = m), Array.isArray(v) && v.length)) {
                   var h = b.call(e, v),
-                    O = h.menus,
-                    g = h.list;
-                  (f.listSource = g), (f.computedSidebarMenus = O);
+                    g = h.menus,
+                    O = h.list;
+                  (f.listSource = O), (f.computedSidebarMenus = g);
                 }
               } else (f.listSource = []), (f.computedSidebarMenus = [{ text: t, menus: c }]);
             }
@@ -1067,7 +1067,7 @@
               a.Nuomi,
               { id: 'global', state: h, onInit: null },
               r.default.createElement(
-                u.Layout,
+                l.Layout,
                 {
                   type: 'hash',
                   title: 'Docfree',
@@ -1079,7 +1079,7 @@
                 r.default.createElement(
                   a.Route,
                   { path: '*' },
-                  r.default.createElement(u.NotFound, null),
+                  r.default.createElement(l.NotFound, null),
                 ),
               ),
             ),
@@ -1107,15 +1107,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -1147,7 +1147,7 @@
           var t = e.code,
             n = e.render,
             o = e.children,
-            f = r((0, l.useConnect)(), 1)[0].showCode,
+            f = r((0, u.useConnect)(), 1)[0].showCode,
             s = r((0, a.useState)(!1), 2),
             p = s[0],
             y = s[1];
@@ -1174,8 +1174,8 @@
                   },
                 },
                 p
-                  ? a.default.createElement(u.EyeInvisibleOutlined, null)
-                  : a.default.createElement(u.EyeOutlined, null),
+                  ? a.default.createElement(l.EyeInvisibleOutlined, null)
+                  : a.default.createElement(l.EyeOutlined, null),
                 p ? '隐藏' : '显示',
                 '代码',
               ),
@@ -1195,14 +1195,14 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        u = n(52),
-        l = n(18),
+        l = n(52),
+        u = n(18),
         c = f(n(651)),
         i = f(n(188));
       function f(e) {
@@ -1255,13 +1255,13 @@
         Object.defineProperty(t, 'AnchorLinkEnhance', {
           enumerable: !0,
           get: function() {
-            return u.default;
+            return l.default;
           },
         }),
         Object.defineProperty(t, 'Layout', {
           enumerable: !0,
           get: function() {
-            return l.default;
+            return u.default;
           },
         }),
         Object.defineProperty(t, 'Props', {
@@ -1297,8 +1297,8 @@
       var r = p(n(227)),
         o = p(n(653)),
         a = p(n(655)),
-        u = p(n(657)),
-        l = p(n(658)),
+        l = p(n(657)),
+        u = p(n(658)),
         c = p(n(669)),
         i = p(n(671)),
         f = p(n(187)),
@@ -1327,15 +1327,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -1366,10 +1366,10 @@
         (t.default = function(e) {
           var t = e.lang,
             n = e.content,
-            o = r((0, u.useState)(!1), 2),
+            o = r((0, l.useState)(!1), 2),
             a = o[0],
             f = o[1],
-            s = (0, u.useRef)(),
+            s = (0, l.useRef)(),
             d = function() {
               var e = document.createElement('textarea');
               return (
@@ -1384,20 +1384,20 @@
               );
             };
           return (
-            (0, u.useLayoutEffect)(function() {
+            (0, l.useLayoutEffect)(function() {
               c.hljs.highlightBlock(s.current);
             }, []),
-            u.default.createElement(
+            l.default.createElement(
               c.Card,
               {
                 title: t,
                 bordered: !1,
-                extra: u.default.createElement(
+                extra: l.default.createElement(
                   c.Tooltip,
                   { placement: 'top', title: '复制'.concat(a ? '成功' : '代码') },
                   a
-                    ? u.default.createElement(l.CheckOutlined, { style: { color: 'green' } })
-                    : u.default.createElement(l.CopyOutlined, {
+                    ? l.default.createElement(u.CheckOutlined, { style: { color: 'green' } })
+                    : l.default.createElement(u.CopyOutlined, {
                         onClick: function() {
                           var e = d();
                           f(!0),
@@ -1409,12 +1409,12 @@
                       }),
                 ),
               },
-              u.default.createElement(i.default, { ref: s, lang: t, content: n }),
+              l.default.createElement(i.default, { ref: s, lang: t, content: n }),
             )
           );
         });
       var a,
-        u = (function(e) {
+        l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== o(e) && 'function' != typeof e)) return { default: e };
           var t = f();
@@ -1423,13 +1423,13 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        l = n(52),
+        u = n(52),
         c = n(18),
         i = (a = n(187)) && a.__esModule ? a : { default: a };
       function f() {
@@ -1493,7 +1493,7 @@
         }
         return o;
       }
-      function u(e, t) {
+      function l(e, t) {
         return (
           (function(e) {
             if (Array.isArray(e)) return e;
@@ -1510,15 +1510,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -1530,8 +1530,8 @@
           })()
         );
       }
-      function l(e) {
-        return (l =
+      function u(e) {
+        return (u =
           'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
             ? function(e) {
                 return typeof e;
@@ -1548,14 +1548,14 @@
       Object.defineProperty(t, '__esModule', { value: !0 }),
         (t.default = function(e) {
           var t = e.pageSize,
-            n = u((0, s.useConnect)(), 2),
-            l = n[0].listSource,
+            n = l((0, s.useConnect)(), 2),
+            u = n[0].listSource,
             c = n[1],
             d = (0, s.useNuomi)().nuomiProps.location,
-            p = l.length,
+            p = u.length,
             y = Number(d.query.page) || 1,
             m = (y - 1) * t,
-            b = l.slice(m, m + t),
+            b = u.slice(m, m + t),
             v = [];
           b.forEach(function(e) {
             var t = e.to,
@@ -1563,12 +1563,12 @@
               r = e.ctime,
               o = (0, f.default)('yyyyMM/dd', new Date(r)),
               a = o.substr(0, 4),
-              u = o.substr(4),
-              l = v.find(function(e) {
+              l = o.substr(4),
+              u = v.find(function(e) {
                 return e.year === a;
               }),
-              c = { date: u, to: t, text: n };
-            l && l.year === a ? l.list.push(c) : v.push({ year: a, list: [c] });
+              c = { date: l, to: t, text: n };
+            u && u.year === a ? u.list.push(c) : v.push({ year: a, list: [c] });
           });
           return (
             (0, i.useLayoutEffect)(function() {
@@ -1636,7 +1636,7 @@
       var c,
         i = (function(e) {
           if (e && e.__esModule) return e;
-          if (null === e || ('object' !== l(e) && 'function' != typeof e)) return { default: e };
+          if (null === e || ('object' !== u(e) && 'function' != typeof e)) return { default: e };
           var t = d();
           if (t && t.has(e)) return t.get(e);
           var n = {},
@@ -1683,15 +1683,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -1720,7 +1720,7 @@
       }
       Object.defineProperty(t, '__esModule', { value: !0 }), (t.default = void 0);
       var a,
-        u = (function(e) {
+        l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== o(e) && 'function' != typeof e)) return { default: e };
           var t = f();
@@ -1729,13 +1729,13 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        l = (a = n(189)) && a.__esModule ? a : { default: a },
+        u = (a = n(189)) && a.__esModule ? a : { default: a },
         c = n(52),
         i = n(18);
       function f() {
@@ -1756,17 +1756,17 @@
           a = o[0].listSource,
           f = o[1],
           s = (0, i.useNuomi)().nuomiProps,
-          d = r((0, u.useState)([]), 2),
+          d = r((0, l.useState)([]), 2),
           p = d[0],
           y = d[1];
         return (
-          (0, u.useLayoutEffect)(function() {
+          (0, l.useLayoutEffect)(function() {
             f({ type: 'initData' }),
               document.querySelectorAll('pre code').forEach(function(e) {
                 i.hljs.highlightBlock(e);
               });
           }, []),
-          (0, u.useLayoutEffect)(
+          (0, l.useLayoutEffect)(
             function() {
               var e = a.findIndex(function(e) {
                 var t = e.text;
@@ -1776,18 +1776,18 @@
             },
             [a],
           ),
-          u.default.createElement(
+          l.default.createElement(
             'div',
             { className: 'docfree-content' },
             t,
             !!n &&
-              u.default.createElement(
+              l.default.createElement(
                 i.Row,
                 { justify: 'space-between', className: 'docfree-content-extra' },
-                u.default.createElement(
+                l.default.createElement(
                   i.Col,
                   null,
-                  u.default.createElement(
+                  l.default.createElement(
                     'a',
                     {
                       href: (function() {
@@ -1806,37 +1806,37 @@
                     '上编辑此文件',
                   ),
                 ),
-                u.default.createElement(
+                l.default.createElement(
                   i.Col,
                   null,
                   '最后更新时间：',
-                  (0, l.default)(n.format, new Date(s.utime)),
+                  (0, u.default)(n.format, new Date(s.utime)),
                 ),
               ),
             (!!p[0] || !!p[1]) &&
-              u.default.createElement(
+              l.default.createElement(
                 i.Row,
                 { justify: 'space-between', className: 'docfree-next-prev' },
-                u.default.createElement(
+                l.default.createElement(
                   i.Col,
                   null,
                   !!p[0] &&
-                    u.default.createElement(
+                    l.default.createElement(
                       i.Link,
                       { to: p[0].to },
-                      u.default.createElement(c.LeftOutlined, null),
+                      l.default.createElement(c.LeftOutlined, null),
                       p[0].text,
                     ),
                 ),
-                u.default.createElement(
+                l.default.createElement(
                   i.Col,
                   null,
                   !!p[1] &&
-                    u.default.createElement(
+                    l.default.createElement(
                       i.Link,
                       { to: p[1].to },
                       p[1].text,
-                      u.default.createElement(c.RightOutlined, null),
+                      l.default.createElement(c.RightOutlined, null),
                     ),
                 ),
               ),
@@ -1879,13 +1879,13 @@
               return e.__proto__ || Object.getPrototypeOf(e);
             })(e);
       }
-      function u(e) {
+      function l(e) {
         if (void 0 === e)
           throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
         return e;
       }
-      function l(e, t) {
-        return (l =
+      function u(e, t) {
+        return (u =
           Object.setPrototypeOf ||
           function(e, t) {
             return (e.__proto__ = t), e;
@@ -1909,31 +1909,31 @@
       }
       var s = (function(e) {
         function t(e) {
-          var n, o, l;
+          var n, o, u;
           return (
             (function(e, t) {
               if (!(e instanceof t)) throw new TypeError('Cannot call a class as a function');
             })(this, t),
             (o = this),
-            (l = a(t).call(this, e)),
-            (n = !l || ('object' !== r(l) && 'function' != typeof l) ? u(o) : l),
-            f(u(n), 'offsetTop', void 0),
-            f(u(n), 'scrollHandler', function() {
+            (u = a(t).call(this, e)),
+            (n = !u || ('object' !== r(u) && 'function' != typeof u) ? l(o) : u),
+            f(l(n), 'offsetTop', void 0),
+            f(l(n), 'scrollHandler', function() {
               var e = n.findData().to,
                 t = i.router.location(),
                 r = t.pathname,
                 o = t.search;
               i.router.replace({ pathname: r, search: o, hash: e });
             }),
-            f(u(n), 'findData', function() {
+            f(l(n), 'findData', function() {
               var e = window.scrollY,
                 n = t.data;
               return (
                 n.find(function(t, r) {
                   var o = t.top,
                     a = n[r + 1],
-                    u = o <= e;
-                  return a ? u && e < a.top : u;
+                    l = o <= e;
+                  return a ? l && e < a.top : l;
                 }) || { to: '' }
               );
             }),
@@ -1949,7 +1949,7 @@
             (e.prototype = Object.create(t && t.prototype, {
               constructor: { value: e, writable: !0, configurable: !0 },
             })),
-              t && l(e, t);
+              t && u(e, t);
           })(t, e),
           (n = t),
           (c = [
@@ -2023,19 +2023,19 @@
             { className: 'docfree-layout' },
             o.default.createElement(c.BackTop, null),
             o.default.createElement(a.default, i),
-            o.default.createElement(u.default, null),
+            o.default.createElement(l.default, null),
             o.default.createElement(
               'section',
               null,
               t,
-              o.default.createElement(l.default, { content: n }),
+              o.default.createElement(u.default, { content: n }),
             ),
           );
         });
       var o = i(n(0)),
         a = i(n(659)),
-        u = i(n(664)),
-        l = i(n(666)),
+        l = i(n(664)),
+        u = i(n(666)),
         c = n(18);
       function i(e) {
         return e && e.__esModule ? e : { default: e };
@@ -2065,8 +2065,8 @@
               r.default.createElement(
                 c.default,
                 { icon: r.default.createElement(o.UnorderedListOutlined, null) },
-                r.default.createElement(u.default, { data: n, type: i }),
-                r.default.createElement(l.default, { data: f }),
+                r.default.createElement(l.default, { data: n, type: i }),
+                r.default.createElement(u.default, { data: f }),
               ),
             ),
           );
@@ -2074,8 +2074,8 @@
       var r = i(n(0)),
         o = n(52),
         a = n(18),
-        u = i(n(660)),
-        l = i(n(661)),
+        l = i(n(660)),
+        u = i(n(661)),
         c = i(n(193));
       function i(e) {
         return e && e.__esModule ? e : { default: e };
@@ -2121,15 +2121,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -2160,16 +2160,16 @@
         (t.default = function(e) {
           var t = e.data,
             n = e.type,
-            a = o((0, u.useState)(!1), 2),
+            a = o((0, l.useState)(!1), 2),
             i = a[0],
             f = a[1],
-            s = o((0, u.useState)([]), 2),
+            s = o((0, l.useState)([]), 2),
             d = s[0],
             p = s[1];
-          return u.default.createElement(
+          return l.default.createElement(
             'div',
             { className: 'docfree-search' },
-            u.default.createElement(
+            l.default.createElement(
               c.Popover,
               {
                 overlayClassName: 'docfree-popover',
@@ -2181,12 +2181,12 @@
                 onVisibleChange: function(e) {
                   e && d.length ? f(!0) : f(!1);
                 },
-                content: u.default.createElement(c.List, {
+                content: l.default.createElement(c.List, {
                   dataSource: d,
                   renderItem: function(e) {
                     var t = e.text,
                       r = e.to;
-                    return u.default.createElement(
+                    return l.default.createElement(
                       c.List.Item,
                       {
                         onClick: function() {
@@ -2204,13 +2204,13 @@
                               : c.router.location({ pathname: t }, { hash: o });
                         },
                       },
-                      u.default.createElement('span', null, t),
+                      l.default.createElement('span', null, t),
                     );
                   },
                 }),
               },
-              u.default.createElement(c.Input, {
-                prefix: u.default.createElement(l.SearchOutlined, null),
+              l.default.createElement(c.Input, {
+                prefix: l.default.createElement(u.SearchOutlined, null),
                 onChange: function(e) {
                   var n = e.target.value.trim(),
                     o = [],
@@ -2231,11 +2231,11 @@
                           if (-1 !== c) {
                             var f = t.substr(0, c),
                               s = t.substr(c + n.length),
-                              d = u.default.createElement(
-                                u.default.Fragment,
+                              d = l.default.createElement(
+                                l.default.Fragment,
                                 null,
                                 f,
-                                u.default.createElement('b', null, n),
+                                l.default.createElement('b', null, n),
                                 s,
                               );
                             o.push({
@@ -2243,12 +2243,12 @@
                               text:
                                 1 === r
                                   ? d
-                                  : u.default.createElement(
-                                      u.default.Fragment,
+                                  : l.default.createElement(
+                                      l.default.Fragment,
                                       null,
                                       i,
                                       ' ',
-                                      u.default.createElement(l.RightOutlined, null),
+                                      l.default.createElement(u.RightOutlined, null),
                                       ' ',
                                       d,
                                     ),
@@ -2267,7 +2267,7 @@
             ),
           );
         });
-      var u = (function(e) {
+      var l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== a(e) && 'function' != typeof e)) return { default: e };
           var t = i();
@@ -2276,13 +2276,13 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var o in e)
             if (Object.prototype.hasOwnProperty.call(e, o)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, o) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, o, u) : (n[o] = e[o]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, o) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, o, l) : (n[o] = e[o]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        l = n(52),
+        u = n(52),
         c = n(18);
       function i() {
         if ('function' != typeof WeakMap) return null;
@@ -2337,7 +2337,7 @@
           e
         );
       }
-      function u(e, t) {
+      function l(e, t) {
         if (null == e) return {};
         var n,
           r,
@@ -2379,20 +2379,20 @@
                 n
               );
             };
-          return l.default.createElement(c.default, {
+          return u.default.createElement(c.default, {
             className: 'docfree-nav',
             data: (function e(t) {
               var a = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
-                l = arguments.length > 2 ? arguments[2] : void 0;
+                u = arguments.length > 2 ? arguments[2] : void 0;
               return (
                 t.forEach(function(t) {
                   var c = t.text,
                     i = t.to,
                     f = t.menus,
-                    s = u(t, ['text', 'to', 'menus']);
+                    s = l(t, ['text', 'to', 'menus']);
                   if (c) {
                     var d = Array.isArray(f) && f.length;
-                    if (l && !i && f && d) {
+                    if (u && !i && f && d) {
                       var p = r(f);
                       a.push(
                         o(
@@ -2410,18 +2410,18 @@
                                 a = void 0;
                               try {
                                 for (
-                                  var u, l = p[Symbol.iterator]();
-                                  !(r = (u = l.next()).done);
+                                  var l, u = p[Symbol.iterator]();
+                                  !(r = (l = u.next()).done);
                                   r = !0
                                 ) {
-                                  var c = u.value;
+                                  var c = l.value;
                                   if (n.startsWith(c)) return !0;
                                 }
                               } catch (e) {
                                 (o = !0), (a = e);
                               } finally {
                                 try {
-                                  r || null == l.return || l.return();
+                                  r || null == u.return || u.return();
                                 } finally {
                                   if (o) throw a;
                                 }
@@ -2445,7 +2445,7 @@
             })(t, [], !0),
           });
         });
-      var l = i(n(0)),
+      var u = i(n(0)),
         c = i(n(191));
       function i(e) {
         return e && e.__esModule ? e : { default: e };
@@ -2473,15 +2473,15 @@
               a = void 0;
             try {
               for (
-                var u, l = e[Symbol.iterator]();
-                !(r = (u = l.next()).done) && (n.push(u.value), !t || n.length !== t);
+                var l, u = e[Symbol.iterator]();
+                !(r = (l = u.next()).done) && (n.push(l.value), !t || n.length !== t);
                 r = !0
               );
             } catch (e) {
               (o = !0), (a = e);
             } finally {
               try {
-                r || null == l.return || l.return();
+                r || null == u.return || u.return();
               } finally {
                 if (o) throw a;
               }
@@ -2495,7 +2495,7 @@
       }
       Object.defineProperty(t, '__esModule', { value: !0 }),
         (t.default = function() {
-          var e = r((0, u.useConnect)(), 1)[0],
+          var e = r((0, l.useConnect)(), 1)[0],
             t = e.showSidebar,
             n = e.showPageSidebar,
             i = e.sidebarMenus,
@@ -2512,21 +2512,21 @@
                   c.default,
                   { icon: o.default.createElement(a.MenuUnfoldOutlined, null), dir: 'left' },
                   !!f && o.default.createElement('strong', null, f),
-                  o.default.createElement(l.default, { data: i }),
+                  o.default.createElement(u.default, { data: i }),
                 ),
               ),
             n &&
               o.default.createElement(
                 'div',
                 { className: 'docfree-page-sidebar' },
-                o.default.createElement(l.default, { data: s }),
+                o.default.createElement(u.default, { data: s }),
               ),
           );
         });
       var o = i(n(0)),
         a = n(52),
-        u = n(18),
-        l = i(n(191)),
+        l = n(18),
+        u = i(n(191)),
         c = i(n(193));
       function i(e) {
         return e && e.__esModule ? e : { default: e };
@@ -2586,7 +2586,7 @@
       }
       Object.defineProperty(t, '__esModule', { value: !0 }), (t.default = void 0);
       var a,
-        u = (function(e) {
+        l = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== o(e) && 'function' != typeof e)) return { default: e };
           var t = c();
@@ -2595,13 +2595,13 @@
             r = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = r ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = r ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
-        l = (a = n(1)) && a.__esModule ? a : { default: a };
+        u = (a = n(1)) && a.__esModule ? a : { default: a };
       function c() {
         if ('function' != typeof WeakMap) return null;
         var e = new WeakMap();
@@ -2616,16 +2616,16 @@
         var t = e.titles,
           n = e.datas,
           a = e.of,
-          l = e.widths,
-          c = (0, u.useMemo)(function() {
+          u = e.widths,
+          c = (0, l.useMemo)(function() {
             var e = [];
             if (n) e = r(n);
             else if (a) {
-              var l = a.propTypes || {},
+              var u = a.propTypes || {},
                 c = a.defaultProps || {},
                 i = a.__PROPTYPES_DESCRIPTIONS__ || {};
-              Object.keys(l).forEach(function(t) {
-                var n = l[t].type,
+              Object.keys(u).forEach(function(t) {
+                var n = u[t].type,
                   r = i[t],
                   a = (function(e) {
                     if (void 0 !== e)
@@ -2645,7 +2645,7 @@
                         return !!e.trim();
                       })
                       .map(function(e, t) {
-                        return u.default.createElement('div', { key: t }, e.trim());
+                        return l.default.createElement('div', { key: t }, e.trim());
                       })),
                   e.push([t, n, a, r]);
               });
@@ -2660,29 +2660,29 @@
                 : e;
             });
           }, []);
-        return u.default.createElement(
+        return l.default.createElement(
           'table',
           { className: 'docfree-props' },
-          u.default.createElement(
+          l.default.createElement(
             'thead',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'tr',
               null,
               t.map(function(e, t) {
-                return u.default.createElement('th', { key: t, style: { width: l[t] } }, e);
+                return l.default.createElement('th', { key: t, style: { width: u[t] } }, e);
               }),
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'tbody',
             null,
             c.map(function(e, t) {
-              return u.default.createElement(
+              return l.default.createElement(
                 'tr',
                 { key: t },
                 e.map(function(e, t) {
-                  return u.default.createElement('td', { key: t }, null == e ? '-' : e);
+                  return l.default.createElement('td', { key: t }, null == e ? '-' : e);
                 }),
               );
             }),
@@ -2697,13 +2697,13 @@
           of: null,
         }),
         (i.propTypes = {
-          widths: l.default.arrayOf(l.default.any),
-          titles: l.default.arrayOf(l.default.string),
-          datas: l.default.oneOfType([
-            l.default.arrayOf(l.default.arrayOf(l.default.string)),
-            l.default.arrayOf(l.default.arrayOf(l.default.element)),
+          widths: u.default.arrayOf(u.default.any),
+          titles: u.default.arrayOf(u.default.string),
+          datas: u.default.oneOfType([
+            u.default.arrayOf(u.default.arrayOf(u.default.string)),
+            u.default.arrayOf(u.default.arrayOf(u.default.element)),
           ]),
-          of: l.default.elementType,
+          of: u.default.elementType,
         });
       var f = i;
       t.default = f;
@@ -2742,24 +2742,24 @@
       var o = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== r(e) && 'function' != typeof e)) return { default: e };
-          var t = u();
+          var t = l();
           if (t && t.has(e)) return t.get(e);
           var n = {},
             o = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var l = o ? Object.getOwnPropertyDescriptor(e, a) : null;
-              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
+              var u = o ? Object.getOwnPropertyDescriptor(e, a) : null;
+              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
         })(n(0)),
         a = n(18);
-      function u() {
+      function l() {
         if ('function' != typeof WeakMap) return null;
         var e = new WeakMap();
         return (
-          (u = function() {
+          (l = function() {
             return e;
           }),
           e
@@ -2812,12 +2812,12 @@
                     o = e.text,
                     c = r(e, ['to', 'text']);
                   return a.default.createElement(
-                    u.Button,
-                    l({ size: 'large' }, c, {
+                    l.Button,
+                    u({ size: 'large' }, c, {
                       key: t,
                       onClick: function() {
                         return (function(e) {
-                          e && (/^(https?:)?\/\//.test(e) ? window.open(e) : u.router.location(e));
+                          e && (/^(https?:)?\/\//.test(e) ? window.open(e) : l.router.location(e));
                         })(n);
                       },
                     }),
@@ -2842,9 +2842,9 @@
         });
       var o,
         a = (o = n(0)) && o.__esModule ? o : { default: o },
-        u = n(18);
-      function l() {
-        return (l =
+        l = n(18);
+      function u() {
+        return (u =
           Object.assign ||
           function(e) {
             for (var t = 1; t < arguments.length; t++) {
@@ -2878,8 +2878,8 @@
       Object.defineProperty(t, '__esModule', { value: !0 }), (t.MDXContent = p);
       var o,
         a = n(0),
-        u = (o = a) && o.__esModule ? o : { default: o },
-        l = (function(e) {
+        l = (o = a) && o.__esModule ? o : { default: o },
+        u = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== r(e) && 'function' != typeof e)) return { default: e };
           var t = c();
@@ -2888,8 +2888,8 @@
             o = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = o ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = o ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
@@ -2938,14 +2938,14 @@
         return o;
       }
       var s = {},
-        d = l.Content;
+        d = u.Content;
       function p(e) {
         var t = e.components,
           r = f(e, ['components']);
-        return u.default.createElement(
+        return l.default.createElement(
           d,
           i({}, s, r, { components: t }),
-          u.default.createElement(l.Home, {
+          l.default.createElement(u.Home, {
             title: 'Docfree',
             description: '基于webpack+nuomi开发的md静态文档生成工具',
             buttons: [
@@ -2964,11 +2964,11 @@
               },
               {
                 title: '插件化',
-                detail: u.default.createElement(
-                  u.default.Fragment,
+                detail: l.default.createElement(
+                  l.default.Fragment,
                   null,
                   '基于',
-                  u.default.createElement(
+                  l.default.createElement(
                     'a',
                     { href: 'https://remark.js.org/', target: '_blank' },
                     'remark',
@@ -2978,25 +2978,25 @@
               },
             ],
           }),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '安装使用吧' }, '#'),
-            u.default.createElement('span', null, '安装使用吧'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '安装使用吧' }, '#'),
+            l.default.createElement('span', null, '安装使用吧'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-sh' },
               '# 安装\nyarn global add docfree\n\n# 初始化\ndocfree init docs\n\n# 开始写作\ndocfree dev docs\n\n# 构建静态文件\ndocfree build docs\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function(e, t) {
                 var r = t.location;
                 if (!1 !== t.setting.valine) {
@@ -3024,7 +3024,7 @@
         pageSidebarMenus: [],
         utime: 1587022712781.9827,
         render: function() {
-          return u.default.createElement(p, { pageExtra: !1 });
+          return l.default.createElement(p, { pageExtra: !1 });
         },
         title: 'Docfree',
       };
@@ -3050,8 +3050,8 @@
       Object.defineProperty(t, '__esModule', { value: !0 }), (t.MDXContent = p);
       var o,
         a = n(0),
-        u = (o = a) && o.__esModule ? o : { default: o },
-        l = (function(e) {
+        l = (o = a) && o.__esModule ? o : { default: o },
+        u = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== r(e) && 'function' != typeof e)) return { default: e };
           var t = c();
@@ -3060,8 +3060,8 @@
             o = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = o ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = o ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
@@ -3110,53 +3110,53 @@
         return o;
       }
       var s = {},
-        d = l.Content;
+        d = u.Content;
       function p(e) {
         var t = e.components,
           r = f(e, ['components']);
-        return u.default.createElement(
+        return l.default.createElement(
           d,
           i({}, s, r, { components: t }),
-          u.default.createElement(
+          l.default.createElement(
             'h1',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '介绍' }, '#'),
-            u.default.createElement('span', null, '介绍'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '介绍' }, '#'),
+            l.default.createElement('span', null, '介绍'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('code', { className: 'inline' }, 'docfrees'),
+            l.default.createElement('code', { className: 'inline' }, 'docfrees'),
             '是基于',
-            u.default.createElement('code', { className: 'inline' }, 'webpack'),
+            l.default.createElement('code', { className: 'inline' }, 'webpack'),
             '+',
-            u.default.createElement('code', { className: 'inline' }, 'nuomi'),
+            l.default.createElement('code', { className: 'inline' }, 'nuomi'),
             '开发的md静态文档生成工具',
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '特性' }, '#'),
-            u.default.createElement('span', null, '特性'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '特性' }, '#'),
+            l.default.createElement('span', null, '特性'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'ul',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'li',
               null,
               '以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。',
             ),
-            u.default.createElement(
+            l.default.createElement(
               'li',
               null,
               '享受 React + webpack 的开发体验，可以在 Markdown 中使用 React 组件，也可以基于 React 组件自动生成组件 API 文档。',
             ),
-            u.default.createElement(
+            l.default.createElement(
               'li',
               null,
               '基于',
-              u.default.createElement(
+              l.default.createElement(
                 'a',
                 { href: 'https://remark.js.org/', target: '_blank' },
                 'remark',
@@ -3164,17 +3164,17 @@
               '插件化机制，可以使用丰富的第三方插件增强写作体验。',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '它能做什么？' }, '#'),
-            u.default.createElement('span', null, '它能做什么？'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '它能做什么？' }, '#'),
+            l.default.createElement('span', null, '它能做什么？'),
           ),
-          u.default.createElement('p', null, '写组件库文档，写博客。'),
-          u.default.createElement(
+          l.default.createElement('p', null, '写组件库文档，写博客。'),
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function(e, t) {
                 var r = t.location;
                 if (!1 !== t.setting.valine) {
@@ -3208,7 +3208,7 @@
         pageSidebarMenus: [],
         utime: 1586914285717.9224,
         render: function() {
-          return u.default.createElement(p, {
+          return l.default.createElement(p, {
             pageExtra: {
               platform: 'Github',
               path: 'https://github.com/yinjiazeng/docfree/tree/master/doc',
@@ -3240,8 +3240,8 @@
       Object.defineProperty(t, '__esModule', { value: !0 }), (t.MDXContent = v);
       var o,
         a = n(0),
-        u = (o = a) && o.__esModule ? o : { default: o },
-        l = (function(e) {
+        l = (o = a) && o.__esModule ? o : { default: o },
+        u = (function(e) {
           if (e && e.__esModule) return e;
           if (null === e || ('object' !== r(e) && 'function' != typeof e)) return { default: e };
           var t = c();
@@ -3250,8 +3250,8 @@
             o = Object.defineProperty && Object.getOwnPropertyDescriptor;
           for (var a in e)
             if (Object.prototype.hasOwnProperty.call(e, a)) {
-              var u = o ? Object.getOwnPropertyDescriptor(e, a) : null;
-              u && (u.get || u.set) ? Object.defineProperty(n, a, u) : (n[a] = e[a]);
+              var l = o ? Object.getOwnPropertyDescriptor(e, a) : null;
+              l && (l.get || l.set) ? Object.defineProperty(n, a, l) : (n[a] = e[a]);
             }
           (n.default = e), t && t.set(e, n);
           return n;
@@ -3352,25 +3352,25 @@
                   e +
                   ' was not imported, exported, or provided by MDXProvider as global scope',
               ),
-              u.default.createElement('div', t)
+              l.default.createElement('div', t)
             );
           };
         },
         m = (y('Playground'), y('Alert'), {}),
-        b = l.Content;
+        b = u.Content;
       function v(e) {
         var t = e.components,
           r = p(e, ['components']);
-        return u.default.createElement(
+        return l.default.createElement(
           b,
           i({}, m, r, { components: t }),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '展示组件' }, '#'),
-            u.default.createElement('span', null, '展示组件'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '展示组件' }, '#'),
+            l.default.createElement('span', null, '展示组件'),
           ),
-          u.default.createElement(l.Playground, {
+          l.default.createElement(u.Playground, {
             code: [
               {
                 lang: 'javascript',
@@ -3390,65 +3390,65 @@
               return (
                 n(679),
                 n(0),
-                u.default.createElement(
+                l.default.createElement(
                   'div',
                   { className: 'buttons' },
-                  u.default.createElement(e.default, { type: 'primary' }, 'Primary'),
-                  u.default.createElement(e.default, null, 'Default'),
-                  u.default.createElement(e.default, { type: 'dashed' }, 'Dashed'),
-                  u.default.createElement(e.default, { type: 'link' }, 'Link'),
+                  l.default.createElement(e.default, { type: 'primary' }, 'Primary'),
+                  l.default.createElement(e.default, null, 'Default'),
+                  l.default.createElement(e.default, { type: 'dashed' }, 'Dashed'),
+                  l.default.createElement(e.default, { type: 'link' }, 'Link'),
                 )
               );
             },
           }),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               '//```jsx\nimport React from \'react\';\nimport { Button } from \'antd\';\n\n<div className="buttons">\n  <Button type="primary">Primary</Button>\n  <Button>Default</Button>\n  <Button type="dashed">Dashed</Button>\n  <Button type="link">Link</Button>\n</div>\n\n<style lang="less">\n.buttons {\n  & > button {\n    margin-right: 8px;\n  }\n}\n</style>\n//```\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
             '可以直接在',
-            u.default.createElement('code', { className: 'inline' }, 'jsx'),
+            l.default.createElement('code', { className: 'inline' }, 'jsx'),
             '中使用',
-            u.default.createElement('code', { className: 'inline' }, 'style'),
+            l.default.createElement('code', { className: 'inline' }, 'style'),
             '标签写样式，',
-            u.default.createElement('code', { className: 'inline' }, 'lang'),
+            l.default.createElement('code', { className: 'inline' }, 'lang'),
             '支持',
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'inline' },
               'css/less/sass/scss/styl/stylus',
             ),
             '，默认支持',
-            u.default.createElement('code', { className: 'inline' }, 'css/less'),
+            l.default.createElement('code', { className: 'inline' }, 'css/less'),
             '，其他支持需安装对应的',
-            u.default.createElement('code', { className: 'inline' }, 'loader'),
+            l.default.createElement('code', { className: 'inline' }, 'loader'),
             '。\n也支持',
-            u.default.createElement('code', { className: 'inline' }, 'cssModules'),
+            l.default.createElement('code', { className: 'inline' }, 'cssModules'),
             '，通过',
-            u.default.createElement('code', { className: 'inline' }, '$style'),
+            l.default.createElement('code', { className: 'inline' }, '$style'),
             '获取样式，熟悉',
-            u.default.createElement('code', { className: 'inline' }, 'Vue'),
+            l.default.createElement('code', { className: 'inline' }, 'Vue'),
             '的应该知道怎么用。',
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '支持Typescript' }, '#'),
-            u.default.createElement('span', null, '支持Typescript'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '支持Typescript' }, '#'),
+            l.default.createElement('span', null, '支持Typescript'),
           ),
-          u.default.createElement(l.Playground, {
+          l.default.createElement(u.Playground, {
             code: [
               {
                 lang: 'typescript',
@@ -3468,39 +3468,39 @@
                 return e && e.__esModule ? e : { default: e };
               }
               n(0);
-              return u.default.createElement(function() {
-                return u.default.createElement(
+              return l.default.createElement(function() {
+                return l.default.createElement(
                   'div',
                   { className: t.default.buttons },
-                  u.default.createElement(e.default, { type: 'primary' }, 'Primary'),
-                  u.default.createElement(e.default, null, 'Default'),
-                  u.default.createElement(e.default, { type: 'dashed' }, 'Dashed'),
-                  u.default.createElement(e.default, { type: 'link' }, 'Link'),
+                  l.default.createElement(e.default, { type: 'primary' }, 'Primary'),
+                  l.default.createElement(e.default, null, 'Default'),
+                  l.default.createElement(e.default, { type: 'dashed' }, 'Dashed'),
+                  l.default.createElement(e.default, { type: 'link' }, 'Link'),
                 );
               }, null);
             },
           }),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               '//```tsx\nimport React, { ElementType } from \'react\';\nimport { Button } from \'antd\';\n\nconst Buttons: ElementType<any> = () => (\n  <div className={$style.buttons}>\n    <Button type="primary">Primary</Button>\n    <Button>Default</Button>\n    <Button type="dashed">Dashed</Button>\n    <Button type="link">Link</Button>\n  </div>\n);\n\n<Buttons />\n\n<style lang="less" module>\n.buttons {\n  & > button {\n    margin-right: 8px;\n  }\n}\n</style>\n//```\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '引入文件展示组件' }, '#'),
-            u.default.createElement('span', null, '引入文件展示组件'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '引入文件展示组件' }, '#'),
+            l.default.createElement('span', null, '引入文件展示组件'),
           ),
-          u.default.createElement(l.Playground, {
+          l.default.createElement(u.Playground, {
             code: [
               {
                 lang: 'javascript',
@@ -3516,81 +3516,81 @@
               var e = (function(e) {
                 return e && e.default ? e.default : e;
               })(n(685));
-              return u.default.createElement(e, null);
+              return l.default.createElement(e, null);
             },
           }),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               '<Docfree.Playground src="./Demo.jsx" />\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '自动生成组件文档' }, '#'),
-            u.default.createElement('span', null, '自动生成组件文档'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '自动生成组件文档' }, '#'),
+            l.default.createElement('span', null, '自动生成组件文档'),
           ),
-          u.default.createElement(l.Props, {
+          l.default.createElement(u.Props, {
             of: (function(e) {
               return e && e.default ? e.default : e;
             })(n(686)),
           }),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               '<Docfree.Props src="./Demo.jsx" />\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('code', { className: 'inline' }, 'src'),
+            l.default.createElement('code', { className: 'inline' }, 'src'),
             '引入的组件需包含',
-            u.default.createElement('code', { className: 'inline' }, 'defaultProps'),
+            l.default.createElement('code', { className: 'inline' }, 'defaultProps'),
             '和',
-            u.default.createElement('code', { className: 'inline' }, 'propTypes'),
+            l.default.createElement('code', { className: 'inline' }, 'propTypes'),
             '2个静态对象，并且需要在组件外部定义，类组件不要使用',
-            u.default.createElement('code', { className: 'inline' }, 'static'),
+            l.default.createElement('code', { className: 'inline' }, 'static'),
             '定义，否则无法解析，\n',
-            u.default.createElement('code', { className: 'inline' }, 'propTypes'),
+            l.default.createElement('code', { className: 'inline' }, 'propTypes'),
             '对象的值必须用 ',
-            u.default.createElement(
+            l.default.createElement(
               'a',
               { href: 'https://github.com/facebook/prop-types', target: '_blank' },
               'prop-types',
             ),
             ' 定义，可以在属性的上方使用',
-            u.default.createElement('code', { className: 'inline' }, '//'),
+            l.default.createElement('code', { className: 'inline' }, '//'),
             '或',
-            u.default.createElement('code', { className: 'inline' }, '/**/'),
+            l.default.createElement('code', { className: 'inline' }, '/**/'),
             '注释\n自动生成接口说明。',
           ),
-          u.default.createElement(
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function() {
                 var e = n(77).default;
                 return (
                   n(119),
-                  u.default.createElement(e, {
+                  l.default.createElement(e, {
                     type: 'warning',
                     message: '注意',
                     description:
@@ -3600,31 +3600,31 @@
               },
             }),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '支持Vue' }, '#'),
-            u.default.createElement('span', null, '支持Vue'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '支持Vue' }, '#'),
+            l.default.createElement('span', null, '支持Vue'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-sh' },
               'yarn add webpack vue-loader vue vue-template-compiler\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               "// docs/.docfree/config.js\n\nconst VuePlugin = require('vue-loader/lib/plugin-webpack4');\n\nmodule.exports = {\n  // ...其他选项\n  webpack: {\n    plugins: [new VuePlugin()],\n    module: {\n      rules: [{\n        test: /\\.vue$/,\n        loader: 'vue-loader',\n      }, {\n        exclude: /\\.vue$/,\n        loader: 'file-loader',\n      }]\n    }\n  },\n};\n",
             ),
           ),
-          u.default.createElement(l.Playground, {
+          l.default.createElement(u.Playground, {
             code: [
               {
                 lang: 'vue',
@@ -3644,12 +3644,12 @@
                   } || {},
                 o = r.mixins,
                 a = void 0 === o ? [] : o,
-                u = p(r, ['mixins']),
-                l = {};
-              l.docfree$style = n(712);
+                l = p(r, ['mixins']),
+                u = {};
+              u.docfree$style = n(712);
               var c =
                 '<div :class="$style.div">\n    <p>点击试一试</p>\n    <button-counter></button-counter>\n  </div>';
-              l.docfree$style && (c = c.replace(/(\$style\.)/g, 'docfree$1')),
+              u.docfree$style && (c = c.replace(/(\$style\.)/g, 'docfree$1')),
                 new t(
                   (function(e) {
                     for (var t = 1; t < arguments.length; t++) {
@@ -3665,66 +3665,66 @@
                           });
                     }
                     return e;
-                  })({}, u, { el: e, template: c, mixins: [].concat(f(a), [{ data: l }]) }),
+                  })({}, l, { el: e, template: c, mixins: [].concat(f(a), [{ data: u }]) }),
                 );
             },
           }),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-html' },
               '//```vue\n<template>\n  <div :class="$style.div">\n    <p>点击试一试</p>\n    <button-counter></button-counter>\n  </div>\n</template>\n\n<script>\nimport buttonCounter from \'./button-counter.vue\';\n\nexport default {\n  components: {\n    \'button-counter\': buttonCounter,\n  }\n}\n</script>\n\n<style lang="less" module>\n.div {\n  & > p {\n    color: #1890ff;\n  }\n}\n</style>\n//```\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '插件使用' }, '#'),
-            u.default.createElement('span', null, '插件使用'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '插件使用' }, '#'),
+            l.default.createElement('span', null, '插件使用'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h3',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: 'tip' }, '#'),
-            u.default.createElement('span', null, 'tip'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: 'tip' }, '#'),
+            l.default.createElement('span', null, 'tip'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-sh' },
               'yarn add antd remark-docfree-tip remark-emoji\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               "// docs/.docfree/config.js\n\nmodule.exports = {\n  // ...其他选项\n  plugins: ['docfree-tip'],\n};\n",
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function() {
                 var e = n(77).default;
                 return (
                   n(119),
-                  u.default.createElement(e, {
+                  l.default.createElement(e, {
                     type: 'success',
                     message: '正确',
-                    description: u.default.createElement(l.PreCode, {
+                    description: l.default.createElement(u.PreCode, {
                       lang: 'jsx',
                       content: '<div></div>',
                     }),
@@ -3733,18 +3733,18 @@
               },
             }),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function() {
                 var e = n(77).default;
                 return (
                   n(119),
-                  u.default.createElement(e, {
+                  l.default.createElement(e, {
                     type: 'error',
                     message: '错误',
-                    description: u.default.createElement(l.PreCode, {
+                    description: l.default.createElement(u.PreCode, {
                       lang: 'jsx',
                       content: '<div></d>',
                     }),
@@ -3753,66 +3753,271 @@
               },
             }),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               {},
               '//```tip:success:jsx\n正确\n<div></div>\n//```\n\n//```tip:error:jsx\n错误\n<div></d>\n//```\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h3',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: 'emoji' }, '#'),
-            u.default.createElement('span', null, 'emoji'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: 'emoji' }, '#'),
+            l.default.createElement('span', null, 'emoji'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-sh' },
               'yarn add remark-emoji\n',
             ),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement(
+            l.default.createElement(
               'code',
               { className: 'language-js' },
               "// docs/.docfree/config.js\n\nmodule.exports = {\n  // ...其他选项\n  plugins: ['emoji'],\n};\n",
             ),
           ),
-          u.default.createElement('p', null, '🐶 👍 👍 👍 👍 👍'),
-          u.default.createElement(
+          l.default.createElement('p', null, '🐶 👍 👍 👍 👍 👍'),
+          l.default.createElement(
             'p',
             null,
-            u.default.createElement('strong', null, 'markdown代码'),
+            l.default.createElement('strong', null, 'markdown代码'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'pre',
             null,
-            u.default.createElement('code', {}, ':dog: :+1: :+1: :+1: :+1: :+1:\n'),
+            l.default.createElement('code', {}, ':dog: :+1: :+1: :+1: :+1: :+1:\n'),
           ),
-          u.default.createElement(
+          l.default.createElement(
             'h2',
             null,
-            u.default.createElement(l.AnchorLinkEnhance, { to: '其他功能' }, '#'),
-            u.default.createElement('span', null, '其他功能'),
+            l.default.createElement(u.AnchorLinkEnhance, { to: '目录介绍' }, '#'),
+            l.default.createElement('span', null, '目录介绍'),
           ),
-          u.default.createElement('p', null, '文档整理中...'),
-          u.default.createElement(
+          l.default.createElement(
+            'p',
+            null,
+            '文档根目录下包含',
+            l.default.createElement('code', { className: 'inline' }, '.docfree'),
+            '文件夹，该文件夹用于存放配置相关文件，',
+            l.default.createElement('code', { className: 'inline' }, 'config.js'),
+            '是主配置文件，',
+            l.default.createElement('code', { className: 'inline' }, 'public'),
+            '是静态资源目录，默认只有index.html，你可以在里面新建任意文件或者文件夹，编译时都会被拷贝到构建目录下。\n如果需要在index.html中引入一些资源可以通过',
+            l.default.createElement(
+              'code',
+              { className: 'inline' },
+              '<%= htmlWebpackPlugin.options.publicPath %>',
+            ),
+            '作为资源路径前缀。\n',
+            l.default.createElement('code', { className: 'inline' }, 'temp'),
+            '是临时文件目录，目前里面包含',
+            l.default.createElement('code', { className: 'inline' }, 'data.json'),
+            '和',
+            l.default.createElement('code', { className: 'inline' }, 'docfree.js'),
+            '，data.json是存储文件时间数据的，该文件提交时不可以忽略，否则展示最终编辑时间和排序都会丢失，docfree.js是入口文件，每次都会自动生成，无需提交，\n请自行设置在',
+            l.default.createElement('code', { className: 'inline' }, '.gitignore'),
+            '中。',
+          ),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '路由' }, '#'),
+            l.default.createElement('span', null, '路由'),
+          ),
+          l.default.createElement(
+            'p',
+            null,
+            'docfree将所有',
+            l.default.createElement('code', { className: 'inline' }, 'md'),
+            ' ',
+            l.default.createElement('code', { className: 'inline' }, 'mdx'),
+            '文件以及非',
+            l.default.createElement('code', { className: 'inline' }, '.'),
+            '开头的文件夹解析为路由，格式是',
+            l.default.createElement('code', { className: 'inline' }, '目录/文件名'),
+            '，文件名后缀会被忽略。例如根目录下包含a.md，会被解析为路由',
+            l.default.createElement('code', { className: 'inline' }, '/a'),
+            '，b目录会被解析为',
+            l.default.createElement('code', { className: 'inline' }, '/b'),
+            '，b目录下的c文件会被解析为',
+            l.default.createElement('code', { className: 'inline' }, '/b/c'),
+            '，\n依次类推，同一目录下文件名和文件夹名不要重名，否则只会解析文件夹。在',
+            l.default.createElement('code', { className: 'inline' }, 'doc'),
+            '模式时，如果文件为README.md，那么访问时文件名会被忽略，例如',
+            l.default.createElement('code', { className: 'inline' }, '/README'),
+            '需用',
+            l.default.createElement('code', { className: 'inline' }, '/'),
+            '访问。',
+          ),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '配置' }, '#'),
+            l.default.createElement('span', null, '配置'),
+          ),
+          l.default.createElement(u.Props, {
+            datas: [
+              ['type', '"hash" | "browser"', '"hash"', '路由类型'],
+              ['mode', '"doc" | "blog"', '"doc"', '页面模式'],
+              ['title', 'string', '-', '页面title以及logo文字内容'],
+              ['dest', 'string', '.docfree/dist', '生成静态文件目录'],
+              [
+                'footer',
+                'string',
+                '',
+                '页面脚注内容，支持字符串或者js文件路径，路径必须是绝对路径，js中可以使用React',
+              ],
+              [
+                'nav',
+                'array',
+                '',
+                '导航配置，数组内容为 { "to": "跳转的链接", "text": "导航文字", "menus": 子集导航数组，数据等同父级 }，to 和 menus不是必须的，to 值包含http或者https时会被作为外部链接，否则作为路由',
+              ],
+              [
+                'sidebar',
+                'object',
+                '{ "depth": 3, "pageDepth": 0, data: null }',
+                '侧边栏配置，depth是左侧导航深度，pageDepth是右侧导航深度，深度值设置为0将不展示侧边栏，data为配置数据，具体下面讲',
+              ],
+              [
+                'pageExtra',
+                'object',
+                '{ "platform": "Github", "path": "", "format": "yyyy/MM/dd hh:mm:ss" }',
+                '页面底部额外数据设置，包含日期和编辑链接，path是编辑链接，需设置为相应平台文档根目录',
+              ],
+              ['langTheme', 'string', '', 'highlight.js主题样式'],
+              ['pageSize', 'number', '20', 'bolg模式时列表展示数量'],
+              ['plugins', 'array', '', 'remark插件，如果是字符串，可以忽略remrk-前缀'],
+              ['webpack', 'object', '', 'webpack配置'],
+            ],
+          }),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '侧边栏配置' }, '#'),
+            l.default.createElement('span', null, '侧边栏配置'),
+          ),
+          l.default.createElement(
+            'p',
+            null,
+            '默认时，每个页面的侧边栏只会包含该页面的标题和子标题，通过配置可以让侧边栏展示其他页面的标题',
+          ),
+          l.default.createElement(
+            'pre',
+            null,
+            l.default.createElement(
+              'code',
+              { className: 'language-js' },
+              "// 格式如下\n{\n  depth: 3,\n  data: {\n    '/': {\n      title: '侧边栏标题',\n      menus: [\n        'README',\n        'a',\n        {\n          text: '',\n          menus: [...]\n        }\n      ]\n    },\n    '/guide': {\n      title: '侧边栏标题',\n      menus: [{\n        text: '',\n        menus: [{\n          text: '',\n          menus: [...]\n        }]\n      }]\n    }\n  }\n}\n",
+            ),
+          ),
+          l.default.createElement(
+            'p',
+            null,
+            l.default.createElement('code', { className: 'inline' }, 'data'),
+            '值为一个对象，键为目录，',
+            l.default.createElement('code', { className: 'inline' }, '/'),
+            '表示根目录，值对对象，包含',
+            l.default.createElement('code', { className: 'inline' }, 'title'),
+            '和',
+            l.default.createElement('code', { className: 'inline' }, 'menus'),
+            '字段，',
+            l.default.createElement('code', { className: 'inline' }, 'title'),
+            '为侧边栏大标题，非必须，menus为该目录下文件名数组，',
+            l.default.createElement('code', { className: 'inline' }, '.md'),
+            '后缀需要省略，这样，每个页面都会展示其他页面的标题。\nmenus数组值也可以设置为对象，用于为侧边栏配置子标题，必须包含',
+            l.default.createElement('code', { className: 'inline' }, 'text'),
+            '字段。',
+          ),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '页面设置' }, '#'),
+            l.default.createElement('span', null, '页面设置'),
+          ),
+          l.default.createElement(
+            'p',
+            null,
+            l.default.createElement('code', { className: 'inline' }, 'config.js'),
+            '用于全局配置，每个',
+            l.default.createElement('code', { className: 'inline' }, 'md'),
+            '文件也可以通过设置来覆盖全局配置，设置项需要在文件内容顶部。',
+          ),
+          l.default.createElement(
+            'pre',
+            null,
+            l.default.createElement(
+              'code',
+              {},
+              '---\ntitle: 标题\ndepth: 侧边栏深度\npageDepth: 子（右）侧边栏深度\npageExtra: false 只可以设置false 用于隐藏额外内容\n---\n',
+            ),
+          ),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '主题' }, '#'),
+            l.default.createElement('span', null, '主题'),
+          ),
+          l.default.createElement(
+            'p',
+            null,
+            'docfree界面是使用',
+            l.default.createElement('code', { className: 'inline' }, 'antd4.0'),
+            '开发的，预处理器使用的是less，修改主题样式需要在',
+            l.default.createElement('code', { className: 'inline' }, '.docfree'),
+            '目录下新建',
+            l.default.createElement('code', { className: 'inline' }, 'modify-vars.js'),
+            '，导出对象即可，具体参考',
+            l.default.createElement(
+              'a',
+              {
+                href:
+                  'https://ant-design.gitee.io/docs/react/customize-theme-cn#Ant-Design-的样式变量',
+                target: '_blank',
+              },
+              'Ant Design 的样式变量',
+            ),
+          ),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '组件' }, '#'),
+            l.default.createElement('span', null, '组件'),
+          ),
+          l.default.createElement('p', null, '整理中...'),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '插件开发' }, '#'),
+            l.default.createElement('span', null, '插件开发'),
+          ),
+          l.default.createElement('p', null, '整理中...'),
+          l.default.createElement(
+            'h2',
+            null,
+            l.default.createElement(u.AnchorLinkEnhance, { to: '其他功能' }, '#'),
+            l.default.createElement('span', null, '其他功能'),
+          ),
+          l.default.createElement('p', null, '整理中...'),
+          l.default.createElement(
             'section',
             null,
-            u.default.createElement(l.Component, {
+            l.default.createElement(u.Component, {
               render: function(e, t) {
                 var r = t.location;
                 if (!1 !== t.setting.valine) {
@@ -3842,6 +4047,14 @@
           { text: '插件使用', depth: 2, level: 1 },
           { text: 'tip', depth: 3, level: 2 },
           { text: 'emoji', depth: 3, level: 2 },
+          { text: '目录介绍', depth: 2, level: 1 },
+          { text: '路由', depth: 2, level: 1 },
+          { text: '配置', depth: 2, level: 1 },
+          { text: '侧边栏配置', depth: 2, level: 1 },
+          { text: '页面设置', depth: 2, level: 1 },
+          { text: '主题', depth: 2, level: 1 },
+          { text: '组件', depth: 2, level: 1 },
+          { text: '插件开发', depth: 2, level: 1 },
           { text: '其他功能', depth: 2, level: 1 },
         ],
         showSidebar: !0,
@@ -3855,12 +4068,20 @@
           { text: '插件使用', depth: 2, level: 1 },
           { text: 'tip', depth: 3, level: 2 },
           { text: 'emoji', depth: 3, level: 2 },
+          { text: '目录介绍', depth: 2, level: 1 },
+          { text: '路由', depth: 2, level: 1 },
+          { text: '配置', depth: 2, level: 1 },
+          { text: '侧边栏配置', depth: 2, level: 1 },
+          { text: '页面设置', depth: 2, level: 1 },
+          { text: '主题', depth: 2, level: 1 },
+          { text: '组件', depth: 2, level: 1 },
+          { text: '插件开发', depth: 2, level: 1 },
           { text: '其他功能', depth: 2, level: 1 },
         ],
         pageSidebarMenus: [],
-        utime: 1586955002855.816,
+        utime: 1587033349627.2737,
         render: function() {
-          return u.default.createElement(v, {
+          return l.default.createElement(v, {
             pageExtra: {
               platform: 'Github',
               path: 'https://github.com/yinjiazeng/docfree/tree/master/doc',
@@ -3893,12 +4114,12 @@
     685: function(e, t, n) {
       'use strict';
       Object.defineProperty(t, '__esModule', { value: !0 });
-      var r = l(n(40));
+      var r = u(n(40));
       n(42);
-      var o = l(n(0)),
-        a = l(n(1)),
-        u = l(n(194));
-      function l(e) {
+      var o = u(n(0)),
+        a = u(n(1)),
+        l = u(n(194));
+      function u(e) {
         return e && e.__esModule ? e : { default: e };
       }
       function c(e) {
@@ -3957,7 +4178,7 @@
         function t() {
           return i(this, t), s(this, d(t).apply(this, arguments));
         }
-        var n, a, l;
+        var n, a, u;
         return (
           (function(e, t) {
             if ('function' != typeof t && null !== t)
@@ -3974,7 +4195,7 @@
               value: function() {
                 return o.default.createElement(
                   'div',
-                  { className: u.default.buttons },
+                  { className: l.default.buttons },
                   o.default.createElement(r.default, { type: 'primary' }, 'Primary'),
                   o.default.createElement(r.default, null, 'Default'),
                   o.default.createElement(r.default, { type: 'dashed' }, 'Dashed'),
@@ -3983,7 +4204,7 @@
               },
             },
           ]) && f(n.prototype, a),
-          l && f(n, l),
+          u && f(n, u),
           t
         );
       })(o.default.Component);
@@ -3997,12 +4218,12 @@
     686: function(e, t, n) {
       'use strict';
       Object.defineProperty(t, '__esModule', { value: !0 });
-      var r = l(n(40));
+      var r = u(n(40));
       n(42);
-      var o = l(n(0)),
-        a = l(n(687)),
-        u = l(n(194));
-      function l(e) {
+      var o = u(n(0)),
+        a = u(n(687)),
+        l = u(n(194));
+      function u(e) {
         return e && e.__esModule ? e : { default: e };
       }
       function c(e) {
@@ -4061,7 +4282,7 @@
         function t() {
           return i(this, t), s(this, d(t).apply(this, arguments));
         }
-        var n, a, l;
+        var n, a, u;
         return (
           (function(e, t) {
             if ('function' != typeof t && null !== t)
@@ -4078,7 +4299,7 @@
               value: function() {
                 return o.default.createElement(
                   'div',
-                  { className: u.default.buttons },
+                  { className: l.default.buttons },
                   o.default.createElement(r.default, { type: 'primary' }, 'Primary'),
                   o.default.createElement(r.default, null, 'Default'),
                   o.default.createElement(r.default, { type: 'dashed' }, 'Dashed'),
@@ -4087,7 +4308,7 @@
               },
             },
           ]) && f(n.prototype, a),
-          l && f(n, l),
+          u && f(n, u),
           t
         );
       })(o.default.Component);
@@ -4142,17 +4363,17 @@
               })(e);
       }
       Object.defineProperty(t, '__esModule', { value: !0 });
-      var u = {};
+      var l = {};
       t.default = void 0;
-      var l = f(n(688));
-      Object.keys(l).forEach(function(e) {
+      var u = f(n(688));
+      Object.keys(u).forEach(function(e) {
         'default' !== e &&
           '__esModule' !== e &&
-          (Object.prototype.hasOwnProperty.call(u, e) ||
+          (Object.prototype.hasOwnProperty.call(l, e) ||
             Object.defineProperty(t, e, {
               enumerable: !0,
               get: function() {
-                return l[e];
+                return u[e];
               },
             }));
       });
@@ -4176,15 +4397,15 @@
           r = Object.defineProperty && Object.getOwnPropertyDescriptor;
         for (var o in e)
           if (Object.prototype.hasOwnProperty.call(e, o)) {
-            var u = r ? Object.getOwnPropertyDescriptor(e, o) : null;
-            u && (u.get || u.set) ? Object.defineProperty(n, o, u) : (n[o] = e[o]);
+            var l = r ? Object.getOwnPropertyDescriptor(e, o) : null;
+            l && (l.get || l.set) ? Object.defineProperty(n, o, l) : (n[o] = e[o]);
           }
         return (n.default = e), t && t.set(e, n), n;
       }
       Object.keys(c).forEach(function(e) {
         'default' !== e &&
           '__esModule' !== e &&
-          (Object.prototype.hasOwnProperty.call(u, e) ||
+          (Object.prototype.hasOwnProperty.call(l, e) ||
             Object.defineProperty(t, e, {
               enumerable: !0,
               get: function() {
@@ -4206,7 +4427,7 @@
               });
         }
         return e;
-      })({}, l, {}, c);
+      })({}, u, {}, c);
       t.default = s;
     },
     688: function(e, t, n) {
@@ -4240,8 +4461,8 @@
           'func' === e ? (e = 'function') : 'bool' === e && (e = 'boolean'),
           (t.type = t.isRequired.type = e);
       });
-      var u = a.any,
-        l = a.string,
+      var l = a.any,
+        u = a.string,
         c = a.array,
         i = a.bool,
         f = a.func,
@@ -4260,8 +4481,8 @@
         (t.func = f),
         (t.bool = i),
         (t.array = c),
-        (t.string = l),
-        (t.any = u);
+        (t.string = u),
+        (t.any = l);
     },
     689: function(e, t, n) {
       'use strict';
@@ -4365,10 +4586,10 @@
         if (t && t.has(e)) return t.get(e);
         var n = {},
           o = Object.defineProperty && Object.getOwnPropertyDescriptor;
-        for (var u in e)
-          if (Object.prototype.hasOwnProperty.call(e, u)) {
-            var l = o ? Object.getOwnPropertyDescriptor(e, u) : null;
-            l && (l.get || l.set) ? Object.defineProperty(n, u, l) : (n[u] = e[u]);
+        for (var l in e)
+          if (Object.prototype.hasOwnProperty.call(e, l)) {
+            var u = o ? Object.getOwnPropertyDescriptor(e, l) : null;
+            u && (u.get || u.set) ? Object.defineProperty(n, l, u) : (n[l] = e[l]);
           }
         (n.default = e), t && t.set(e, n);
         return n;
@@ -4396,9 +4617,9 @@
               return o[e];
             });
           })(a);
-      var u = n(200),
-        l = Object(u.a)(o.default, r.a, r.b, !1, null, null, null);
-      t.default = l.exports;
+      var l = n(200),
+        u = Object(l.a)(o.default, r.a, r.b, !1, null, null, null);
+      t.default = u.exports;
     },
     712: function(e, t, n) {
       'use strict';

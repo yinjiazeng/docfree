@@ -25,7 +25,7 @@ export interface DocfreeSidebar {
 export type DocfreePlugin = string | Function;
 
 export interface DocfreeConfig {
-  router: 'hash' | 'browser';
+  type: 'hash' | 'browser';
   mode: 'doc' | 'blog';
   title: string;
   dest: string;
@@ -45,7 +45,7 @@ export interface DocfreeConfig {
 }
 
 const defaultConfig: DocfreeConfig = {
-  router: 'hash',
+  type: 'hash',
   mode: 'doc',
   title: '',
   footer: '',
