@@ -13,5 +13,9 @@
   "license": "MIT",
   "scripts": {
     "dts": "tsc"
+  },
+  "dependencies": {
+    "leancloud-storage": "^4.5.3",
+    "valine": "^1.4.4"
   }
 }
