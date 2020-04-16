@@ -56,18 +56,16 @@
   & > h4,
   & > h5,
   & > h6 {
-    margin: -6-@docfree-edge-size-large 0 @docfree-edge-size-small;
+    margin: @docfree-edge-size-large 0 @docfree-edge-size-small;
     word-break: break-all;
     & > a[id] {
       display: inline-block;
       margin-right: 8px;
       padding-top: @docfree-header-height;
+      margin-top: -@docfree-header-height;
     }
     & > span {
       display: inline-block;
-    }
-    &:first-child {
-      margin-top: -@docfree-header-height;
     }
   }
   & > h1 {

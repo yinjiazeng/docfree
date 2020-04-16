@@ -29,11 +29,13 @@ module.exports = async function docfreeLoader(this: any, content: string) {
   const callback = this.async();
 
   try {
+    const options = getOptions(this);
     const config: any = getConfig();
-    const { sidebar } = config;
+    const { publicPath } = options;
+    const { sidebar, plugins } = config;
     const { content: markdownContent, data: setting } = matter(content);
     const resource = { resourcePath, content: markdownContent };
-    const { content: mdContent, headings: hs } = parser(resource, config.plugins);
+    const { content: mdContent, headings: hs } = parser(resource, { plugins, publicPath });
     const sidebarDepth = getDepth(setting.depth, sidebar.depth);
     const pageSidebarDepth = getDepth(setting.pageDepth, sidebar.pageDepth);
     let title = setting.title || '';

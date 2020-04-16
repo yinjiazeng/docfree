@@ -8,26 +8,32 @@ import docfreeVue from 'remark-docfree-vue';
 import docfreeProps from 'remark-docfree-props';
 import docfreeJsx from 'remark-docfree-jsx';
 import enhanceLink from 'remark-enhance-link';
+import enhanceImage from 'remark-enhance-image';
 
 export interface ParserResult {
   headings: Heading[];
   content: string;
 }
 
-export default function({ content, resourcePath }, plugins: any): ParserResult {
+export default function({ content, resourcePath }, { plugins, publicPath }: any): ParserResult {
   let headings: Heading[] = [];
   let remarkPlugins = [
     remark()
-      .use(docfreePlayground)
-      .use(docfreeProps)
+      .use(enhanceLink, {
+        publicPath,
+      })
+      .use(enhanceImage, {
+        publicPath,
+      })
       .use(docfreeHeadingLink, {
         complete(data: Heading[]) {
           headings = data;
         },
       })
+      .use(docfreePlayground)
+      .use(docfreeProps)
       .use(docfreeJsx)
       .use(docfreeVue)
-      .use(enhanceLink)
       .use(mdx),
   ];
 

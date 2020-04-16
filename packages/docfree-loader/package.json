@@ -25,6 +25,7 @@
     "remark-docfree-playground": "^0.2.20",
     "remark-docfree-props": "^0.2.20",
     "remark-docfree-vue": "^0.2.20",
+    "remark-enhance-image": "^0.2.20",
     "remark-enhance-link": "^0.2.20",
     "remark-mdx": "^1.5.8"
   }

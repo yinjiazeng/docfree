@@ -93,6 +93,7 @@ export default function(options: Configuration): Configuration {
           },
       title,
       template: join(staticPath, 'index.html'),
+      publicPath,
     }),
     new CopyWebpackPlugin([
       {
@@ -256,6 +257,9 @@ export default function(options: Configuration): Configuration {
     {
       test: mdExtReg,
       loader: require.resolve('docfree-loader'),
+      options: {
+        publicPath,
+      },
     },
     ...playgroundStyleLoaders,
     ...playgroundStyleModuleLoaders,

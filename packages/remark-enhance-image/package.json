@@ -1,0 +1,20 @@
+{
+  "name": "remark-enhance-image",
+  "version": "0.2.20",
+  "author": "Aniu <yinjiazeng@163.com>",
+  "keywords": [],
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dts": "tsc"
+  },
+  "dependencies": {
+    "unist-util-visit": "^2.0.2"
+  }
+}

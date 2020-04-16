@@ -134,7 +134,7 @@
 .docfree-content > h4,
 .docfree-content > h5,
 .docfree-content > h6 {
-  margin: -34px 0 16px;
+  margin: 28px 0 16px;
   word-break: break-all;
 }
 .docfree-content > h1 > a[id],
@@ -146,6 +146,7 @@
   display: inline-block;
   margin-right: 8px;
   padding-top: 54px;
+  margin-top: -54px;
 }
 .docfree-content > h1 > span,
 .docfree-content > h2 > span,
@@ -154,14 +155,6 @@
 .docfree-content > h5 > span,
 .docfree-content > h6 > span {
   display: inline-block;
-}
-.docfree-content > h1:first-child,
-.docfree-content > h2:first-child,
-.docfree-content > h3:first-child,
-.docfree-content > h4:first-child,
-.docfree-content > h5:first-child,
-.docfree-content > h6:first-child {
-  margin-top: -54px;
 }
 .docfree-content > h1 {
   font-size: 28px;
