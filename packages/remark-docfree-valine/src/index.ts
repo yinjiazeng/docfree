@@ -1,7 +1,5 @@
-import { Parent, Node } from 'unist';
-
 export default function(options = {}) {
-  return function({ children }: Parent & Node) {
+  return function({ children }) {
     children.push({
       type: 'jsx',
       value: `<section>
