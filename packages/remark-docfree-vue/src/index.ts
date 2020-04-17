@@ -88,7 +88,7 @@ export default function() {
                 if (data.docfree$style) {
                   template = template.replace(/(\\$style\\.)/g, 'docfree$1');
                 }
-                new Vue({
+                const vm = new Vue({
                   ...rest,
                   el: $el,
                   template,
@@ -96,6 +96,9 @@ export default function() {
                     data,
                   }]
                 });
+                return function() {
+                  vm.$destroy();
+                }
               }`.replace(/\n+/g, '\n');
           }
 

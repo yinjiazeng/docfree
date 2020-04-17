@@ -8,7 +8,26 @@ export default function Component({ render, children, ...rest }) {
 
   useEffect(() => {
     if (render) {
-      componentDispatch(render(ref.current, nuomiProps));
+      const renderResult = render(ref.current, nuomiProps);
+      let clear: any = null;
+      let renderComponent: any = null;
+
+      if (typeof renderResult === 'function') {
+        clear = renderResult;
+      } else if (Array.isArray(renderResult)) {
+        clear = renderResult[1];
+        renderComponent = renderResult[0];
+      } else {
+        renderComponent = renderResult;
+      }
+
+      componentDispatch(renderComponent);
+
+      if (typeof clear === 'function') {
+        return () => {
+          clear();
+        };
+      }
     }
   }, []);
 

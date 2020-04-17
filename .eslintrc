@@ -16,6 +16,7 @@
     "no-cond-assign": "off",
     "no-multi-assign": "off",
     "no-useless-return": "off",
+    "prefer-destructuring": "off",
     "prefer-promise-reject-errors": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",

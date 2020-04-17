@@ -68,7 +68,7 @@ const visit = ({ children }: UnistNode, file: VFile) => {
                         content: styleContent.trim(),
                       });
 
-                      path.remove();
+                      // path.remove();
                     }
                   },
                 });

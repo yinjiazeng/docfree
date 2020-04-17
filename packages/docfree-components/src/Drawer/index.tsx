@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { router } from '../components';
 import './style.less';
 
 export default function Drawer({ icon, dir = 'right', children }) {
@@ -20,6 +21,17 @@ export default function Drawer({ icon, dir = 'right', children }) {
   };
 
   useEffect(() => {
+    const unListener = router.listener((location: any, isInit: boolean) => {
+      if (!isInit && display) {
+        hide();
+      }
+    });
+    return () => {
+      unListener();
+    };
+  }, [display]);
+
+  useEffect(() => {
     const resize = () => {
       if (window.outerWidth > 800 && display !== null) {
         displayDispatch(null);
@@ -29,7 +41,7 @@ export default function Drawer({ icon, dir = 'right', children }) {
     return () => {
       window.removeEventListener('resize', resize);
     };
-  });
+  }, []);
 
   if (display !== null) {
     style = { display };
