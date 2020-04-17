@@ -78,6 +78,7 @@
     "valine": "^1.4.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.7.0"
   }
 }
