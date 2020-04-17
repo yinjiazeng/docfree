@@ -1077,7 +1077,7 @@
           );
         })([
           { text: '指南', to: '/guide' },
-          { text: 'v0.3.1', to: 'https://github.com/yinjiazeng/docfree/releases' },
+          { text: 'v0.3.2', to: 'https://github.com/yinjiazeng/docfree/releases' },
           { text: 'GitHub', to: 'https://github.com/yinjiazeng/docfree' },
         ]),
         h = {
@@ -3229,7 +3229,7 @@
           { text: '它能做什么？', depth: 2, level: 1 },
         ],
         showSidebar: !0,
-        showPageSidebar: !1,
+        showPageSidebar: !0,
         sidebarMenus: [
           { text: '特性', depth: 2, level: 1 },
           { text: '它能做什么？', depth: 2, level: 1 },
@@ -3923,7 +3923,7 @@
               [
                 'sidebar',
                 'object',
-                '{ "depth": 3, "pageDepth": 0, data: null }',
+                '{ "depth": 3, "pageDepth": 6, data: null }',
                 '侧边栏配置，depth是左侧导航深度，pageDepth是右侧导航深度，深度值设置为0将不展示侧边栏，data为配置数据，具体下面讲',
               ],
               [
@@ -3933,7 +3933,7 @@
                 '页面底部额外数据设置，包含日期和编辑链接，path是编辑链接，需设置为相应平台文档根目录',
               ],
               ['langTheme', 'string', '', 'highlight.js主题样式'],
-              ['pageSize', 'number', '20', 'bolg模式时列表展示数量'],
+              ['pageSize', 'number', '30', 'bolg模式时列表展示数量'],
               ['plugins', 'array', '', 'remark插件，如果是字符串，可以忽略remrk-前缀'],
               ['webpack', 'object', '', 'webpack配置'],
             ],
@@ -4090,7 +4090,7 @@
           { text: '其他功能', depth: 2, level: 1 },
         ],
         showSidebar: !0,
-        showPageSidebar: !1,
+        showPageSidebar: !0,
         sidebarMenus: [
           { text: '展示组件', depth: 2, level: 1 },
           { text: '支持Typescript', depth: 2, level: 1 },
