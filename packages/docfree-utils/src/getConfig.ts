@@ -60,7 +60,7 @@ const defaultConfig: DocfreeConfig = {
   langTheme: '',
   sidebar: {
     depth: 3,
-    pageDepth: 0,
+    pageDepth: 6,
     data: null,
   },
   plugins: [],

@@ -307,10 +307,10 @@ docfree将所有`md` `mdx`文件以及非`.`开头的文件夹解析为路由，
     ['dest', 'string', '.docfree/dist', '生成静态文件目录'],
     ['footer', 'string', '', '页面脚注内容，支持字符串或者js文件路径，路径必须是绝对路径，js中可以使用React'],
     ['nav', 'array', '', '导航配置，数组内容为 { "to": "跳转的链接", "text": "导航文字", "menus": 子集导航数组，数据等同父级 }，to 和 menus不是必须的，to 值包含http或者https时会被作为外部链接，否则作为路由'],
-    ['sidebar', 'object', '{ "depth": 3, "pageDepth": 0, data: null }', '侧边栏配置，depth是左侧导航深度，pageDepth是右侧导航深度，深度值设置为0将不展示侧边栏，data为配置数据，具体下面讲'],
+    ['sidebar', 'object', '{ "depth": 3, "pageDepth": 6, data: null }', '侧边栏配置，depth是左侧导航深度，pageDepth是右侧导航深度，深度值设置为0将不展示侧边栏，data为配置数据，具体下面讲'],
     ['pageExtra', 'object', '{ "platform": "Github", "path": "", "format": "yyyy/MM/dd hh:mm:ss" }', '页面底部额外数据设置，包含日期和编辑链接，path是编辑链接，需设置为相应平台文档根目录'],
     ['langTheme', 'string', '', 'highlight.js主题样式'],
-    ['pageSize', 'number', '20', 'bolg模式时列表展示数量'],
+    ['pageSize', 'number', '30', 'bolg模式时列表展示数量'],
     ['plugins', 'array', '', 'remark插件，如果是字符串，可以忽略remrk-前缀'],
     ['webpack', 'object', '', 'webpack配置'],
   ]}

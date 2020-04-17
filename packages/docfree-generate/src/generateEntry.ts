@@ -13,7 +13,7 @@ export default function generateEntry(routes: RouteItem[]): string {
     routesString = formatJSON(routes);
     routesString = routesString.replace(
       /("children":\s*)"BlogEntry"/g,
-      `$1<Docfree.BlogEntry pageSize={${Number(config.pageSize) || 20}} />`,
+      `$1<Docfree.BlogEntry pageSize={${Number(config.pageSize) || 30}} />`,
     );
   } else {
     routesString = formatJSON(routes);
