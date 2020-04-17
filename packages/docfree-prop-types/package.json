@@ -1,6 +1,6 @@
 {
   "name": "docfree-prop-types",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Aniu <yinjiazeng@163.com>",
   "keywords": [],
   "description": "",
@@ -15,7 +15,7 @@
     "dts": "tsc"
   },
   "dependencies": {
-    "docfree-utils": "^0.3.1",
+    "docfree-utils": "^0.3.2",
     "prop-types": "^15.7.2"
   }
 }
