@@ -11,7 +11,7 @@ module.exports = {
     text: '指南',
     to: '/guide',
   }, {
-    text: '版本',
+    text: `v${require('../../lerna.json').version}`,
     to: 'https://github.com/yinjiazeng/docfree/releases',
   }, {
     text: 'GitHub',
