@@ -25,8 +25,10 @@ function Content({ children, pageExtra }) {
   useLayoutEffect(() => {
     dispatch({ type: 'initData' });
 
-    document.querySelectorAll('pre code').forEach((block) => {
-      hljs.highlightBlock(block);
+    const codes = document.querySelectorAll('pre code');
+
+    [].forEach.call(codes, (node) => {
+      hljs.highlightBlock(node);
     });
   }, []);
 
