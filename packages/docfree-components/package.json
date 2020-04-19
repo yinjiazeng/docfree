@@ -14,7 +14,6 @@
     "dts": "tsc"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.3",
     "date-format": "^3.0.0",
     "docfree-utils": "^0.3.2",
     "prop-types": "^15.7.2"

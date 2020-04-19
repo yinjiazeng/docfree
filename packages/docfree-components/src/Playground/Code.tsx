@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState, useRef, RefObject } from 'react';
-import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
-import { Tooltip, Card, hljs } from '../components';
+import { Tooltip, Card, hljs, Icon } from '../components';
 import PreCode from '../PreCode';
 
 export default function Code({ lang, content }) {
@@ -42,9 +41,9 @@ export default function Code({ lang, content }) {
       extra={
         <Tooltip placement="top" title={`复制${copy ? '成功' : '代码'}`}>
           {copy ? (
-            <CheckOutlined style={{ color: 'green' }} />
+            <Icon type="check" style={{ color: 'green' }} />
           ) : (
-            <CopyOutlined onClick={copyHandler} />
+            <Icon type="copy" onClick={copyHandler} />
           )}
         </Tooltip>
       }>

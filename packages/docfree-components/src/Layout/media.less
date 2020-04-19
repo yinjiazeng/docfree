@@ -1,70 +1,76 @@
 @import '../style/default.less';
 
 @media screen and (max-width: 800px) {
-  .docfree-header-left-col {
-    display: flex !important;
-  }
-
-  .docfree-header-left-col,
-  .docfree-header-right-col {
-    & > .docfree-drawer-icon {
-      display: inline-block;
-    }
-  }
-
-  .docfree-header-right-col {
+  .docfree-header {
     & > div {
-      display: none;
-      padding: 12px @docfree-edge-size-small @docfree-edge-size-small;
-      width: @docfree-sidebar-width;
-      position: fixed;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: #fff;
-      border-left: 1px solid @docfree-layout-border-color;
-      overflow: auto;
-      & > .docfree-nav {
-        padding-left: 12px;
-        margin-top: @docfree-edge-size-small;
-        li > :first-child {
-          margin-bottom: 6px;
+      &:last-child {
+        text-align: center;
+        & > a {
+          margin-right: -12px;
         }
-        & > li {
-          float: none;
-          margin-left: 0;
-          line-height: normal;
-          & > :first-child {
-            height: auto;
-            line-height: initial;
-            padding: 0;
-            max-width: none;
-            &.active {
-              border: none;
+      }
+      &:first-child {
+        & > .docfree-drawer-icon {
+          display: inline-block;
+        }
+        & > div {
+          display: none;
+          padding: 12px @docfree-edge-size-small @docfree-edge-size-small;
+          width: @docfree-sidebar-width;
+          position: fixed;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background: #fff;
+          border-left: 1px solid @docfree-layout-border-color;
+          overflow: auto;
+          & > .docfree-nav {
+            padding-left: 12px;
+            margin-top: @docfree-edge-size-small;
+            li > :first-child {
+              margin-bottom: 6px;
             }
-            &:after {
-              display: none;
-            }
-          }
-          & > ul {
-            display: block;
-            position: static;
-            max-width: none;
-            max-height: none;
-            box-shadow: none;
-            padding: 0;
-            li {
-              padding: 0 0 0 12px;
-            }
-            & > li:not(:last-child) {
+            & > li {
+              float: none;
+              margin-left: 0;
+              line-height: normal;
+              & > :first-child {
+                height: auto;
+                line-height: normal;
+                padding: 0;
+                max-width: none;
+                &.active {
+                  border: none;
+                }
+                &:after {
+                  display: none;
+                }
+              }
               & > ul {
-                padding-bottom: 0;
-                margin-bottom: 0;
+                display: block;
+                position: static;
+                max-width: none;
+                max-height: none;
+                box-shadow: none;
+                padding: 0;
+                li {
+                  padding: 0 0 0 12px;
+                }
+                & > li:not(:last-child) {
+                  & > ul {
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                  }
+                }
               }
             }
           }
         }
       }
+    }
+
+    .docfree-search {
+      display: block;
     }
   }
 

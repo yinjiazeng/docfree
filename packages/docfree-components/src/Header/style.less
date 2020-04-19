@@ -2,6 +2,7 @@
 
 .docfree-header {
   height: @docfree-header-height;
+  line-height: @docfree-header-height;
   position: fixed;
   top: 0;
   right: 0;
@@ -10,24 +11,22 @@
   z-index: 11;
   background: #fff;
   box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
-  & > div {
-    display: flex;
-    align-items: center;
+  & > div:first-child {
+    float: right;
+    & > .docfree-drawer-icon {
+      display: none;
+    }
+    & > div {
+      line-height: normal;
+    }
   }
 }
 
-.docfree-header-left-col {
-  display: none !important;
-}
-
-.docfree-header-right-col {
-  & > .docfree-drawer-icon {
-    display: none;
-  }
-  & > div {
-    display: flex;
-    align-items: center;
-  }
+.docfree-logo,
+.docfree-nav,
+.docfree-search {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .docfree-nav {
@@ -105,12 +104,14 @@
 
 .docfree-search {
   .ant-input-affix-wrapper {
-    border-radius: 100px;
+    line-height: normal;
+    .ant-input {
+      border-radius: 100px;
+    }
   }
 }
 
 .docfree-logo {
-  display: block;
   height: 44px;
   line-height: 42px;
   font-size: 24px;

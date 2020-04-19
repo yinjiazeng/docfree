@@ -42,3 +42,5 @@ import '@antd/lib/back-top/style';
 
 export { default as Empty } from '@antd/lib/empty';
 import '@antd/lib/empty/style';
+
+export { default as Icon } from '@antd/lib/icon';

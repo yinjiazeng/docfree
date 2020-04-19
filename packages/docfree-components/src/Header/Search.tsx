@@ -1,6 +1,5 @@
 import React, { useState, ReactElement } from 'react';
-import { SearchOutlined, RightOutlined } from '@ant-design/icons';
-import { router, Input, Popover, List } from '../components';
+import { router, Input, Popover, List, Icon } from '../components';
 
 export interface DataSource {
   to: { pathname: string; hash: string };
@@ -66,7 +65,7 @@ export default function Search({ data, type }) {
                   txt
                 ) : (
                   <>
-                    {title} <RightOutlined /> {txt}
+                    {title} <Icon type="right" /> {txt}
                   </>
                 ),
               key,
@@ -107,7 +106,7 @@ export default function Search({ data, type }) {
             )}
           />
         }>
-        <Input prefix={<SearchOutlined />} onChange={onChange} placeholder="搜索内容..." />
+        <Input prefix={<Icon type="search" />} onChange={onChange} placeholder="搜索内容..." />
       </Popover>
     </div>
   );

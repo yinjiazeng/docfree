@@ -29,10 +29,10 @@ module.exports = {
   plugins: [
     'emoji',
     'docfree-tip',
-    ['docfree-valine', {
-      appId: 'dGttSTqRILSLU8UewRynugPd-gzGzoHsz',
-      appKey: '2EN9v9dynsReU0lQIdBGRno7',
-    }]
+    // ['docfree-valine', {
+    //   appId: 'dGttSTqRILSLU8UewRynugPd-gzGzoHsz',
+    //   appKey: '2EN9v9dynsReU0lQIdBGRno7',
+    // }]
   ],
   webpack: {
     plugins: [new VuePlugin()],

@@ -128,7 +128,7 @@ export default function(options: Configuration): Configuration {
           sourceMap,
           plugins: [
             autoprefixer({
-              overrideBrowserslist: ['last 1 version', '> 1%', 'IE 11'],
+              overrideBrowserslist: ['last 1 version', '> 1%', 'IE 9'],
             }),
           ],
         },

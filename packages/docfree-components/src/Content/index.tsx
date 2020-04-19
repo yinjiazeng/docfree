@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import format from 'date-format';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { useConnect, useNuomi, Link, hljs, Row, Col } from '../components';
+import { useConnect, useNuomi, Link, hljs, Row, Col, Icon } from '../components';
 import './style.less';
 
 function Content({ children, pageExtra }) {
@@ -44,21 +43,21 @@ function Content({ children, pageExtra }) {
     <div className="docfree-content">
       {children}
       {!!pageExtra && (
-        <Row justify="space-between" className="docfree-content-extra">
+        <Row type="flex" justify="space-between" className="docfree-content-extra">
           <Col>
             <a href={getEditUrl()} target="_blank">
               在{pageExtra.platform}上编辑此文件
             </a>
           </Col>
-          <Col>最后更新时间：{format(pageExtra.format, new Date(nuomiProps.utime))}</Col>
+          <Col>更新时间：{format(pageExtra.format, new Date(nuomiProps.utime))}</Col>
         </Row>
       )}
       {(!!prevNextData[0] || !!prevNextData[1]) && (
-        <Row justify="space-between" className="docfree-next-prev">
+        <Row type="flex" justify="space-between" className="docfree-next-prev">
           <Col>
             {!!prevNextData[0] && (
               <Link to={prevNextData[0].to}>
-                <LeftOutlined />
+                <Icon type="left" />
                 {prevNextData[0].text}
               </Link>
             )}
@@ -67,7 +66,7 @@ function Content({ children, pageExtra }) {
             {!!prevNextData[1] && (
               <Link to={prevNextData[1].to}>
                 {prevNextData[1].text}
-                <RightOutlined />
+                <Icon type="right" />
               </Link>
             )}
           </Col>
