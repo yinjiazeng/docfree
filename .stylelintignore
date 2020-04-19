@@ -2,3 +2,5 @@
 **/lib
 **/*.d.ts
 **/.docfree
+**/docs
+
