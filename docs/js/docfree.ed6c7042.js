@@ -4455,7 +4455,7 @@
           );
         })([
           { text: '指南', to: '/guide' },
-          { text: 'v0.3.3', to: 'https://github.com/yinjiazeng/docfree/releases' },
+          { text: 'v0.4.0', to: 'https://github.com/yinjiazeng/docfree/releases' },
           { text: 'GitHub', to: 'https://github.com/yinjiazeng/docfree' },
         ]),
         h = {
