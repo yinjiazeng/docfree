@@ -32,6 +32,11 @@ import ${
       ? `'@highlight/styles/${config.langTheme}.css';`
       : `'docfree-components/lib/style/lang.less';`
   }
+${
+  isAbsolute(config.footer)
+    ? `import footer from '${config.footer}';`
+    : `\n\nconst footer = '${config.footer}';`
+}
 
 const routes = ${routesString};
 const documentTitle = '${config.title}';
@@ -264,7 +269,6 @@ nuomi.config({
 });
 
 const nav = getNavMenus(${formatJSON(config.nav)});
-const footer = ${isAbsolute(config.footer) ? `require('${config.footer}')` : `'${config.footer}'`};
 const routerType = '${['hash', 'browser'].includes(config.type) ? config.type : 'hash'}';
 
 const globalState = {

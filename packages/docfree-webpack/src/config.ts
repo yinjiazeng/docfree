@@ -277,7 +277,7 @@ export default function(options: Configuration): Configuration {
   const defaultConfig: Configuration = {
     stats: 'errors-only',
     entry: {
-      docfree: tempPath.create('docfree.js'),
+      docfree: [require.resolve('@babel/polyfill'), tempPath.create('docfree.js')],
     },
     output: {
       path: destPath,
