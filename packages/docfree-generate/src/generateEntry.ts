@@ -275,6 +275,9 @@ nuomi.config({
 
 const nav = getNavMenus(${formatJSON(config.nav)});
 const routerType = '${['hash', 'browser'].includes(config.type) ? config.type : 'hash'}';
+const basename = ('${
+    config.webpack && config.webpack.output ? config.webpack.output.publicPath : ''
+  }').replace(/^\\.+|\\/+$/, '') || '/';
 
 const globalState = {
   showSidebar: false,
@@ -286,7 +289,7 @@ const globalState = {
 
 const App = () => {
   return (
-    <Router type={routerType}>
+    <Router type={routerType} basename={basename}>
       <Nuomi id="global" state={globalState} onInit={null}>
         <Docfree.Layout type={routerType} title={documentTitle} nav={nav} footer={footer} dataSource={dataSource}>
           <ShapeRoute routes={routes} />

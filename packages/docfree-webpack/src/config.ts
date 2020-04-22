@@ -81,8 +81,8 @@ export default function(options: Configuration): Configuration {
     modifyVars = require(modifyVarsPath);
   }
 
-  const plugins = [
-    new HtmlWebpackPlugin({
+  const createHtml = (page = 'index') => {
+    return new HtmlWebpackPlugin({
       minify: isDev
         ? false
         : {
@@ -93,8 +93,18 @@ export default function(options: Configuration): Configuration {
           },
       title,
       template: join(staticPath, 'index.html'),
+      filename: `${page}.html`,
       publicPath,
-    }),
+    });
+  };
+
+  let plugins: any = [createHtml()];
+
+  if (!isDev && type === 'browser') {
+    plugins.push(createHtml('404'));
+  }
+
+  plugins = plugins.concat([
     new CopyWebpackPlugin([
       {
         from: staticPath,
@@ -102,7 +112,7 @@ export default function(options: Configuration): Configuration {
       },
     ]),
     new webpack.ProgressPlugin(),
-  ];
+  ]);
 
   const getStyleLoaders = (module: boolean = false): RuleSetRule[] => {
     const sourceMap = isDev;
