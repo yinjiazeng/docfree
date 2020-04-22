@@ -94,7 +94,7 @@ export default function(options: Configuration): Configuration {
       title,
       template: join(staticPath, 'index.html'),
       filename: `${page}.html`,
-      publicPath,
+      publicPath: /^\//.test(publicPath) && isDev ? '/' : publicPath,
     });
   };
 

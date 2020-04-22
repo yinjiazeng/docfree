@@ -3683,20 +3683,6 @@ babel-plugin-transform-es2015-modules-commonjs@^6.26.2:
     babel-template "^6.26.0"
     babel-types "^6.26.0"
 
-babel-plugin-transform-es3-member-expression-literals@^6.8.0:
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-es3-member-expression-literals/-/babel-plugin-transform-es3-member-expression-literals-6.22.0.tgz#733d3444f3ecc41bef8ed1a6a4e09657b8969ebb"
-  integrity sha1-cz00RPPsxBvvjtGmpOCWV7iWnrs=
-  dependencies:
-    babel-runtime "^6.22.0"
-
-babel-plugin-transform-es3-property-literals@^6.8.0:
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-es3-property-literals/-/babel-plugin-transform-es3-property-literals-6.22.0.tgz#b2078d5842e22abf40f73e8cde9cd3711abd5758"
-  integrity sha1-sgeNWELiKr9A9z6M3pzTcRq9V1g=
-  dependencies:
-    babel-runtime "^6.22.0"
-
 babel-plugin-transform-strict-mode@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-strict-mode/-/babel-plugin-transform-strict-mode-6.24.1.tgz#d5faf7aa578a65bbe591cf5edae04a0c67020758"
@@ -3704,14 +3690,6 @@ babel-plugin-transform-strict-mode@^6.24.1:
   dependencies:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
-
-babel-preset-es3@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-es3/-/babel-preset-es3-1.0.1.tgz#e08dd950a1670dab8b50abceaa9b93d3d9accd1e"
-  integrity sha1-4I3ZUKFnDauLUKvOqpuT09mszR4=
-  dependencies:
-    babel-plugin-transform-es3-member-expression-literals "^6.8.0"
-    babel-plugin-transform-es3-property-literals "^6.8.0"
 
 babel-preset-jest@^25.1.0:
   version "25.1.0"
@@ -10745,14 +10723,13 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuomi@^0.8.17:
-  version "0.8.17"
-  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.17.tgz#20d5fa9b395cce1b500e7dc0c84288c6f816f254"
-  integrity sha512-WUrg634HUQwsJVSAa1awOrJ1UN+XSKUj+2HP+a5TEUmyA3VdUtGoxz6NB7jkwLAyS97qB/MffhzRYwlJafQ0SQ==
+nuomi@^0.8.18:
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-0.8.18.tgz#6b44b5210d83683d6b95d07ff0657524cb6f0831"
+  integrity sha512-iJRcXJvTfTq2DtDYKkZpVe6OrOb3xvqHmG5XP11kHWnQyacPydSEWSQfCag3e0uphB/BRqPYlkllKbG79sfVVw==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"
-    proxy-polyfill "^0.3.0"
     redux "^4.0.0"
     warning "^4.0.3"
 
@@ -12102,11 +12079,6 @@ proxy-addr@~2.0.5:
   dependencies:
     forwarded "~0.1.2"
     ipaddr.js "1.9.1"
-
-proxy-polyfill@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/proxy-polyfill/-/proxy-polyfill-0.3.1.tgz#163d5283cf928dd8ddb5c5e88528e4ccd233496f"
-  integrity sha512-jywE1NIksgIGqZc4uF0QLbXGz2RcHQobsCkAW+8F0nr/6agap+TWksEAKyLnIBafPD88HT9qZR2ec0oomHdjcQ==
 
 prr@~1.0.1:
   version "1.0.1"
