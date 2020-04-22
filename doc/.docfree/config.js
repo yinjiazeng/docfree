@@ -37,6 +37,9 @@ module.exports = {
   ],
   webpack: {
     plugins: [new VuePlugin()],
+    output: {
+      publicPath: '/docfree/'
+    },
     module: {
       rules: [{
         test: /\.vue$/,
