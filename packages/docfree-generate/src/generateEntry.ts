@@ -86,16 +86,21 @@ const getList = (pathname, { query }) => {
   return list;
 };
 `
-    : ''
-}
-const getMenus = function(array, menus = [], list = []) {
+    : `
+const getMenus = function(pre, array, menus = [], list = []) {
   array.forEach((item) => {
     if (typeof item === 'string') {
-      const name = item.trim();
+      let name = item;
+      const filePath = pre + '/' + item;
+      const index = name.lastIndexOf('/');
+
+      if (index !== -1) {
+        name = name.substr(index+1);
+      }
 
       if (name) {
         const findData = dataSource.find((source) => {
-          return source.pathname === this.pathname && source.filename === name;
+          return source.pathname + source.filename === filePath;
         });
 
         let menuData;
@@ -103,7 +108,7 @@ const getMenus = function(array, menus = [], list = []) {
           const { pathname, filename, title, ext } = findData;
           const menu = { to: pathname + (/^README$/i.test(filename) ? '' : filename), text: title };
 
-          if (filename === this.filename && ext === this.ext) {
+          if (this.pathname + this.filename === filePath && ext === this.ext) {
             menu.menus = this.sidebarMenus;
           }
 
@@ -118,14 +123,14 @@ const getMenus = function(array, menus = [], list = []) {
       }
     } else if (item && typeof item === 'object') {
       if (Array.isArray(item)) {
-        const { menus: m, list: l } = getMenus.call(this, item);
+        const { menus: m, list: l } = getMenus.call(this, pre, item);
         list = list.concat(l);
         menus = menus.concat(m);
       } else {
         const { text, menus: ms } = item;
         if (text) {
           if (Array.isArray(ms)) {
-            const { menus: m, list: l } = getMenus.call(this, ms);
+            const { menus: m, list: l } = getMenus.call(this, pre, ms);
             const menu = { text, menus: m };
             list = list.concat(l);
             menus.push(menu);
@@ -138,7 +143,8 @@ const getMenus = function(array, menus = [], list = []) {
   });
 
   return { menus, list };
-};
+};`
+}
 
 const getNavMenus = function(array, menus = []) {
   array.forEach(({ to, text, menus: ms }) => {
@@ -155,21 +161,6 @@ const getNavMenus = function(array, menus = []) {
     }
   });
   return menus;
-};
-
-const findFilename = (menus, filename) => {
-  let find = false;
-  if (Array.isArray(menus)) {
-    for(let item of menus) {
-      if (item === filename) {
-        find = true;
-        break;
-      } else if (!find && item && item.menus) {
-        find = findFilename(item.menus, filename);
-      }
-    }
-  }
-  return find;
 };
 
 nuomi.config({
@@ -201,23 +192,43 @@ nuomi.config({
 
       if (!routeData.computedSidebarMenus) {
         let data;
+        let pre;
         ${
           !isBlog && config.sidebar.data
             ? `
         const sidebarData = ${formatJSON(config.sidebar.data)};
-        data = sidebarData[pathname] || sidebarData[pathname.replace(/\\/+$/, '') || '/'];`
+        const filepath = pathname + filename;
+        const findFilename = (prePath, menus) => {
+          let find = false;
+          if (Array.isArray(menus)) {
+            for(let item of menus) {
+              if (typeof item === 'string' && (prePath + '/' + item) === filepath) {
+                find = true;
+                break;
+              } else if (!find && item && item.menus) {
+                find = findFilename(prePath, item.menus);
+              }
+            }
+          }
+          return find;
+        };
+
+        for(let i in sidebarData){
+          const source = sidebarData[i] || {};
+          if (pathname.startsWith(i) && findFilename(i, source.menus)) {
+            data = source;
+            pre = i;
+            break;
+          }
+        }
+        `
             : ''
         }
-        if (data && findFilename(data.menus, filename)) {
-          const { title, menus } = data;
-          payload.sidebarTitle = title;
-
-          if (Array.isArray(menus) && menus.length) {
-            const { menus: m, list } = getMenus.call(nuomiProps, menus);
-
-            routeData.listSource = list;
-            routeData.computedSidebarMenus = m;
-          }
+        if (data) {
+          payload.sidebarTitle = data.title;
+          const { menus, list } = getMenus.call(nuomiProps, pre, data.menus);
+          routeData.listSource = list;
+          routeData.computedSidebarMenus = menus;
         } else {
           routeData.listSource = [];
           routeData.computedSidebarMenus = [{ text: title, menus: sidebarMenus }];
