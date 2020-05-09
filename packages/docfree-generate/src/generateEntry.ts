@@ -23,12 +23,7 @@ export default function generateEntry(routes: RouteItem[]): string {
     .replace(/("children":\s*)"NotFound"/g, '$1<Docfree.NotFound />')
     .replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
 
-  const content = `
-  if (typeof btoa === 'undefined') {
-    window.btoa = function() {}
-  }
-
-import React from 'react';
+  const content = `import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from '@nuomi';
 import * as Docfree from 'docfree-components';
