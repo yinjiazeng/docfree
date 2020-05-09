@@ -30,6 +30,7 @@ export default function(options: Configuration): Configuration {
 
   const publicPath =
     (webpackConfig.output && webpackConfig.output.publicPath) || (type === 'browser' ? '/' : './');
+  const sourcePublicPath = /^\//.test(publicPath) && isDev ? '/' : publicPath;
   const publicjsPath = `js`;
   const publicMediaPath = `media`;
 
@@ -94,7 +95,7 @@ export default function(options: Configuration): Configuration {
       title,
       template: join(staticPath, 'index.html'),
       filename: `${page}.html`,
-      publicPath: /^\//.test(publicPath) && isDev ? '/' : publicPath,
+      publicPath: sourcePublicPath,
     });
   };
 
@@ -268,7 +269,7 @@ export default function(options: Configuration): Configuration {
       test: mdExtReg,
       loader: require.resolve('docfree-loader'),
       options: {
-        publicPath,
+        publicPath: sourcePublicPath,
       },
     },
     ...playgroundStyleLoaders,
