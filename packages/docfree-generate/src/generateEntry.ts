@@ -86,7 +86,7 @@ const getMenus = function(pre, array, menus = [], list = []) {
   array.forEach((item) => {
     if (typeof item === 'string') {
       let name = item;
-      const filePath = pre + '/' + item;
+      const filePath = (pre + '/').replace(/\\/+$/, '/') + item;
       const index = name.lastIndexOf('/');
 
       if (index !== -1) {
