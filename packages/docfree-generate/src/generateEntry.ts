@@ -197,7 +197,7 @@ nuomi.config({
           let find = false;
           if (Array.isArray(menus)) {
             for(let item of menus) {
-              if (typeof item === 'string' && (prePath + '/' + item) === filepath) {
+              if (typeof item === 'string' && ((prePath + '/').replace(/\\/+$/, '/') + item) === filepath) {
                 find = true;
                 break;
               } else if (!find && item && item.menus) {
