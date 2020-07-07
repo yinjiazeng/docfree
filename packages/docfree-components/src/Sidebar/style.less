@@ -43,14 +43,16 @@
       }
       & > li {
         & > b {
-          border-bottom: 1px solid @docfree-layout-border-color;
-          padding-bottom: 6px;
-          color: @heading-color;
+          border-top: 1px solid @docfree-layout-border-color;
+          padding-top: 6px;
+          & + ul {
+            padding-left: 12px;
+          }
         }
-        li > b {
-          font-weight: normal;
-          color: @text-color-secondary;
-        }
+      }
+      li > b {
+        font-weight: normal;
+        color: @heading-color;
       }
     }
   }
