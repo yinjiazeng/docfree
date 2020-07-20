@@ -1,5 +1,5 @@
 import webpack, { Configuration, RuleSetRule } from 'webpack';
-import { getDocPath, getConfig, qs, merge, tempPath, fsExtra } from 'docfree-utils';
+import { getDocPath, getConfig, qs, merge, tempPath, fsExtra, babelOptions } from 'docfree-utils';
 import { join, resolve } from 'path';
 import webpackMerge from 'webpack-merge';
 import autoprefixer from 'autoprefixer';
@@ -252,37 +252,9 @@ export default function(options: Configuration): Configuration {
       test: [jsExtReg, mdExtReg],
       exclude: /node_modules/,
       loader: require.resolve('babel-loader'),
-      options: merge(
-        {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: {
-                  node: true,
-                },
-                modules: 'commonjs',
-              },
-            ],
-            '@babel/preset-react',
-            '@babel/preset-typescript',
-          ],
-          plugins: [
-            '@babel/plugin-proposal-class-properties',
-            [
-              'import',
-              {
-                libraryName: 'antd',
-                libraryDirectory: 'lib',
-                style: true,
-              },
-            ],
-          ],
-        },
-        {
-          plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
-        },
-      ),
+      options: merge(babelOptions, {
+        plugins: [require.resolve('babel-plugin-transform-es2015-modules-commonjs')],
+      }),
     },
     {
       test: jsExtReg,
