@@ -1,11 +1,12 @@
-import { isAbsolute } from 'path';
-import { getConfig, formatJSON } from 'docfree-utils';
+import { isAbsolute, relative } from 'path';
+import { getConfig, formatJSON, tempPath } from 'docfree-utils';
 import generateBlogRoutes from './generateBlogRoutes';
 import { RouteItem } from './generateData';
 
 export default function generateEntry(routes: RouteItem[]): string {
   const config = getConfig();
   const isBlog = config.mode === 'blog';
+  const entryDir = tempPath.create('');
   let routesString: string;
 
   if (isBlog) {
@@ -34,7 +35,7 @@ import ${
   }
 ${
   isAbsolute(config.footer)
-    ? `import footer from '${config.footer}';`
+    ? `import footer from '${relative(entryDir, config.footer).replace(/\\/g, '/')}';`
     : `\n\nconst footer = '${config.footer}';`
 }
 

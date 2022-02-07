@@ -1,6 +1,6 @@
 import { readdirSync, statSync } from 'fs';
-import { join, extname, basename } from 'path';
-import { tempData } from 'docfree-utils';
+import { join, extname, basename, relative } from 'path';
+import { tempData, tempPath } from 'docfree-utils';
 
 export interface RouteItem {
   path: string;
@@ -37,6 +37,7 @@ export const updateData = function(p: string) {
 export default function(docPath: string) {
   const data = {};
   const fileData = tempData.get();
+  const entryDir = tempPath.create('');
 
   const generateRoutes = function(rootPath: string, array: RouteItem[] = []): RouteItem[] {
     readdirSync(rootPath).forEach((item) => {
@@ -62,7 +63,7 @@ export default function(docPath: string) {
           ext: extname(item),
           title: filename,
           path: /^README$/i.test(filename) ? '/' : `/${filename}`,
-          require: itemPath,
+          require: relative(entryDir, itemPath).replace(/\\/g, '/'),
         });
       } else if (stat.isDirectory() && item !== 'node_modules' && !/^\./.test(item)) {
         array.push({
