@@ -10,7 +10,7 @@
     "babel": "babel packages/**/src --out-dir ../lib --relative --extensions .ts,.tsx",
     "dts": "lerna run dts",
     "clean": "rimraf packages/**/lib",
-    "publish": "npm run clean && npm run build && lerna run dts && lerna publish",
+    "publish": "npm run clean && npm run build && lerna publish",
     "test": "jest",
     "doc:dev": "docfree dev doc",
     "doc:build": "docfree build doc"
