@@ -48,7 +48,7 @@ const generateData = (rawData, data = []) => {
       const { children, render, effects, reducers, onInit, onChange, ...rest } = route;
       if (Array.isArray(children)) {
         data = generateData(children, data);
-      } else if (${isBlog ? `route.path !== '/' && ` : ''}route.title) {
+      } else if (route.title) {
         data.push(rest);
       }
     }
@@ -69,13 +69,12 @@ ${
   return 0;
 });
 
-const getList = (pathname, { query }) => {
-  const prePath = query._ || pathname;
+const getList = (pathname) => {
   const list = [];
 
-  dataSource.forEach(({ title, pathname: pre, filename, ctime }) => {
-    if (pre.startsWith(prePath)) {
-      list.push({ to: pre + filename + '?_=' + prePath, text: title, ctime });
+  dataSource.forEach(({ title, pathname: pre, path, ctime }) => {
+    if (pre.startsWith(pathname)) {
+      list.push({ to: (pre + path).replace(/\\/+/g, '/'), text: title, ctime });
     }
   });
 
@@ -233,7 +232,7 @@ nuomi.config({
 
       payload.sidebarMenus = routeData.computedSidebarMenus || [];
 
-      const listSource = ${isBlog ? 'getList(pathname, location)' : 'routeData.listSource'} || [];
+      const listSource = ${isBlog ? 'getList(pathname)' : 'routeData.listSource'} || [];
 
       this.dispatch({
         type: '_updateState',
