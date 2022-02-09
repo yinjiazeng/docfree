@@ -87,7 +87,16 @@ module.exports = async function docfreeLoader(this: any, content: string) {
       .replace(
         /<(inlineCode)>([\s\S]*?)<\/\1>/g,
         (a: string, b: string, c: string) => `<code className="inline">${c}</code>`,
-      );
+      )
+      .replace(/(<img\s+\{\s*\.{3}\{\s*"src":\s*)"([^"]+)"/g, (a: string, b: string, c: string) => {
+        if (/^\.+\//.test(c)) {
+          return `${b}require('${c}').default`;
+        }
+        if (/^~/.test(c)) {
+          return `${b}"${c.replace(/^~/, publicPath)}"`;
+        }
+        return a;
+      });
 
     return callback(
       null,

@@ -8,7 +8,6 @@ import docfreeVue from 'remark-docfree-vue';
 import docfreeProps from 'remark-docfree-props';
 import docfreeJsx from 'remark-docfree-jsx';
 import enhanceLink from 'remark-enhance-link';
-import enhanceImage from 'remark-enhance-image';
 
 export interface ParserResult {
   headings: Heading[];
@@ -20,9 +19,6 @@ export default function({ content, resourcePath }, { plugins, publicPath }: any)
   let remarkPlugins = [
     remark()
       .use(enhanceLink, {
-        publicPath,
-      })
-      .use(enhanceImage, {
         publicPath,
       })
       .use(docfreeHeadingLink, {
