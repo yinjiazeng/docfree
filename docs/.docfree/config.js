@@ -5,7 +5,7 @@ module.exports = {
   type: 'browser',
   mode: 'doc',
   pageExtra: {
-    path: 'https://github.com/yinjiazeng/docfree/tree/master/doc'
+    path: 'https://github.com/yinjiazeng/docfree/tree/master/docs'
   },
   nav: [{
     text: '指南',
