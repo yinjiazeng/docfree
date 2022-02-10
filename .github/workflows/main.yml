@@ -37,10 +37,9 @@ jobs:
         run: yarn build && yarn doc:build
         
       - name: Deploy Docs
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: docs
-          FOLDER: docs/.docfree/dist
-          CLEAN: false
+          branch: docs
+          folder: docs/.docfree/dist
+          clean: false
           
