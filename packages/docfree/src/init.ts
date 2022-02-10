@@ -50,9 +50,7 @@ export default async function(name: string) {
 
     try {
       pkg = require(pkgPath);
-    } catch (e) {
-      //
-    }
+    } catch (e) {}
 
     if (!pkg.scripts) {
       pkg.scripts = {};
