@@ -41,6 +41,7 @@ export interface DocfreeConfig {
   langTheme: string;
   plugins: DocfreePlugin[];
   webpack: any;
+  async: boolean;
   [key: string]: any;
 }
 
@@ -52,6 +53,7 @@ const defaultConfig: DocfreeConfig = {
   nav: [],
   dest: '',
   pageSize: 30,
+  async: false,
   pageExtra: {
     platform: 'Github',
     path: '',

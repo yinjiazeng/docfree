@@ -313,6 +313,7 @@ docfree将所有`md` `mdx`文件以及非`.`开头的文件夹解析为路由，
     ['pageSize', 'number', '30', 'bolg模式时列表展示数量'],
     ['plugins', 'array', '', 'remark插件，如果是字符串，可以忽略remrk-前缀'],
     ['webpack', 'object', '', 'webpack配置'],
+    ['async', 'boolean', 'false', '是否按需加载模块'],
   ]}
 />
 

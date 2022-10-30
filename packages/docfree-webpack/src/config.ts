@@ -290,6 +290,7 @@ export default function(options: Configuration): Configuration {
     entry: {
       docfree: [require.resolve('@babel/polyfill'), tempPath.create('docfree.js')],
     },
+    mode: 'development',
     output: {
       path: destPath,
       filename: `${publicjsPath}/[name].[${isDev ? 'hash' : 'contenthash'}:8].js`,

@@ -20,9 +20,22 @@ export default function generateEntry(routes: RouteItem[]): string {
     routesString = formatJSON(routes);
   }
 
-  routesString = routesString
-    .replace(/("children":\s*)"NotFound"/g, '$1<Docfree.NotFound />')
-    .replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
+  routesString = routesString.replace(/("children":\s*)"NotFound"/g, '$1<Docfree.NotFound />');
+
+  if (config.async) {
+    routesString = routesString.replace(
+      /"require":\s*"([^"]+)"/g,
+      `...require("$1?getTitleInfo=1").default,
+    async: (cb) => {
+      require.ensure([], (require) => {
+        cb(require("$1").default);
+      })
+    }
+    `,
+    );
+  } else {
+    routesString = routesString.replace(/"require":\s*"([^"]+)"/g, '...require("$1").default');
+  }
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
@@ -38,6 +51,8 @@ ${
     ? `import footer from '${relative(entryDir, config.footer).replace(/\\/g, '/')}';`
     : `\n\nconst footer = '${config.footer}';`
 }
+
+
 
 const routes = ${routesString};
 const documentTitle = '${config.title}';

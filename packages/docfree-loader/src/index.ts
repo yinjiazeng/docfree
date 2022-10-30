@@ -18,10 +18,10 @@ const getDepth = (settingDepth: any, defaultDepth: number) => {
 
 module.exports = async function docfreeLoader(this: any, content: string) {
   const { resourcePath, resourceQuery } = this;
-  const { styleContentKey } = qs.parse(resourceQuery.slice(1));
+  const params = qs.parse(resourceQuery.slice(1));
 
-  if (styleContentKey) {
-    const styleContent = storage.get(styleContentKey);
+  if (params.styleContentKey) {
+    const styleContent = storage.get(params.styleContentKey);
 
     return styleContent || '';
   }
@@ -71,6 +71,13 @@ module.exports = async function docfreeLoader(this: any, content: string) {
             return item;
           })
       : [];
+
+    if (params.getTitleInfo && title) {
+      return callback(
+        null,
+        `export default { title: '${title}', headings: ${formatJSON(headings)}, }`,
+      );
+    }
 
     content = `import React from 'react';
   import * as Docfree from 'docfree-components';
