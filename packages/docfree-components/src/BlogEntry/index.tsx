@@ -26,9 +26,9 @@ export default function BlogEntry({ pageSize }) {
   const data: GroupData[] = [];
 
   source.forEach(({ to, text, ctime }) => {
-    const dateStr = format('yyyyMM/dd', new Date(ctime));
-    const year = dateStr.substr(0, 4);
-    const date = dateStr.substr(4);
+    const dateStr = format('yyyy/MM/dd', new Date(ctime));
+    const year = dateStr.substr(0, 7);
+    const date = dateStr.substr(5);
     const find = data.find((item) => item.year === year);
     const item: Data = { date, to, text };
 
