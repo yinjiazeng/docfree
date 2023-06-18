@@ -8,7 +8,7 @@ export default function Home({ title, description, buttons, features }) {
       if (/^(https?:)?\/\//.test(to)) {
         window.open(to);
       } else {
-        router.location(to);
+        router.push(to);
       }
     }
   };

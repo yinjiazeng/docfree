@@ -3,7 +3,7 @@ export default function(options = {}) {
     children.push({
       type: 'jsx',
       value: `<section>
-      <Docfree.Component render={function($el, { location, setting }){
+      <Docfree.Component render={function($el, { location, store: { state: { setting } } }){
         if (setting.valine !== false) {
           window.AV = require('leancloud-storage');
           const Valine = require('valine');

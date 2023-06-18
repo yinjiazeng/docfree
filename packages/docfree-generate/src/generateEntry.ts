@@ -26,7 +26,7 @@ export default function generateEntry(routes: RouteItem[]): string {
     routesString = routesString.replace(
       /"require":\s*"([^"]+)"/g,
       `...require("$1?getTitleInfo=1").default,
-    async: (cb) => {
+    load: (cb) => {
       require.ensure([], (require) => {
         cb(require("$1").default);
       })
@@ -39,7 +39,7 @@ export default function generateEntry(routes: RouteItem[]): string {
 
   const content = `import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, ShapeRoute, Nuomi, store, nuomi } from '@nuomi';
+import { Router, Route, ShapeRoute, Nuomi, globalStore, configure, router } from '@nuomi';
 import * as Docfree from 'docfree-components';
 import ${
     config.langTheme
@@ -60,11 +60,12 @@ const documentTitle = '${config.title}';
 const generateData = (rawData, data = []) => {
   rawData.forEach((route) => {
     if (route.path !== '*') {
-      const { children, render, effects, reducers, onInit, onChange, ...rest } = route;
+      const { state: s, extends: exts = [{}], children } = route;
+      const state = { ...exts[0].state, ...s }
       if (Array.isArray(children)) {
         data = generateData(children, data);
-      } else if (route.title) {
-        data.push(rest);
+      } else if (state.title) {
+        data.push(state);
       }
     }
   });
@@ -87,7 +88,7 @@ ${
 const getList = (pathname) => {
   const list = [];
 
-  dataSource.forEach(({ title, pathname: pre, path, ctime }) => {
+  dataSource.forEach(({ { title, pathname: pre, path, ctime } }) => {
     if (pre.startsWith(pathname)) {
       list.push({ to: (pre + path).replace(/\\/+/g, '/'), text: title, ctime });
     }
@@ -173,13 +174,12 @@ const getNavMenus = function(array, menus = []) {
   return menus;
 };
 
-nuomi.config({
+configure({
   state: {
     listSource: [],
   },
-  effects: {
-    initData() {
-      const nuomiProps = this.getNuomiProps();
+  action: {
+    initData({ state, commit }) {
       const {
         title,
         pathname,
@@ -189,9 +189,8 @@ nuomi.config({
         sidebarTitle,
         sidebarMenus,
         pageSidebarMenus,
-        data: routeData,
-        location,
-      } = nuomiProps;
+        routeData = {},
+      } = state;
 
       const payload = {
         sidebarTitle,
@@ -236,7 +235,7 @@ nuomi.config({
         }
         if (data) {
           payload.sidebarTitle = data.title;
-          const { menus, list } = getMenus.call(nuomiProps, pre, data.menus);
+          const { menus, list } = getMenus.call(state, pre, data.menus);
           routeData.listSource = list;
           routeData.computedSidebarMenus = menus;
         } else {
@@ -249,21 +248,20 @@ nuomi.config({
 
       const listSource = ${isBlog ? 'getList(pathname)' : 'routeData.listSource'} || [];
 
-      this.dispatch({
-        type: '_updateState',
-        payload: {
-          listSource,
-        },
-      });
+      commit({
+        listSource,
+      })
 
-      store.dispatch({
-        type: 'global/_updateState',
+      globalStore.dispatch({
+        type: 'global/@update',
         payload,
       });
     }
   },
   onInit() {
-    const { path, title, location, data } = this;
+    const { location, store, path } = this;
+    const { state: data } = location;
+    const { title } = store.state;
 
     if (title && path !== '/') {
       document.title = title + ' | ' + documentTitle;
@@ -292,6 +290,16 @@ nuomi.config({
       }
     }
   }
+});
+
+router.listener((from, to) => {
+  if (from?.pathname !== to.pathname) {
+    NProgress.start();
+  }
+}, () => {
+  setTimeout(() => {
+    NProgress.done();
+  }, 300);
 });
 
 const nav = getNavMenus(${formatJSON(config.nav)});

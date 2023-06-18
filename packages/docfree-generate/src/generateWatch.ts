@@ -19,7 +19,7 @@ export default function() {
           clearTimeout(timer);
           timer = setTimeout(() => {
             generate();
-            res();
+            res(null);
           }, 100);
         }
       })

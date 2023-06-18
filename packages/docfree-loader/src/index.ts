@@ -75,7 +75,13 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     if (params.getTitleInfo && title) {
       return callback(
         null,
-        `export default { title: '${title}', headings: ${formatJSON(headings)}, }`,
+        `export default {
+          title: '${title}',
+          state: {
+            title: '${title}',
+            headings: ${formatJSON(headings)},
+          }
+        }`,
       );
     }
 
@@ -108,30 +114,31 @@ module.exports = async function docfreeLoader(this: any, content: string) {
     return callback(
       null,
       `${result}
-
-      const nuomiProps = {
+      const props = {
         state: {
           showCode: false,
+          setting: ${formatJSON(setting)},
+          headings: ${formatJSON(headings)},
+          showSidebar: ${sidebarDepth > 0},
+          showPageSidebar: ${pageSidebarDepth > 0},
+          sidebarMenus: ${formatJSON(sidebarMenus)},
+          pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
+          utime: ${tempData.get(resourcePath).utime},
         },
-        setting: ${formatJSON(setting)},
-        headings: ${formatJSON(headings)},
-        showSidebar: ${sidebarDepth > 0},
-        showPageSidebar: ${pageSidebarDepth > 0},
-        sidebarMenus: ${formatJSON(sidebarMenus)},
-        pageSidebarMenus: ${formatJSON(pageSidebarMenus)},
-        utime: ${tempData.get(resourcePath).utime},
         render() {
           return <MDXContent pageExtra={${formatJSON(
             setting.pageExtra !== false ? config.pageExtra : false,
           )}} />
         },
       };
-      ${title ? `nuomiProps.title = '${title}';` : ''}
-      export default nuomiProps;
+
+      ${title ? `props.state.title='${title}';` : ''}
+
+      export default props;
     `,
     );
   } catch (e) {
-    if (e.message.startsWith(resourcePath)) {
+    if (e && e.message.startsWith(resourcePath)) {
       e.message = e.message.replace(/^[^:]+/, resourcePath);
     }
 

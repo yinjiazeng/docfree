@@ -16,9 +16,7 @@ export interface GroupData {
 
 export default function BlogEntry({ pageSize }) {
   const [{ listSource }, dispatch] = useConnect();
-  const {
-    nuomiProps: { location },
-  }: any = useNuomi();
+  const [{ location }] = useNuomi();
   const total = listSource.length;
   const page = Number(location.query.page) || 1;
   const startIndex = (page - 1) * pageSize;
@@ -44,7 +42,7 @@ export default function BlogEntry({ pageSize }) {
 
   const onChange = (current: number) => {
     const { url, search, ...rest } = location;
-    router.location({ ...rest, query: { page: current } });
+    router.push({ ...rest, query: { page: current } });
   };
 
   useLayoutEffect(() => {

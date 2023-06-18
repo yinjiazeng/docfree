@@ -25,6 +25,7 @@ module.exports = {
       },
     }
   },
+  async: true,
   footer: 'MIT Licensed | Copyright © 2020-present',
   plugins: [
     'emoji',

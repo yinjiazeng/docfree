@@ -21,7 +21,7 @@ export default function Drawer({ icon, dir = 'right', children }) {
   };
 
   useEffect(() => {
-    const unListener = router.listener((location: any, isInit: boolean) => {
+    const unListener = router.listener((from: any, to: any, isInit: boolean) => {
       if (!isInit && display) {
         hide();
       }

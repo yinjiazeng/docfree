@@ -1,18 +1,16 @@
 import React, { useLayoutEffect, useState } from 'react';
 import format from 'date-format';
-import { useConnect, useNuomi, Link, hljs, Row, Col, Icon } from '../components';
+import { useConnect, Link, hljs, Row, Col, Icon } from '../components';
 import './style.less';
 
 function Content({ children, pageExtra }) {
-  const [{ listSource }, dispatch] = useConnect();
-  const { nuomiProps } = useNuomi();
+  const [{ listSource, pathname, filename, ext, title, utime }, dispatch] = useConnect();
   const [prevNextData, prevNextDispatch]: [{ to: string; text: string }[], any] = useState([]);
 
   const getEditUrl = () => {
     let { path } = pageExtra;
 
     if (typeof path === 'string' && path) {
-      const { ext, filename, pathname } = nuomiProps;
       path = path.replace(/\/+$/, '');
 
       return path + pathname + filename + ext;
@@ -22,7 +20,7 @@ function Content({ children, pageExtra }) {
   };
 
   useLayoutEffect(() => {
-    dispatch({ type: 'initData' });
+    dispatch('initData');
 
     const codes = document.querySelectorAll('pre code');
 
@@ -32,7 +30,7 @@ function Content({ children, pageExtra }) {
   }, []);
 
   useLayoutEffect(() => {
-    const findIndex = listSource.findIndex(({ text }) => nuomiProps.title === text);
+    const findIndex = listSource.findIndex(({ text }) => title === text);
 
     if (findIndex !== -1) {
       prevNextDispatch([listSource[findIndex - 1], listSource[findIndex + 1]]);
@@ -49,7 +47,7 @@ function Content({ children, pageExtra }) {
               在{pageExtra.platform}上编辑此文件
             </a>
           </Col>
-          <Col>更新时间：{format(pageExtra.format, new Date(nuomiProps.utime))}</Col>
+          <Col>更新时间：{format(pageExtra.format, new Date(utime))}</Col>
         </Row>
       )}
       {(!!prevNextData[0] || !!prevNextData[1]) && (

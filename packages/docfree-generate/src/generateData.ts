@@ -5,13 +5,6 @@ import { tempData, tempPath } from 'docfree-utils';
 export interface RouteItem {
   path: string;
   children?: RouteItem[] | string;
-  require?: string;
-  pathname?: string;
-  title?: string;
-  filename?: string;
-  ext?: string;
-  ctime?: number;
-  utile?: number;
   [key: string]: any;
 }
 
@@ -56,13 +49,18 @@ export default function(docPath: string) {
           utime,
         };
 
-        array.push({
+        const state = {
           ...data[path],
           pathname: path.replace(/\/[^/]+$/, '/'),
           filename,
           ext: extname(item),
           title: filename,
+        };
+
+        array.push({
           path: /^README$/i.test(filename) ? '/' : `/${filename}`,
+          state: {},
+          extends: [{ state }],
           require: relative(entryDir, itemPath).replace(/\\/g, '/'),
         });
       } else if (stat.isDirectory() && item !== 'node_modules' && !/^\./.test(item)) {

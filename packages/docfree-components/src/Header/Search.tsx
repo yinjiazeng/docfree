@@ -30,7 +30,7 @@ export default function Search({ data, type }) {
       window.location.hash = hash;
     } else {
       // 在onInit中处理
-      router.location({ pathname }, { hash });
+      router.push({ pathname, state: { hash } });
     }
   };
 

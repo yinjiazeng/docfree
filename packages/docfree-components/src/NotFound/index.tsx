@@ -1,11 +1,11 @@
 import React, { useLayoutEffect } from 'react';
-import { store, Result } from '../components';
+import { globalStore, Result } from '../components';
 import './style.less';
 
 export default function NotFound() {
   useLayoutEffect(() => {
-    store.dispatch({
-      type: 'global/_updateState',
+    globalStore.dispatch({
+      type: 'global/@update',
       payload: {
         showPageSidebar: false,
       },

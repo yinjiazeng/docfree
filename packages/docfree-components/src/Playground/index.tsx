@@ -25,7 +25,7 @@ export default function Playground({ code, render, children }) {
         {show ? <Icon type="eye-invisible" /> : <Icon type="eye" />}
         {show ? '隐藏' : '显示'}代码
       </a>
-      {show && [].concat(code).map((item, i) => <Code {...item} key={i} />)}
+      {show && [].concat(code).map((item: any, i) => <Code {...item} key={i} />)}
     </div>
   );
 }

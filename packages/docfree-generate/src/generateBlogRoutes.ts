@@ -15,7 +15,14 @@ export default function generateBlogRoutes(routes: RouteItem[] = [], pathname = 
 
   routes.unshift({
     path: '/',
-    pathname,
+    state: {},
+    extends: [
+      {
+        state: {
+          pathname,
+        },
+      },
+    ],
     children: 'BlogEntry',
   });
 
