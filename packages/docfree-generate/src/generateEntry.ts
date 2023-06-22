@@ -60,8 +60,8 @@ const documentTitle = '${config.title}';
 const generateData = (rawData, data = []) => {
   rawData.forEach((route) => {
     if (route.path !== '*') {
-      const { state: s, extends: exts = [{}], children } = route;
-      const state = { ...exts[0].state, ...s }
+      const { state: s, extends: exts = [{}], children, path } = route;
+      const state = { ...exts[0].state, ...s, path }
       if (Array.isArray(children)) {
         data = generateData(children, data);
       } else if (state.title) {
@@ -88,7 +88,7 @@ ${
 const getList = (pathname) => {
   const list = [];
 
-  dataSource.forEach(({ { title, pathname: pre, path, ctime } }) => {
+  dataSource.forEach(({ title, pathname: pre, path, ctime }) => {
     if (pre.startsWith(pathname)) {
       list.push({ to: (pre + path).replace(/\\/+/g, '/'), text: title, ctime });
     }
@@ -191,7 +191,6 @@ configure({
         pageSidebarMenus,
         routeData = {},
       } = state;
-
       const payload = {
         sidebarTitle,
         showSidebar: !!showSidebar,
@@ -250,7 +249,7 @@ configure({
 
       commit({
         listSource,
-      })
+      });
 
       globalStore.dispatch({
         type: 'global/@update',
@@ -258,12 +257,12 @@ configure({
       });
     }
   },
-  onInit() {
-    const { location, store, path } = this;
-    const { state: data } = location;
+  onInit({ store }) {
+    const location = router.location();
+    const { state } = location;
     const { title } = store.state;
 
-    if (title && path !== '/') {
+    if (title && location.pathname !== '/') {
       document.title = title + ' | ' + documentTitle;
     } else {
       document.title = documentTitle;
@@ -272,10 +271,10 @@ configure({
     // 文章页面
     if (title) {
       // search跳转来
-      if (data.hash) {
+      if (state.hash) {
         const { hash: h } = window.location;
         setTimeout(() => {
-          window.location.hash = h + '#' + data.hash;
+          window.location.hash = h + '#' + state.hash;
         });
         return;
       }
@@ -284,10 +283,7 @@ configure({
         window.scrollTo({ top: 0 });
       }
     } else {
-      // 博客首页
-      if (path) {
-        window.scrollTo({ top: 0 });
-      }
+      window.scrollTo({ top: 0 });
     }
   }
 });
@@ -296,10 +292,12 @@ router.listener((from, to) => {
   if (from?.pathname !== to.pathname) {
     NProgress.start();
   }
-}, () => {
-  setTimeout(() => {
-    NProgress.done();
-  }, 300);
+}, (e) => {
+  if (!e.path.endsWith('*')) {
+    setTimeout(() => {
+      NProgress.done();
+    }, 300);
+  }
 });
 
 const nav = getNavMenus(${formatJSON(config.nav)});

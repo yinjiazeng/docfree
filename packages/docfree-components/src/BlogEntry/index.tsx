@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import format from 'date-format';
-import { Link, useConnect, useNuomi, router, Pagination, Empty } from '../components';
+import { Link, useConnect, useLocation, router, Pagination, Empty } from '../components';
 import './style.less';
 
 export interface Data {
@@ -16,7 +16,7 @@ export interface GroupData {
 
 export default function BlogEntry({ pageSize }) {
   const [{ listSource }, dispatch] = useConnect();
-  const [{ location }] = useNuomi();
+  const location = useLocation();
   const total = listSource.length;
   const page = Number(location.query.page) || 1;
   const startIndex = (page - 1) * pageSize;
@@ -46,7 +46,7 @@ export default function BlogEntry({ pageSize }) {
   };
 
   useLayoutEffect(() => {
-    dispatch({ type: 'initData' });
+    dispatch('initData');
   }, []);
 
   return (

@@ -4,7 +4,7 @@ import { useNuomi } from '../components';
 export default function Component({ render, children, ...rest }) {
   const ref: RefObject<any> = useRef();
   const [component, componentDispatch] = useState(children);
-  const [nuomi] = useNuomi();
+  const nuomi = useNuomi();
 
   useEffect(() => {
     if (render) {
