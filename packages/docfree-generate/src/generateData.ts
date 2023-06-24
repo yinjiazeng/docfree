@@ -60,7 +60,6 @@ export default function(docPath: string) {
         array.push({
           key: ctime,
           path: /^README$/i.test(filename) ? '/' : `/${filename}`,
-          state: {},
           extends: [{ state }],
           require: relative(entryDir, itemPath).replace(/\\/g, '/'),
         });

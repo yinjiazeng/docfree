@@ -2,9 +2,9 @@ import { RouteItem } from './generateData';
 
 export default function generateBlogRoutes(routes: RouteItem[] = [], pathname = '/'): RouteItem[] {
   for (const route of routes) {
-    const { children, path, filename }: any = route;
+    const { children, path, extends: exts }: any = route;
 
-    if (path === '/' && /^README$/i.test(filename)) {
+    if (path === '/' && exts && exts.length && /^README$/i.test(exts[0].state.filename)) {
       return routes;
     }
 
@@ -15,7 +15,6 @@ export default function generateBlogRoutes(routes: RouteItem[] = [], pathname = 
 
   routes.unshift({
     path: '/',
-    state: {},
     extends: [
       {
         state: {
