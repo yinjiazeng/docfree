@@ -10764,10 +10764,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuomi@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/nuomi/-/nuomi-1.1.1.tgz#057a27ae8efe65aa542b4d795661d1ffb1338a3d"
-  integrity sha512-7UppT2fsSbesfi5c2MZoSPWfWYj6bpD5An8jY4SwFQOUAo83oPglLMUeO7+sheZtjo7GAgC7nMRMetDHqyDpmQ==
+nuomi@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/nuomi/-/nuomi-1.2.0.tgz#0ddc14af3be13388146e27dfbc742d7555f76e8a"
+  integrity sha512-g1UfaFh1XuD/F0uufQgIYTUvvfuoHkT4DKp6dl2tkizy+D2560FDu/WgvB4al6B5IwBoQntgtfDiYl8MY1oZaQ==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"

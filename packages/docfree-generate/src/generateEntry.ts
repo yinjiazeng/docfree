@@ -178,7 +178,7 @@ configure({
   state: {
     listSource: [],
   },
-  action: {
+  actions: {
     initData({ state, commit }) {
       const {
         title,
